@@ -1,0 +1,104 @@
+
+import argparse
+import sys
+import os
+from datetime import datetime
+
+import submodules
+
+class Main(object):
+    '''
+    A class to parse subcommands.
+    Inspired by this blog post: https://chase-seibert.github.io/blog/2014/03/21/python-multilevel-argparse.html
+    '''
+
+    STUDY_ID_DESCRIPTION = 'Get the study_id from the pdc_study_id.'
+    METADATA_DESCRIPTION = 'Get the metadata for files in a study.'
+    FILE_DESCRIPTION = 'Download a single file.'
+    FILES_DESCRIPTION = 'Download all the files in a study.'
+
+    def __init__(self):
+        parser = argparse.ArgumentParser(description='Command line client for NCI Proteomics Data Commons',
+                                         usage = f'''PDC_client <command> [<args>]
+
+Available commands:
+   studyID     {Main.STUDY_ID_DESCRIPTION}
+   metadata    {Main.METADATA_DESCRIPTION}
+   file        {Main.FILE_DESCRIPTION}
+   files       {Main.FILES_DESCRIPTION}''')
+        parser.add_argument('command', help = 'Subcommand to run.')
+        args = parser.parse_args(sys.argv[1:2])
+        if not hasattr(self, args.command):
+            sys.stderr.write(f'{args.command} is an unknown command!')
+            parser.print_help()
+            sys.exit(1)
+        getattr(self, args.command)()
+
+    def studyID(self):
+        parser = argparse.ArgumentParser(description=Main.STUDY_ID_DESCRIPTION)
+        parser.add_argument('pdc_study_id')
+        args = parser.parse_args(sys.argv[2:])
+        study_id = submodules.api.study_id(args.pdc_study_id)
+        sys.stdout.write(f'{study_id}\n')
+
+    def metadata(self):
+        parser = argparse.ArgumentParser(description=Main.METADATA_DESCRIPTION)
+        parser.add_argument('-f', '--format', choices=['json', 'tsv', 'str'], default = 'json',
+                            help = 'The output file format. Default is "json".')
+        parser.add_argument('-o', '--ofname', default='study_metadata',
+                            help='Output base name.')
+        parser.add_argument('study_id', help='The study id.')
+        args = parser.parse_args(sys.argv[2:])
+
+        ofname = f'{args.ofname}.{args.format}'
+        data = submodules.api.metadata(args.study_id)
+        submodules.io.writeFileMetadata(data, ofname, args.format)
+
+    def file(self):
+        parser = argparse.ArgumentParser(description=Main.FILE_DESCRIPTION)
+        parser.add_argument('-o', '--ofname', default=None,
+                            help='Output file name.')
+        parser.add_argument('-m', '--md5sum', default=None,
+                            help='The expected file md5 sum. If blank, the check sum step is skipped.')
+        parser.add_argument('--noBackup', action='store_true', default=False,
+                            help='Don\'t backup duplicate files. '
+                                 'By default, if the file already exists the new file is written to a tempory file as it is '
+                                 'being downloaded and overwritten once the download is completed.')
+        parser.add_argument('-f', '--force', action='store_true', default=False,
+                            help='Re-download even if the target file already exists.')
+        parser.add_argument('url', help='The file url.')
+
+        args = parser.parse_args(sys.argv[2:])
+
+        if args.ofname is None:
+            ofname = submodules.io.fileBasename(args.url)
+            if ofname is None:
+                sys.stderr.write('ERROR: Could not determine output file name!')
+                sys.exit(1)
+        else:
+            ofname = args.ofname
+
+        remove_old = False
+        if os.path.isfile(ofname):
+            if not args.force and args.md5sum is not None:
+                if submodules.io.md5Sum(ofname) == args.md5sum:
+                    sys.stdout.write(f'The file: "{ofname}" has already been downloaded. Use --force option to override.\n')
+                    sys.exit(0)
+
+            if args.noBackup:
+                os.remove(ofname)
+            else:
+                remove_old = True
+                old_ofname = ofname
+                ofname += '_{}.tmp'.format(datetime.now().strftime("%y%m%d_%H%M%S"))
+
+        if not submodules.io.downloadFile(args.url, ofname, expected_md5=args.md5sum):
+            sys.stderr.write(f'ERROR: Failed to download file: {ofname}\n')
+
+        if remove_old:
+            os.rename(ofname, old_ofname)
+
+
+if __name__ == '__main__':
+    Main()
+
