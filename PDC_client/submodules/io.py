@@ -9,7 +9,7 @@ RAW_BASENAME_RE = re.compile(r'/([^/]+\.raw)')
 RAW_DIRNAME_RE = re.compile(r'cloudfront\.net\/(.*)\/([^/]+\.raw)')
 
 
-def writeFileMetadata(data, ofname, format='json'):
+def writeFileMetadata(data, ofname, format='json', nFiles=None):
     '''
     Write file metadata.
 
@@ -17,15 +17,20 @@ def writeFileMetadata(data, ofname, format='json'):
         data (dict): File metadata api payload.
         ofname (str): Output file name.
         format (str): Output file format. One of ["json", "tsv", "str"]
+        nFiles (int): Number of files in output. If None, all files are printed.
 
     Raises:
         ValueError: If unknown output file format.
     '''
-    
+
+    file_data = data['data']['filesPerStudy']
+    if nFiles is not None:
+        file_data = file_data[0:nFiles]
+
     keys = ('file_id', 'file_name', 'md5sum', 'file_location', 'file_size', 'data_category')
     if format in ('json', 'str'):
         newData = list()
-        for file in data['data']['filesPerStudy']:
+        for file in file_data:
             newFile = {k: file[k] for k in keys}
             newFile['url'] = file['signedUrl']['url']
             newData.append(newFile)
@@ -42,11 +47,11 @@ def writeFileMetadata(data, ofname, format='json'):
                     outF.write('\t')
                 outF.write(h)
             outF.write('\n')
-            for file in data['data']['filesPerStudy']:
+            for file in file_data:
                 for k in keys:
                     outF.write(f'{file[k]}\t')
                 outF.write('{}\n'.format(file['signedUrl']['url']))
-                    
+
     else:
         raise ValueError(f'{format} is an unknown output format!')
 
@@ -70,7 +75,7 @@ def fileBasename(url):
         basename (str): The file basename, None if no match was found.
     '''
 
-    match = RAW_BASENAME_RE.search(url) 
+    match = RAW_BASENAME_RE.search(url)
     return None if not match else match.group(1)
 
 
@@ -99,7 +104,7 @@ def downloadFile(url, ofname, expected_md5=None, nRetrys=5):
 
     The expected md5 sum is checked against the downloaded file and the
     download is retried up to n times if it does not match.
-    
+
     Parameters:
         url (str): The file url.
         ofname (str): The name of the file to write.
@@ -109,7 +114,7 @@ def downloadFile(url, ofname, expected_md5=None, nRetrys=5):
     Returns:
         sucess (bool): True if sucessfull, False if not.
     '''
-    
+
     tries = 0
     while tries < nRetrys:
         tries += 1

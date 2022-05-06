@@ -44,7 +44,9 @@ Available commands:
     def metadata(self):
         parser = argparse.ArgumentParser(description=Main.METADATA_DESCRIPTION)
         parser.add_argument('-f', '--format', choices=['json', 'tsv', 'str'], default = 'json',
-                            help = 'The output file format. Default is "json".')
+                            help='The output file format. Default is "json".')
+        parser.add_argument('-n', '--nFiles', type=int, default=None,
+                            help='The number of files to get metadata for. Default is all files in study')
         parser.add_argument('-o', '--ofname', default='study_metadata',
                             help='Output base name.')
         parser.add_argument('study_id', help='The study id.')
@@ -52,7 +54,7 @@ Available commands:
 
         ofname = f'{args.ofname}.{args.format}'
         data = submodules.api.metadata(args.study_id)
-        submodules.io.writeFileMetadata(data, ofname, args.format)
+        submodules.io.writeFileMetadata(data, ofname, format=args.format, nFiles=args.nFiles)
 
     def file(self):
         parser = argparse.ArgumentParser(description=Main.FILE_DESCRIPTION)
