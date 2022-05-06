@@ -98,7 +98,9 @@ Available commands:
         if remove_old:
             os.rename(ofname, old_ofname)
 
+def main():
+    _ = Main()
 
 if __name__ == '__main__':
-    Main()
+    main()
 
