@@ -1,5 +1,6 @@
 # things I added
 data/*
+id_rsa_*
 
 __pycache__/
 *.py[cod]
