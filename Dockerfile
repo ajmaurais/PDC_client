@@ -2,7 +2,7 @@ from python:3.9-alpine
 
 MAINTAINER "Aaron Maurais -- MacCoss Lab"
 
-RUN apk add git openssh && \
+RUN apk add --no-cache git bash openssh && \
     mkdir -p /code/PDC_client /data /root/.ssh
 
 COPY id_rsa_PDC_client_repo /root/.ssh
@@ -16,4 +16,6 @@ RUN cd /code/PDC_client && \
     pip install .
 
 WORKDIR /data
+
+CMD ["PDC_client"]
 
