@@ -1,4 +1,6 @@
-led / optimized / DLL files
+# things I added
+data/*
+
 __pycache__/
 *.py[cod]
 *$py.class
