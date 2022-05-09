@@ -45,6 +45,15 @@ def metadata(study_id):
             signedUrl {url}} 
     }''' % study_id
 
-    return _post(query)
+    payload = _post(query)
+
+    keys = ('file_id', 'file_name', 'md5sum', 'file_location', 'file_size', 'data_category')
+    data = list()
+    for file in payload['data']['filesPerStudy']:
+        newFile = {k: file[k] for k in keys}
+        newFile['url'] = file['signedUrl']['url']
+        data.append(newFile)
+
+    return data
 
 

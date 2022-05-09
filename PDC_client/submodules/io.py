@@ -14,7 +14,7 @@ def writeFileMetadata(data, ofname, format='json', nFiles=None):
     Write file metadata.
 
     Parameters:
-        data (dict): File metadata api payload.
+        data (list): List of dictionaries representing the metadata for each file.
         ofname (str): Output file name.
         format (str): Output file format. One of ["json", "tsv", "str"]
         nFiles (int): Number of files in output. If None, all files are printed.
@@ -23,40 +23,42 @@ def writeFileMetadata(data, ofname, format='json', nFiles=None):
         ValueError: If unknown output file format.
     '''
 
-    file_data = data['data']['filesPerStudy']
-    if nFiles is not None:
-        file_data = file_data[0:nFiles]
+    # make sure all the keys are the same
+    keys = data[0].keys()
+    for file in data:
+        if keys != file.keys():
+            raise KeyError('File dict keys must be identical!')
 
-    keys = ('file_id', 'file_name', 'md5sum', 'file_location', 'file_size', 'data_category')
+    if nFiles is not None:
+        data = data[0:nFiles]
+
     if format in ('json', 'str'):
-        newData = list()
-        for file in file_data:
-            newFile = {k: file[k] for k in keys}
-            newFile['url'] = file['signedUrl']['url']
-            newData.append(newFile)
         if format == 'json':
             with open(ofname, 'w') as outF:
-                json.dump(newData, outF)
+                json.dump(data, outF)
         else:
-            print(json.dumps(newData, indent = 2))
+            print(json.dumps(data, indent = 2))
 
     elif format == 'tsv':
         with open(ofname, 'w') as outF:
-            for i, h in enumerate(keys + ('url',)):
+            for i, h in enumerate(keys):
                 if i != 0:
                     outF.write('\t')
                 outF.write(h)
             outF.write('\n')
-            for file in file_data:
-                for k in keys:
-                    outF.write(f'{file[k]}\t')
-                outF.write('{}\n'.format(file['signedUrl']['url']))
+            for file in data:
+                for i, v in enumerate(file.values()):
+                    if i != 0:
+                        outF.write('\t')
+                    outF.write(v)
+                outF.write('\n')
 
     else:
         raise ValueError(f'{format} is an unknown output format!')
 
 
 def md5Sum(fname):
+    ''' Get the md5 digest of a file. '''
     file_hash = md5()
     with open(fname, 'rb') as inF:
         while chunk := inF.read(8192):
