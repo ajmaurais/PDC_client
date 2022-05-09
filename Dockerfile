@@ -2,14 +2,10 @@ from python:3.9-alpine
 
 MAINTAINER "Aaron Maurais -- MacCoss Lab"
 
-RUN apk add --no-cache git bash openssh && \
+RUN apk add --no-cache git bash && \
     mkdir -p /code/PDC_client /data /root/.ssh
 
-COPY id_rsa_PDC_client_repo /root/.ssh
-
-RUN echo -e 'Host pdcGitRepo\n\tHostname github.com\n\tIdentityFile=/root/.ssh/id_rsa_PDC_client_repo\n\tStrictHostKeyChecking=no' > /root/.ssh/config
-
-RUN git clone git@pdcGitRepo:ajmaurais/PDC_client.git /code/PDC_client
+RUN git clone https://github.com/ajmaurais/PDC_client /code/PDC_client
  
 RUN cd /code/PDC_client && \
     python setup.py build && \
