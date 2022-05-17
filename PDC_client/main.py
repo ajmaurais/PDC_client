@@ -53,8 +53,8 @@ Available commands:
         args = parser.parse_args(sys.argv[2:])
 
         ofname = f'{args.ofname}.{args.format}'
-        data = submodules.api.metadata(args.study_id)
-        submodules.io.writeFileMetadata(data, ofname, format=args.format, nFiles=args.nFiles)
+        data = submodules.api.metadata(args.study_id, nFiles=args.nFiles)
+        submodules.io.writeFileMetadata(data, ofname, format=args.format)
 
     def file(self):
         parser = argparse.ArgumentParser(description=Main.FILE_DESCRIPTION)

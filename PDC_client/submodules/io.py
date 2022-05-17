@@ -9,7 +9,7 @@ RAW_BASENAME_RE = re.compile(r'/([^/]+\.raw)')
 RAW_DIRNAME_RE = re.compile(r'cloudfront\.net\/(.*)\/([^/]+\.raw)')
 
 
-def writeFileMetadata(data, ofname, format='json', nFiles=None):
+def writeFileMetadata(data, ofname, format='json'):
     '''
     Write file metadata.
 
@@ -17,7 +17,6 @@ def writeFileMetadata(data, ofname, format='json', nFiles=None):
         data (list): List of dictionaries representing the metadata for each file.
         ofname (str): Output file name.
         format (str): Output file format. One of ["json", "tsv", "str"]
-        nFiles (int): Number of files in output. If None, all files are printed.
 
     Raises:
         ValueError: If unknown output file format.
@@ -28,9 +27,6 @@ def writeFileMetadata(data, ofname, format='json', nFiles=None):
     for file in data:
         if keys != file.keys():
             raise KeyError('File dict keys must be identical!')
-
-    if nFiles is not None:
-        data = data[0:nFiles]
 
     if format in ('json', 'str'):
         if format == 'json':
