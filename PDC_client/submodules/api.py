@@ -2,6 +2,7 @@
 import requests
 import json
 import re
+from concurrent.futures import ThreadPoolExecutor
 
 _URL ='https://proteomic.datacommons.cancer.gov/graphql'
 
@@ -79,7 +80,7 @@ def _get_paginated_data(query_f, data_name, study_id, page_limit=10, no_change_i
     return ret
 
 
-def case_metadata(study_id):
+def case_metadata(study_id, max_threads=45):
 
     def make_case_query(study_id, page_offset, page_limit=100):
         return '''query={
@@ -101,20 +102,22 @@ def case_metadata(study_id):
     data = _get_paginated_data(make_case_query, 'caseDemographicsPerStudy', study_id)
 
     keys = ['ethnicity', 'gender', 'race', 'cause_of_death', 'vital_status', 'year_of_birth', 'year_of_death']
+    
+    with ThreadPoolExecutor(max_workers=max_threads) as pool:
+        case_data = dict(pool.map(single_case, set([d['case_id'] for d in data])))
+
     cases = list()
-    length = len(data)
-    for i, case in enumerate(data):
+    for case in data:
         if len(case['demographics']) != 1:
             RuntimeError(f'Incorrect number of demographics in case {case["case_id"]}')
         newData = {key: case['demographics'][0][key] for key in keys}
         newData['case_id'] = case['case_id']
 
-        case_data = single_case(newData['case_id'])
-        for k, v in case_data.items():
+        for k, v in case_data[newData['case_id']].items():
             newData[k] = v
         cases.append(newData)
         
-    return data
+    return cases
 
 
 def single_case(case_id):
@@ -147,7 +150,7 @@ def single_case(case_id):
     for key in diagnosis_keys:
         ret[key] = data['diagnoses'][key]
 
-    return ret
+    return case_id, ret
 
 
 def aliquot_id(file_id):
@@ -165,10 +168,10 @@ def aliquot_id(file_id):
         RuntimeError(f'Too many files in query for file_id: {file_id}')
     if len(r['data']['fileMetadata'][0]['aliquots']) != 1:
         RuntimeError(f'Too many aliquot IDs for file_id: {file_id}')
-    return r['data']['fileMetadata'][0]['aliquots'][0]['aliquot_id']
+    return file_id, r['data']['fileMetadata'][0]['aliquots'][0]['aliquot_id']
     
 
-def metadata(study_id, nFiles=None):
+def metadata(study_id, nFiles=None, max_threads=50):
     ''' Get file metadata for a study '''
 
     query = '''query {
@@ -199,9 +202,12 @@ def metadata(study_id, nFiles=None):
             data.append(newFile)
             file_count += 1
 
-    cases = case_metadata(study_id)
+    cases = case_metadata(study_id, max_threads=max_threads)
+    with ThreadPoolExecutor(max_workers=max_threads) as pool:
+        aliquot_ids = dict(pool.map(aliquot_id, set([f['file_id'] for f in data])))
+
     for file in data:
-        file['aliquot_id'] = aliquot_id(file['file_id'])
+        file['aliquot_id'] = aliquot_ids[file['file_id']]
 
     return data
 
