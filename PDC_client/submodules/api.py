@@ -3,24 +3,27 @@ import requests
 import json
 import re
 from concurrent.futures import ThreadPoolExecutor
+from multiprocessing import cpu_count
 
+MAX_THREADS = cpu_count()
 _URL ='https://proteomic.datacommons.cancer.gov/graphql'
 
-def _post(query):
-    r = requests.post(_URL, json = {'query': query})
-    if r.status_code == 200:
-        return r.json()
-    else:
-        raise RuntimeError(f'Failed to retrieve failed with response code {r.status_code}!')
+def _post(query, retries=5):
+    for i in range(retries):
+        r = requests.post(_URL, json = {'query': query})
+        if r.status_code == 200:
+            return r.json()
+    raise RuntimeError(f'Failed with response code {r.status_code}!')
 
-def _get(query):
+
+def _get(query, retries=5):
     query = re.sub('\s+', ' ', query)
-    r = requests.get(f'{_URL}?{query}')
-    if r.status_code == 200:
-        return r.json()
-    else:
-        print(f'url:\n"{_URL}?{query}"')
-        raise RuntimeError(f'Failed to retrieve failed with response code {r.status_code}!')
+    for i in range(retries):
+        r = requests.get(f'{_URL}?{query}')
+        if r.status_code == 200:
+            return r.json()
+    print(f'url:\n"{_URL}?{query}"')
+    raise RuntimeError(f'Failed with response code {r.status_code}!')
   
 
 def study_id(pdc_study_id):
@@ -80,7 +83,7 @@ def _get_paginated_data(query_f, data_name, study_id, page_limit=10, no_change_i
     return ret
 
 
-def case_metadata(study_id, max_threads=45):
+def case_metadata(study_id, max_threads=MAX_THREADS):
 
     def make_case_query(study_id, page_offset, page_limit=100):
         return '''query={
@@ -171,7 +174,7 @@ def aliquot_id(file_id):
     return file_id, r['data']['fileMetadata'][0]['aliquots'][0]['aliquot_id']
     
 
-def metadata(study_id, nFiles=None, max_threads=50):
+def metadata(study_id, nFiles=None, max_threads=MAX_THREADS):
     ''' Get file metadata for a study '''
 
     query = '''query {
