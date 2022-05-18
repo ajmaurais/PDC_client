@@ -49,12 +49,17 @@ Available commands:
                             help='The number of files to get metadata for. Default is all files in study')
         parser.add_argument('-o', '--ofname', default='study_metadata',
                             help='Output base name.')
+        parser.add_argument('-a', '--skylineAnnotations', default=False, action='store_true',
+                            help='Also save Skyline annotations csv file')
         parser.add_argument('study_id', help='The study id.')
         args = parser.parse_args(sys.argv[2:])
 
         ofname = f'{args.ofname}.{args.format}'
-        data = submodules.api.metadata(args.study_id, nFiles=args.nFiles)
+        data = submodules.api.metadata(args.study_id, n_files=args.nFiles)
         submodules.io.writeFileMetadata(data, ofname, format=args.format)
+        if args.skylineAnnotations:
+            submodules.io.writeSkylineAnnotations(data, f'{args.ofname}_annotations.csv')
+
 
     def file(self):
         parser = argparse.ArgumentParser(description=Main.FILE_DESCRIPTION)

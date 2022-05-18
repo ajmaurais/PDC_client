@@ -7,6 +7,8 @@ from multiprocessing import cpu_count
 
 MAX_THREADS = cpu_count()
 _URL ='https://proteomic.datacommons.cancer.gov/graphql'
+FILE_METADATA_KEYS = [ "file_id", "file_name", "md5sum", "file_location", "file_size",
+                       "data_category", "file_type", "file_format", "url"]
 
 def _post(query, retries=5):
     for i in range(retries):

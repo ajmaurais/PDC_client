@@ -1,12 +1,23 @@
 
 import sys
+from os.path import splitext
 import json
 from hashlib import md5
 import requests
 import re
 
+from .api import FILE_METADATA_KEYS
+
 RAW_BASENAME_RE = re.compile(r'/([^/]+\.raw)')
 RAW_DIRNAME_RE = re.compile(r'cloudfront\.net\/(.*)\/([^/]+\.raw)')
+
+
+def _write_row(itterable, ostream, sep='\t', quote=None):
+    for i, it in enumerate(itterable):
+        if i > 0:
+            ostream.write(sep)
+        ostream.write(it if quote is None else f'{quote}{it}{quote}')
+    ostream.write('\n')
 
 
 def writeFileMetadata(data, ofname, format='json'):
@@ -37,20 +48,27 @@ def writeFileMetadata(data, ofname, format='json'):
 
     elif format == 'tsv':
         with open(ofname, 'w') as outF:
-            for i, h in enumerate(keys):
-                if i != 0:
-                    outF.write('\t')
-                outF.write(h)
-            outF.write('\n')
+            _write_row(keys, outF, sep='\t')
             for file in data:
-                for i, v in enumerate(file.values()):
-                    if i != 0:
-                        outF.write('\t')
-                    outF.write(v)
-                outF.write('\n')
-
+                _write_row(keys, outF, sep='\t')
     else:
         raise ValueError(f'{format} is an unknown output format!')
+
+
+def writeSkylineAnnotations(data, ofname):
+    
+    file_annotations = [key for key in data[0].keys() if key not in FILE_METADATA_KEYS]
+
+    # make csv headers
+    headers = ['ElementLocator']
+    headers += ['annotation_' + key for key in data[0].keys() if key in file_annotations]
+
+    with open(ofname, 'w') as outF:
+        _write_row(headers, outF, sep=',', quote='"')
+        for file in data:
+            annotation_values = ['Replicate:/' + splitext(file['file_name'])[0]]
+            annotation_values += [file[a] if file[a] else '' for a in file_annotations]
+            _write_row(annotation_values, outF, sep=',', quote='"')
 
 
 def md5_sum(fname):
