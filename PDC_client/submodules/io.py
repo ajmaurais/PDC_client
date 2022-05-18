@@ -53,7 +53,7 @@ def writeFileMetadata(data, ofname, format='json'):
         raise ValueError(f'{format} is an unknown output format!')
 
 
-def md5Sum(fname):
+def md5_sum(fname):
     ''' Get the md5 digest of a file. '''
     file_hash = md5()
     with open(fname, 'rb') as inF:
@@ -129,7 +129,7 @@ def downloadFile(url, ofname, expected_md5=None, nRetrys=5):
 
         if expected_md5 is None:
             return True
-        if md5Sum(ofname) == expected_md5:
+        if md5_sum(ofname) == expected_md5:
             return True
 
     return False

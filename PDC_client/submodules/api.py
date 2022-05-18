@@ -56,7 +56,7 @@ def _get_paginated_data(query_f, data_name, study_id, page_limit=10, no_change_i
     no_change_iterations = 0
     previous_len = 0
     
-    while not done:
+    while True:
         data = _get(query_f(study_id, offset, page_limit))
         ret += data['data'][endpoint_name][data_name]
 
@@ -71,7 +71,7 @@ def _get_paginated_data(query_f, data_name, study_id, page_limit=10, no_change_i
 
         entry_i += len(data['data'][endpoint_name][data_name])
         if entry_i >= total_entries:
-            done = True
+            return ret
 
         # check that we are not in an infinite loop
         if len(ret) == previous_len:
@@ -79,8 +79,6 @@ def _get_paginated_data(query_f, data_name, study_id, page_limit=10, no_change_i
         previous_len = len(ret)
         if no_change_iterations >= no_change_iterations_limit:
             raise RuntimeError('Something is wrong...')
-
-    return ret
 
 
 def case_metadata(study_id, max_threads=MAX_THREADS):
@@ -174,8 +172,8 @@ def aliquot_id(file_id):
     return file_id, r['data']['fileMetadata'][0]['aliquots'][0]['aliquot_id']
     
 
-def metadata(study_id, nFiles=None, max_threads=MAX_THREADS):
-    ''' Get file metadata for a study '''
+def raw_files(study_id, n_files=None):
+    ''' Get metadata for raw files in a study '''
 
     query = '''query {
        filesPerStudy (study_id: "%s" acceptDUA: true) {
@@ -190,14 +188,14 @@ def metadata(study_id, nFiles=None, max_threads=MAX_THREADS):
             signedUrl {url}} 
     }''' % study_id
 
+    # get a list of .raw files in study
     payload = _post(query)
-
     keys = ('file_id', 'file_name', 'md5sum', 'file_location', 'file_size', 'data_category', 'file_type', 'file_format')
     data = list()
     file_count = 0
     for file in payload['data']['filesPerStudy']:
         if file['data_category'] == 'Raw Mass Spectra':
-            if nFiles is not None and file_count >= nFiles:
+            if n_files is not None and file_count >= n_files:
                 break
 
             newFile = {k: file[k] for k in keys}
@@ -205,13 +203,45 @@ def metadata(study_id, nFiles=None, max_threads=MAX_THREADS):
             data.append(newFile)
             file_count += 1
 
-    cases = case_metadata(study_id, max_threads=max_threads)
-    with ThreadPoolExecutor(max_workers=max_threads) as pool:
-        aliquot_ids = dict(pool.map(aliquot_id, set([f['file_id'] for f in data])))
+    return data
 
-    for file in data:
+
+def metadata(study_id, n_files=None, max_threads=MAX_THREADS):
+    '''
+    Get metadata for each raw file in a study 
+
+    Parameters:
+        study_id (str): The PDC study id.
+        n_files (int): The number of files to get data for. If None data for all files are retreived.
+        max_threads (int): The max number of threads to use for making api calls.
+
+    Returns:
+        file_dat (list): A list of dicts where each list element is a file.
+    '''
+
+    # Get file metadata
+    file_data = raw_files(study_id, n_files)
+
+    # add aliquot_id to file metadata
+    with ThreadPoolExecutor(max_workers=max_threads) as pool:
+        aliquot_ids = dict(pool.map(aliquot_id, set([f['file_id'] for f in file_data])))
+    for file in file_data:
         file['aliquot_id'] = aliquot_ids[file['file_id']]
 
-    return data
+    # Get metadata for cases in files
+    cases = case_metadata(study_id, max_threads=max_threads)
+    cases_per_aliquot = dict()
+    for case in cases:
+        samples = case.pop('samples')
+        for sample in samples:
+            for aliquot in sample['aliquots']:
+                assert aliquot['aliquot_id'] not in cases_per_aliquot
+                cases_per_aliquot[aliquot['aliquot_id']] = case
+    
+    # Add case metadata to file metadata
+    for file in file_data:
+        file.update(cases_per_aliquot[file['aliquot_id']])
+
+    return file_data
 
 
