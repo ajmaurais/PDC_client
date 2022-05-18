@@ -2,6 +2,7 @@
 import sys
 import os
 import time
+from multiprocessing import cpu_count
 
 module_path = os.path.realpath(os.path.dirname(os.path.realpath(__file__)) + '/../')
 sys.path = [module_path] + sys.path
@@ -15,7 +16,7 @@ def time_f(f, *args, **kwargs):
     end = time.time()
     return end - start, r
 
-mult = 6 
+mult = int(cpu_count() / 2)
 count = 10
 thread_counts = [max(1, x * mult) for x in range(count)]
 print(f'Testing thread counts: {thread_counts}')
