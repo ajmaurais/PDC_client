@@ -244,6 +244,11 @@ def metadata(study_id, n_files=None, max_threads=MAX_THREADS):
     for file in file_data:
         file.update(cases_per_aliquot[file['aliquot_id']])
 
+        # set None values to 'NA'
+        for k in file.keys():
+            if file[k] is None:
+                file[k] = 'NA'
+
     return file_data
 
 
