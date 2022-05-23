@@ -50,7 +50,7 @@ def writeFileMetadata(data, ofname, format='json'):
         with open(ofname, 'w') as outF:
             _write_row(keys, outF, sep='\t')
             for file in data:
-                _write_row(keys, outF, sep='\t')
+                _write_row([file[key] for key in keys], outF, sep='\t')
     else:
         raise ValueError(f'{format} is an unknown output format!')
 
