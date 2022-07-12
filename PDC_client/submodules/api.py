@@ -28,6 +28,25 @@ def _get(query, retries=5):
     raise RuntimeError(f'Failed with response code {r.status_code}!')
   
 
+def pdc_study_id(study_id):
+    '''
+    Get pdc_study_id from a study_id.
+
+    Parameters:
+        study_id (str)
+
+    Returns:
+        pdc_study_id (str)
+    '''
+
+    query = '''query {
+        study (study_id: "%s" acceptDUA: true) {pdc_study_id}
+    }''' % study_id
+
+    data = _post(query)
+    return data["data"]["study"][0]["pdc_study_id"]
+
+
 def study_id(pdc_study_id):
     '''
     Get study_id from a pdc_study_id.

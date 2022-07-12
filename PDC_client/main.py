@@ -13,6 +13,7 @@ class Main(object):
     '''
 
     STUDY_ID_DESCRIPTION = 'Get the study_id from the pdc_study_id.'
+    PDC_STUDY_ID_DESCRIPTION = 'Get the pdc_study_id from the study_id.'
     METADATA_DESCRIPTION = 'Get the metadata for files in a study.'
     FILE_DESCRIPTION = 'Download a single file.'
     FILES_DESCRIPTION = 'Download all the files in a study.'
@@ -23,6 +24,7 @@ class Main(object):
 
 Available commands:
    studyID     {Main.STUDY_ID_DESCRIPTION}
+   PDCStudyID  {Main.PDC_STUDY_ID_DESCRIPTION}
    metadata    {Main.METADATA_DESCRIPTION}
    file        {Main.FILE_DESCRIPTION}
    files       {Main.FILES_DESCRIPTION}''')
@@ -34,12 +36,22 @@ Available commands:
             sys.exit(1)
         getattr(self, args.command)()
 
+
     def studyID(self):
         parser = argparse.ArgumentParser(description=Main.STUDY_ID_DESCRIPTION)
         parser.add_argument('pdc_study_id')
         args = parser.parse_args(sys.argv[2:])
         study_id = submodules.api.study_id(args.pdc_study_id)
         sys.stdout.write(f'{study_id}\n')
+
+
+    def PDCStudyID(self):
+        parser = argparse.ArgumentParser(description=Main.PDC_STUDY_ID_DESCRIPTION)
+        parser.add_argument('study_id')
+        args = parser.parse_args(sys.argv[2:])
+        pdc_study_id = submodules.api.pdc_study_id(args.study_id)
+        sys.stdout.write(f'{pdc_study_id}\n')
+
 
     def metadata(self):
         parser = argparse.ArgumentParser(description=Main.METADATA_DESCRIPTION)
