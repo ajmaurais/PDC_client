@@ -6,6 +6,12 @@ from datetime import datetime
 
 from . import submodules
 
+def _firstSubcommand(argv):
+    for i in range(1, len(argv)):
+        if argv[i][0] != '-':
+            return i
+    return len(argv)
+
 class Main(object):
     '''
     A class to parse subcommands.
@@ -28,10 +34,14 @@ Available commands:
    metadata    {Main.METADATA_DESCRIPTION}
    file        {Main.FILE_DESCRIPTION}
    files       {Main.FILES_DESCRIPTION}''')
+        parser.add_argument('--debug', choices = ['pdb', 'pudb'], default=None,
+                            help='Start the main method in selected debugger')
         parser.add_argument('command', help = 'Subcommand to run.')
+        # args = parser.parse_args(sys.argv[1:(_firstSubcommand(sys.argv) + 1)])
         args = parser.parse_args(sys.argv[1:2])
+
         if not hasattr(self, args.command):
-            sys.stderr.write(f'{args.command} is an unknown command!')
+            sys.stderr.write(f'ERROR: {args.command} is an unknown command!\n')
             parser.print_help()
             sys.exit(1)
         getattr(self, args.command)()
@@ -39,9 +49,14 @@ Available commands:
 
     def studyID(self):
         parser = argparse.ArgumentParser(description=Main.STUDY_ID_DESCRIPTION)
+        parser.add_argument('-u', '--baseUrl', default=submodules.api.BASE_URL,
+                            help=f'The base URL for the PDC API. {submodules.api.BASE_URL} is the default.')
         parser.add_argument('pdc_study_id')
         args = parser.parse_args(sys.argv[2:])
-        study_id = submodules.api.study_id(args.pdc_study_id)
+        study_id = submodules.api.study_id(args.pdc_study_id, args.baseUrl)
+        if study_id is None:
+            sys.stderr.write('ERROR: No study found matching study_id!\n')
+            sys.exit(1)
         sys.stdout.write(f'{study_id}\n')
 
 
@@ -61,17 +76,21 @@ Available commands:
                             help='The number of files to get metadata for. Default is all files in study')
         parser.add_argument('-o', '--ofname', default='study_metadata',
                             help='Output base name.')
+        parser.add_argument('-u', '--baseUrl', default=submodules.api.BASE_URL,
+                            help=f'The base URL for the PDC API. {submodules.api.BASE_URL} is the default.')
         parser.add_argument('-a', '--skylineAnnotations', default=False, action='store_true',
                             help='Also save Skyline annotations csv file')
         parser.add_argument('study_id', help='The study id.')
         args = parser.parse_args(sys.argv[2:])
 
         ofname = f'{args.ofname}.{args.format}'
-        data = submodules.api.metadata(args.study_id, n_files=args.nFiles)
+        data = submodules.api.metadata(args.study_id, url=args.baseUrl, n_files=args.nFiles)
+        if len(data) == 0:
+            sys.stderr.write('ERROR: Could not find any data associated with study!\n')
+            sys.exit(1)
         submodules.io.writeFileMetadata(data, ofname, format=args.format)
         if args.skylineAnnotations:
             submodules.io.writeSkylineAnnotations(data, f'{args.ofname}_annotations.csv')
-
 
     def file(self):
         parser = argparse.ArgumentParser(description=Main.FILE_DESCRIPTION)
@@ -92,7 +111,7 @@ Available commands:
         if args.ofname is None:
             ofname = submodules.io.fileBasename(args.url)
             if ofname is None:
-                sys.stderr.write('ERROR: Could not determine output file name!')
+                sys.stderr.write('ERROR: Could not determine output file name!\n')
                 sys.exit(1)
         else:
             ofname = args.ofname
@@ -100,7 +119,7 @@ Available commands:
         remove_old = False
         if os.path.isfile(ofname):
             if not args.force and args.md5sum is not None:
-                if submodules.io.md5Sum(ofname) == args.md5sum:
+                if submodules.io.md5_sum(ofname) == args.md5sum:
                     sys.stdout.write(f'The file: "{ofname}" has already been downloaded. Use --force option to override.\n')
                     sys.exit(0)
 

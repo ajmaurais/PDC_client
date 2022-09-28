@@ -6,29 +6,29 @@ from concurrent.futures import ThreadPoolExecutor
 from multiprocessing import cpu_count
 
 MAX_THREADS = cpu_count()
-_URL ='https://proteomic.datacommons.cancer.gov/graphql'
+BASE_URL ='https://proteomic.datacommons.cancer.gov/graphql'
 FILE_METADATA_KEYS = [ "file_id", "file_name", "md5sum", "file_location", "file_size",
                        "data_category", "file_type", "file_format", "url"]
 
-def _post(query, retries=5):
+def _post(query, url, retries=5):
     for i in range(retries):
-        r = requests.post(_URL, json = {'query': query})
+        r = requests.post(url, json = {'query': query})
         if r.status_code == 200:
             return r.json()
     raise RuntimeError(f'Failed with response code {r.status_code}!')
 
 
-def _get(query, retries=5):
+def _get(query, url, retries=5):
     query = re.sub('\s+', ' ', query)
     for i in range(retries):
-        r = requests.get(f'{_URL}?{query}')
+        r = requests.get(f'{url}?{query}')
         if r.status_code == 200:
             return r.json()
-    print(f'url:\n"{_URL}?{query}"')
+    print(f'url:\n"{url}?{query}"')
     raise RuntimeError(f'Failed with response code {r.status_code}!')
-  
+ 
 
-def pdc_study_id(study_id):
+def pdc_study_id(study_id, url):
     '''
     Get pdc_study_id from a study_id.
 
@@ -43,11 +43,13 @@ def pdc_study_id(study_id):
         study (study_id: "%s" acceptDUA: true) {pdc_study_id}
     }''' % study_id
 
-    data = _post(query)
-    return data["data"]["study"][0]["pdc_study_id"]
+    data = _post(query, url)
+    if len(data['data']['study']) > 0:
+        return data["data"]["study"][0]["pdc_study_id"]
+    return None
 
 
-def study_id(pdc_study_id):
+def study_id(pdc_study_id, url):
     '''
     Get study_id from a pdc_study_id.
 
@@ -62,11 +64,13 @@ def study_id(pdc_study_id):
         study (pdc_study_id: "%s" acceptDUA: true) {study_id}
     }''' % pdc_study_id
 
-    data = _post(query)
-    return data["data"]["study"][0]["study_id"]
+    data = _post(query, url)
+    if len(data['data']['study']) > 0:
+        return data["data"]["study"][0]["study_id"]
+    return None
 
 
-def _get_paginated_data(query_f, data_name, study_id, page_limit=10, no_change_iterations_limit=2):
+def _get_paginated_data(query_f, url, data_name, study_id, page_limit=10, no_change_iterations_limit=2):
 
     ret = list()
     done = False
@@ -78,7 +82,7 @@ def _get_paginated_data(query_f, data_name, study_id, page_limit=10, no_change_i
     previous_len = 0
     
     while True:
-        data = _get(query_f(study_id, offset, page_limit))
+        data = _get(query_f(study_id, offset, page_limit), url)
         ret += data['data'][endpoint_name][data_name]
 
         offset += page_limit
@@ -102,7 +106,7 @@ def _get_paginated_data(query_f, data_name, study_id, page_limit=10, no_change_i
             raise RuntimeError('Something is wrong...')
 
 
-def case_metadata(study_id, max_threads=MAX_THREADS):
+def case_metadata(study_id, url, max_threads=MAX_THREADS):
 
     def make_case_query(study_id, page_offset, page_limit=100):
         return '''query={
@@ -121,12 +125,12 @@ def case_metadata(study_id, max_threads=MAX_THREADS):
                     }
             } pagination { count sort from page total pages size } }}''' % (study_id, page_offset, page_limit)
     
-    data = _get_paginated_data(make_case_query, 'caseDemographicsPerStudy', study_id)
+    data = _get_paginated_data(make_case_query, url, 'caseDemographicsPerStudy', study_id)
 
     keys = ['ethnicity', 'gender', 'race', 'cause_of_death', 'vital_status', 'year_of_birth', 'year_of_death']
     
     with ThreadPoolExecutor(max_workers=max_threads) as pool:
-        case_data = dict(pool.map(single_case, set([d['case_id'] for d in data])))
+        case_data = dict(pool.map(lambda x: single_case(x, url), set([d['case_id'] for d in data])))
 
     cases = list()
     for case in data:
@@ -142,7 +146,7 @@ def case_metadata(study_id, max_threads=MAX_THREADS):
     return cases
 
 
-def single_case(case_id):
+def single_case(case_id, url):
 
     query = '''query={case (case_id: "%s" acceptDUA: true) {
     case_id
@@ -159,7 +163,7 @@ def single_case(case_id):
         }
     }} ''' % case_id
 
-    r = _get(query)
+    r = _get(query, url)
     data = r['data']['case'][0]
 
     if len(data['diagnoses']) != 1:
@@ -175,7 +179,7 @@ def single_case(case_id):
     return case_id, ret
 
 
-def aliquot_id(file_id):
+def aliquot_id(file_id, url):
     '''
     Get the aliquot ID for a file.
     '''
@@ -185,7 +189,7 @@ def aliquot_id(file_id):
         aliquots { aliquot_id } }
         }''' % file_id
 
-    r = _get(query)
+    r = _get(query, url)
     if len(r['data']['fileMetadata']) != 1:
         RuntimeError(f'Too many files in query for file_id: {file_id}')
     if len(r['data']['fileMetadata'][0]['aliquots']) != 1:
@@ -193,7 +197,7 @@ def aliquot_id(file_id):
     return file_id, r['data']['fileMetadata'][0]['aliquots'][0]['aliquot_id']
     
 
-def raw_files(study_id, n_files=None):
+def raw_files(study_id, url, n_files=None):
     ''' Get metadata for raw files in a study '''
 
     query = '''query {
@@ -210,7 +214,7 @@ def raw_files(study_id, n_files=None):
     }''' % study_id
 
     # get a list of .raw files in study
-    payload = _post(query)
+    payload = _post(query, url)
     keys = ('file_id', 'file_name', 'md5sum', 'file_location', 'file_size', 'data_category', 'file_type', 'file_format')
     data = list()
     file_count = 0
@@ -227,7 +231,7 @@ def raw_files(study_id, n_files=None):
     return data
 
 
-def metadata(study_id, n_files=None, max_threads=MAX_THREADS):
+def metadata(study_id, url=BASE_URL, n_files=None, max_threads=MAX_THREADS):
     '''
     Get metadata for each raw file in a study 
 
@@ -241,16 +245,17 @@ def metadata(study_id, n_files=None, max_threads=MAX_THREADS):
     '''
 
     # Get file metadata
-    file_data = raw_files(study_id, n_files)
+    file_data = raw_files(study_id, url, n_files=n_files)
 
     # add aliquot_id to file metadata
     with ThreadPoolExecutor(max_workers=max_threads) as pool:
-        aliquot_ids = dict(pool.map(aliquot_id, set([f['file_id'] for f in file_data])))
+        aliquot_ids = dict(pool.map(lambda x: aliquot_id(x, url),
+                                    set([f['file_id'] for f in file_data])))
     for file in file_data:
         file['aliquot_id'] = aliquot_ids[file['file_id']]
 
     # Get metadata for cases in files
-    cases = case_metadata(study_id, max_threads=max_threads)
+    cases = case_metadata(study_id, url, max_threads=max_threads)
     cases_per_aliquot = dict()
     for case in cases:
         samples = case.pop('samples')
@@ -269,5 +274,4 @@ def metadata(study_id, n_files=None, max_threads=MAX_THREADS):
                 file[k] = 'NA'
 
     return file_data
-
 
