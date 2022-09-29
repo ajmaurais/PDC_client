@@ -4,6 +4,7 @@ import json
 import re
 from concurrent.futures import ThreadPoolExecutor
 from multiprocessing import cpu_count
+import sys
 
 MAX_THREADS = cpu_count()
 BASE_URL ='https://proteomic.datacommons.cancer.gov/graphql'
@@ -215,6 +216,14 @@ def raw_files(study_id, url, n_files=None):
 
     # get a list of .raw files in study
     payload = _post(query, url)
+    if 'errors' in payload:
+        sys.stderr.write('ERROR: API query failed with response(s):\n')
+        for error in payload['errors']:
+            sys.stderr.write('Code: {}\nEndpoint: {}\nMessage: {}\n'.format(error['extensions']['code'],
+                                                                            ', '.join(error['path']),
+                                                                            error['message']))
+        return None
+
     keys = ('file_id', 'file_name', 'md5sum', 'file_location', 'file_size', 'data_category', 'file_type', 'file_format')
     data = list()
     file_count = 0
@@ -246,6 +255,8 @@ def metadata(study_id, url=BASE_URL, n_files=None, max_threads=MAX_THREADS):
 
     # Get file metadata
     file_data = raw_files(study_id, url, n_files=n_files)
+    if file_data is None:
+        return None
 
     # add aliquot_id to file metadata
     with ThreadPoolExecutor(max_workers=max_threads) as pool:

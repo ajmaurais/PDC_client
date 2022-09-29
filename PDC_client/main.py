@@ -85,6 +85,8 @@ Available commands:
 
         ofname = f'{args.ofname}.{args.format}'
         data = submodules.api.metadata(args.study_id, url=args.baseUrl, n_files=args.nFiles)
+        if data is None:
+            sys.exit(1)
         if len(data) == 0:
             sys.stderr.write('ERROR: Could not find any data associated with study!\n')
             sys.exit(1)
