@@ -62,9 +62,11 @@ Available commands:
 
     def PDCStudyID(self):
         parser = argparse.ArgumentParser(description=Main.PDC_STUDY_ID_DESCRIPTION)
+        parser.add_argument('-u', '--baseUrl', default=submodules.api.BASE_URL,
+                            help=f'The base URL for the PDC API. {submodules.api.BASE_URL} is the default.')
         parser.add_argument('study_id')
         args = parser.parse_args(sys.argv[2:])
-        pdc_study_id = submodules.api.pdc_study_id(args.study_id)
+        pdc_study_id = submodules.api.pdc_study_id(args.study_id, args.baseUrl)
         sys.stdout.write(f'{pdc_study_id}\n')
 
 
