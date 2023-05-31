@@ -6,11 +6,15 @@ from datetime import datetime
 
 from . import submodules
 
+SUBCOMMANDS = {'studyID', 'PDCStudyID', 'metadata', 'file', 'files'}
+
+
 def _firstSubcommand(argv):
     for i in range(1, len(argv)):
-        if argv[i][0] != '-':
+        if argv[i] in SUBCOMMANDS:
             return i
     return len(argv)
+
 
 class Main(object):
     '''
@@ -37,22 +41,30 @@ Available commands:
         parser.add_argument('--debug', choices = ['pdb', 'pudb'], default=None,
                             help='Start the main method in selected debugger')
         parser.add_argument('command', help = 'Subcommand to run.')
-        # args = parser.parse_args(sys.argv[1:(_firstSubcommand(sys.argv) + 1)])
-        args = parser.parse_args(sys.argv[1:2])
+        subcommand_start = _firstSubcommand(sys.argv)
+        args = parser.parse_args(sys.argv[1:(subcommand_start + 1)])
 
-        if not hasattr(self, args.command):
+        if args.debug:
+            if args.debug == 'pdb':
+                sys.stderr.write('Why are you using pdb? You should be using pudb you jack rabbit!\n')
+                sys.exit(1)
+            elif args.debug == 'pudb':
+                import pudb
+                pudb.set_trace()
+
+        if not args.command in SUBCOMMANDS:
             sys.stderr.write(f'ERROR: {args.command} is an unknown command!\n')
             parser.print_help()
             sys.exit(1)
-        getattr(self, args.command)()
+        getattr(self, args.command)(subcommand_start + 1)
 
 
-    def studyID(self):
+    def studyID(self, start=2):
         parser = argparse.ArgumentParser(description=Main.STUDY_ID_DESCRIPTION)
         parser.add_argument('-u', '--baseUrl', default=submodules.api.BASE_URL,
                             help=f'The base URL for the PDC API. {submodules.api.BASE_URL} is the default.')
         parser.add_argument('pdc_study_id')
-        args = parser.parse_args(sys.argv[2:])
+        args = parser.parse_args(sys.argv[start:])
         study_id = submodules.api.study_id(args.pdc_study_id, args.baseUrl)
         if study_id is None:
             sys.stderr.write('ERROR: No study found matching study_id!\n')
@@ -60,17 +72,17 @@ Available commands:
         sys.stdout.write(f'{study_id}\n')
 
 
-    def PDCStudyID(self):
+    def PDCStudyID(self, start=2):
         parser = argparse.ArgumentParser(description=Main.PDC_STUDY_ID_DESCRIPTION)
         parser.add_argument('-u', '--baseUrl', default=submodules.api.BASE_URL,
                             help=f'The base URL for the PDC API. {submodules.api.BASE_URL} is the default.')
         parser.add_argument('study_id')
-        args = parser.parse_args(sys.argv[2:])
+        args = parser.parse_args(sys.argv[start:])
         pdc_study_id = submodules.api.pdc_study_id(args.study_id, args.baseUrl)
         sys.stdout.write(f'{pdc_study_id}\n')
 
 
-    def metadata(self):
+    def metadata(self, start=2):
         parser = argparse.ArgumentParser(description=Main.METADATA_DESCRIPTION)
         parser.add_argument('-f', '--format', choices=['json', 'tsv', 'str'], default = 'json',
                             help='The output file format. Default is "json".')
@@ -83,7 +95,7 @@ Available commands:
         parser.add_argument('-a', '--skylineAnnotations', default=False, action='store_true',
                             help='Also save Skyline annotations csv file')
         parser.add_argument('study_id', help='The study id.')
-        args = parser.parse_args(sys.argv[2:])
+        args = parser.parse_args(sys.argv[start:])
 
         ofname = f'{args.ofname}.{args.format}'
         data = submodules.api.metadata(args.study_id, url=args.baseUrl, n_files=args.nFiles)
@@ -96,7 +108,7 @@ Available commands:
         if args.skylineAnnotations:
             submodules.io.writeSkylineAnnotations(data, f'{args.ofname}_annotations.csv')
 
-    def file(self):
+    def file(self, start=2):
         parser = argparse.ArgumentParser(description=Main.FILE_DESCRIPTION)
         parser.add_argument('-o', '--ofname', default=None,
                             help='Output file name.')
@@ -110,7 +122,7 @@ Available commands:
                             help='Re-download even if the target file already exists.')
         parser.add_argument('url', help='The file url.')
 
-        args = parser.parse_args(sys.argv[2:])
+        args = parser.parse_args(sys.argv[start:])
 
         if args.ofname is None:
             ofname = submodules.io.fileBasename(args.url)
