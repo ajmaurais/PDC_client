@@ -46,11 +46,10 @@ Available commands:
 
         if args.debug:
             if args.debug == 'pdb':
-                sys.stderr.write('Why are you using pdb? You should be using pudb you jack rabbit!\n')
-                sys.exit(1)
+                import pdb as debugger
             elif args.debug == 'pudb':
-                import pudb
-                pudb.set_trace()
+                import pudb as debugger
+            debugger.set_trace()
 
         if not args.command in SUBCOMMANDS:
             sys.stderr.write(f'ERROR: {args.command} is an unknown command!\n')

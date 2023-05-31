@@ -1,6 +1,5 @@
 
 import sys
-from os.path import splitext
 import json
 from hashlib import md5
 import requests
@@ -10,6 +9,14 @@ from .api import FILE_METADATA_KEYS
 
 RAW_BASENAME_RE = re.compile(r'/([^/]+\.raw)')
 RAW_DIRNAME_RE = re.compile(r'cloudfront\.net\/(.*)\/([^/]+\.raw)')
+FILE_EXT_RE = re.compile(r'^([\w\-%& \\\/=\+]+)\.(.*)$')
+
+
+def splitext(path):
+    m = FILE_EXT_RE.search(path)
+    if m:
+        return m.groups()
+    return path, ''
 
 
 def _write_row(itterable, ostream, sep='\t', quote=None):
