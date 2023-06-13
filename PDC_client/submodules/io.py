@@ -152,10 +152,10 @@ def downloadFile(url, ofname, expected_md5=None, nRetrys=5):
         except (requests.exceptions.RequestException) as error:
             sys.stderr.write('Failed to download file "{}" because "{}"'.format(ofname, error))
 
-        if expected_md5 is None:
+        if expected_md5 is None or md5_sum(ofname) == expected_md5:
             return True
-        if md5_sum(ofname) == expected_md5:
-            return True
+        else:
+            sys.stderr.write('Checksums do not match!')
 
     return False
 
