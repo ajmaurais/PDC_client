@@ -121,7 +121,7 @@ def splitRawPath(url):
         return None
 
 
-def downloadFile(url, ofname, expected_md5=None, nRetrys=5):
+def downloadFile(url, ofname, expected_md5=None, nRetrys=2):
     '''
     Download a single file.
 
@@ -151,6 +151,7 @@ def downloadFile(url, ofname, expected_md5=None, nRetrys=5):
             continue
         except (requests.exceptions.RequestException) as error:
             sys.stderr.write('Failed to download file "{}" because "{}"'.format(ofname, error))
+            continue
 
         if expected_md5 is None or md5_sum(ofname) == expected_md5:
             return True
