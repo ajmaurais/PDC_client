@@ -147,6 +147,7 @@ Available commands:
 
         if not submodules.io.downloadFile(args.url, ofname, expected_md5=args.md5sum):
             sys.stderr.write(f'ERROR: Failed to download file: {ofname}\n')
+            sys.exit(1)
 
         if remove_old:
             os.rename(ofname, old_ofname)
