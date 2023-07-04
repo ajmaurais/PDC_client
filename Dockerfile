@@ -11,7 +11,6 @@ RUN cd /code/PDC_client && \
     python setup.py build && \
     pip install .
 
-
 RUN echo '#!/usr/bin/env bash\nset -e\nexec "$@"' > /usr/local/bin/entrypoint && \
     chmod 755 /usr/local/bin/entrypoint
 
