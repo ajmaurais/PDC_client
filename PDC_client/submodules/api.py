@@ -11,25 +11,32 @@ BASE_URL ='https://proteomic.datacommons.cancer.gov/graphql'
 FILE_METADATA_KEYS = [ "file_id", "file_name", "md5sum", "file_location", "file_size",
                        "data_category", "file_type", "file_format", "url"]
 
-def _post(query, url, retries=5):
+def _post(query, url, retries=5, **kwargs):
     for i in range(retries):
-        r = requests.post(url, json = {'query': query})
+        try:
+            r = requests.post(url, json = {'query': query}, **kwargs)
+        except requests.exceptions.SSLError as e:
+            raise RuntimeError("SSL certificate verification failed! Use --skipVerify to skip SSL verification.")
         if r.status_code == 200:
             return r.json()
+    sys.stderr.write(f'url:\n"{url}?{query}"\n')
     raise RuntimeError(f'Failed with response code {r.status_code}!')
 
 
-def _get(query, url, retries=5):
+def _get(query, url, retries=5, **kwargs):
     query = re.sub('\s+', ' ', query)
     for i in range(retries):
-        r = requests.get(f'{url}?{query}')
+        try:
+            r = requests.get(f'{url}?{query}', **kwargs)
+        except requests.exceptions.SSLError as e:
+            raise RuntimeError("SSL certificate verification failed! Use --skipVerify to skip SSL verification.")
         if r.status_code == 200:
             return r.json()
-    print(f'url:\n"{url}?{query}"')
+    sys.stderr.write(f'url:\n"{url}?{query}"\n')
     raise RuntimeError(f'Failed with response code {r.status_code}!')
  
 
-def pdc_study_id(study_id, url):
+def pdc_study_id(study_id, url, **kwargs):
     '''
     Get pdc_study_id from a study_id.
 
@@ -44,13 +51,13 @@ def pdc_study_id(study_id, url):
         study (study_id: "%s" acceptDUA: true) {pdc_study_id}
     }''' % study_id
 
-    data = _post(query, url)
+    data = _post(query, url, **kwargs)
     if len(data['data']['study']) > 0:
         return data["data"]["study"][0]["pdc_study_id"]
     return None
 
 
-def study_id(pdc_study_id, url):
+def study_id(pdc_study_id, url, **kwargs):
     '''
     Get study_id from a pdc_study_id.
 
@@ -65,13 +72,14 @@ def study_id(pdc_study_id, url):
         study (pdc_study_id: "%s" acceptDUA: true) {study_id}
     }''' % pdc_study_id
 
-    data = _post(query, url)
+    data = _post(query, url, **kwargs)
     if len(data['data']['study']) > 0:
         return data["data"]["study"][0]["study_id"]
     return None
 
 
-def _get_paginated_data(query_f, url, data_name, study_id, page_limit=10, no_change_iterations_limit=2):
+def _get_paginated_data(query_f, url, data_name, study_id,
+                        page_limit=10, no_change_iterations_limit=2, **kwargs):
 
     ret = list()
     done = False
@@ -83,7 +91,7 @@ def _get_paginated_data(query_f, url, data_name, study_id, page_limit=10, no_cha
     previous_len = 0
     
     while True:
-        data = _get(query_f(study_id, offset, page_limit), url)
+        data = _get(query_f(study_id, offset, page_limit), url, **kwargs)
         ret += data['data'][endpoint_name][data_name]
 
         offset += page_limit
@@ -107,7 +115,7 @@ def _get_paginated_data(query_f, url, data_name, study_id, page_limit=10, no_cha
             raise RuntimeError('Something is wrong...')
 
 
-def case_metadata(study_id, url, max_threads=MAX_THREADS):
+def case_metadata(study_id, url, max_threads=MAX_THREADS, **kwargs):
 
     def make_case_query(study_id, page_offset, page_limit=100):
         return '''query={
@@ -126,7 +134,7 @@ def case_metadata(study_id, url, max_threads=MAX_THREADS):
                     }
             } pagination { count sort from page total pages size } }}''' % (study_id, page_offset, page_limit)
     
-    data = _get_paginated_data(make_case_query, url, 'caseDemographicsPerStudy', study_id)
+    data = _get_paginated_data(make_case_query, url, 'caseDemographicsPerStudy', study_id, **kwargs)
 
     keys = ['ethnicity', 'gender', 'race', 'cause_of_death', 'vital_status', 'year_of_birth', 'year_of_death']
     
@@ -147,7 +155,7 @@ def case_metadata(study_id, url, max_threads=MAX_THREADS):
     return cases
 
 
-def single_case(case_id, url):
+def single_case(case_id, url, **kwargs):
 
     query = '''query={case (case_id: "%s" acceptDUA: true) {
     case_id
@@ -164,7 +172,7 @@ def single_case(case_id, url):
         }
     }} ''' % case_id
 
-    r = _get(query, url)
+    r = _get(query, url, **kwargs)
     data = r['data']['case'][0]
 
     if len(data['diagnoses']) != 1:
@@ -180,7 +188,7 @@ def single_case(case_id, url):
     return case_id, ret
 
 
-def aliquot_id(file_id, url):
+def aliquot_id(file_id, url, **kwargs):
     '''
     Get the aliquot ID for a file.
     '''
@@ -190,7 +198,7 @@ def aliquot_id(file_id, url):
         aliquots { aliquot_id } }
         }''' % file_id
 
-    r = _get(query, url)
+    r = _get(query, url, **kwargs)
     if len(r['data']['fileMetadata']) != 1:
         RuntimeError(f'Too many files in query for file_id: {file_id}')
     if len(r['data']['fileMetadata'][0]['aliquots']) != 1:
@@ -198,7 +206,7 @@ def aliquot_id(file_id, url):
     return file_id, r['data']['fileMetadata'][0]['aliquots'][0]['aliquot_id']
     
 
-def raw_files(study_id, url, n_files=None):
+def raw_files(study_id, url, n_files=None, **kwargs):
     ''' Get metadata for raw files in a study '''
 
     query = '''query {
@@ -215,7 +223,7 @@ def raw_files(study_id, url, n_files=None):
     }''' % study_id
 
     # get a list of .raw files in study
-    payload = _post(query, url)
+    payload = _post(query, url, **kwargs)
     if 'errors' in payload:
         sys.stderr.write('ERROR: API query failed with response(s):\n')
         for error in payload['errors']:
@@ -240,7 +248,7 @@ def raw_files(study_id, url, n_files=None):
     return data
 
 
-def metadata(study_id, url=BASE_URL, n_files=None, max_threads=MAX_THREADS):
+def metadata(study_id, url=BASE_URL, n_files=None, max_threads=MAX_THREADS, **kwargs):
     '''
     Get metadata for each raw file in a study 
 
@@ -248,6 +256,8 @@ def metadata(study_id, url=BASE_URL, n_files=None, max_threads=MAX_THREADS):
         study_id (str): The PDC study id.
         n_files (int): The number of files to get data for. If None data for all files are retreived.
         max_threads (int): The max number of threads to use for making api calls.
+
+        kwargs: additional arguments passed to requests.get
 
     Returns:
         file_dat (list): A list of dicts where each list element is a file.
@@ -266,7 +276,7 @@ def metadata(study_id, url=BASE_URL, n_files=None, max_threads=MAX_THREADS):
         file['aliquot_id'] = aliquot_ids[file['file_id']]
 
     # Get metadata for cases in files
-    cases = case_metadata(study_id, url, max_threads=max_threads)
+    cases = case_metadata(study_id, url, max_threads=max_threads, **kwargs)
     cases_per_aliquot = dict()
     for case in cases:
         samples = case.pop('samples')

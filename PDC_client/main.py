@@ -62,9 +62,12 @@ Available commands:
         parser = argparse.ArgumentParser(description=Main.STUDY_ID_DESCRIPTION)
         parser.add_argument('-u', '--baseUrl', default=submodules.api.BASE_URL,
                             help=f'The base URL for the PDC API. {submodules.api.BASE_URL} is the default.')
+        parser.add_argument('--skipVerify', default=False, action='store_true',
+                            help='Skip ssl verification?')
         parser.add_argument('pdc_study_id')
         args = parser.parse_args(sys.argv[start:])
-        study_id = submodules.api.study_id(args.pdc_study_id, args.baseUrl)
+        study_id = submodules.api.study_id(args.pdc_study_id, args.baseUrl,
+                                           verify=not args.skipVerify)
         if study_id is None:
             sys.stderr.write('ERROR: No study found matching study_id!\n')
             sys.exit(1)
@@ -75,9 +78,12 @@ Available commands:
         parser = argparse.ArgumentParser(description=Main.PDC_STUDY_ID_DESCRIPTION)
         parser.add_argument('-u', '--baseUrl', default=submodules.api.BASE_URL,
                             help=f'The base URL for the PDC API. {submodules.api.BASE_URL} is the default.')
+        parser.add_argument('--skipVerify', default=False, action='store_true',
+                            help='Skip ssl verification?')
         parser.add_argument('study_id')
         args = parser.parse_args(sys.argv[start:])
-        pdc_study_id = submodules.api.pdc_study_id(args.study_id, args.baseUrl)
+        pdc_study_id = submodules.api.pdc_study_id(args.study_id, args.baseUrl,
+                                                   verify=not args.skipVerify)
         sys.stdout.write(f'{pdc_study_id}\n')
 
 
@@ -91,6 +97,8 @@ Available commands:
                             help='Output base name.')
         parser.add_argument('-u', '--baseUrl', default=submodules.api.BASE_URL,
                             help=f'The base URL for the PDC API. {submodules.api.BASE_URL} is the default.')
+        parser.add_argument('--skipVerify', default=False, action='store_true',
+                            help='Skip ssl verification?')
         parser.add_argument('-a', '--skylineAnnotations', default=False, action='store_true',
                             help='Also save Skyline annotations csv file')
         parser.add_argument('study_id', help='The study id.')
