@@ -2,7 +2,10 @@ from python:3.9-slim
 
 MAINTAINER "Aaron Maurais -- MacCoss Lab"
 
-RUN mkdir -p /code/PDC_client/PDC_client /data
+RUN apt-get update && \
+    apt-get -y install procps && \
+    apt-get clean && \
+    mkdir -p /code/PDC_client/PDC_client /data
 
 COPY PDC_client code/PDC_client/PDC_client
 COPY setup.py requirements.txt README.md /code/PDC_client
