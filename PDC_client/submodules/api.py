@@ -139,7 +139,7 @@ def case_metadata(study_id, url, max_threads=MAX_THREADS, **kwargs):
     keys = ['ethnicity', 'gender', 'race', 'cause_of_death', 'vital_status', 'year_of_birth', 'year_of_death']
     
     with ThreadPoolExecutor(max_workers=max_threads) as pool:
-        case_data = dict(pool.map(lambda x: single_case(x, url), set([d['case_id'] for d in data])))
+        case_data = dict(pool.map(lambda x: single_case(x, url, **kwargs), set([d['case_id'] for d in data])))
 
     cases = list()
     for case in data:
@@ -264,13 +264,13 @@ def metadata(study_id, url=BASE_URL, n_files=None, max_threads=MAX_THREADS, **kw
     '''
 
     # Get file metadata
-    file_data = raw_files(study_id, url, n_files=n_files)
+    file_data = raw_files(study_id, url, n_files=n_files, **kwargs)
     if file_data is None:
         return None
 
     # add aliquot_id to file metadata
     with ThreadPoolExecutor(max_workers=max_threads) as pool:
-        aliquot_ids = dict(pool.map(lambda x: aliquot_id(x, url),
+        aliquot_ids = dict(pool.map(lambda x: aliquot_id(x, url, **kwargs),
                                     set([f['file_id'] for f in file_data])))
     for file in file_data:
         file['aliquot_id'] = aliquot_ids[file['file_id']]

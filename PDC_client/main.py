@@ -105,7 +105,7 @@ Available commands:
         args = parser.parse_args(sys.argv[start:])
 
         ofname = f'{args.ofname}.{args.format}'
-        data = submodules.api.metadata(args.study_id, url=args.baseUrl, n_files=args.nFiles)
+        data = submodules.api.metadata(args.study_id, url=args.baseUrl, n_files=args.nFiles, verify=not args.skipVerify)
         if data is None:
             sys.exit(1)
         if len(data) == 0:
