@@ -43,7 +43,7 @@ def main():
     for key, value in git_info.items():
         docker_command.append('--build-arg')
         docker_command.append(f"GIT_{key.upper()}={value}")
-    
+
     docker_command.append('--build-arg')
     docker_command.append(f"GIT_SHORT_HASH={git_info['hash'][:8]}")
 
