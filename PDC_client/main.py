@@ -6,7 +6,7 @@ from datetime import datetime
 
 from . import submodules
 
-SUBCOMMANDS = {'studyID', 'PDCStudyID', 'metadata', 'file', 'files'}
+SUBCOMMANDS = {'studyID', 'PDCStudyID', 'studyName', 'metadata', 'file', 'files'}
 
 
 def _firstSubcommand(argv):
@@ -24,6 +24,7 @@ class Main(object):
 
     STUDY_ID_DESCRIPTION = 'Get the study_id from the pdc_study_id.'
     PDC_STUDY_ID_DESCRIPTION = 'Get the pdc_study_id from the study_id.'
+    STUDY_NAME_DESCRIPTION = 'Get the study name.'
     METADATA_DESCRIPTION = 'Get the metadata for files in a study.'
     FILE_DESCRIPTION = 'Download a single file.'
     FILES_DESCRIPTION = 'Download all the files in a study.'
@@ -35,6 +36,7 @@ class Main(object):
 Available commands:
    studyID     {Main.STUDY_ID_DESCRIPTION}
    PDCStudyID  {Main.PDC_STUDY_ID_DESCRIPTION}
+   studyName   {Main.STUDY_NAME_DESCRIPTION}
    metadata    {Main.METADATA_DESCRIPTION}
    file        {Main.FILE_DESCRIPTION}
    files       {Main.FILES_DESCRIPTION}''')
@@ -85,6 +87,24 @@ Available commands:
         pdc_study_id = submodules.api.pdc_study_id(args.study_id, args.baseUrl,
                                                    verify=not args.skipVerify)
         sys.stdout.write(f'{pdc_study_id}\n')
+
+
+    def studyName(self, start=2):
+        parser = argparse.ArgumentParser(description=Main.STUDY_NAME_DESCRIPTION)
+        parser.add_argument('-u', '--baseUrl', default=submodules.api.BASE_URL,
+                            help=f'The base URL for the PDC API. {submodules.api.BASE_URL} is the default.')
+        parser.add_argument('--skipVerify', default=False, action='store_true',
+                            help='Skip ssl verification?')
+        parser.add_argument('--normalize', default=False, action='store_true',
+                            help='Remove special characters from study name so it a valid file name.')
+        parser.add_argument('study_id')
+        args = parser.parse_args(sys.argv[start:])
+        study_name = submodules.api.study_name(args.study_id, args.baseUrl,
+                                               verify=not args.skipVerify)
+        if args.normalize:
+            study_name = submodules.io.normalize_fname(study_name)
+
+        sys.stdout.write(f'{study_name}\n')
 
 
     def metadata(self, start=2):

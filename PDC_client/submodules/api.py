@@ -57,6 +57,27 @@ def pdc_study_id(study_id, url, **kwargs):
     return None
 
 
+def study_name(pdc_study_id, url, **kwargs):
+    '''
+    Get study_name from a pdc_study_id.
+
+    Parameters:
+        pdc_study_id (str)
+
+    Returns:
+        study_name (str)
+    '''
+
+    query = '''query {
+        study (study_id: "%s" acceptDUA: true) {study_name}
+    }''' % pdc_study_id
+
+    data = _post(query, url, **kwargs)
+    if len(data['data']['study']) > 0:
+        return data["data"]["study"][0]["study_name"]
+    return None
+
+
 def study_id(pdc_study_id, url, **kwargs):
     '''
     Get study_id from a pdc_study_id.
