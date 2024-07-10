@@ -1,9 +1,10 @@
 
 import sys
 import json
+from csv import DictReader
 from hashlib import md5
-import requests
 import re
+import requests
 
 from .api import FILE_METADATA_KEYS
 
@@ -69,8 +70,16 @@ def writeFileMetadata(data, ofname, format='json'):
         raise ValueError(f'{format} is an unknown output format!')
 
 
+def readFileMetadata(fp, format):
+    if format == 'tsv':
+        return list(DictReader(fp, delimiter='\t'))
+    if format == 'json':
+        return json.load(fp)
+    raise RuntimeError(f"Unknown metadata format!: '{format}'")
+
+
 def writeSkylineAnnotations(data, ofname):
-    
+
     file_annotations = [key for key in data[0].keys() if key not in FILE_METADATA_KEYS]
 
     # make csv headers

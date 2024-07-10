@@ -1,10 +1,9 @@
 
-import requests
-import json
 import re
 from concurrent.futures import ThreadPoolExecutor
 from multiprocessing import cpu_count
 import sys
+import requests
 
 MAX_THREADS = cpu_count()
 BASE_URL ='https://proteomic.datacommons.cancer.gov/graphql'
@@ -34,7 +33,7 @@ def _get(query, url, retries=5, **kwargs):
             return r.json()
     sys.stderr.write(f'url:\n"{url}?{query}"\n')
     raise RuntimeError(f'Failed with response code {r.status_code}!')
- 
+
 
 def pdc_study_id(study_id, url, **kwargs):
     '''
@@ -110,7 +109,7 @@ def _get_paginated_data(query_f, url, data_name, study_id,
     endpoint_name = 'paginated{}{}'.format(data_name[0].upper(), data_name[1:])
     no_change_iterations = 0
     previous_len = 0
-    
+
     while True:
         data = _get(query_f(study_id, offset, page_limit), url, **kwargs)
         ret += data['data'][endpoint_name][data_name]
@@ -154,11 +153,11 @@ def case_metadata(study_id, url, max_threads=MAX_THREADS, **kwargs):
                     year_of_death
                     }
             } pagination { count sort from page total pages size } }}''' % (study_id, page_offset, page_limit)
-    
+
     data = _get_paginated_data(make_case_query, url, 'caseDemographicsPerStudy', study_id, **kwargs)
 
     keys = ['ethnicity', 'gender', 'race', 'cause_of_death', 'vital_status', 'year_of_birth', 'year_of_death']
-    
+
     with ThreadPoolExecutor(max_workers=max_threads) as pool:
         case_data = dict(pool.map(lambda x: single_case(x, url, **kwargs), set([d['case_id'] for d in data])))
 
@@ -172,7 +171,7 @@ def case_metadata(study_id, url, max_threads=MAX_THREADS, **kwargs):
         for k, v in case_data[newData['case_id']].items():
             newData[k] = v
         cases.append(newData)
-        
+
     return cases
 
 
@@ -225,7 +224,7 @@ def aliquot_id(file_id, url, **kwargs):
     if len(r['data']['fileMetadata'][0]['aliquots']) != 1:
         RuntimeError(f'Too many aliquot IDs for file_id: {file_id}')
     return file_id, r['data']['fileMetadata'][0]['aliquots'][0]['aliquot_id']
-    
+
 
 def raw_files(study_id, url, n_files=None, **kwargs):
     ''' Get metadata for raw files in a study '''
@@ -240,7 +239,7 @@ def raw_files(study_id, url, n_files=None, **kwargs):
             data_category
             file_type
             file_format
-            signedUrl {url}} 
+            signedUrl {url}}
     }''' % study_id
 
     # get a list of .raw files in study
@@ -271,7 +270,7 @@ def raw_files(study_id, url, n_files=None, **kwargs):
 
 def metadata(study_id, url=BASE_URL, n_files=None, max_threads=MAX_THREADS, **kwargs):
     '''
-    Get metadata for each raw file in a study 
+    Get metadata for each raw file in a study
 
     Parameters:
         study_id (str): The PDC study id.
@@ -305,7 +304,7 @@ def metadata(study_id, url=BASE_URL, n_files=None, max_threads=MAX_THREADS, **kw
             for aliquot in sample['aliquots']:
                 assert aliquot['aliquot_id'] not in cases_per_aliquot
                 cases_per_aliquot[aliquot['aliquot_id']] = case
-    
+
     # Add case metadata to file metadata
     for file in file_data:
         file.update(cases_per_aliquot[file['aliquot_id']])

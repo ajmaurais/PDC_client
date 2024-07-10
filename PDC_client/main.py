@@ -6,7 +6,9 @@ from datetime import datetime
 
 from . import submodules
 
-SUBCOMMANDS = {'studyID', 'PDCStudyID', 'studyName', 'metadata', 'file', 'files'}
+SUBCOMMANDS = {'studyID', 'PDCStudyID', 'studyName',
+               'metadata', 'metadataToSky',
+               'file', 'files'}
 
 
 def _firstSubcommand(argv):
@@ -26,6 +28,7 @@ class Main(object):
     PDC_STUDY_ID_DESCRIPTION = 'Get the pdc_study_id from the study_id.'
     STUDY_NAME_DESCRIPTION = 'Get the study name.'
     METADATA_DESCRIPTION = 'Get the metadata for files in a study.'
+    METADATA_TO_SKY_DESCRIPTION = 'Convert a metadata tsv or json to Skyline annotation csv.'
     FILE_DESCRIPTION = 'Download a single file.'
     FILES_DESCRIPTION = 'Download all the files in a study.'
 
@@ -34,12 +37,13 @@ class Main(object):
                                          usage = f'''PDC_client <command> [<args>]
 
 Available commands:
-   studyID     {Main.STUDY_ID_DESCRIPTION}
-   PDCStudyID  {Main.PDC_STUDY_ID_DESCRIPTION}
-   studyName   {Main.STUDY_NAME_DESCRIPTION}
-   metadata    {Main.METADATA_DESCRIPTION}
-   file        {Main.FILE_DESCRIPTION}
-   files       {Main.FILES_DESCRIPTION}''')
+   studyID         {Main.STUDY_ID_DESCRIPTION}
+   PDCStudyID      {Main.PDC_STUDY_ID_DESCRIPTION}
+   studyName       {Main.STUDY_NAME_DESCRIPTION}
+   metadata        {Main.METADATA_DESCRIPTION}
+   metadataToSky   {Main.METADATA_TO_SKY_DESCRIPTION}
+   file            {Main.FILE_DESCRIPTION}
+   files           {Main.FILES_DESCRIPTION}''')
         parser.add_argument('--debug', choices = ['pdb', 'pudb'], default=None,
                             help='Start the main method in selected debugger')
         parser.add_argument('command', help = 'Subcommand to run.')
@@ -134,6 +138,27 @@ Available commands:
         submodules.io.writeFileMetadata(data, ofname, format=args.format)
         if args.skylineAnnotations:
             submodules.io.writeSkylineAnnotations(data, f'{args.ofname}_annotations.csv')
+
+
+    def metadataToSky(self, start=2):
+        parser = argparse.ArgumentParser(description=Main.METADATA_TO_SKY_DESCRIPTION)
+        parser.add_argument('-i', '--in', default=None,
+                            choices=('tsv', 'json'), dest='input_format',
+                            help='Specify metadata file format. '
+                                 'By default the format is inferred from the file extension.')
+        parser.add_argument('metadata_file', help='The metadata file to convert.')
+        args = parser.parse_args(sys.argv[start:])
+
+        if args.input_format:
+            input_format = args.input_format
+        else:
+            input_format = os.path.splitext(args.metadata_file)[1][1:]
+
+        with open(args.metadata_file, 'r') as outF:
+            data = submodules.io.readFileMetadata(outF, input_format)
+
+        submodules.io.writeSkylineAnnotations(data, 'skyline_annotations.csv')
+
 
     def file(self, start=2):
         parser = argparse.ArgumentParser(description=Main.FILE_DESCRIPTION)
