@@ -23,7 +23,7 @@ def _post(query, url, retries=5, **kwargs):
 
 
 def _get(query, url, retries=5, **kwargs):
-    query = re.sub('\s+', ' ', query)
+    query = re.sub(r'\s+', ' ', query)
     for i in range(retries):
         try:
             r = requests.get(f'{url}?{query}', **kwargs)
