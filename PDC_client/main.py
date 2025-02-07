@@ -8,7 +8,7 @@ from . import submodules
 
 SUBCOMMANDS = {'studyID', 'PDCStudyID', 'studyName',
                'metadata', 'metadataToSky',
-               'file', 'files'}
+               'file'}
 
 
 def _firstSubcommand(argv):
@@ -18,7 +18,7 @@ def _firstSubcommand(argv):
     return len(argv)
 
 
-class Main(object):
+class Main:
     '''
     A class to parse subcommands.
     Inspired by this blog post: https://chase-seibert.github.io/blog/2014/03/21/python-multilevel-argparse.html
@@ -30,9 +30,10 @@ class Main(object):
     METADATA_DESCRIPTION = 'Get the metadata for files in a study.'
     METADATA_TO_SKY_DESCRIPTION = 'Convert a metadata tsv or json to Skyline annotation csv.'
     FILE_DESCRIPTION = 'Download a single file.'
-    FILES_DESCRIPTION = 'Download all the files in a study.'
 
-    def __init__(self):
+    def __init__(self, argv=sys.argv):
+        self.argv = argv
+
         parser = argparse.ArgumentParser(description='Command line client for NCI Proteomics Data Commons',
                                          usage = f'''PDC_client <command> [<args>]
 
@@ -42,20 +43,10 @@ Available commands:
    studyName       {Main.STUDY_NAME_DESCRIPTION}
    metadata        {Main.METADATA_DESCRIPTION}
    metadataToSky   {Main.METADATA_TO_SKY_DESCRIPTION}
-   file            {Main.FILE_DESCRIPTION}
-   files           {Main.FILES_DESCRIPTION}''')
-        parser.add_argument('--debug', choices = ['pdb', 'pudb'], default=None,
-                            help='Start the main method in selected debugger')
+   file            {Main.FILE_DESCRIPTION}''')
         parser.add_argument('command', help = 'Subcommand to run.')
-        subcommand_start = _firstSubcommand(sys.argv)
-        args = parser.parse_args(sys.argv[1:(subcommand_start + 1)])
-
-        if args.debug:
-            if args.debug == 'pdb':
-                import pdb as debugger
-            elif args.debug == 'pudb':
-                import pudb as debugger
-            debugger.set_trace()
+        subcommand_start = _firstSubcommand(self.argv)
+        args = parser.parse_args(self.argv[1:(subcommand_start + 1)])
 
         if not args.command in SUBCOMMANDS:
             sys.stderr.write(f'ERROR: {args.command} is an unknown command!\n')
@@ -71,7 +62,7 @@ Available commands:
         parser.add_argument('--skipVerify', default=False, action='store_true',
                             help='Skip ssl verification?')
         parser.add_argument('pdc_study_id')
-        args = parser.parse_args(sys.argv[start:])
+        args = parser.parse_args(self.argv[start:])
         study_id = submodules.api.study_id(args.pdc_study_id, args.baseUrl,
                                            verify=not args.skipVerify)
         if study_id is None:
@@ -87,7 +78,7 @@ Available commands:
         parser.add_argument('--skipVerify', default=False, action='store_true',
                             help='Skip ssl verification?')
         parser.add_argument('study_id')
-        args = parser.parse_args(sys.argv[start:])
+        args = parser.parse_args(self.argv[start:])
         pdc_study_id = submodules.api.pdc_study_id(args.study_id, args.baseUrl,
                                                    verify=not args.skipVerify)
         sys.stdout.write(f'{pdc_study_id}\n')
@@ -102,7 +93,7 @@ Available commands:
         parser.add_argument('--normalize', default=False, action='store_true',
                             help='Remove special characters from study name so it a valid file name.')
         parser.add_argument('study_id')
-        args = parser.parse_args(sys.argv[start:])
+        args = parser.parse_args(self.argv[start:])
         study_name = submodules.api.study_name(args.study_id, args.baseUrl,
                                                verify=not args.skipVerify)
         if args.normalize:
@@ -126,10 +117,12 @@ Available commands:
         parser.add_argument('-a', '--skylineAnnotations', default=False, action='store_true',
                             help='Also save Skyline annotations csv file')
         parser.add_argument('study_id', help='The study id.')
-        args = parser.parse_args(sys.argv[start:])
+        args = parser.parse_args(self.argv[start:])
 
         ofname = f'{args.ofname}.{args.format}'
-        data = submodules.api.metadata(args.study_id, url=args.baseUrl, n_files=args.nFiles, verify=not args.skipVerify)
+        data = submodules.api.metadata(args.study_id, url=args.baseUrl, n_files=args.nFiles,
+                                       verify=not args.skipVerify)
+
         if data is None:
             sys.exit(1)
         if len(data) == 0:
@@ -147,7 +140,7 @@ Available commands:
                             help='Specify metadata file format. '
                                  'By default the format is inferred from the file extension.')
         parser.add_argument('metadata_file', help='The metadata file to convert.')
-        args = parser.parse_args(sys.argv[start:])
+        args = parser.parse_args(self.argv[start:])
 
         if args.input_format:
             input_format = args.input_format
@@ -174,7 +167,7 @@ Available commands:
                             help='Re-download even if the target file already exists.')
         parser.add_argument('url', help='The file url.')
 
-        args = parser.parse_args(sys.argv[start:])
+        args = parser.parse_args(self.argv[start:])
 
         if args.ofname is None:
             ofname = submodules.io.fileBasename(args.url)

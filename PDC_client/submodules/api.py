@@ -23,12 +23,13 @@ def _post(query, url, retries=5, **kwargs):
 
 
 def _get(query, url, retries=5, **kwargs):
-    query = re.sub(r'\s+', ' ', query)
+    query = re.sub(r'\s+', ' ', query.strip())
     for i in range(retries):
         try:
             r = requests.get(f'{url}?{query}', **kwargs)
         except requests.exceptions.SSLError as e:
-            raise RuntimeError("SSL certificate verification failed! Use --skipVerify to skip SSL verification.")
+            message = "SSL certificate verification failed! Use --skipVerify to skip SSL verification."
+            raise RuntimeError(message) from e
         if r.status_code == 200:
             return r.json()
     sys.stderr.write(f'url:\n"{url}?{query}"\n')
@@ -51,7 +52,7 @@ def pdc_study_id(study_id, url, **kwargs):
     }''' % study_id
 
     data = _post(query, url, **kwargs)
-    if len(data['data']['study']) > 0:
+    if data['data']['study'] and len(data['data']['study']) > 0:
         return data["data"]["study"][0]["pdc_study_id"]
     return None
 
@@ -72,7 +73,7 @@ def study_name(pdc_study_id, url, **kwargs):
     }''' % pdc_study_id
 
     data = _post(query, url, **kwargs)
-    if len(data['data']['study']) > 0:
+    if data['data']['study'] and len(data['data']['study']) > 0:
         return data["data"]["study"][0]["study_name"]
     return None
 
@@ -93,7 +94,7 @@ def study_id(pdc_study_id, url, **kwargs):
     }''' % pdc_study_id
 
     data = _post(query, url, **kwargs)
-    if len(data['data']['study']) > 0:
+    if data['data']['study'] and len(data['data']['study']) > 0:
         return data["data"]["study"][0]["study_id"]
     return None
 
@@ -196,7 +197,7 @@ def single_case(case_id, url, **kwargs):
     data = r['data']['case'][0]
 
     if len(data['diagnoses']) != 1:
-        RuntimeError(f'More than 1 diagnoses in case_id: {case_id}')
+        raise RuntimeError(f'More than 1 diagnoses in case_id: {case_id}')
     data['diagnoses'] = data['diagnoses'][0]
 
     keys = ['case_id', 'primary_site', 'samples']
@@ -220,9 +221,9 @@ def aliquot_id(file_id, url, **kwargs):
 
     r = _get(query, url, **kwargs)
     if len(r['data']['fileMetadata']) != 1:
-        RuntimeError(f'Too many files in query for file_id: {file_id}')
+        raise RuntimeError(f'Too many files in query for file_id: {file_id}')
     if len(r['data']['fileMetadata'][0]['aliquots']) != 1:
-        RuntimeError(f'Too many aliquot IDs for file_id: {file_id}')
+        raise RuntimeError(f'Too many aliquot IDs for file_id: {file_id}')
     return file_id, r['data']['fileMetadata'][0]['aliquots'][0]['aliquot_id']
 
 
@@ -230,7 +231,7 @@ def raw_files(study_id, url, n_files=None, **kwargs):
     ''' Get metadata for raw files in a study '''
 
     query = '''query {
-       filesPerStudy (study_id: "%s" acceptDUA: true) {
+       filesPerStudy (study_id: "%s" data_category: "Raw Mass Spectra" acceptDUA: true) {
             file_id
             file_name
             md5sum
