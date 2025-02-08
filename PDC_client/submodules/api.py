@@ -227,6 +227,9 @@ def aliquot_id(file_id, url, **kwargs):
     return file_id, r['data']['fileMetadata'][0]['aliquots'][0]['aliquot_id']
 
 
+# def study_raw_file_urls(study_id, url, 
+
+
 def raw_files(study_id, url, n_files=None, **kwargs):
     ''' Get metadata for raw files in a study '''
 
