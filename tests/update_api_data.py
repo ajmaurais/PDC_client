@@ -5,6 +5,7 @@ import argparse
 import json
 import difflib
 import subprocess
+import asyncio
 
 from PDC_client.submodules import api
 
@@ -164,6 +165,22 @@ def check_file(new_data, old_data_path, name='', color=True, write=False):
         print_diff(old_data, new_data, name=name, color=color)
 
 
+async def download_metadata(pdc_study_ids):
+    # download all study_ids for pdc_study_ids
+    study_id_tasks = list()
+    async with asyncio.TaskGroup() as tg:
+        for study in pdc_study_ids:
+            study_id_tasks.append(tg.create_task(api.async_get_study_id(pdc_study_id=study)))
+    study_ids = [task.result() for task in study_id_tasks]
+
+    study_metadata_tasks = list()
+    async with asyncio.TaskGroup() as tg:
+        for study in study_ids:
+            study_metadata_tasks.append(tg.create_task(api.async_get_study_metadata(study_id=study)))
+
+    return [task.result() for task in study_metadata_tasks]
+
+
 def main():
     parser = argparse.ArgumentParser(description='This script checks if there are any changes to '
                                                  'the test api data in tests/data/api and prints '
@@ -180,9 +197,7 @@ def main():
 
     pdc_study_ids = STUDIES if args.pdc_study_ids is None else args.pdc_study_ids
 
-    test_studies = list()
-    for study in pdc_study_ids:
-        test_studies.append(api.get_study_metadata(pdc_study_id=study))
+    test_studies = asyncio.run(download_metadata(pdc_study_ids))
 
     test_data = {'Study metadata': (test_studies, STUDY_METADATA)}
 

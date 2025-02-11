@@ -1,5 +1,6 @@
 
 import re
+import asyncio
 from concurrent.futures import ThreadPoolExecutor
 from multiprocessing import cpu_count
 import sys
@@ -10,7 +11,7 @@ BASE_URL ='https://proteomic.datacommons.cancer.gov/graphql'
 FILE_METADATA_KEYS = [ "file_id", "file_name", "md5sum", "file_location", "file_size",
                        "data_category", "file_type", "file_format", "url"]
 
-def _post(query, url, retries=5, timeout=60, **kwargs):
+async def _post(query, url, retries=5, timeout=60, **kwargs):
     for _ in range(retries):
         try:
             r = requests.post(url, json = {'query': query}, timeout=timeout, **kwargs)
@@ -23,7 +24,7 @@ def _post(query, url, retries=5, timeout=60, **kwargs):
     raise RuntimeError(f'Failed with response code {r.status_code}!')
 
 
-def _get(query, url, retries=5, timeout=60, **kwargs):
+async def _get(query, url, retries=5, timeout=60, **kwargs):
     query = re.sub(r'\s+', ' ', query.strip())
     for _ in range(retries):
         try:
@@ -37,6 +38,25 @@ def _get(query, url, retries=5, timeout=60, **kwargs):
     raise RuntimeError(f'Failed with response code {r.status_code}!')
 
 
+async def async_get_study_id(pdc_study_id, url=BASE_URL, **kwargs):
+    ''' async version of get_study_id '''
+
+    query = '''query={
+        studyCatalog (pdc_study_id: "%s" acceptDUA: true){
+            versions { study_id is_latest_version }
+        }}''' % pdc_study_id
+
+    data = await _get(query, url, **kwargs)
+
+    if len(data['data']['studyCatalog']) == 0:
+        return None
+
+    for version in data['data']['studyCatalog'][0]['versions']:
+        if version['is_latest_version'] == 'yes':
+            return version['study_id']
+    return None
+
+
 def get_study_id(pdc_study_id, url=BASE_URL, **kwargs):
     '''
     Get latest study_id from a pdc_study_id.
@@ -47,29 +67,23 @@ def get_study_id(pdc_study_id, url=BASE_URL, **kwargs):
     Returns:
         study_id (str)
     '''
-
-    query = '''query={
-        studyCatalog (pdc_study_id: "%s" acceptDUA: true){
-            versions { study_id is_latest_version }
-        }}''' % pdc_study_id
-
-    data = _get(query, url, **kwargs)
-    for version in data['data']['studyCatalog'][0]['versions']:
-        if version['is_latest_version'] == 'yes':
-            return version['study_id']
-    return None
+    return asyncio.run(async_get_study_id(pdc_study_id, url=url, **kwargs))
 
 
-def get_study_metadata(pdc_study_id=None, study_id=None, url=BASE_URL, **kwargs):
+async def async_get_study_metadata(pdc_study_id=None, study_id=None, url=BASE_URL, **kwargs):
     if study_id is not None:
         _id = study_id
+        id_name = 'study_id'
+        study_id_task = None
     elif pdc_study_id is not None:
-        _id = get_study_id(pdc_study_id, url, **kwargs)
+        _id = pdc_study_id
+        id_name = 'pdc_study_id'
+        study_id_task = asyncio.create_task(get_study_id(pdc_study_id, url, **kwargs))
     else:
         raise ValueError('Both pdc_study_id and study_id cannot be None!')
 
-    query = '''query={
-            study (study_id: "%s" acceptDUA: true) {
+    study_query = '''query={
+            study (%s: "%s" acceptDUA: true) {
                 study_id
                 pdc_study_id
                 study_name
@@ -78,13 +92,33 @@ def get_study_metadata(pdc_study_id=None, study_id=None, url=BASE_URL, **kwargs)
                 cases_count
                 aliquots_count
             }
-        } ''' % _id
+        } ''' % (id_name, _id)
 
-    data = _get(query, url=url, **kwargs)
-    return data['data']['study'][0]
+    study_task = asyncio.create_task(_get(study_query, url=url, **kwargs))
+    data = await study_task
+
+    if study_id_task is None:
+        if data['data']['study'] is None:
+            return None
+        return data['data']['study'][0]
+
+    study_id = await study_id_task
+
+    if study_id is None:
+        return None
+
+    for study in data['data']['study']:
+        if study['study_id'] == study_id:
+            return study
+    raise RuntimeError('Could not find latest study for pdc_study_id!')
 
 
-def get_pdc_study_id(study_id, url, **kwargs):
+def get_study_metadata(pdc_study_id=None, study_id=None, url=BASE_URL, **kwargs):
+    return asyncio.run(async_get_study_metadata(pdc_study_id=pdc_study_id, study_id=study_id,
+                                                 url=BASE_URL, **kwargs))
+
+
+def get_pdc_study_id(study_id, url=BASE_URL, **kwargs):
     '''
     Get pdc_study_id from a study_id.
 
@@ -95,10 +129,12 @@ def get_pdc_study_id(study_id, url, **kwargs):
         pdc_study_id (str)
     '''
     data = get_study_metadata(study_id=study_id, url=url, **kwargs)
-    return data['pdc_study_id']
+    if data is not None:
+        return data['pdc_study_id']
+    return None
 
 
-def get_study_name(study_id, url, **kwargs):
+def get_study_name(study_id, url=BASE_URL, **kwargs):
     '''
     Get study_name for a study_id.
 
@@ -109,7 +145,9 @@ def get_study_name(study_id, url, **kwargs):
         study_name (str)
     '''
     data = get_study_metadata(study_id=study_id, url=url, **kwargs)
-    return data['study_name']
+    if data is not None:
+        return data['study_name']
+    return None
 
 
 def _get_paginated_data(query_f, url, data_name, study_id,
