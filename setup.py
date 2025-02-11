@@ -1,12 +1,22 @@
+
+import os
+import re
+
 from setuptools import setup, find_packages
 
-setup(name='PDC_client',
-      version=0.2,
-      author='Aaron Maurais',
-      url='https://github.com/ajmaurais/PDC_client',
-      packages=find_packages(),
-      package_dir={'PDC_client': 'PDC_client'},
-      python_requires='>=3.8',
-      install_requires=['requests>=2.27.1'],
-      entry_points={'console_scripts': ['PDC_client=PDC_client:main']}
+
+def read_version():
+    version_file = os.path.join(os.path.dirname(__file__), 'src', '__init__.py')
+    with open(version_file, 'r') as f:
+        version_content = f.read()
+    version_match = re.search(r"^__version__ = ['\"]([^'\"]*)['\"]", version_content, re.M)
+    if version_match:
+        return version_match.group(1)
+    raise RuntimeError("Unable to find version string.")
+
+
+setup(
+    name="my_package",
+    version=read_version(),
+    packages=find_packages(),
 )

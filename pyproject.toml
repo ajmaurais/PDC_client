@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools", "setuptools-scm"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = 'PDC_client'
+authors=[{name='Aaron Maurais', email='maurais@uw.edu'}]
+description = 'Tools to interact with the NCI Proteomic Data Commons (PDC) API'
+readme = 'README.md'
+dynamic=['version']
+dependencies = [
+    'requests>=2.32.3'
+]
+requires-python = '>=3.8'
+
+[tool.setuptools]
+packages = ['PDC_client', 'PDC_client.submodules']
+package-dir = {'PDC_client' = 'src'}
+
+[tools.setuptools.dynamic]
+version = { attr = 'PDC_client.__version__' }
+
+[project.scripts]
+PDC_client = 'PDC_client.main:main'
