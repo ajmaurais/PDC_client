@@ -10,23 +10,10 @@ BASE_URL ='https://proteomic.datacommons.cancer.gov/graphql'
 FILE_METADATA_KEYS = [ "file_id", "file_name", "md5sum", "file_location", "file_size",
                        "data_category", "file_type", "file_format", "url"]
 
-def _post(query, url, retries=5, **kwargs):
-    for i in range(retries):
+def _post(query, url, retries=5, timeout=60, **kwargs):
+    for _ in range(retries):
         try:
-            r = requests.post(url, json = {'query': query}, **kwargs)
-        except requests.exceptions.SSLError as e:
-            raise RuntimeError("SSL certificate verification failed! Use --skipVerify to skip SSL verification.")
-        if r.status_code == 200:
-            return r.json()
-    sys.stderr.write(f'url:\n"{url}?{query}"\n')
-    raise RuntimeError(f'Failed with response code {r.status_code}!')
-
-
-def _get(query, url, retries=5, **kwargs):
-    query = re.sub(r'\s+', ' ', query.strip())
-    for i in range(retries):
-        try:
-            r = requests.get(f'{url}?{query}', **kwargs)
+            r = requests.post(url, json = {'query': query}, timeout=timeout, **kwargs)
         except requests.exceptions.SSLError as e:
             message = "SSL certificate verification failed! Use --skipVerify to skip SSL verification."
             raise RuntimeError(message) from e
@@ -36,7 +23,68 @@ def _get(query, url, retries=5, **kwargs):
     raise RuntimeError(f'Failed with response code {r.status_code}!')
 
 
-def pdc_study_id(study_id, url, **kwargs):
+def _get(query, url, retries=5, timeout=60, **kwargs):
+    query = re.sub(r'\s+', ' ', query.strip())
+    for _ in range(retries):
+        try:
+            r = requests.get(f'{url}?{query}', timeout=timeout, **kwargs)
+        except requests.exceptions.SSLError as e:
+            message = "SSL certificate verification failed! Use --skipVerify to skip SSL verification."
+            raise RuntimeError(message) from e
+        if r.status_code == 200:
+            return r.json()
+    sys.stderr.write(f'url:\n"{url}?{query}"\n')
+    raise RuntimeError(f'Failed with response code {r.status_code}!')
+
+
+def get_study_id(pdc_study_id, url=BASE_URL, **kwargs):
+    '''
+    Get latest study_id from a pdc_study_id.
+
+    Parameters:
+        pdc_study_id (str)
+
+    Returns:
+        study_id (str)
+    '''
+
+    query = '''query={
+        studyCatalog (pdc_study_id: "%s" acceptDUA: true){
+            versions { study_id is_latest_version }
+        }}''' % pdc_study_id
+
+    data = _get(query, url, **kwargs)
+    for version in data['data']['studyCatalog'][0]['versions']:
+        if version['is_latest_version'] == 'yes':
+            return version['study_id']
+    return None
+
+
+def get_study_metadata(pdc_study_id=None, study_id=None, url=BASE_URL, **kwargs):
+    if study_id is not None:
+        _id = study_id
+    elif pdc_study_id is not None:
+        _id = get_study_id(pdc_study_id, url, **kwargs)
+    else:
+        raise ValueError('Both pdc_study_id and study_id cannot be None!')
+
+    query = '''query={
+            study (study_id: "%s" acceptDUA: true) {
+                study_id
+                pdc_study_id
+                study_name
+                analytical_fraction
+                experiment_type
+                cases_count
+                aliquots_count
+            }
+        } ''' % _id
+
+    data = _get(query, url=url, **kwargs)
+    return data['data']['study'][0]
+
+
+def get_pdc_study_id(study_id, url, **kwargs):
     '''
     Get pdc_study_id from a study_id.
 
@@ -46,57 +94,22 @@ def pdc_study_id(study_id, url, **kwargs):
     Returns:
         pdc_study_id (str)
     '''
-
-    query = '''query {
-        study (study_id: "%s" acceptDUA: true) {pdc_study_id}
-    }''' % study_id
-
-    data = _post(query, url, **kwargs)
-    if data['data']['study'] and len(data['data']['study']) > 0:
-        return data["data"]["study"][0]["pdc_study_id"]
-    return None
+    data = get_study_metadata(study_id=study_id, url=url, **kwargs)
+    return data['pdc_study_id']
 
 
-def study_name(pdc_study_id, url, **kwargs):
+def get_study_name(study_id, url, **kwargs):
     '''
-    Get study_name from a pdc_study_id.
+    Get study_name for a study_id.
 
     Parameters:
-        pdc_study_id (str)
+        study_id (str)
 
     Returns:
         study_name (str)
     '''
-
-    query = '''query {
-        study (study_id: "%s" acceptDUA: true) {study_name}
-    }''' % pdc_study_id
-
-    data = _post(query, url, **kwargs)
-    if data['data']['study'] and len(data['data']['study']) > 0:
-        return data["data"]["study"][0]["study_name"]
-    return None
-
-
-def study_id(pdc_study_id, url, **kwargs):
-    '''
-    Get study_id from a pdc_study_id.
-
-    Parameters:
-        pdc_study_id (str)
-
-    Returns:
-        study_id (str)
-    '''
-
-    query = '''query {
-        study (pdc_study_id: "%s" acceptDUA: true) {study_id}
-    }''' % pdc_study_id
-
-    data = _post(query, url, **kwargs)
-    if data['data']['study'] and len(data['data']['study']) > 0:
-        return data["data"]["study"][0]["study_id"]
-    return None
+    data = get_study_metadata(study_id=study_id, url=url, **kwargs)
+    return data['study_name']
 
 
 def _get_paginated_data(query_f, url, data_name, study_id,
@@ -227,7 +240,7 @@ def aliquot_id(file_id, url, **kwargs):
     return file_id, r['data']['fileMetadata'][0]['aliquots'][0]['aliquot_id']
 
 
-# def study_raw_file_urls(study_id, url, 
+# def study_raw_file_urls(study_id, url,
 
 
 def raw_files(study_id, url, n_files=None, **kwargs):
