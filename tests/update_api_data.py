@@ -34,9 +34,9 @@ def colorize_diff(diff):
     return colored_lines
 
 
-def print_diff(lhs, rhs, name=None, color=True):
+def get_diff(lhs, rhs, name):
     '''
-    Pretty print the difference between 2 json dictionaries.
+    Get the diff text for 2 JSON objects.
 
     Parameters
     ----------
@@ -44,6 +44,11 @@ def print_diff(lhs, rhs, name=None, color=True):
     rhs: dict
     name: str
         The name of the file that is being compared.
+
+    Returns
+    -------
+    diff: list
+        A line with each line of the diff text between lhs and rhs.
     '''
     lhs_s, rhs_s = [json.dumps(x, indent=2, sort_keys=True).splitlines() for x in [lhs, rhs]]
 
@@ -52,15 +57,26 @@ def print_diff(lhs, rhs, name=None, color=True):
                                 tofile='' if name is None else f'New {name}',
                                 lineterm='')
 
+    return diff
+
+
+def print_diff(diff, color=True):
+    '''
+    Pretty print the difference between 2 json dictionaries to stdout.
+
+    Parameters
+    ----------
+    diff: list
+        A list of the diff text.
+    color: bool
+        Should the output be colored?
+    '''
+
     interactive_terminal = sys.stdout.isatty()
 
     if color and interactive_terminal:
         diff = colorize_diff(diff)
     diff_s = '\n'.join(diff)
-
-    if len(diff_s) == 0:
-        sys.stdout.write(f'{name} up to date.\n')
-        return
 
     if interactive_terminal and os.get_terminal_size().lines < len(diff):
         with subprocess.Popen(['less', '-R'], stdin=subprocess.PIPE, text=True) as pager:
@@ -155,17 +171,6 @@ def update_test_data(files, color=True):
     sys.stdout.write(f'{n_deletions} deletion{"s" if n_deletions > 1 else ""}(-)\n')
 
 
-def check_file(new_data, old_data_path, name='', color=True, write=False):
-    old_data = load_json_to_dict(old_data_path)
-    if write:
-        if old_data != new_data:
-            sys.stdout.write(f'Updating {name}...\n')
-            with open(old_data_path, 'w', encoding='utf-8') as outF:
-                json.dump(new_data, outF, indent=2, sort_keys=True)
-    else:
-        print_diff(old_data, new_data, name=name, color=color)
-
-
 async def download_metadata(pdc_study_ids):
     # download all study_ids for pdc_study_ids
     async with httpx.AsyncClient() as client:
@@ -223,8 +228,17 @@ def main():
     if args.write:
         update_test_data(test_data, color=not args.plain)
     else:
+        diff_lines = list()
         for name, (data, path) in test_data.items():
-            check_file(data, path, name=name, color=not args.plain)
+            old_data = load_json_to_dict(path)
+            diff = list(get_diff(data, old_data, name=name))
+            diff_lines += diff
+
+        if len(diff_lines) == 0:
+            for name in test_data:
+                sys.stdout.write(f'{name} up to date\n')
+        else:
+            print_diff(diff_lines, color=not args.plain)
 
 
 if __name__ == '__main__':
