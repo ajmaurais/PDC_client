@@ -1,54 +1,58 @@
 
 import re
 import asyncio
-from concurrent.futures import ThreadPoolExecutor
-from multiprocessing import cpu_count
+# from concurrent.futures import ThreadPoolExecutor
+# from multiprocessing import cpu_count
 import sys
-import requests
+# import aiohttp
+import aiohttp
 
 from .logger import LOGGER
 
-MAX_THREADS = cpu_count()
+# MAX_THREADS = cpu_count()
+MAX_THREADS = 14
 BASE_URL ='https://proteomic.datacommons.cancer.gov/graphql'
 FILE_METADATA_KEYS = ['file_id', 'file_name', 'md5sum', 'file_location', 'file_size',
                       'data_category', 'file_type', 'file_format', 'url']
 
-async def _post(query, url, retries=5, timeout=60, **kwargs):
-    for _ in range(retries):
-        try:
-            r = requests.post(url, json = {'query': query}, timeout=timeout, **kwargs)
-        except requests.exceptions.SSLError as e:
-            message = "SSL certificate verification failed! Use --skipVerify to skip SSL verification."
-            raise RuntimeError(message) from e
-        if r.status_code == 200:
-            return r.json()
-    sys.stderr.write(f'url:\n"{url}?{query}"\n')
-    raise RuntimeError(f'Failed with response code {r.status_code}!')
-
-
-async def _get(query, url, retries=5, timeout=60, **kwargs):
+async def _post(session, query, url, retries=5):
     query = re.sub(r'\s+', ' ', query.strip())
-    for _ in range(retries):
-        try:
-            r = requests.get(f'{url}?{query}', timeout=timeout, **kwargs)
-        except requests.exceptions.SSLError as e:
-            message = "SSL certificate verification failed! Use --skipVerify to skip SSL verification."
-            raise RuntimeError(message) from e
-        if r.status_code == 200:
-            return r.json()
+    # try:
+        # for _ in range(retries):
+    async with session.post(url, json={'query': query}) as response:
+        if response.status == 200:
+            return await response.json()
+        # if response.status >= 400 and response.status < 500:
+        #     break
+    # except aiohttp.ClientSSLError as e:
+    #     message = "SSL certificate verification failed! Use --skipVerify to skip SSL verification."
+    #     raise RuntimeError(message) from e
     sys.stderr.write(f'url:\n"{url}?{query}"\n')
-    raise RuntimeError(f'Failed with response code {r.status_code}!')
+    raise RuntimeError(f'Failed with response code {response.status}!')
 
 
-async def async_get_study_id(pdc_study_id, url=BASE_URL, **kwargs):
-    ''' async version of get_study_id '''
+async def _get(session, query, url, retries=5, **kwargs):
+    query = re.sub(r'\s+', ' ', query.strip())
+    # try:
+    async with session.get(f'{url}?{query}', **kwargs) as response:
+        if response.status == 200:
+            return await response.json()
+            # if response.status >= 400 and response.status < 500:
+            #     break
+    # except aiohttp.ClientSSLError as e:
+    #     message = "SSL certificate verification failed! Use --skipVerify to skip SSL verification."
+    #     raise RuntimeError(message) from e
+    sys.stderr.write(f'url:\n"{url}?{query}"\n')
+    raise RuntimeError(f'Failed with response code {response.status}!')
 
+
+async def _async_get_study_id(session, pdc_study_id, url=BASE_URL, **kwargs):
     query = '''query={
         studyCatalog (pdc_study_id: "%s" acceptDUA: true){
             versions { study_id is_latest_version }
         }}''' % pdc_study_id
 
-    data = await _get(query, url, **kwargs)
+    data = await _get(session, query, url, **kwargs)
 
     if len(data['data']['studyCatalog']) == 0:
         return None
@@ -59,7 +63,13 @@ async def async_get_study_id(pdc_study_id, url=BASE_URL, **kwargs):
     return None
 
 
-def get_study_id(pdc_study_id, url=BASE_URL, **kwargs):
+async def async_get_study_id(pdc_study_id, **kwargs):
+    ''' async version of get_study_id '''
+    async with aiohttp.ClientSession() as session:
+        return await _async_get_study_id(session, pdc_study_id, **kwargs)
+
+
+def get_study_id(pdc_study_id, **kwargs):
     '''
     Get latest study_id from a pdc_study_id.
 
@@ -69,10 +79,10 @@ def get_study_id(pdc_study_id, url=BASE_URL, **kwargs):
     Returns:
         study_id (str)
     '''
-    return asyncio.run(async_get_study_id(pdc_study_id, url=url, **kwargs))
+    return asyncio.run(async_get_study_id(pdc_study_id, **kwargs))
 
 
-async def async_get_study_metadata(pdc_study_id=None, study_id=None, url=BASE_URL, **kwargs):
+async def _async_get_study_metadata(session, pdc_study_id=None, study_id=None, url=BASE_URL, **kwargs):
     if study_id is not None:
         _id = study_id
         id_name = 'study_id'
@@ -80,7 +90,7 @@ async def async_get_study_metadata(pdc_study_id=None, study_id=None, url=BASE_UR
     elif pdc_study_id is not None:
         _id = pdc_study_id
         id_name = 'pdc_study_id'
-        study_id_task = asyncio.create_task(get_study_id(pdc_study_id, url, **kwargs))
+        study_id_task = asyncio.create_task(_async_get_study_id(session, pdc_study_id, url=url, **kwargs))
     else:
         raise ValueError('Both pdc_study_id and study_id cannot be None!')
 
@@ -96,7 +106,7 @@ async def async_get_study_metadata(pdc_study_id=None, study_id=None, url=BASE_UR
             }
         } ''' % (id_name, _id)
 
-    study_task = asyncio.create_task(_get(study_query, url=url, **kwargs))
+    study_task = asyncio.create_task(_get(session, study_query, url, **kwargs))
     data = await study_task
 
     if study_id_task is None:
@@ -115,12 +125,20 @@ async def async_get_study_metadata(pdc_study_id=None, study_id=None, url=BASE_UR
     raise RuntimeError('Could not find latest study for pdc_study_id!')
 
 
-def get_study_metadata(pdc_study_id=None, study_id=None, url=BASE_URL, **kwargs):
+async def async_get_study_metadata(pdc_study_id=None, study_id=None, **kwargs):
+    async with aiohttp.ClientSession() as session:
+        return await _async_get_study_metadata(session,
+                                               pdc_study_id=pdc_study_id,
+                                               study_id=study_id,
+                                               **kwargs)
+
+
+def get_study_metadata(pdc_study_id=None, study_id=None, **kwargs):
     return asyncio.run(async_get_study_metadata(pdc_study_id=pdc_study_id, study_id=study_id,
-                                                 url=BASE_URL, **kwargs))
+                                                **kwargs))
 
 
-def get_pdc_study_id(study_id, url=BASE_URL, **kwargs):
+def get_pdc_study_id(study_id, **kwargs):
     '''
     Get pdc_study_id from a study_id.
 
@@ -130,13 +148,13 @@ def get_pdc_study_id(study_id, url=BASE_URL, **kwargs):
     Returns:
         pdc_study_id (str)
     '''
-    data = get_study_metadata(study_id=study_id, url=url, **kwargs)
+    data = get_study_metadata(study_id=study_id, **kwargs)
     if data is not None:
         return data['pdc_study_id']
     return None
 
 
-def get_study_name(study_id, url=BASE_URL, **kwargs):
+def get_study_name(study_id, **kwargs):
     '''
     Get study_name for a study_id.
 
@@ -146,7 +164,7 @@ def get_study_name(study_id, url=BASE_URL, **kwargs):
     Returns:
         study_name (str)
     '''
-    data = get_study_metadata(study_id=study_id, url=url, **kwargs)
+    data = get_study_metadata(study_id=study_id, **kwargs)
     if data is not None:
         return data['study_name']
     return None
@@ -280,9 +298,7 @@ def aliquot_id(file_id, url, **kwargs):
     return file_id, r['data']['fileMetadata'][0]['aliquots'][0]['aliquot_id']
 
 
-async def async_get_raw_files(study_id, url=BASE_URL, n_files=None, **kwargs):
-    ''' Get metadata for raw files in a study '''
-
+async def _async_get_raw_files(session, study_id, url=BASE_URL, n_files=None, **kwargs):
     query = '''query {
        filesPerStudy (study_id: "%s" data_category: "Raw Mass Spectra" acceptDUA: true) {
             file_id file_name md5sum file_location file_size
@@ -290,7 +306,8 @@ async def async_get_raw_files(study_id, url=BASE_URL, n_files=None, **kwargs):
         }''' % study_id
 
     # get a list of .raw files in study
-    payload = await _post(query, url, **kwargs)
+    payload = await _post(session, query, url, **kwargs)
+
     if 'errors' in payload:
         LOGGER.error('API query failed with response(s):')
         for error in payload['errors']:
@@ -315,8 +332,15 @@ async def async_get_raw_files(study_id, url=BASE_URL, n_files=None, **kwargs):
     return data
 
 
-def get_raw_files(study_id, url=BASE_URL, n_files=None, **kwargs):
-    return asyncio.run(async_get_raw_files(study_id, url=url, n_files=n_files, **kwargs))
+async def async_get_raw_files(study_id, **kwargs):
+    async with aiohttp.ClientSession() as session:
+        data = await _async_get_raw_files(session, study_id, **kwargs)
+    return data
+
+
+def get_raw_files(study_id, **kwargs):
+    ''' Get metadata for raw files in a study '''
+    return asyncio.run(async_get_raw_files(study_id, **kwargs))
 
 
 def metadata(study_id, url=BASE_URL, n_files=None, max_threads=MAX_THREADS, **kwargs):

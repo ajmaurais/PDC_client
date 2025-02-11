@@ -9,9 +9,9 @@ description = 'Tools to interact with the NCI Proteomic Data Commons (PDC) API'
 readme = 'README.md'
 dynamic=['version']
 dependencies = [
-    'requests>=2.32.3'
+    'aiohttp>=3.11.12'
 ]
-requires-python = '>=3.8'
+requires-python = '>=3.11'
 
 [tool.setuptools]
 packages = ['PDC_client', 'PDC_client.submodules']

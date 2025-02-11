@@ -33,15 +33,15 @@ class TestStudyLevel(unittest.TestCase):
 
 
     def test_invalid_study_id(self):
-        self.assertIsNone(api.get_study_id('DUMMY', api.BASE_URL))
+        self.assertIsNone(api.get_study_id('DUMMY'))
 
 
     def test_invalid_pdc_study_id(self):
-        self.assertIsNone(api.get_pdc_study_id('DUMMY', api.BASE_URL))
+        self.assertIsNone(api.get_pdc_study_id('DUMMY'))
 
 
     def test_invalid_study_name(self):
-        self.assertIsNone(api.get_study_name('DUMMY', api.BASE_URL))
+        self.assertIsNone(api.get_study_name('DUMMY'))
 
 
 class TestFileLevel(unittest.TestCase):

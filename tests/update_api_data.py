@@ -6,6 +6,7 @@ import json
 import difflib
 import subprocess
 import asyncio
+import aiohttp
 
 from PDC_client.submodules import api
 
@@ -167,18 +168,25 @@ def check_file(new_data, old_data_path, name='', color=True, write=False):
 
 async def download_metadata(pdc_study_ids):
     # download all study_ids for pdc_study_ids
-    study_id_tasks = list()
-    async with asyncio.TaskGroup() as tg:
-        for study in pdc_study_ids:
-            study_id_tasks.append(tg.create_task(api.async_get_study_id(pdc_study_id=study)))
-    study_ids = [task.result() for task in study_id_tasks]
+    async with aiohttp.ClientSession() as session:
+        study_id_tasks = list()
+        async with asyncio.TaskGroup() as tg:
+            for study in pdc_study_ids:
+                study_id_tasks.append(
+                    tg.create_task(api._async_get_study_id(session, pdc_study_id=study))
+                )
+        study_ids = [task.result() for task in study_id_tasks]
 
-    study_metadata_tasks = list()
-    file_tasks = list()
-    async with asyncio.TaskGroup() as tg:
-        for study in study_ids:
-            study_metadata_tasks.append(tg.create_task(api.async_get_study_metadata(study_id=study)))
-            file_tasks.append(tg.create_task(api.async_get_raw_files(study)))
+        study_metadata_tasks = list()
+        file_tasks = list()
+        async with asyncio.TaskGroup() as tg:
+            for study in study_ids:
+                study_metadata_tasks.append(
+                    tg.create_task(api._async_get_study_metadata(session, study_id=study))
+                )
+                file_tasks.append(
+                    tg.create_task(api._async_get_raw_files(session, study))
+                )
 
     study_metadata = [task.result() for task in study_metadata_tasks]
     raw_files = {study: task.result() for study, task in zip(study_ids, file_tasks)}

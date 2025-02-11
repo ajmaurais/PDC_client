@@ -4,7 +4,7 @@ import json
 from csv import DictReader
 from hashlib import md5
 import re
-import requests
+# import requests
 
 from .api import FILE_METADATA_KEYS
 
