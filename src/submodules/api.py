@@ -4,8 +4,7 @@ import asyncio
 # from concurrent.futures import ThreadPoolExecutor
 # from multiprocessing import cpu_count
 import sys
-# import aiohttp
-import aiohttp
+import httpx
 
 from .logger import LOGGER
 
@@ -19,31 +18,31 @@ async def _post(session, query, url, retries=5):
     query = re.sub(r'\s+', ' ', query.strip())
     # try:
         # for _ in range(retries):
-    async with session.post(url, json={'query': query}) as response:
-        if response.status == 200:
-            return await response.json()
-        # if response.status >= 400 and response.status < 500:
+    response = await session.post(url, json={'query': query})
+    if response.status_code == 200:
+        return response.json()
+        # if response.status_code >= 400 and response.status_code < 500:
         #     break
     # except aiohttp.ClientSSLError as e:
     #     message = "SSL certificate verification failed! Use --skipVerify to skip SSL verification."
     #     raise RuntimeError(message) from e
     sys.stderr.write(f'url:\n"{url}?{query}"\n')
-    raise RuntimeError(f'Failed with response code {response.status}!')
+    raise RuntimeError(f'Failed with response code {response.status_code}!')
 
 
 async def _get(session, query, url, retries=5, **kwargs):
     query = re.sub(r'\s+', ' ', query.strip())
     # try:
-    async with session.get(f'{url}?{query}', **kwargs) as response:
-        if response.status == 200:
-            return await response.json()
-            # if response.status >= 400 and response.status < 500:
+    response = await session.get(f'{url}?{query}', **kwargs)
+    if response.status_code == 200:
+        return response.json()
+            # if response.status_code >= 400 and response.status_code < 500:
             #     break
     # except aiohttp.ClientSSLError as e:
     #     message = "SSL certificate verification failed! Use --skipVerify to skip SSL verification."
     #     raise RuntimeError(message) from e
     sys.stderr.write(f'url:\n"{url}?{query}"\n')
-    raise RuntimeError(f'Failed with response code {response.status}!')
+    raise RuntimeError(f'Failed with response code {response.status_code}!')
 
 
 async def _async_get_study_id(session, pdc_study_id, url=BASE_URL, **kwargs):
@@ -65,7 +64,7 @@ async def _async_get_study_id(session, pdc_study_id, url=BASE_URL, **kwargs):
 
 async def async_get_study_id(pdc_study_id, **kwargs):
     ''' async version of get_study_id '''
-    async with aiohttp.ClientSession() as session:
+    async with httpx.AsyncClient() as session:
         return await _async_get_study_id(session, pdc_study_id, **kwargs)
 
 
@@ -126,7 +125,7 @@ async def _async_get_study_metadata(session, pdc_study_id=None, study_id=None, u
 
 
 async def async_get_study_metadata(pdc_study_id=None, study_id=None, **kwargs):
-    async with aiohttp.ClientSession() as session:
+    async with httpx.AsyncClient() as session:
         return await _async_get_study_metadata(session,
                                                pdc_study_id=pdc_study_id,
                                                study_id=study_id,
@@ -333,7 +332,7 @@ async def _async_get_raw_files(session, study_id, url=BASE_URL, n_files=None, **
 
 
 async def async_get_raw_files(study_id, **kwargs):
-    async with aiohttp.ClientSession() as session:
+    async with httpx.AsyncClient() as session:
         data = await _async_get_raw_files(session, study_id, **kwargs)
     return data
 

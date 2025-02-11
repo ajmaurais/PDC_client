@@ -6,7 +6,7 @@ import json
 import difflib
 import subprocess
 import asyncio
-import aiohttp
+import httpx
 
 from PDC_client.submodules import api
 
@@ -168,12 +168,12 @@ def check_file(new_data, old_data_path, name='', color=True, write=False):
 
 async def download_metadata(pdc_study_ids):
     # download all study_ids for pdc_study_ids
-    async with aiohttp.ClientSession() as session:
+    async with httpx.AsyncClient() as client:
         study_id_tasks = list()
         async with asyncio.TaskGroup() as tg:
             for study in pdc_study_ids:
                 study_id_tasks.append(
-                    tg.create_task(api._async_get_study_id(session, pdc_study_id=study))
+                    tg.create_task(api._async_get_study_id(client, pdc_study_id=study))
                 )
         study_ids = [task.result() for task in study_id_tasks]
 
@@ -182,10 +182,10 @@ async def download_metadata(pdc_study_ids):
         async with asyncio.TaskGroup() as tg:
             for study in study_ids:
                 study_metadata_tasks.append(
-                    tg.create_task(api._async_get_study_metadata(session, study_id=study))
+                    tg.create_task(api._async_get_study_metadata(client, study_id=study))
                 )
                 file_tasks.append(
-                    tg.create_task(api._async_get_raw_files(session, study))
+                    tg.create_task(api._async_get_raw_files(client, study))
                 )
 
     study_metadata = [task.result() for task in study_metadata_tasks]
