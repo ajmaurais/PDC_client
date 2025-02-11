@@ -6,10 +6,12 @@ from multiprocessing import cpu_count
 import sys
 import requests
 
+from .logger import LOGGER
+
 MAX_THREADS = cpu_count()
 BASE_URL ='https://proteomic.datacommons.cancer.gov/graphql'
-FILE_METADATA_KEYS = [ "file_id", "file_name", "md5sum", "file_location", "file_size",
-                       "data_category", "file_type", "file_format", "url"]
+FILE_METADATA_KEYS = ['file_id', 'file_name', 'md5sum', 'file_location', 'file_size',
+                      'data_category', 'file_type', 'file_format', 'url']
 
 async def _post(query, url, retries=5, timeout=60, **kwargs):
     for _ in range(retries):
@@ -278,49 +280,43 @@ def aliquot_id(file_id, url, **kwargs):
     return file_id, r['data']['fileMetadata'][0]['aliquots'][0]['aliquot_id']
 
 
-# def study_raw_file_urls(study_id, url,
-
-
-def raw_files(study_id, url, n_files=None, **kwargs):
+async def async_get_raw_files(study_id, url=BASE_URL, n_files=None, **kwargs):
     ''' Get metadata for raw files in a study '''
 
     query = '''query {
        filesPerStudy (study_id: "%s" data_category: "Raw Mass Spectra" acceptDUA: true) {
-            file_id
-            file_name
-            md5sum
-            file_location
-            file_size
-            data_category
-            file_type
-            file_format
-            signedUrl {url}}
-    }''' % study_id
+            file_id file_name md5sum file_location file_size
+            data_category file_type file_format signedUrl {url}}
+        }''' % study_id
 
     # get a list of .raw files in study
-    payload = _post(query, url, **kwargs)
+    payload = await _post(query, url, **kwargs)
     if 'errors' in payload:
-        sys.stderr.write('ERROR: API query failed with response(s):\n')
+        LOGGER.error('API query failed with response(s):')
         for error in payload['errors']:
-            sys.stderr.write('Code: {}\nEndpoint: {}\nMessage: {}\n'.format(error['extensions']['code'],
-                                                                            ', '.join(error['path']),
-                                                                            error['message']))
+            LOGGER.error('\n\tCode: %s\n\tEndpoint: %s\n\tMessage: %s\n',
+                         error['extensions']['code'],
+                         ', '.join(error['path']),
+                         error['message'])
         return None
 
-    keys = ('file_id', 'file_name', 'md5sum', 'file_location', 'file_size', 'data_category', 'file_type', 'file_format')
+    keys = ('file_id', 'file_name', 'md5sum', 'file_location',
+            'file_size', 'data_category', 'file_type', 'file_format')
     data = list()
-    file_count = 0
     for file in payload['data']['filesPerStudy']:
         if file['data_category'] == 'Raw Mass Spectra':
-            if n_files is not None and file_count >= n_files:
-                break
+            new_file = {k: file[k] for k in keys}
+            new_file['url'] = file['signedUrl']['url']
+            data.append(new_file)
 
-            newFile = {k: file[k] for k in keys}
-            newFile['url'] = file['signedUrl']['url']
-            data.append(newFile)
-            file_count += 1
+    if n_files is not None:
+        return data[:n_files]
 
     return data
+
+
+def get_raw_files(study_id, url=BASE_URL, n_files=None, **kwargs):
+    return asyncio.run(async_get_raw_files(study_id, url=url, n_files=n_files, **kwargs))
 
 
 def metadata(study_id, url=BASE_URL, n_files=None, max_threads=MAX_THREADS, **kwargs):

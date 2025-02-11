@@ -9,7 +9,7 @@ import asyncio
 
 from PDC_client.submodules import api
 
-from setup_tests import STUDY_METADATA
+from setup_tests import STUDY_METADATA, FILE_METADATA
 
 STUDIES = ['PDC000504', 'PDC000341', 'PDC000414', 'PDC000464',
            'PDC000110']
@@ -174,11 +174,21 @@ async def download_metadata(pdc_study_ids):
     study_ids = [task.result() for task in study_id_tasks]
 
     study_metadata_tasks = list()
+    file_tasks = list()
     async with asyncio.TaskGroup() as tg:
         for study in study_ids:
             study_metadata_tasks.append(tg.create_task(api.async_get_study_metadata(study_id=study)))
+            file_tasks.append(tg.create_task(api.async_get_raw_files(study)))
 
-    return [task.result() for task in study_metadata_tasks]
+    study_metadata = [task.result() for task in study_metadata_tasks]
+    raw_files = {study: task.result() for study, task in zip(study_ids, file_tasks)}
+
+    # remove url slot from file metadata because the urls are temporary
+    for study in raw_files:
+        for i in range(len(raw_files[study])):
+            raw_files[study][i].pop('url')
+
+    return study_metadata, raw_files
 
 
 def main():
@@ -197,9 +207,10 @@ def main():
 
     pdc_study_ids = STUDIES if args.pdc_study_ids is None else args.pdc_study_ids
 
-    test_studies = asyncio.run(download_metadata(pdc_study_ids))
+    test_studies, test_files = asyncio.run(download_metadata(pdc_study_ids))
 
-    test_data = {'Study metadata': (test_studies, STUDY_METADATA)}
+    test_data = {'Study metadata': (test_studies, STUDY_METADATA),
+                 'File metadata': (test_files, FILE_METADATA)}
 
     if args.write:
         update_test_data(test_data, color=not args.plain)
