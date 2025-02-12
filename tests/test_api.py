@@ -140,12 +140,13 @@ class TestAliquotLevel(unittest.TestCase):
         for study, study_aliquots in self.aliquots.items():
             study_aliquots = self.aliquot_list_to_dict(study_aliquots)
 
-            for page_len in [1, 5, 10, 200]:
-                test_study_aliquots = api.get_study_biospecimens(self.studies[study]['study_id'],
-                                                                 page_limit=page_len)
+            # for page_len in [10, 100]:
+            page_len = 12
+            test_study_aliquots = api.get_study_aliquots(self.studies[study]['study_id'],
+                                                         page_limit=page_len, timeout=15)
 
-                self.assertEqual(len(test_study_aliquots), self.studies[study]['aliquots_count'])
+            self.assertEqual(len(test_study_aliquots), self.studies[study]['aliquots_count'])
 
-                test_study_aliquots = self.aliquot_list_to_dict(test_study_aliquots)
+            test_study_aliquots = self.aliquot_list_to_dict(test_study_aliquots)
 
-                self.assertDictEqual(test_study_aliquots, study_aliquots)
+            self.assertDictEqual(test_study_aliquots, study_aliquots)

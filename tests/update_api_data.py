@@ -173,7 +173,9 @@ def update_test_data(files, color=True):
 
 async def download_metadata(pdc_study_ids):
     # download all study_ids for pdc_study_ids
-    async with httpx.AsyncClient() as client:
+
+    client_limits = httpx.Limits(max_connections=20, max_keepalive_connections=10, keepalive_expiry=5)
+    async with httpx.AsyncClient(timeout=30, limits=client_limits) as client:
         study_id_tasks = list()
         async with asyncio.TaskGroup() as tg:
             for study in pdc_study_ids:
@@ -194,7 +196,7 @@ async def download_metadata(pdc_study_ids):
                     tg.create_task(api._async_get_raw_files(client, study))
                 )
                 aliquot_tasks.append(
-                    tg.create_task(api._async_get_study_biospecimens(client, study))
+                    tg.create_task(api._async_get_study_aliquots(client, study))
                 )
 
     study_metadata = [task.result() for task in study_metadata_tasks]
@@ -270,7 +272,7 @@ def main():
 
     diff_lines = list()
     for name, (data, old_data) in test_data.items():
-        diff = list(get_diff(data, old_data, name=name))
+        diff = list(get_diff(old_data, data, name=name))
         diff_lines += diff
 
     if len(diff_lines) == 0:

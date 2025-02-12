@@ -198,7 +198,7 @@ async def _get_paginated_data(query_f, url, data_name, study_id,
     return data
 
 
-async def _async_get_study_biospecimens(client, study_id, url=BASE_URL, **kwargs):
+async def _async_get_study_aliquots(client, study_id, url=BASE_URL, page_limit=10, **kwargs):
     def query_f(study_id, offset, limit):
         return '''query={
             paginatedCasesSamplesAliquots (study_id: "%s" offset: %u limit: %u) {
@@ -212,8 +212,45 @@ async def _async_get_study_biospecimens(client, study_id, url=BASE_URL, **kwargs
                 pagination { count from page total pages size }
             } } ''' % (study_id, offset, limit)
 
-    pages = await _get_paginated_data(query_f, url, 'casesSamplesAliquots',
-                                      study_id, client=client, **kwargs)
+    def file_query(file_id):
+        return '''query={
+            fileMetadata (file_id: "%s" acceptDUA: true) {
+                file_id aliquots { aliquot_id } }
+                }''' % file_id
+
+    file_id_query = '''query {
+        filesPerStudy (study_id: "%s", data_category: "Raw Mass Spectra" acceptDUA: true) {
+            file_id }
+        } ''' % study_id
+
+    file_id_task = asyncio.create_task(
+            _post(client, file_id_query, url, **kwargs)
+        )
+
+    aliquot_task = asyncio.create_task(
+            _get_paginated_data(query_f, url, 'casesSamplesAliquots', study_id,
+                                client=client, page_limit=page_limit, **kwargs)
+        )
+
+    file_id_data = await file_id_task
+    file_ids = [f['file_id'] for f in file_id_data['data']['filesPerStudy']]
+
+    aliquot_id_tasks = list()
+    async with asyncio.TaskGroup() as tg:
+        for file_id in file_ids:
+            aliquot_id_tasks.append(
+                tg.create_task(_get(client, file_query(file_id), url))
+            )
+
+    # construct dictionary of aliquot_ids maped to file_ids
+    file_ids = dict()
+    for task in aliquot_id_tasks:
+        data = task.result()
+        file_id = data['data']['fileMetadata'][0]['file_id']
+        for aliquot in data['data']['fileMetadata'][0]['aliquots']:
+            file_ids[aliquot['aliquot_id']] = file_id
+
+    pages = await aliquot_task
 
     # Flatten pages into 1 list
     data = list()
@@ -229,19 +266,21 @@ async def _async_get_study_biospecimens(client, study_id, url=BASE_URL, **kwargs
                 new_a.update({k: sample[k] for k in ('sample_id', 'sample_submitter_id',
                                                      'sample_type', 'tissue_type')})
                 new_a['case_id'] = case['case_id']
+                new_a['file_id'] = file_ids.get(new_a['aliquot_id'], 'MISSING')
 
                 aliquots.append(new_a)
 
     return aliquots
 
 
-async def async_get_study_biospecimens(study_id, verify=True, timeout=15, **kwargs):
-    async with httpx.AsyncClient(verify=verify, timeout=timeout) as client:
-        return await _async_get_study_biospecimens(client, study_id, **kwargs)
+async def async_get_study_aliquots(study_id, verify=True, timeout=10, **kwargs):
+    client_limits = httpx.Limits(max_connections=20, max_keepalive_connections=10, keepalive_expiry=5)
+    async with httpx.AsyncClient(verify=verify, limits=client_limits, timeout=timeout) as client:
+        return await _async_get_study_aliquots(client, study_id, **kwargs)
 
 
-def get_study_biospecimens(study_id, **kwargs):
-    return asyncio.run(async_get_study_biospecimens(study_id, **kwargs))
+def get_study_aliquots(study_id, **kwargs):
+    return asyncio.run(async_get_study_aliquots(study_id, **kwargs))
 
 
 def case_metadata(study_id, url, **kwargs):
