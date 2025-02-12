@@ -10,7 +10,7 @@ import httpx
 
 from PDC_client.submodules import api
 
-from setup_tests import STUDY_METADATA, FILE_METADATA
+from setup_tests import STUDY_METADATA, FILE_METADATA, ALIQUOT_METADATA
 
 STUDIES = ['PDC000504', 'PDC000341', 'PDC000414', 'PDC000464',
            'PDC000110']
@@ -180,10 +180,11 @@ async def download_metadata(pdc_study_ids):
                 study_id_tasks.append(
                     tg.create_task(api._async_get_study_id(client, pdc_study_id=study))
                 )
-        study_ids = [task.result() for task in study_id_tasks]
+        study_ids = {task.result(): pdc_id for pdc_id, task in zip(pdc_study_ids, study_id_tasks)}
 
         study_metadata_tasks = list()
         file_tasks = list()
+        aliquot_tasks = list()
         async with asyncio.TaskGroup() as tg:
             for study in study_ids:
                 study_metadata_tasks.append(
@@ -192,16 +193,42 @@ async def download_metadata(pdc_study_ids):
                 file_tasks.append(
                     tg.create_task(api._async_get_raw_files(client, study))
                 )
+                aliquot_tasks.append(
+                    tg.create_task(api._async_get_study_biospecimens(client, study))
+                )
 
     study_metadata = [task.result() for task in study_metadata_tasks]
-    raw_files = {study: task.result() for study, task in zip(study_ids, file_tasks)}
+    raw_files = {study_ids[study]: task.result() for study, task in zip(study_ids.keys(), file_tasks)}
+    aliquots = {study_ids[study]: task.result() for study, task in zip(study_ids.keys(), file_tasks)}
 
     # remove url slot from file metadata because the urls are temporary
     for study in raw_files:
         for i in range(len(raw_files[study])):
             raw_files[study][i].pop('url')
 
-    return study_metadata, raw_files
+    return study_metadata, raw_files, aliquots
+
+
+def filter_old_data(test_data):
+    data = test_data.copy()
+
+    # filter Study metadata
+    if isinstance(data['Study metadata'][1], list):
+        study_ids = {study['study_id'] for study in data['Study metadata'][0]}
+        data['Study metadata'][1] = [study for study in data['Study metadata'][1]
+                                     if study['study_id'] in study_ids]
+
+    # filter File metadata
+    if isinstance(data['File metadata'][1], dict):
+        data['File metadata'][1] = {k: v for k, v in data['File metadata'][1].items()
+                                    if k in data['File metadata'][0]}
+
+    # filter File metadata
+    if isinstance(data['Aliquot metadata'][1], dict):
+        data['Aliquot metadata'][1] = {k: v for k, v in data['Aliquot metadata'][1].items()
+                                       if k in data['Aliquot metadata'][0]}
+
+    return data
 
 
 def main():
@@ -212,33 +239,44 @@ def main():
                         help='Overwrite test files in data/api with new api data?')
     parser.add_argument('--plain', action='store_true', default=False,
                         help="Don't use colors in diff output.")
-    parser.add_argument('pdc_study_ids', nargs='?', default=None,
+    parser.add_argument('pdc_study_ids', nargs='*', default=None,
                         help='PDC study ID(s) to download new data for. '
                              'If not specified, data is downloaded for all ids in TEST_STUDIES')
 
     args = parser.parse_args()
 
-    pdc_study_ids = STUDIES if args.pdc_study_ids is None else args.pdc_study_ids
+    all_studies = len(args.pdc_study_ids) == 0
+    pdc_study_ids = STUDIES if all_studies else args.pdc_study_ids
 
-    test_studies, test_files = asyncio.run(download_metadata(pdc_study_ids))
+    test_studies, test_files, test_aliquots, = asyncio.run(download_metadata(pdc_study_ids))
 
-    test_data = {'Study metadata': (test_studies, STUDY_METADATA),
-                 'File metadata': (test_files, FILE_METADATA)}
+    test_data = {'Study metadata': [test_studies, STUDY_METADATA],
+                 'File metadata': [test_files, FILE_METADATA],
+                 'Aliquot metadata': [test_aliquots, ALIQUOT_METADATA]}
 
     if args.write:
         update_test_data(test_data, color=not args.plain)
-    else:
-        diff_lines = list()
-        for name, (data, path) in test_data.items():
-            old_data = load_json_to_dict(path)
-            diff = list(get_diff(data, old_data, name=name))
-            diff_lines += diff
+        sys.exit(0)
 
-        if len(diff_lines) == 0:
-            for name in test_data:
-                sys.stdout.write(f'{name} up to date\n')
-        else:
-            print_diff(diff_lines, color=not args.plain)
+    # load json files from paths
+    for name in test_data:
+        test_data[name][1] = load_json_to_dict(test_data[name][1])
+
+    # filter old data of applicable
+    if not all_studies:
+        test_data = filter_old_data(test_data)
+
+    diff_lines = list()
+    for name, (data, old_data) in test_data.items():
+        diff = list(get_diff(data, old_data, name=name))
+        diff_lines += diff
+
+    if len(diff_lines) == 0:
+        for name in test_data:
+            sys.stdout.write(f'{name} up to date\n')
+        sys.exit(0)
+
+    print_diff(diff_lines, color=not args.plain)
 
 
 if __name__ == '__main__':

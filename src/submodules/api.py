@@ -1,57 +1,48 @@
 
 import re
 import asyncio
-# from concurrent.futures import ThreadPoolExecutor
-# from multiprocessing import cpu_count
 import sys
 import httpx
 
 from .logger import LOGGER
 
-# MAX_THREADS = cpu_count()
-MAX_THREADS = 14
 BASE_URL ='https://proteomic.datacommons.cancer.gov/graphql'
-FILE_METADATA_KEYS = ['file_id', 'file_name', 'md5sum', 'file_location', 'file_size',
+FILE_METADATA_KEYS = ['file_id', 'file_name', 'file_submitter_id', 'md5sum', 'file_size',
                       'data_category', 'file_type', 'file_format', 'url']
 
-async def _post(session, query, url, retries=5):
+
+async def _post(client, query, url, retries=5):
     query = re.sub(r'\s+', ' ', query.strip())
-    # try:
-        # for _ in range(retries):
-    response = await session.post(url, json={'query': query})
-    if response.status_code == 200:
-        return response.json()
-        # if response.status_code >= 400 and response.status_code < 500:
-        #     break
-    # except aiohttp.ClientSSLError as e:
-    #     message = "SSL certificate verification failed! Use --skipVerify to skip SSL verification."
-    #     raise RuntimeError(message) from e
+    for _ in range(retries):
+        response = await client.post(url, json={'query': query})
+        if response.status_code == 200:
+            return response.json()
+        if response.status_code >= 400 and response.status_code < 500:
+            break
     sys.stderr.write(f'url:\n"{url}?{query}"\n')
     raise RuntimeError(f'Failed with response code {response.status_code}!')
 
 
-async def _get(session, query, url, retries=5, **kwargs):
+async def _get(client, query, url, retries=5):
     query = re.sub(r'\s+', ' ', query.strip())
-    # try:
-    response = await session.get(f'{url}?{query}', **kwargs)
-    if response.status_code == 200:
-        return response.json()
-            # if response.status_code >= 400 and response.status_code < 500:
-            #     break
-    # except aiohttp.ClientSSLError as e:
-    #     message = "SSL certificate verification failed! Use --skipVerify to skip SSL verification."
-    #     raise RuntimeError(message) from e
+
+    for _ in range(retries):
+        response = await client.get(f'{url}?{query}')
+        if response.status_code == 200:
+            return response.json()
+        if response.status_code >= 400 and response.status_code < 500:
+            break
     sys.stderr.write(f'url:\n"{url}?{query}"\n')
     raise RuntimeError(f'Failed with response code {response.status_code}!')
 
 
-async def _async_get_study_id(session, pdc_study_id, url=BASE_URL, **kwargs):
+async def _async_get_study_id(client, pdc_study_id, url=BASE_URL, **kwargs):
     query = '''query={
         studyCatalog (pdc_study_id: "%s" acceptDUA: true){
             versions { study_id is_latest_version }
         }}''' % pdc_study_id
 
-    data = await _get(session, query, url, **kwargs)
+    data = await _get(client, query, url, **kwargs)
 
     if len(data['data']['studyCatalog']) == 0:
         return None
@@ -64,8 +55,8 @@ async def _async_get_study_id(session, pdc_study_id, url=BASE_URL, **kwargs):
 
 async def async_get_study_id(pdc_study_id, **kwargs):
     ''' async version of get_study_id '''
-    async with httpx.AsyncClient() as session:
-        return await _async_get_study_id(session, pdc_study_id, **kwargs)
+    async with httpx.AsyncClient() as client:
+        return await _async_get_study_id(client, pdc_study_id, **kwargs)
 
 
 def get_study_id(pdc_study_id, **kwargs):
@@ -81,7 +72,7 @@ def get_study_id(pdc_study_id, **kwargs):
     return asyncio.run(async_get_study_id(pdc_study_id, **kwargs))
 
 
-async def _async_get_study_metadata(session, pdc_study_id=None, study_id=None, url=BASE_URL, **kwargs):
+async def _async_get_study_metadata(client, pdc_study_id=None, study_id=None, url=BASE_URL, **kwargs):
     if study_id is not None:
         _id = study_id
         id_name = 'study_id'
@@ -89,7 +80,9 @@ async def _async_get_study_metadata(session, pdc_study_id=None, study_id=None, u
     elif pdc_study_id is not None:
         _id = pdc_study_id
         id_name = 'pdc_study_id'
-        study_id_task = asyncio.create_task(_async_get_study_id(session, pdc_study_id, url=url, **kwargs))
+        study_id_task = asyncio.create_task(
+                _async_get_study_id(client, pdc_study_id, url=url, **kwargs)
+            )
     else:
         raise ValueError('Both pdc_study_id and study_id cannot be None!')
 
@@ -105,7 +98,7 @@ async def _async_get_study_metadata(session, pdc_study_id=None, study_id=None, u
             }
         } ''' % (id_name, _id)
 
-    study_task = asyncio.create_task(_get(session, study_query, url, **kwargs))
+    study_task = asyncio.create_task(_get(client, study_query, url, **kwargs))
     data = await study_task
 
     if study_id_task is None:
@@ -125,8 +118,8 @@ async def _async_get_study_metadata(session, pdc_study_id=None, study_id=None, u
 
 
 async def async_get_study_metadata(pdc_study_id=None, study_id=None, **kwargs):
-    async with httpx.AsyncClient() as session:
-        return await _async_get_study_metadata(session,
+    async with httpx.AsyncClient() as client:
+        return await _async_get_study_metadata(client,
                                                pdc_study_id=pdc_study_id,
                                                study_id=study_id,
                                                **kwargs)
@@ -169,44 +162,89 @@ def get_study_name(study_id, **kwargs):
     return None
 
 
-def _get_paginated_data(query_f, url, data_name, study_id,
-                        page_limit=10, no_change_iterations_limit=2, **kwargs):
+async def _get_paginated_data(query_f, url, data_name, study_id,
+                              client=None, page_limit=10, verify=True):
 
-    ret = list()
-    done = False
-    total_entries = None
-    entry_i = 0
-    offset = 0
-    endpoint_name = 'paginated{}{}'.format(data_name[0].upper(), data_name[1:])
-    no_change_iterations = 0
-    previous_len = 0
+    endpoint_name = f'paginated{data_name[0].upper()}{data_name[1:]}'
 
-    while True:
-        data = _get(query_f(study_id, offset, page_limit), url, **kwargs)
-        ret += data['data'][endpoint_name][data_name]
+    init_client = client is None
+    if init_client:
+        client = httpx.AsyncClient(verify=verify)
 
-        offset += page_limit
+    data = list()
+    try:
+        query = query_f(study_id, 0, page_limit)
+        first_page = await _get(client, query, url)
 
-        # probably will delete this later
-        if total_entries is None:
-            total_entries = data['data'][endpoint_name]['total']
-        else:
-            if total_entries != data['data'][endpoint_name]['total']:
-                raise RuntimeError('Something is wrong...')
+        total = first_page['data'][endpoint_name]['total']
 
-        entry_i += len(data['data'][endpoint_name][data_name])
-        if entry_i >= total_entries:
-            return ret
+        if total <= page_limit:
+            return [first_page]
 
-        # check that we are not in an infinite loop
-        if len(ret) == previous_len:
-            no_change_iterations += 1
-        previous_len = len(ret)
-        if no_change_iterations >= no_change_iterations_limit:
-            raise RuntimeError('Something is wrong...')
+        offset = page_limit
+        page_tasks = list()
+        async with asyncio.TaskGroup() as tg:
+            while offset < total:
+                page_tasks.append(
+                    tg.create_task(_get(client, query_f(study_id, offset, page_limit), url))
+                )
+                offset += page_limit
+    finally:
+        if init_client:
+            await client.aclose()
+
+    data = [first_page] + [task.result() for task in page_tasks]
+
+    return data
 
 
-def case_metadata(study_id, url, max_threads=MAX_THREADS, **kwargs):
+async def _async_get_study_biospecimens(client, study_id, url=BASE_URL, **kwargs):
+    def query_f(study_id, offset, limit):
+        return '''query={
+            paginatedCasesSamplesAliquots (study_id: "%s" offset: %u limit: %u) {
+                total
+                casesSamplesAliquots {
+                    case_id
+                    samples { sample_id sample_submitter_id sample_type tissue_type
+                        aliquots { aliquot_id analyte_type }
+                    }
+                }
+                pagination { count from page total pages size }
+            } } ''' % (study_id, offset, limit)
+
+    pages = await _get_paginated_data(query_f, url, 'casesSamplesAliquots',
+                                      study_id, client=client, **kwargs)
+
+    # Flatten pages into 1 list
+    data = list()
+    for page in pages:
+        data += page['data']['paginatedCasesSamplesAliquots']['casesSamplesAliquots']
+
+    # flatten aliquots into 1 list
+    aliquots = list()
+    for case in data:
+        for sample in case['samples']:
+            for aliquot in sample['aliquots']:
+                new_a = {k: aliquot[k] for k in ('aliquot_id', 'analyte_type')}
+                new_a.update({k: sample[k] for k in ('sample_id', 'sample_submitter_id',
+                                                     'sample_type', 'tissue_type')})
+                new_a['case_id'] = case['case_id']
+
+                aliquots.append(new_a)
+
+    return aliquots
+
+
+async def async_get_study_biospecimens(study_id, verify=True, **kwargs):
+    async with httpx.AsyncClient(verify=verify) as client:
+        return await _async_get_study_biospecimens(client, study_id, **kwargs)
+
+
+def get_study_biospecimens(study_id, **kwargs):
+    return asyncio.run(async_get_study_biospecimens(study_id, **kwargs))
+
+
+def case_metadata(study_id, url, **kwargs):
 
     def make_case_query(study_id, page_offset, page_limit=100):
         return '''query={
@@ -297,15 +335,15 @@ def aliquot_id(file_id, url, **kwargs):
     return file_id, r['data']['fileMetadata'][0]['aliquots'][0]['aliquot_id']
 
 
-async def _async_get_raw_files(session, study_id, url=BASE_URL, n_files=None, **kwargs):
+async def _async_get_raw_files(client, study_id, url=BASE_URL, n_files=None, **kwargs):
     query = '''query {
        filesPerStudy (study_id: "%s" data_category: "Raw Mass Spectra" acceptDUA: true) {
-            file_id file_name md5sum file_location file_size
+            file_id file_name file_submitter_id md5sum file_size
             data_category file_type file_format signedUrl {url}}
         }''' % study_id
 
     # get a list of .raw files in study
-    payload = await _post(session, query, url, **kwargs)
+    payload = await _post(client, query, url, **kwargs)
 
     if 'errors' in payload:
         LOGGER.error('API query failed with response(s):')
@@ -316,8 +354,8 @@ async def _async_get_raw_files(session, study_id, url=BASE_URL, n_files=None, **
                          error['message'])
         return None
 
-    keys = ('file_id', 'file_name', 'md5sum', 'file_location',
-            'file_size', 'data_category', 'file_type', 'file_format')
+    keys = ('file_id', 'file_name', 'file_submitter_id', 'md5sum', 'file_size',
+            'data_category', 'file_type', 'file_format')
     data = list()
     for file in payload['data']['filesPerStudy']:
         if file['data_category'] == 'Raw Mass Spectra':
@@ -332,9 +370,8 @@ async def _async_get_raw_files(session, study_id, url=BASE_URL, n_files=None, **
 
 
 async def async_get_raw_files(study_id, **kwargs):
-    async with httpx.AsyncClient() as session:
-        data = await _async_get_raw_files(session, study_id, **kwargs)
-    return data
+    async with httpx.AsyncClient() as client:
+        return await _async_get_raw_files(client, study_id, **kwargs)
 
 
 def get_raw_files(study_id, **kwargs):
