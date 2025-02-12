@@ -284,57 +284,6 @@ def case_metadata(study_id, url, **kwargs):
     return cases
 
 
-def single_case(case_id, url, **kwargs):
-
-    query = '''query={case (case_id: "%s" acceptDUA: true) {
-    case_id
-    primary_site
-    samples {
-        sample_id
-        aliquots { aliquot_id }
-    }
-    diagnoses{
-        tissue_or_organ_of_origin
-        primary_diagnosis
-        tumor_grade
-        tumor_stage
-        }
-    }} ''' % case_id
-
-    r = _get(query, url, **kwargs)
-    data = r['data']['case'][0]
-
-    if len(data['diagnoses']) != 1:
-        raise RuntimeError(f'More than 1 diagnoses in case_id: {case_id}')
-    data['diagnoses'] = data['diagnoses'][0]
-
-    keys = ['case_id', 'primary_site', 'samples']
-    ret = {key: data[key] for key in keys}
-    diagnosis_keys = ['tissue_or_organ_of_origin', 'primary_diagnosis', 'tumor_grade', 'tumor_stage']
-    for key in diagnosis_keys:
-        ret[key] = data['diagnoses'][key]
-
-    return case_id, ret
-
-
-def aliquot_id(file_id, url, **kwargs):
-    '''
-    Get the aliquot ID for a file.
-    '''
-
-    query = '''query={
-    fileMetadata (file_id: "%s" acceptDUA: true) {
-        aliquots { aliquot_id } }
-        }''' % file_id
-
-    r = _get(query, url, **kwargs)
-    if len(r['data']['fileMetadata']) != 1:
-        raise RuntimeError(f'Too many files in query for file_id: {file_id}')
-    if len(r['data']['fileMetadata'][0]['aliquots']) != 1:
-        raise RuntimeError(f'Too many aliquot IDs for file_id: {file_id}')
-    return file_id, r['data']['fileMetadata'][0]['aliquots'][0]['aliquot_id']
-
-
 async def _async_get_raw_files(client, study_id, url=BASE_URL, n_files=None, **kwargs):
     query = '''query {
        filesPerStudy (study_id: "%s" data_category: "Raw Mass Spectra" acceptDUA: true) {
@@ -378,52 +327,4 @@ def get_raw_files(study_id, **kwargs):
     ''' Get metadata for raw files in a study '''
     return asyncio.run(async_get_raw_files(study_id, **kwargs))
 
-
-def metadata(study_id, url=BASE_URL, n_files=None, max_threads=MAX_THREADS, **kwargs):
-    '''
-    Get metadata for each raw file in a study
-
-    Parameters:
-        study_id (str): The PDC study id.
-        n_files (int): The number of files to get data for. If None data for all files are retreived.
-        max_threads (int): The max number of threads to use for making api calls.
-
-        kwargs: additional arguments passed to requests.get
-
-    Returns:
-        file_dat (list): A list of dicts where each list element is a file.
-    '''
-
-    # Get file metadata
-    file_data = raw_files(study_id, url, n_files=n_files, **kwargs)
-    if file_data is None:
-        return None
-
-    # add aliquot_id to file metadata
-    with ThreadPoolExecutor(max_workers=max_threads) as pool:
-        aliquot_ids = dict(pool.map(lambda x: aliquot_id(x, url, **kwargs),
-                                    set([f['file_id'] for f in file_data])))
-    for file in file_data:
-        file['aliquot_id'] = aliquot_ids[file['file_id']]
-
-    # Get metadata for cases in files
-    cases = case_metadata(study_id, url, max_threads=max_threads, **kwargs)
-    cases_per_aliquot = dict()
-    for case in cases:
-        samples = case.pop('samples')
-        for sample in samples:
-            for aliquot in sample['aliquots']:
-                assert aliquot['aliquot_id'] not in cases_per_aliquot
-                cases_per_aliquot[aliquot['aliquot_id']] = case
-
-    # Add case metadata to file metadata
-    for file in file_data:
-        file.update(cases_per_aliquot[file['aliquot_id']])
-
-        # set None values to 'NA'
-        for k in file.keys():
-            if file[k] is None:
-                file[k] = 'NA'
-
-    return file_data
 
