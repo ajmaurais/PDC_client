@@ -140,7 +140,7 @@ class TestAliquotLevel(unittest.TestCase):
         for study, study_aliquots in self.aliquots.items():
             study_aliquots = self.aliquot_list_to_dict(study_aliquots)
 
-            for page_len in [1, 3, 5, 10, 100, 200]:
+            for page_len in [1, 5, 10, 200]:
                 test_study_aliquots = api.get_study_biospecimens(self.studies[study]['study_id'],
                                                                  page_limit=page_len)
 

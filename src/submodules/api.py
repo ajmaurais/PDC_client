@@ -235,8 +235,8 @@ async def _async_get_study_biospecimens(client, study_id, url=BASE_URL, **kwargs
     return aliquots
 
 
-async def async_get_study_biospecimens(study_id, verify=True, **kwargs):
-    async with httpx.AsyncClient(verify=verify) as client:
+async def async_get_study_biospecimens(study_id, verify=True, timeout=15, **kwargs):
+    async with httpx.AsyncClient(verify=verify, timeout=timeout) as client:
         return await _async_get_study_biospecimens(client, study_id, **kwargs)
 
 
