@@ -50,6 +50,10 @@ class TestFileLevel(unittest.TestCase):
         with open(setup_tests.FILE_METADATA, 'r', encoding='utf-8') as inF:
             cls.files = json.load(inF)
 
+        with open(setup_tests.STUDY_METADATA, 'r', encoding='utf-8') as inF:
+            study_list = json.load(inF)
+        cls.studies = {study.pop('pdc_study_id'): study for study in study_list}
+
 
     @staticmethod
     def file_list_to_dict(file_list):
@@ -62,7 +66,7 @@ class TestFileLevel(unittest.TestCase):
 
     def test_data(self):
         for study, study_files in self.files.items():
-            test_study_files = api.get_raw_files(study)
+            test_study_files = api.get_raw_files(self.studies[study]['study_id'])
 
             test_study_files = self.file_list_to_dict(test_study_files)
             study_files = self.file_list_to_dict(study_files)
@@ -91,20 +95,57 @@ class TestFileLevel(unittest.TestCase):
 
     def test_n_files_arg(self):
         random.seed(1)
-        test_studies = random.sample(list(self.files.keys()), 3)
+        test_studies = random.sample(list(self.files.keys()), min(len(self.files), 3))
 
         # test behavior of n_files=0
-        data = api.get_raw_files(test_studies[0], n_files=0)
+        data = api.get_raw_files(self.studies[test_studies[0]]['study_id'], n_files=0)
         self.assertIsInstance(data, list)
         self.assertEqual(len(data), 0)
 
         # test behavior of n_files > n_files_study
-        n_files_study = len(self.files[test_studies[1]])
-        data = api.get_raw_files(test_studies[1], n_files=n_files_study + 10)
+        index = min(len(test_studies) - 1, 1)
+        n_files_study = len(self.files[test_studies[index]])
+        data = api.get_raw_files(self.studies[test_studies[index]]['study_id'],
+                                 n_files=n_files_study + 10)
         self.assertEqual(len(data), n_files_study)
 
         for study in test_studies:
             n_files = len(self.files[study])
             subset_n_files = random.randint(1, n_files - 1)
-            data = api.get_raw_files(study, n_files=subset_n_files)
+            data = api.get_raw_files(self.studies[study]['study_id'], n_files=subset_n_files)
             self.assertEqual(len(data), subset_n_files)
+
+
+class TestAliquotLevel(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        with open(setup_tests.ALIQUOT_METADATA, 'r', encoding='utf-8') as inF:
+            cls.aliquots = json.load(inF)
+
+        with open(setup_tests.STUDY_METADATA, 'r', encoding='utf-8') as inF:
+            study_list = json.load(inF)
+        cls.studies = {study.pop('pdc_study_id'): study for study in study_list}
+
+
+    @staticmethod
+    def aliquot_list_to_dict(aliquot_list):
+        aliquot_dict = dict()
+        for aliquot in aliquot_list.copy():
+            aliquot_dict[aliquot.pop('aliquot_id')] = aliquot
+
+        return aliquot_dict
+
+
+    def test_data(self):
+        for study, study_aliquots in self.aliquots.items():
+            study_aliquots = self.aliquot_list_to_dict(study_aliquots)
+
+            for page_len in [1, 3, 5, 10, 100, 200]:
+                test_study_aliquots = api.get_study_biospecimens(self.studies[study]['study_id'],
+                                                                 page_limit=page_len)
+
+                self.assertEqual(len(test_study_aliquots), self.studies[study]['aliquots_count'])
+
+                test_study_aliquots = self.aliquot_list_to_dict(test_study_aliquots)
+
+                self.assertDictEqual(test_study_aliquots, study_aliquots)

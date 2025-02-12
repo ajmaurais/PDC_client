@@ -198,8 +198,10 @@ async def download_metadata(pdc_study_ids):
                 )
 
     study_metadata = [task.result() for task in study_metadata_tasks]
-    raw_files = {study_ids[study]: task.result() for study, task in zip(study_ids.keys(), file_tasks)}
-    aliquots = {study_ids[study]: task.result() for study, task in zip(study_ids.keys(), file_tasks)}
+    raw_files = {study_ids[study]: task.result()
+                 for study, task in zip(study_ids.keys(), file_tasks)}
+    aliquots = {study_ids[study]: task.result()
+                for study, task in zip(study_ids.keys(), aliquot_tasks)}
 
     # remove url slot from file metadata because the urls are temporary
     for study in raw_files:
