@@ -148,7 +148,7 @@ class TestAliquotLevel(unittest.TestCase):
         for study, study_aliquots in self.aliquots.items():
             study_aliquots = self.aliquot_list_to_dict(study_aliquots)
 
-            page_len = 12
+            page_len = 100
             test_study_aliquots = api.get_study_aliquots(self.studies[study]['study_id'],
                                                          page_limit=page_len, timeout=15)
 
@@ -191,7 +191,7 @@ class TestCaseLevel(unittest.TestCase):
         for study, study_cases in self.cases.items():
             study_cases = self.case_list_to_dict(study_cases)
 
-            page_len = 7
+            page_len = 100
             test_study_cases = api.get_study_cases(self.studies[study]['study_id'],
                                                    page_limit=page_len, timeout=15)
 

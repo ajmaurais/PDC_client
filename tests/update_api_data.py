@@ -174,15 +174,12 @@ def update_test_data(files, color=True):
 async def download_metadata(pdc_study_ids):
     ''' download all study_ids for pdc_study_ids '''
 
-    client_limits = httpx.Limits(max_connections=20,
-                                 max_keepalive_connections=10,
-                                 keepalive_expiry=5)
-    async with httpx.AsyncClient(timeout=30, limits=client_limits) as client:
+    async with httpx.AsyncClient(timeout=30, limits=api.ASYNC_CLIENT_LIMITS) as client:
         study_id_tasks = list()
         async with asyncio.TaskGroup() as tg:
             for study in pdc_study_ids:
                 study_id_tasks.append(
-                    tg.create_task(api._async_get_study_id(client, pdc_study_id=study))
+                    tg.create_task(api.async_get_study_id(pdc_study_id=study, client=client))
                 )
         study_ids = {task.result(): pdc_id for pdc_id, task in zip(pdc_study_ids, study_id_tasks)}
 
@@ -193,16 +190,16 @@ async def download_metadata(pdc_study_ids):
         async with asyncio.TaskGroup() as tg:
             for study in study_ids:
                 study_metadata_tasks.append(
-                    tg.create_task(api._async_get_study_metadata(client, study_id=study))
+                    tg.create_task(api.async_get_study_metadata(study_id=study, client=client))
                 )
                 file_tasks.append(
-                    tg.create_task(api._async_get_study_raw_files(client, study))
+                    tg.create_task(api.async_get_study_raw_files(study, client=client))
                 )
                 aliquot_tasks.append(
-                    tg.create_task(api._async_get_study_aliquots(client, study))
+                    tg.create_task(api.async_get_study_aliquots(study, client=client))
                 )
                 case_tasks.append(
-                    tg.create_task(api._async_get_study_cases(client, study))
+                    tg.create_task(api.async_get_study_cases(study, client=client))
                 )
 
     study_metadata = [task.result() for task in study_metadata_tasks]
@@ -222,6 +219,7 @@ async def download_metadata(pdc_study_ids):
 
 
 def filter_old_data(test_data):
+    ''' Remove studies from old data which are not in new data. '''
     data = test_data.copy()
 
     # filter Study metadata
