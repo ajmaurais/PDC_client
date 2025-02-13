@@ -62,9 +62,9 @@ async def _async_get_study_id(client, pdc_study_id, url=BASE_URL, **kwargs):
     return None
 
 
-async def async_get_study_id(pdc_study_id, **kwargs):
+async def async_get_study_id(pdc_study_id, verify=True, **kwargs):
     ''' async version of get_study_id '''
-    async with httpx.AsyncClient() as client:
+    async with httpx.AsyncClient(verify=verify) as client:
         return await _async_get_study_id(client, pdc_study_id, **kwargs)
 
 
@@ -126,8 +126,8 @@ async def _async_get_study_metadata(client, pdc_study_id=None, study_id=None, ur
     raise RuntimeError('Could not find latest study for pdc_study_id!')
 
 
-async def async_get_study_metadata(pdc_study_id=None, study_id=None, **kwargs):
-    async with httpx.AsyncClient() as client:
+async def async_get_study_metadata(pdc_study_id=None, study_id=None, verify=True, **kwargs):
+    async with httpx.AsyncClient(verify=True) as client:
         return await _async_get_study_metadata(client,
                                                pdc_study_id=pdc_study_id,
                                                study_id=study_id,

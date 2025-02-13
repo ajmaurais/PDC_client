@@ -4,7 +4,7 @@ import sys
 import os
 from datetime import datetime
 
-from . import submodules
+from .submodules import api, io
 
 SUBCOMMANDS = {'studyID', 'PDCStudyID', 'studyName',
                'metadata', 'metadataToSky',
@@ -57,14 +57,14 @@ Available commands:
 
     def studyID(self, start=2):
         parser = argparse.ArgumentParser(description=Main.STUDY_ID_DESCRIPTION)
-        parser.add_argument('-u', '--baseUrl', default=submodules.api.BASE_URL,
-                            help=f'The base URL for the PDC API. {submodules.api.BASE_URL} is the default.')
+        parser.add_argument('-u', '--baseUrl', default=api.BASE_URL,
+                            help=f'The base URL for the PDC API. {api.BASE_URL} is the default.')
         parser.add_argument('--skipVerify', default=False, action='store_true',
                             help='Skip ssl verification?')
         parser.add_argument('pdc_study_id')
         args = parser.parse_args(self.argv[start:])
-        study_id = submodules.api.study_id(args.pdc_study_id, args.baseUrl,
-                                           verify=not args.skipVerify)
+        study_id = api.get_study_id(args.pdc_study_id, url=args.baseUrl,
+                                    verify=not args.skipVerify)
         if study_id is None:
             sys.stderr.write('ERROR: No study found matching study_id!\n')
             sys.exit(1)
@@ -73,31 +73,31 @@ Available commands:
 
     def PDCStudyID(self, start=2):
         parser = argparse.ArgumentParser(description=Main.PDC_STUDY_ID_DESCRIPTION)
-        parser.add_argument('-u', '--baseUrl', default=submodules.api.BASE_URL,
-                            help=f'The base URL for the PDC API. {submodules.api.BASE_URL} is the default.')
+        parser.add_argument('-u', '--baseUrl', default=api.BASE_URL,
+                            help=f'The base URL for the PDC API. {api.BASE_URL} is the default.')
         parser.add_argument('--skipVerify', default=False, action='store_true',
                             help='Skip ssl verification?')
         parser.add_argument('study_id')
         args = parser.parse_args(self.argv[start:])
-        pdc_study_id = submodules.api.pdc_study_id(args.study_id, args.baseUrl,
-                                                   verify=not args.skipVerify)
+        pdc_study_id = api.get_pdc_study_id(args.study_id, url=args.baseUrl,
+                                            verify=not args.skipVerify)
         sys.stdout.write(f'{pdc_study_id}\n')
 
 
     def studyName(self, start=2):
         parser = argparse.ArgumentParser(description=Main.STUDY_NAME_DESCRIPTION)
-        parser.add_argument('-u', '--baseUrl', default=submodules.api.BASE_URL,
-                            help=f'The base URL for the PDC API. {submodules.api.BASE_URL} is the default.')
+        parser.add_argument('-u', '--baseUrl', default=api.BASE_URL,
+                            help=f'The base URL for the PDC API. {api.BASE_URL} is the default.')
         parser.add_argument('--skipVerify', default=False, action='store_true',
                             help='Skip ssl verification?')
         parser.add_argument('--normalize', default=False, action='store_true',
                             help='Remove special characters from study name so it a valid file name.')
         parser.add_argument('study_id')
         args = parser.parse_args(self.argv[start:])
-        study_name = submodules.api.study_name(args.study_id, args.baseUrl,
-                                               verify=not args.skipVerify)
+        study_name = api.get_study_name(args.study_id, url=args.baseUrl,
+                                        verify=not args.skipVerify)
         if args.normalize:
-            study_name = submodules.io.normalize_fname(study_name)
+            study_name = io.normalize_fname(study_name)
 
         sys.stdout.write(f'{study_name}\n')
 
@@ -110,8 +110,8 @@ Available commands:
                             help='The number of files to get metadata for. Default is all files in study')
         parser.add_argument('-o', '--ofname', default='study_metadata',
                             help='Output base name.')
-        parser.add_argument('-u', '--baseUrl', default=submodules.api.BASE_URL,
-                            help=f'The base URL for the PDC API. {submodules.api.BASE_URL} is the default.')
+        parser.add_argument('-u', '--baseUrl', default=api.BASE_URL,
+                            help=f'The base URL for the PDC API. {api.BASE_URL} is the default.')
         parser.add_argument('--skipVerify', default=False, action='store_true',
                             help='Skip ssl verification?')
         parser.add_argument('-a', '--skylineAnnotations', default=False, action='store_true',
@@ -120,17 +120,17 @@ Available commands:
         args = parser.parse_args(self.argv[start:])
 
         ofname = f'{args.ofname}.{args.format}'
-        data = submodules.api.metadata(args.study_id, url=args.baseUrl, n_files=args.nFiles,
-                                       verify=not args.skipVerify)
+        data = api.metadata(args.study_id, url=args.baseUrl, n_files=args.nFiles,
+                            verify=not args.skipVerify)
 
         if data is None:
             sys.exit(1)
         if len(data) == 0:
             sys.stderr.write('ERROR: Could not find any data associated with study!\n')
             sys.exit(1)
-        submodules.io.writeFileMetadata(data, ofname, format=args.format)
+        io.writeFileMetadata(data, ofname, format=args.format)
         if args.skylineAnnotations:
-            submodules.io.writeSkylineAnnotations(data, f'{args.ofname}_annotations.csv')
+            io.writeSkylineAnnotations(data, f'{args.ofname}_annotations.csv')
 
 
     def metadataToSky(self, start=2):
@@ -148,9 +148,9 @@ Available commands:
             input_format = os.path.splitext(args.metadata_file)[1][1:]
 
         with open(args.metadata_file, 'r') as outF:
-            data = submodules.io.readFileMetadata(outF, input_format)
+            data = io.readFileMetadata(outF, input_format)
 
-        submodules.io.writeSkylineAnnotations(data, 'skyline_annotations.csv')
+        io.writeSkylineAnnotations(data, 'skyline_annotations.csv')
 
 
     def file(self, start=2):
@@ -170,7 +170,7 @@ Available commands:
         args = parser.parse_args(self.argv[start:])
 
         if args.ofname is None:
-            ofname = submodules.io.fileBasename(args.url)
+            ofname = io.fileBasename(args.url)
             if ofname is None:
                 sys.stderr.write('ERROR: Could not determine output file name!\n')
                 sys.exit(1)
@@ -180,7 +180,7 @@ Available commands:
         remove_old = False
         if os.path.isfile(ofname):
             if not args.force and args.md5sum is not None:
-                if submodules.io.md5_sum(ofname) == args.md5sum:
+                if io.md5_sum(ofname) == args.md5sum:
                     sys.stdout.write(f'The file: "{ofname}" has already been downloaded. Use --force option to override.\n')
                     sys.exit(0)
 
@@ -191,7 +191,7 @@ Available commands:
                 old_ofname = ofname
                 ofname += '_{}.tmp'.format(datetime.now().strftime("%y%m%d_%H%M%S"))
 
-        if not submodules.io.downloadFile(args.url, ofname, expected_md5=args.md5sum):
+        if not io.downloadFile(args.url, ofname, expected_md5=args.md5sum):
             sys.stderr.write(f'ERROR: Failed to download file: {ofname}\n')
             sys.exit(1)
 
