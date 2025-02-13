@@ -3,6 +3,8 @@ import json
 
 import setup_tests
 
+BASE_URL ='https://proteomic.datacommons.cancer.gov/graphql'
+
 
 def get_study_id(pdc_study_id, **kwargs):
     with open(setup_tests.STUDY_METADATA, 'r', encoding='utf-8') as inF:

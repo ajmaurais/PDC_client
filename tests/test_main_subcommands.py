@@ -14,6 +14,21 @@ TEST_PDC_STUDY_ID = 'PDC000504'
 
 
 class TestStudySubcommands(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.use_dummy_api = os.getenv('USE_DUMMY_API', 'False').lower() == 'true'
+
+        if cls.use_dummy_api:
+            cls.real_api = main.api
+            main.api = dummy_api
+
+
+    @classmethod
+    def tearDownClass(cls):
+        if cls.use_dummy_api:
+            main.api = cls.real_api
+
+
     def test_study_id(self):
         target = dummy_api.get_study_id(TEST_PDC_STUDY_ID)
 
