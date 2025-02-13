@@ -10,7 +10,7 @@ import httpx
 
 from PDC_client.submodules import api
 
-from setup_tests import STUDY_METADATA, FILE_METADATA, ALIQUOT_METADATA
+from setup_tests import STUDY_METADATA, FILE_METADATA, ALIQUOT_METADATA, CASE_METADATA
 
 STUDIES = ['PDC000504', 'PDC000341', 'PDC000414', 'PDC000464',
            'PDC000110']
@@ -172,9 +172,11 @@ def update_test_data(files, color=True):
 
 
 async def download_metadata(pdc_study_ids):
-    # download all study_ids for pdc_study_ids
+    ''' download all study_ids for pdc_study_ids '''
 
-    client_limits = httpx.Limits(max_connections=20, max_keepalive_connections=10, keepalive_expiry=5)
+    client_limits = httpx.Limits(max_connections=20,
+                                 max_keepalive_connections=10,
+                                 keepalive_expiry=5)
     async with httpx.AsyncClient(timeout=30, limits=client_limits) as client:
         study_id_tasks = list()
         async with asyncio.TaskGroup() as tg:
@@ -187,16 +189,20 @@ async def download_metadata(pdc_study_ids):
         study_metadata_tasks = list()
         file_tasks = list()
         aliquot_tasks = list()
+        case_tasks = list()
         async with asyncio.TaskGroup() as tg:
             for study in study_ids:
                 study_metadata_tasks.append(
                     tg.create_task(api._async_get_study_metadata(client, study_id=study))
                 )
                 file_tasks.append(
-                    tg.create_task(api._async_get_raw_files(client, study))
+                    tg.create_task(api._async_get_study_raw_files(client, study))
                 )
                 aliquot_tasks.append(
                     tg.create_task(api._async_get_study_aliquots(client, study))
+                )
+                case_tasks.append(
+                    tg.create_task(api._async_get_study_cases(client, study))
                 )
 
     study_metadata = [task.result() for task in study_metadata_tasks]
@@ -204,13 +210,15 @@ async def download_metadata(pdc_study_ids):
                  for study, task in zip(study_ids.keys(), file_tasks)}
     aliquots = {study_ids[study]: task.result()
                 for study, task in zip(study_ids.keys(), aliquot_tasks)}
+    cases = {study_ids[study]: task.result()
+             for study, task in zip(study_ids.keys(), case_tasks)}
 
     # remove url slot from file metadata because the urls are temporary
     for study in raw_files:
         for i in range(len(raw_files[study])):
             raw_files[study][i].pop('url')
 
-    return study_metadata, raw_files, aliquots
+    return study_metadata, raw_files, aliquots, cases
 
 
 def filter_old_data(test_data):
@@ -227,10 +235,15 @@ def filter_old_data(test_data):
         data['File metadata'][1] = {k: v for k, v in data['File metadata'][1].items()
                                     if k in data['File metadata'][0]}
 
-    # filter File metadata
+    # filter Aliquot metadata
     if isinstance(data['Aliquot metadata'][1], dict):
         data['Aliquot metadata'][1] = {k: v for k, v in data['Aliquot metadata'][1].items()
                                        if k in data['Aliquot metadata'][0]}
+
+    # filter Case metadata
+    if isinstance(data['Case metadata'][1], dict):
+        data['Case metadata'][1] = {k: v for k, v in data['Case metadata'][1].items()
+                                    if k in data['Case metadata'][0]}
 
     return data
 
@@ -252,11 +265,12 @@ def main():
     all_studies = len(args.pdc_study_ids) == 0
     pdc_study_ids = STUDIES if all_studies else args.pdc_study_ids
 
-    test_studies, test_files, test_aliquots, = asyncio.run(download_metadata(pdc_study_ids))
+    test_studies, test_files, test_aliquots, test_cases = asyncio.run(download_metadata(pdc_study_ids))
 
     test_data = {'Study metadata': [test_studies, STUDY_METADATA],
                  'File metadata': [test_files, FILE_METADATA],
-                 'Aliquot metadata': [test_aliquots, ALIQUOT_METADATA]}
+                 'Aliquot metadata': [test_aliquots, ALIQUOT_METADATA],
+                 'Case metadata': [test_cases, CASE_METADATA]}
 
     if args.write:
         update_test_data(test_data, color=not args.plain)
