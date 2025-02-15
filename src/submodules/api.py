@@ -25,8 +25,8 @@ async def _post(client: AsyncClient, query: str, url: str, retries: int=5) -> di
         response = await client.post(url, json={'query': query})
         if response.status_code == 200:
             return response.json()
-        if response.status_code >= 400 and response.status_code < 500:
-            break
+        # if response.status_code >= 400 and response.status_code < 500:
+        #     break
     sys.stderr.write(f'url:\n"{url}?{query}"\n')
     raise RuntimeError(f'Failed with response code {response.status_code}!')
 
@@ -37,8 +37,8 @@ async def _get(client: AsyncClient, query:str , url: str, retries: int=5) -> dic
         response = await client.get(f'{url}?{query}')
         if response.status_code == 200:
             return response.json()
-        if response.status_code >= 400 and response.status_code < 500:
-            break
+        # if response.status_code >= 400 and response.status_code < 500:
+        #     break
     sys.stderr.write(f'url:\n"{url}?{query}"\n')
     raise RuntimeError(f'Failed with response code {response.status_code}!')
 
@@ -334,8 +334,12 @@ async def _get_paginated_data(query_f: Callable[[str, str, int], str],
 
 
 async def async_get_study_aliquots(study_id: str,
-                                   client=None, verify=True, timeout: float=CLIENT_TIMEOUT,
-                                   url=BASE_URL, page_limit=100, **kwargs):
+                                   file_ids: list|None=None,
+                                   client: AsyncClient|None=None,
+                                   verify: bool=True,
+                                   timeout: float=CLIENT_TIMEOUT,
+                                   url: str=BASE_URL,
+                                   page_limit: int=100, **kwargs) -> list:
     '''
     Async version of get_study_aliquots.
 
@@ -343,6 +347,8 @@ async def async_get_study_aliquots(study_id: str,
     ----------
     study_id: str
         The study ID.
+    file_ids: list
+        A list of file IDs to retreive data for. If None, all the files in the study are used.
     client: httpx.AsyncClient
         The client to use for get requests.
         If None a client is instantiated in the function.
@@ -401,13 +407,14 @@ async def async_get_study_aliquots(study_id: str,
                                     client=client, page_limit=page_limit, **kwargs)
             )
 
-        file_id_data = await _post(client, file_id_query, url, **kwargs)
+        if file_ids is not None:
+            file_id_data = await _post(client, file_id_query, url, **kwargs)
 
-        if 'errors' in file_id_data:
-            log_post_errors(file_id_data['errors'])
-            return None
+            if 'errors' in file_id_data:
+                log_post_errors(file_id_data['errors'])
+                return None
 
-        file_ids = [f['file_id'] for f in file_id_data['data']['filesPerStudy']]
+            file_ids = [f['file_id'] for f in file_id_data['data']['filesPerStudy']]
 
         aliquot_id_tasks = list()
         async with asyncio.TaskGroup() as tg:
