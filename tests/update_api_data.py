@@ -6,11 +6,11 @@ import json
 import difflib
 import subprocess
 import asyncio
-import httpx
-
-from PDC_client.submodules import api
 
 from setup_tests import STUDY_METADATA, FILE_METADATA, ALIQUOT_METADATA, CASE_METADATA
+
+from PDC_client.submodules.api import Client
+
 
 STUDIES = ['PDC000504', 'PDC000341', 'PDC000414', 'PDC000464',
            'PDC000110']
@@ -174,12 +174,12 @@ def update_test_data(files, color=True):
 async def download_metadata(pdc_study_ids):
     ''' download all study_ids for pdc_study_ids '''
 
-    async with httpx.AsyncClient(timeout=30, limits=api.ASYNC_CLIENT_LIMITS) as client:
+    async with Client(timeout=30) as client:
         study_id_tasks = list()
         async with asyncio.TaskGroup() as tg:
             for study in pdc_study_ids:
                 study_id_tasks.append(
-                    tg.create_task(api.async_get_study_id(pdc_study_id=study, client=client))
+                    tg.create_task(client.async_get_study_id(pdc_study_id=study))
                 )
         study_ids = {task.result(): pdc_id for pdc_id, task in zip(pdc_study_ids, study_id_tasks)}
 
@@ -190,16 +190,16 @@ async def download_metadata(pdc_study_ids):
         async with asyncio.TaskGroup() as tg:
             for study in study_ids:
                 study_metadata_tasks.append(
-                    tg.create_task(api.async_get_study_metadata(study_id=study, client=client))
+                    tg.create_task(client.async_get_study_metadata(study_id=study))
                 )
                 file_tasks.append(
-                    tg.create_task(api.async_get_study_raw_files(study, client=client))
+                    tg.create_task(client.async_get_study_raw_files(study))
                 )
                 aliquot_tasks.append(
-                    tg.create_task(api.async_get_study_aliquots(study, client=client))
+                    tg.create_task(client.async_get_study_aliquots(study))
                 )
                 case_tasks.append(
-                    tg.create_task(api.async_get_study_cases(study, client=client))
+                    tg.create_task(client.async_get_study_cases(study))
                 )
 
     study_metadata = [task.result() for task in study_metadata_tasks]

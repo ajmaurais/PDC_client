@@ -1,6 +1,7 @@
 # things I added
 data/*
 id_rsa_*
+.vscode/*
 
 __pycache__/
 *.py[cod]
