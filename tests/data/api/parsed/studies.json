@@ -9,24 +9,6 @@
     "study_name": "CPTAC PDAC BioTExt - Proteome"
   },
   {
-    "aliquots_count": 178,
-    "analytical_fraction": "Proteome",
-    "cases_count": 105,
-    "experiment_type": "Label Free",
-    "pdc_study_id": "PDC000341",
-    "study_id": "35a494ec-87f3-41b5-8e4e-f712096440a0",
-    "study_name": "CPTAC PDA Discovery Study - DIA Proteome"
-  },
-  {
-    "aliquots_count": 132,
-    "analytical_fraction": "Proteome",
-    "cases_count": 40,
-    "experiment_type": "Label Free",
-    "pdc_study_id": "PDC000414",
-    "study_id": "6b9fcc3b-d4f6-4969-86f4-d25fb481f927",
-    "study_name": "CPTAC CCRCC Confirmatory Study - Intratumor Heterogeneity - DIA Proteome"
-  },
-  {
     "aliquots_count": 63,
     "analytical_fraction": "Proteome",
     "cases_count": 44,
