@@ -1,9 +1,8 @@
 
-
 import re
 import asyncio
 import sys
-from typing import Callable
+from typing import Callable, Optional
 
 from httpx import Limits, AsyncClient
 
@@ -15,20 +14,27 @@ BASE_URL ='https://proteomic.datacommons.cancer.gov/graphql'
 FILE_METADATA_KEYS = ['file_id', 'file_name', 'file_submitter_id', 'md5sum', 'file_size',
                     'data_category', 'file_type', 'file_format', 'url']
 
-class Query():
+class Client():
     def __init__(self,
                  url: str = BASE_URL,
-                 timeout: int = CLIENT_TIMEOUT,
-                 verify: bool = True,
-                 max_connections: int = 1,
-                 max_keepalive_connections: int = 5,
-                 keepalive_expiry: int = 5,
-                 request_retries: int = 5):
+                 timeout: Optional[int] = CLIENT_TIMEOUT,
+                 verify: Optional[bool] = True,
+                 max_connections: Optional[int] = 5,
+                 max_keepalive_connections: Optional[int] = 5,
+                 keepalive_expiry: Optional[int] = 5,
+                 request_retries: Optional[int] = 5):
 
         self.url = url
         self.request_retries = request_retries
-        self.loop = asyncio.new_event_loop()
 
+        try:
+            self.loop = asyncio.get_running_loop()
+            self.initialized_loop = False
+        except RuntimeError:
+            self.loop = asyncio.new_event_loop()
+            self.initialized_loop = True
+
+        self.initialized_client = True
         self.client = AsyncClient(limits=Limits(max_connections=max_connections,
                                                 max_keepalive_connections=max_keepalive_connections,
                                                 keepalive_expiry=keepalive_expiry),
@@ -36,8 +42,40 @@ class Query():
 
 
     def __del__(self):
-        self.loop.run_until_complete(self.client.aclose())
-        self.loop.close()
+        if self.initialized_loop:
+            self.loop.close()
+
+
+    def __enter__(self):
+        return self
+
+
+    def __exit__(self, exc_type, exc, tb):
+        try:
+            self.loop.run_until_complete(self.client.aclose())
+        except RuntimeError:
+            asyncio.run(self.client.aclose())
+        if self.initialized_loop:
+            self.loop.close()
+
+
+    async def __aenter__(self):
+        return self
+
+
+    async def __aexit__(self, exc_type, exc, tb):
+        try:
+            await self.client.aclose()
+        except RuntimeError:
+            asyncio.run(self.client.aclose())
+        if self.initialized_loop:
+            self.loop.close()
+
+
+    def __await__(self):
+        async def closure():
+            return self
+        return closure().__await__()
 
 
     async def _post(self, query: str) -> dict:

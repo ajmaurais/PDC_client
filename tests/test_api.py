@@ -63,14 +63,6 @@ class TestFileLevel(unittest.TestCase):
         cls.studies = {study.pop('pdc_study_id'): study for study in study_list}
     
 
-    def setUp(self):
-        self.client = api.Client()
-
-
-    def tearDown(self):
-        del self.client
-
-
     @staticmethod
     def file_list_to_dict(file_list):
         file_dict = dict()
@@ -81,29 +73,31 @@ class TestFileLevel(unittest.TestCase):
 
 
     def test_data(self):
-        for study, study_files in self.files.items():
-            test_study_files = self.client.get_study_raw_files(self.studies[study]['study_id'])
+        with api.Client() as client:
+            for study, study_files in self.files.items():
+                test_study_files = client.get_study_raw_files(self.studies[study]['study_id'])
 
-            test_study_files = self.file_list_to_dict(test_study_files)
-            study_files = self.file_list_to_dict(study_files)
+                test_study_files = self.file_list_to_dict(test_study_files)
+                study_files = self.file_list_to_dict(study_files)
 
-            self.assertEqual(len(test_study_files), len(study_files))
-            for file_id, data in study_files.items():
-                self.assertIn(file_id, test_study_files)
+                self.assertEqual(len(test_study_files), len(study_files))
+                for file_id, data in study_files.items():
+                    self.assertIn(file_id, test_study_files)
 
-                # make sure test data has url key then remove it
-                self.assertIn('url', test_study_files[file_id])
-                test_study_files[file_id].pop('url')
+                    # make sure test data has url key then remove it
+                    self.assertIn('url', test_study_files[file_id])
+                    test_study_files[file_id].pop('url')
 
-                # check file level data
-                self.assertDictEqual(data, test_study_files[file_id])
-                self.assertEqual(test_study_files[file_id]['data_category'], 'Raw Mass Spectra')
-                self.assertRegex(test_study_files[file_id]['md5sum'], r'^[a-f0-9]{32}$')
+                    # check file level data
+                    self.assertDictEqual(data, test_study_files[file_id])
+                    self.assertEqual(test_study_files[file_id]['data_category'], 'Raw Mass Spectra')
+                    self.assertRegex(test_study_files[file_id]['md5sum'], r'^[a-f0-9]{32}$')
 
 
     def test_invalid_study(self):
-        with self.assertLogs(level='ERROR') as cm:
-            ret = self.client.get_study_raw_files('DUMMY')
+        with api.Client() as client:
+            with self.assertLogs(level='ERROR') as cm:
+                ret = client.get_study_raw_files('DUMMY')
 
         self.assertIsNone(ret)
         self.assertTrue('API query failed with response' in cm.output[0])
@@ -113,23 +107,24 @@ class TestFileLevel(unittest.TestCase):
         random.seed(1)
         test_studies = random.sample(list(self.files.keys()), min(len(self.files), 3))
 
-        # test behavior of n_files=0
-        data = self.client.get_study_raw_files(self.studies[test_studies[0]]['study_id'], n_files=0)
-        self.assertIsInstance(data, list)
-        self.assertEqual(len(data), 0)
+        with api.Client() as client:
+            # test behavior of n_files=0
+            data = client.get_study_raw_files(self.studies[test_studies[0]]['study_id'], n_files=0)
+            self.assertIsInstance(data, list)
+            self.assertEqual(len(data), 0)
 
-        # test behavior of n_files > n_files_study
-        index = min(len(test_studies) - 1, 1)
-        n_files_study = len(self.files[test_studies[index]])
-        data = self.client.get_study_raw_files(self.studies[test_studies[index]]['study_id'],
-                                 n_files=n_files_study + 10)
-        self.assertEqual(len(data), n_files_study)
+            # test behavior of n_files > n_files_study
+            index = min(len(test_studies) - 1, 1)
+            n_files_study = len(self.files[test_studies[index]])
+            data = client.get_study_raw_files(self.studies[test_studies[index]]['study_id'],
+                                    n_files=n_files_study + 10)
+            self.assertEqual(len(data), n_files_study)
 
-        for study in test_studies:
-            n_files = len(self.files[study])
-            subset_n_files = random.randint(1, n_files - 1)
-            data = self.client.get_study_raw_files(self.studies[study]['study_id'], n_files=subset_n_files)
-            self.assertEqual(len(data), subset_n_files)
+            for study in test_studies:
+                n_files = len(self.files[study])
+                subset_n_files = random.randint(1, n_files - 1)
+                data = client.get_study_raw_files(self.studies[study]['study_id'], n_files=subset_n_files)
+                self.assertEqual(len(data), subset_n_files)
 
 
 class TestAliquotLevel(unittest.TestCase):
@@ -143,19 +138,6 @@ class TestAliquotLevel(unittest.TestCase):
         cls.studies = {study.pop('pdc_study_id'): study for study in study_list}
 
 
-    @classmethod
-    def tearDownClass(cls):
-        pass
-    
-
-    def setUp(self):
-        self.client = api.Client(timeout=30)
-
-
-    def tearDown(self):
-        del self.client
-
-
     @staticmethod
     def aliquot_list_to_dict(aliquot_list):
         aliquot_dict = dict()
@@ -166,8 +148,9 @@ class TestAliquotLevel(unittest.TestCase):
 
 
     def test_invalid_study(self):
-        with self.assertLogs(level='ERROR') as cm:
-            ret = self.client.get_study_aliquots('DUMMY')
+        with api.Client() as client:
+            with self.assertLogs(level='ERROR') as cm:
+                ret = client.get_study_aliquots('DUMMY')
 
         self.assertIsNone(ret)
         self.assertTrue('API query failed with response' in cm.output[0])
@@ -181,8 +164,9 @@ class TestAliquotLevel(unittest.TestCase):
 
         study_aliquots = self.aliquot_list_to_dict(study_aliquots)
         
-        test_study_aliquots = self.client.get_study_aliquots(self.studies[study]['study_id'],
-                                                             page_limit=page_len)
+        with api.Client() as client:
+            test_study_aliquots = client.get_study_aliquots(self.studies[study]['study_id'],
+                                                                page_limit=page_len)
 
         self.assertEqual(len(test_study_aliquots), self.studies[study]['aliquots_count'])
 
@@ -191,8 +175,8 @@ class TestAliquotLevel(unittest.TestCase):
         self.assertDictEqual(test_study_aliquots, study_aliquots)
 
 
-    def test_file_ids_arg(self):
-        pass
+    # def test_file_ids_arg(self):
+    #     pass
 
 
 class TestCaseLevel(unittest.TestCase):
@@ -206,14 +190,6 @@ class TestCaseLevel(unittest.TestCase):
         cls.studies = {study.pop('pdc_study_id'): study for study in study_list}
     
 
-    def setUp(self):
-        self.client = api.Client(timeout=20)
-
-
-    def tearDown(self):
-        del self.client
-
-
     @staticmethod
     def case_list_to_dict(case_list):
         case_dict = dict()
@@ -224,21 +200,23 @@ class TestCaseLevel(unittest.TestCase):
 
 
     def test_invalid_study(self):
-        with self.assertLogs(level='ERROR') as cm:
-            ret = self.client.get_study_cases('DUMMY')
+        with api.Client() as client:
+            with self.assertLogs(level='ERROR') as cm:
+                ret = client.get_study_cases('DUMMY')
 
         self.assertIsNone(ret)
         self.assertTrue("Invalid query for study_id: '" in cm.output[0])
 
 
     def test_data(self):
-        
         page_limit = 100
-        for study, study_cases in self.cases.items():
-            study_cases = self.case_list_to_dict(study_cases)
-            
-            test_study_cases = self.client.get_study_cases(self.studies[study]['study_id'],
-                                                           page_limit=page_limit)
-            self.assertEqual(len(test_study_cases), self.studies[study]['cases_count'])
-            test_study_cases = self.case_list_to_dict(test_study_cases)
-            self.assertDictEqual(test_study_cases, study_cases)
+
+        with api.Client() as client:
+            for study, study_cases in self.cases.items():
+                study_cases = self.case_list_to_dict(study_cases)
+                
+                test_study_cases = client.get_study_cases(self.studies[study]['study_id'],
+                                                          page_limit=page_limit)
+                self.assertEqual(len(test_study_cases), self.studies[study]['cases_count'])
+                test_study_cases = self.case_list_to_dict(test_study_cases)
+                self.assertDictEqual(test_study_cases, study_cases)
