@@ -7,13 +7,19 @@ import difflib
 import subprocess
 import asyncio
 
-from setup_tests import STUDY_METADATA, FILE_METADATA, ALIQUOT_METADATA, CASE_METADATA
+from setup_tests import STUDY_METADATA, STUDY_CATALOG
+from setup_tests import FILE_METADATA, ALIQUOT_METADATA, CASE_METADATA
 
 from PDC_client.submodules.api import Client
 
 
-STUDIES = ['PDC000504', 'PDC000341', 'PDC000414', 'PDC000464',
-           'PDC000110']
+STUDIES = ['PDC000504', 'PDC000464', 'PDC000110']
+
+ENDPOINTS = {'study': 'Study metadata',
+             'studyCatalog': 'Study catalog',
+             'file': 'File metadata',
+             'aliquot': 'Aliquot metadata',
+             'case': 'Case metadata'}
 
 # ANSI color codes
 RED = '\033[31m'    # Red for removals (-)
@@ -171,7 +177,7 @@ def update_test_data(files, color=True):
     sys.stdout.write(f'{n_deletions} deletion{"s" if n_deletions > 1 else ""}(-)\n')
 
 
-async def download_metadata(pdc_study_ids):
+async def download_metadata(pdc_study_ids, endpoints):
     ''' download all study_ids for pdc_study_ids '''
 
     async with Client(timeout=30) as client:
@@ -184,38 +190,67 @@ async def download_metadata(pdc_study_ids):
         study_ids = {task.result(): pdc_id for pdc_id, task in zip(pdc_study_ids, study_id_tasks)}
 
         study_metadata_tasks = list()
+        study_catalog_tasks = list()
         file_tasks = list()
         aliquot_tasks = list()
         case_tasks = list()
         async with asyncio.TaskGroup() as tg:
             for study in study_ids:
-                study_metadata_tasks.append(
-                    tg.create_task(client.async_get_study_metadata(study_id=study))
-                )
-                file_tasks.append(
-                    tg.create_task(client.async_get_study_raw_files(study))
-                )
-                aliquot_tasks.append(
-                    tg.create_task(client.async_get_study_aliquots(study))
-                )
-                case_tasks.append(
-                    tg.create_task(client.async_get_study_cases(study))
-                )
+                if 'study' in endpoints:
+                    study_metadata_tasks.append(
+                        tg.create_task(client.async_get_study_metadata(study_id=study))
+                    )
+                if 'studyCatalog' in endpoints:
+                    study_catalog_tasks.append(
+                        tg.create_task(client.async_get_study_catalog(study_ids[study]))
+                    )
+                if 'file' in endpoints:
+                    file_tasks.append(
+                        tg.create_task(client.async_get_study_raw_files(study))
+                    )
+                if 'aliquot' in endpoints:
+                    aliquot_tasks.append(
+                        tg.create_task(client.async_get_study_aliquots(study))
+                    )
+                if 'case' in endpoints:
+                    case_tasks.append(
+                        tg.create_task(client.async_get_study_cases(study))
+                    )
 
-    study_metadata = [task.result() for task in study_metadata_tasks]
-    raw_files = {study_ids[study]: task.result()
-                 for study, task in zip(study_ids.keys(), file_tasks)}
-    aliquots = {study_ids[study]: task.result()
-                for study, task in zip(study_ids.keys(), aliquot_tasks)}
-    cases = {study_ids[study]: task.result()
-             for study, task in zip(study_ids.keys(), case_tasks)}
+    study_metadata = None
+    if 'study' in endpoints:
+        study_metadata = [task.result() for task in study_metadata_tasks]
 
-    # remove url slot from file metadata because the urls are temporary
-    for study in raw_files:
-        for i in range(len(raw_files[study])):
-            raw_files[study][i].pop('url')
+    study_catalog = None
+    if 'studyCatalog' in endpoints:
+        study_catalog = {study_ids[study]: task.result()
+                         for study, task in zip(study_ids.keys(), study_catalog_tasks)}
 
-    return study_metadata, raw_files, aliquots, cases
+    raw_files = None
+    if 'file' in endpoints:
+        raw_files = {study_ids[study]: task.result()
+                    for study, task in zip(study_ids.keys(), file_tasks)}
+
+        # remove url slot from file metadata because the urls are temporary
+        for study in raw_files:
+            for i in range(len(raw_files[study])):
+                raw_files[study][i].pop('url')
+
+    aliquots = None
+    if 'aliquot' in endpoints:
+        aliquots = {study_ids[study]: task.result()
+                    for study, task in zip(study_ids.keys(), aliquot_tasks)}
+
+    cases = None
+    if 'case' in endpoints:
+        cases = {study_ids[study]: task.result()
+                for study, task in zip(study_ids.keys(), case_tasks)}
+
+    return {'study': study_metadata,
+            'studyCatalog': study_catalog,
+            'file': raw_files,
+            'aliquot': aliquots,
+            'case': cases}
 
 
 def filter_old_data(test_data):
@@ -223,25 +258,15 @@ def filter_old_data(test_data):
     data = test_data.copy()
 
     # filter Study metadata
-    if isinstance(data['Study metadata'][1], list):
-        study_ids = {study['study_id'] for study in data['Study metadata'][0]}
-        data['Study metadata'][1] = [study for study in data['Study metadata'][1]
-                                     if study['study_id'] in study_ids]
+    if 'study' in data and isinstance(data['study'][1], list):
+        study_ids = {study['study_id'] for study in data['study'][0]}
+        data['study'][1] = [study for study in data['study'][1] if study['study_id'] in study_ids]
 
     # filter File metadata
-    if isinstance(data['File metadata'][1], dict):
-        data['File metadata'][1] = {k: v for k, v in data['File metadata'][1].items()
-                                    if k in data['File metadata'][0]}
-
-    # filter Aliquot metadata
-    if isinstance(data['Aliquot metadata'][1], dict):
-        data['Aliquot metadata'][1] = {k: v for k, v in data['Aliquot metadata'][1].items()
-                                       if k in data['Aliquot metadata'][0]}
-
-    # filter Case metadata
-    if isinstance(data['Case metadata'][1], dict):
-        data['Case metadata'][1] = {k: v for k, v in data['Case metadata'][1].items()
-                                    if k in data['Case metadata'][0]}
+    for endpoint in ['file', 'aliquot', 'case']:
+        if endpoint in data and isinstance(data[endpoint][1], dict):
+            data[endpoint][1] = {k: v for k, v in data[endpoint][1].items()
+                                 if k in data[endpoint][0]}
 
     return data
 
@@ -254,21 +279,38 @@ def main():
                         help='Overwrite test files in data/api with new api data?')
     parser.add_argument('--plain', action='store_true', default=False,
                         help="Don't use colors in diff output.")
+    parser.add_argument('-e', '--endpoint', action='append',
+                        choices=list(ENDPOINTS.keys()), dest='endpoints',
+                        help='Specify which endpoints to check. If not specified, all endpoints are checked.')
     parser.add_argument('pdc_study_ids', nargs='*', default=None,
                         help='PDC study ID(s) to download new data for. '
                              'If not specified, data is downloaded for all ids in TEST_STUDIES')
 
     args = parser.parse_args()
 
+    if args.endpoints is None:
+        args.endpoints = list(ENDPOINTS.keys())
+
     all_studies = len(args.pdc_study_ids) == 0
     pdc_study_ids = STUDIES if all_studies else args.pdc_study_ids
 
-    test_studies, test_files, test_aliquots, test_cases = asyncio.run(download_metadata(pdc_study_ids))
+    api_data = asyncio.run(
+        download_metadata(pdc_study_ids, args.endpoints)
+        )
 
-    test_data = {'Study metadata': [test_studies, STUDY_METADATA],
-                 'File metadata': [test_files, FILE_METADATA],
-                 'Aliquot metadata': [test_aliquots, ALIQUOT_METADATA],
-                 'Case metadata': [test_cases, CASE_METADATA]}
+    test_data = {'study': STUDY_METADATA,
+                 'studyCatalog': STUDY_CATALOG,
+                 'file': FILE_METADATA,
+                 'aliquot': ALIQUOT_METADATA,
+                 'case': CASE_METADATA}
+
+    test_data = {key: [api_data[key], test_data[key]] for key, data in api_data.items()
+                 if data is not None}
+
+    # remove endpoints that are not specified
+    for endpoint in list(test_data.keys()):
+        if test_data[endpoint][0] is None:
+            test_data.pop(endpoint)
 
     if args.write:
         update_test_data(test_data, color=not args.plain)
@@ -289,7 +331,7 @@ def main():
 
     if len(diff_lines) == 0:
         for name in test_data:
-            sys.stdout.write(f'{name} up to date\n')
+            sys.stdout.write(f'{ENDPOINTS[name]} up to date\n')
         sys.exit(0)
 
     print_diff(diff_lines, color=not args.plain)

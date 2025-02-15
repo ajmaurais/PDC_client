@@ -20,11 +20,11 @@ class Client():
 
     Attributes
     ----------
-    url : str
+    url: str
         The base URL for the API.
-    request_retries : int
+    request_retries: int
         Number of times to retry a request in case of failure.
-    client : httpx.AsyncClient
+    client: httpx.AsyncClient
         The HTTP client for making requests.
 
     Methods
@@ -154,6 +154,40 @@ class Client():
                         stacklevel=2)
 
 
+    @staticmethod
+    def _study_catalog_query(pdc_study_id):
+        return '''query={
+        studyCatalog (pdc_study_id: "%s" acceptDUA: true){
+            versions { study_id is_latest_version }
+        }}''' % pdc_study_id
+
+
+    async def async_get_study_catalog(self, pdc_study_id: str) -> list:
+        '''
+        Get studyCatalog for a pdc_study_id.
+
+        Parameters
+        ----------
+        pdc_study_id: str
+            The PDC study ID.
+
+        Returns
+        -------
+        study_catalog: list
+            A list of dictionaries where each dictionary is a version of the study.
+        '''
+        query = self._study_catalog_query(pdc_study_id)
+        data = await self._get(query)
+
+        if len(data['data']['studyCatalog']) == 0:
+            return None
+
+        if len(data['data']['studyCatalog']) > 1:
+            raise RuntimeError('More studies than expected for pdc_study_id!')
+
+        return data['data']['studyCatalog'][0]
+
+
     async def async_get_study_id(self, pdc_study_id: str) -> str|None:
         '''
         Async version of get_study_id
@@ -168,18 +202,11 @@ class Client():
         study_id: str
             The study_id or None if no study_id could be found for pdc_study_id
         '''
-
-        query = '''query={
-            studyCatalog (pdc_study_id: "%s" acceptDUA: true){
-                versions { study_id is_latest_version }
-            }}''' % pdc_study_id
-
-        data = await self._get(query)
-
-        if len(data['data']['studyCatalog']) == 0:
+        data = await self.async_get_study_catalog(pdc_study_id)
+        if data is None:
             return None
 
-        for version in data['data']['studyCatalog'][0]['versions']:
+        for version in data['versions']:
             if version['is_latest_version'] == 'yes':
                 return version['study_id']
         return None
@@ -361,59 +388,6 @@ class Client():
         return data
 
 
-    # async def async_get_file_metadata(file_id: str|None=None,
-    #                                 study_id: str|None=None,
-    #                                 client: AsyncClient|None=None,
-    #                                 verify: bool=True,
-    #                                 timeout: float=CLIENT_TIMEOUT,
-    #                                 url: str=BASE_URL, **kwargs) -> dict:
-    #     '''
-    #     Async version of get_file_metadata.
-
-    #     Parameters
-    #     ----------
-    #     file_id: str
-    #         The file ID.
-    #     client: httpx.AsyncClient
-    #         The client to use for get requests.
-    #         If None a client is instantiated in the function.
-    #     verify: bool
-    #         Should SSL verification be disabled for requests?
-    #     timeout: float
-    #         Request timeout.
-    #     url: str
-    #         The base URL to use for get requests.
-    #     kwargs: dict
-    #         Additional kwargs passed to _get
-
-    #     Returns
-    #     -------
-    #     metadata: dict
-    #         The metadata for the file or None if no metadata could be found for file_id.
-    #     '''
-
-    #     if study_id is not None:
-    #         _id = study_id
-    #         id_name = 'file_id'
-    #     elif file_id is not None:
-    #         _id = file_id
-    #         id_name = 'file_id'
-    #     else:
-    #         raise ValueError('Both file_id and study_id cannot be None!')
-
-    #     # query to get aliquot IDs associated with each file.
-    #     query = '''query={
-    #             fileMetadata (%s: "%s" acceptDUA: true) {
-    #                 file_id aliquots { aliquot_id } }
-    #                 }''' % (id_name, _id)
-
-
-    # def get_file_metadata(file_id: str, **kwargs) -> dict:
-    #     '''
-    #     '''
-    #     return asyncio.run(async_get_study_metadata(file_id, **kwargs))
-
-
     @staticmethod
     def _case_aliquot_query(study_id: str, offset: int, limit: int):
         '''query to get study, cases, samples, and aliquots'''
@@ -461,7 +435,7 @@ class Client():
         file_ids: list
             A list of file IDs to retreive data for. If None, all the files in the study are used.
         page_limit: int
-            Page limit passed to _get_paginated_data.
+            Page size limit passed to _get_paginated_data.
 
         Returns
         -------
