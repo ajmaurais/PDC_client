@@ -15,6 +15,46 @@ FILE_METADATA_KEYS = ['file_id', 'file_name', 'file_submitter_id', 'md5sum', 'fi
                     'data_category', 'file_type', 'file_format', 'url']
 
 class Client():
+    '''
+    Client class for interacting with the PDC API.
+
+    Attributes
+    ----------
+    url : str
+        The base URL for the API.
+    request_retries : int
+        Number of times to retry a request in case of failure.
+    client : httpx.AsyncClient
+        The HTTP client for making requests.
+
+    Methods
+    -------
+    async async_get_study_id(pdc_study_id: str) -> str|None:
+        Asynchronously gets the study ID for a given PDC study ID.
+    get_study_id(pdc_study_id: str) -> str|None:
+        Gets the study ID for a given PDC study ID.
+    async async_get_study_metadata(pdc_study_id: str|None=None, study_id: str|None=None) -> list|None:
+        Asynchronously gets the metadata for a study.
+    get_study_metadata(pdc_study_id: str|None=None, study_id: Optional[str]=None) -> list|None
+        Gets the metadata for a study.
+    get_pdc_study_id(study_id: str) -> str:
+        Gets the PDC study ID for a given study ID.
+    get_study_name(study_id: str) -> str:
+        Gets the study name for a given study ID.
+    async async_get_study_aliquots(study_id: str, file_ids: Optional[list]=None, page_limit: int=100) -> list:
+        Asynchronously gets the aliquots for a study.
+    get_study_aliquots(study_id: str, **kwargs) -> list|None:
+        Gets the aliquots for a study.
+    async async_get_study_cases(study_id: str, page_limit: int=100) -> list|None:
+        Asynchronously gets the cases for a study.
+    get_study_cases(study_id: str, **kwargs) -> list|None:
+        Gets the cases for a study.
+    async async_get_study_raw_files(study_id: str, n_files: Optional[int]=None) -> list|None:
+        Asynchronously gets the raw files for a study.
+    get_study_raw_files(study_id: str, **kwargs) -> list|None:
+        Gets the raw files for a study.
+    '''
+
     def __init__(self,
                  url: str = BASE_URL,
                  timeout: Optional[int] = CLIENT_TIMEOUT,
@@ -28,13 +68,12 @@ class Client():
         self.request_retries = request_retries
 
         try:
-            self.loop = asyncio.get_running_loop()
-            self.initialized_loop = False
+            self._loop = asyncio.get_running_loop()
+            self._initialized_loop = False
         except RuntimeError:
-            self.loop = asyncio.new_event_loop()
-            self.initialized_loop = True
+            self._loop = asyncio.new_event_loop()
+            self._initialized_loop = True
 
-        self.initialized_client = True
         self.client = AsyncClient(limits=Limits(max_connections=max_connections,
                                                 max_keepalive_connections=max_keepalive_connections,
                                                 keepalive_expiry=keepalive_expiry),
@@ -42,8 +81,8 @@ class Client():
 
 
     def __del__(self):
-        if self.initialized_loop:
-            self.loop.close()
+        if self._initialized_loop:
+            self._loop.close()
 
 
     def __enter__(self):
@@ -52,11 +91,11 @@ class Client():
 
     def __exit__(self, exc_type, exc, tb):
         try:
-            self.loop.run_until_complete(self.client.aclose())
+            self._loop.run_until_complete(self.client.aclose())
         except RuntimeError:
             asyncio.run(self.client.aclose())
-        if self.initialized_loop:
-            self.loop.close()
+        if self._initialized_loop:
+            self._loop.close()
 
 
     async def __aenter__(self):
@@ -68,8 +107,8 @@ class Client():
             await self.client.aclose()
         except RuntimeError:
             asyncio.run(self.client.aclose())
-        if self.initialized_loop:
-            self.loop.close()
+        if self._initialized_loop:
+            self._loop.close()
 
 
     def __await__(self):
@@ -162,7 +201,18 @@ class Client():
         study_id: str
             The study_id or None if no study_id could be found for pdc_study_id
         '''
-        return self.loop.run_until_complete(self.async_get_study_id(pdc_study_id))
+        return self._loop.run_until_complete(self.async_get_study_id(pdc_study_id))
+
+
+    @staticmethod
+    def _study_metadata_query(id_name, query_id):
+        return '''query={
+            study (%s: "%s" acceptDUA: true) {
+                study_id pdc_study_id study_name
+                analytical_fraction experiment_type
+                cases_count aliquots_count
+            }
+        } ''' % (id_name, query_id)
 
 
     async def async_get_study_metadata(self, pdc_study_id: str|None=None,
@@ -196,18 +246,7 @@ class Client():
         else:
             raise ValueError('Both pdc_study_id and study_id cannot be None!')
 
-        study_query = '''query={
-                study (%s: "%s" acceptDUA: true) {
-                    study_id
-                    pdc_study_id
-                    study_name
-                    analytical_fraction
-                    experiment_type
-                    cases_count
-                    aliquots_count
-                }
-            } ''' % (id_name, _id)
-
+        study_query = self._study_metadata_query(id_name, _id)
         data = await asyncio.create_task(self._get(study_query))
 
         if study_id_task is None:
@@ -227,7 +266,7 @@ class Client():
 
 
     def get_study_metadata(self, pdc_study_id: str|None=None,
-                           study_id: str|None=None, **kwargs) -> dict|None:
+                           study_id: Optional[str]=None) -> Optional[dict]:
         '''
         Parameters
         ----------
@@ -241,7 +280,7 @@ class Client():
         metadata: dict
             The metadata or None if no metadata could be found for study_id
         '''
-        return self.loop.run_until_complete(
+        return self._loop.run_until_complete(
             self.async_get_study_metadata(pdc_study_id=pdc_study_id, study_id=study_id)
             )
 
@@ -375,8 +414,42 @@ class Client():
     #     return asyncio.run(async_get_study_metadata(file_id, **kwargs))
 
 
+    @staticmethod
+    def _case_aliquot_query(study_id: str, offset: int, limit: int):
+        '''query to get study, cases, samples, and aliquots'''
+        return '''query={
+            paginatedCasesSamplesAliquots (study_id: "%s" offset: %u limit: %u) {
+                total
+                casesSamplesAliquots {
+                    case_id
+                    samples { sample_id sample_submitter_id sample_type tissue_type
+                        aliquots { aliquot_id analyte_type }
+                    }
+                }
+                pagination { count from page total pages size }
+            } }''' % (study_id, offset, limit)
+
+
+    @staticmethod
+    def _file_aliquot_query(file_id):
+        ''' query to get aliquot IDs associated with each file. '''
+        return '''query={
+            fileMetadata (file_id: "%s" acceptDUA: true) {
+                file_id aliquots { aliquot_id } }
+                }''' % file_id
+
+
+    @staticmethod
+    def _study_file_id_query(study_id):
+        ''' query to get all file_ids in study '''
+        return '''query {
+            filesPerStudy (study_id: "%s", data_category: "Raw Mass Spectra" acceptDUA: true) {
+                file_id }
+            } ''' % study_id
+
+
     async def async_get_study_aliquots(self, study_id: str,
-                                       file_ids: list|None=None,
+                                       file_ids: Optional[list]=None,
                                        page_limit: int=100) -> list:
         '''
         Async version of get_study_aliquots.
@@ -397,39 +470,13 @@ class Client():
             or None if no cases could be found for study_id.
         '''
 
-        # query to get study, cases, samples, and aliquots
-        def aliquot_query(study_id, offset, limit):
-            return '''query={
-                paginatedCasesSamplesAliquots (study_id: "%s" offset: %u limit: %u) {
-                    total
-                    casesSamplesAliquots {
-                        case_id
-                        samples { sample_id sample_submitter_id sample_type tissue_type
-                            aliquots { aliquot_id analyte_type }
-                        }
-                    }
-                    pagination { count from page total pages size }
-                } }''' % (study_id, offset, limit)
-
-        # query to get aliquot IDs associated with each file.
-        def file_query(file_id):
-            return '''query={
-                fileMetadata (file_id: "%s" acceptDUA: true) {
-                    file_id aliquots { aliquot_id } }
-                    }''' % file_id
-
-        # query to get all file_ids in study
-        file_id_query = '''query {
-            filesPerStudy (study_id: "%s", data_category: "Raw Mass Spectra" acceptDUA: true) {
-                file_id }
-            } ''' % study_id
-
         aliquot_task = asyncio.create_task(
-                self._get_paginated_data(aliquot_query, 'casesSamplesAliquots', study_id,
+                self._get_paginated_data(self._case_aliquot_query, 'casesSamplesAliquots', study_id,
                                          page_limit=page_limit)
             )
 
         if file_ids is None:
+            file_id_query = self._study_file_id_query(study_id)
             file_id_data = await self._post(file_id_query)
 
             if 'errors' in file_id_data:
@@ -442,7 +489,7 @@ class Client():
         async with asyncio.TaskGroup() as tg:
             for file_id in file_ids:
                 aliquot_id_tasks.append(
-                    tg.create_task(self._get(file_query(file_id)))
+                    tg.create_task(self._get(self._file_aliquot_query(file_id)))
                 )
 
         # construct dictionary of aliquot_ids maped to file_ids
@@ -491,7 +538,21 @@ class Client():
             A list of aliquots in the study where each list element is metadata for each aliquot
             or None if no cases could be found for study_id.
         '''
-        return self.loop.run_until_complete(self.async_get_study_aliquots(study_id, **kwargs))
+        return self._loop.run_until_complete(self.async_get_study_aliquots(study_id, **kwargs))
+
+
+    @staticmethod
+    def _study_case_query(study_id, offset, limit):
+        return '''query={
+            paginatedCaseDemographicsPerStudy (study_id: "%s" offset: %u limit: %u acceptDUA: true) {
+            total
+            caseDemographicsPerStudy {
+                case_id
+                demographics { ethnicity gender race cause_of_death
+                    vital_status year_of_birth year_of_death }
+            }
+            pagination { count from page total pages size }
+        } }''' % (study_id, offset, limit)
 
 
     async def async_get_study_cases(self, study_id: str,
@@ -513,19 +574,7 @@ class Client():
             or None if no cases could be found for study_id.
         '''
 
-        def query_f(study_id, page_offset, page_limit):
-            return '''query={
-                paginatedCaseDemographicsPerStudy (study_id: "%s" offset: %u limit: %u acceptDUA: true) {
-                total
-                caseDemographicsPerStudy {
-                    case_id
-                    demographics { ethnicity gender race cause_of_death
-                        vital_status year_of_birth year_of_death }
-                }
-                pagination { count from page total pages size }
-            } }''' % (study_id, page_offset, page_limit)
-
-        data = await self._get_paginated_data(query_f, 'caseDemographicsPerStudy', study_id,
+        data = await self._get_paginated_data(self._study_case_query, 'caseDemographicsPerStudy', study_id,
                                               page_limit=page_limit)
 
         if data is None:
@@ -560,11 +609,20 @@ class Client():
             A list of cases in the study where each list element is metadata for a case
             or None if no cases could be found for study_id.
         '''
-        return self.loop.run_until_complete(self.async_get_study_cases(study_id))
+        return self._loop.run_until_complete(self.async_get_study_cases(study_id, **kwargs))
+
+
+    @staticmethod
+    def _study_raw_file_query(study_id):
+        return '''query {
+            filesPerStudy (study_id: "%s" data_category: "Raw Mass Spectra" acceptDUA: true) {
+                file_id file_name file_submitter_id md5sum file_size
+                data_category file_type file_format signedUrl {url}}
+            }''' % study_id
 
 
     async def async_get_study_raw_files(self, study_id: str,
-                                        n_files: int|None=None) -> list|None:
+                                        n_files: Optional[int]=None) -> list|None:
         '''
         Async versio of get_study_raw_files
 
@@ -582,13 +640,8 @@ class Client():
             or None if no files could be found for study_id.
         '''
 
-        query = '''query {
-        filesPerStudy (study_id: "%s" data_category: "Raw Mass Spectra" acceptDUA: true) {
-                file_id file_name file_submitter_id md5sum file_size
-                data_category file_type file_format signedUrl {url}}
-            }''' % study_id
-
         # get a list of .raw files in study
+        query = self._study_raw_file_query(study_id)
         payload = await self._post(query)
 
         if 'errors' in payload:
@@ -627,4 +680,4 @@ class Client():
             A list of files in the study where each list element is metadata for a file
             or None if no files could be found for study_id.
         '''
-        return self.loop.run_until_complete(self.async_get_study_raw_files(study_id, **kwargs))
+        return self._loop.run_until_complete(self.async_get_study_raw_files(study_id, **kwargs))
