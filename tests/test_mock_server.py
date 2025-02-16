@@ -3,6 +3,7 @@ import unittest
 import subprocess
 import os
 from signal import SIGTERM
+import re
 import json
 import time
 import httpx
@@ -11,19 +12,22 @@ import httpx
 
 import setup_tests
 
-URL = 'http://localhost:5000/graphql'
+from PDC_client.submodules import api
+
+TEST_URL = 'http://localhost:5000/graphql'
+PDC_URL = api.BASE_URL
 
 def server_is_running():
     ''' Check if mock graphql server is running.'''
     query = 'query={ __schema { queryType { name }}}'
     try:
-        response = httpx.get(f'{URL}?{query}')
+        response = httpx.get(f'{TEST_URL}?{query}')
         return response.status_code == 200
     except httpx.ConnectError:
         return False
 
 
-class TestGraphQLServer(unittest.TestCase):
+class TestGraphQLServerBase(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         '''Set up the test server before running tests.'''
@@ -59,35 +63,66 @@ class TestGraphQLServer(unittest.TestCase):
             cls.server_log.close()
 
 
-    def test_query_user(self):
-        self.assertTrue(server_is_running())
+class TestRawRequests(TestGraphQLServerBase):
+    # TEST_PDC_STUDY_ID = 'PDC000504'
+    TEST_PDC_STUDY_ID = 'PDC000110'
 
-        '''Test querying the user endpoint in GraphQL.'''
-        query = ''' query {
-                user(id: "123") { id name email }
-            } '''
+    def get(self, url, query):
+        with httpx.Client() as client:
+            query = re.sub(r'\s+', ' ', query.strip())
+            response = client.get(f'{url}?{query}')
+            return response
 
-        response = httpx.post(URL, json={'query': query})
+
+    def do_comparison_test(self, query):
+        test_response = self.get(TEST_URL, query)
+        pdc_response = self.get(PDC_URL, query)
 
         # Ensure the response is 200 OK
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(test_response.status_code, 200)
+        self.assertEqual(pdc_response.status_code, 200)
 
         # Parse the response JSON
-        data = response.json()
-
-        # Expected result
-        expected_data = {
-            'data': {
-                'user': {
-                    'id': '123',
-                    'name': 'John Doe',
-                    'email': 'john@example.com'
-                }
-            }
-        }
+        test_data = test_response.json()
+        pdc_data = pdc_response.json()
 
         # Assert the response data matches the expected data
-        self.assertDictEqual(data, expected_data)
+        self.assertDictEqual(test_data, pdc_data)
 
-if __name__ == '__main__':
-    unittest.main()
+
+    def test_study_catalog_query(self):
+        self.assertTrue(server_is_running())
+
+        query = api.Client._study_catalog_query(self.TEST_PDC_STUDY_ID)
+        self.do_comparison_test(query)
+
+
+    def test_study_query(self):
+        self.assertTrue(server_is_running())
+
+        query = api.Client._study_metadata_query('pdc_study_id', self.TEST_PDC_STUDY_ID)
+        self.do_comparison_test(query)
+
+
+class TestClient(TestGraphQLServerBase):
+    # TEST_PDC_STUDY_ID = 'PDC000504'
+    TEST_PDC_STUDY_ID = 'PDC000110'
+
+    def do_comparison_test(self, function_name, *args, comparison_f, **kwargs):
+        with api.Client(url=TEST_URL) as client:
+            test_data = getattr(api.Client(), function_name)(*args, **kwargs)
+        
+        with api.Client(url=PDC_URL) as client:
+            pdc_data = getattr(client, function_name)(*args, **kwargs)
+
+        comparison_f(test_data, pdc_data)
+
+
+    def test_study_id(self):
+        self.do_comparison_test('get_study_id', self.TEST_PDC_STUDY_ID,
+                                comparison_f=self.assertEqual)
+    
+
+    def test_study_id(self):
+        self.do_comparison_test('get_study_id', self.TEST_PDC_STUDY_ID,
+                                comparison_f=self.assertEqual)

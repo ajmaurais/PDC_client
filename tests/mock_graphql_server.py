@@ -1,4 +1,6 @@
 import json
+from typing import Generator
+
 from flask import Flask, request
 from flask_graphql import GraphQLView
 import graphene
@@ -11,23 +13,53 @@ class Data:
         with open(setup_tests.STUDY_METADATA, 'r', encoding='utf-8') as inF:
             study_data = json.load(inF)
 
-        self.studies_by_id = {study['study_id']: study for study in study_data}
-        self.study_ids_by_pdc_id = {study['pdc_study_id']: study['study_id'] for study in study_data}
+        self.studies = {study['study_id']: study for study in study_data}
+
+        with open(setup_tests.STUDY_CATALOG, 'r', encoding='utf-8') as inF:
+            self.study_catalog = json.load(inF)
+            for study in self.study_catalog.values():
+                for version in study['versions']:
+                    version['is_latest_version'] = 'yes' if version['is_latest_version'] else 'no'
 
 
-    def get_study(self, study_id):
-        return self.studies_by_id.get(study_id, None)
+    def get_studies(self, study_id=None, pdc_study_id=None) -> Generator[dict, None, None]:
+        '''
+        Retrieve study information based on study_id or pdc_study_id.
 
+        Args:
+            study_id (str, optional): The ID of the study to retrieve. Defaults to None.
+            pdc_study_id (str, optional): The PDC study ID to retrieve. Defaults to None.
 
-    def get_study_id(self, pdc_study_id):
-        return self.study_ids_by_pdc_id.get(pdc_study_id, None)
+        Yields:
+            dict: A dictionary containing the study information if found, otherwise None.
+        '''
+        if study_id is not None:
+            if study_id in self.studies:
+                yield self.studies[study_id]
+        elif pdc_study_id is not None:
+            for study in self.studies.values():
+                if study['pdc_study_id'] == pdc_study_id:
+                    yield study
+        else:
+            yield from self.studies.values()
 
 
 api_data = Data()
 
 
+class StudyVersion(graphene.ObjectType):
+    study_id = graphene.String(name='study_id')
+    is_latest_version = graphene.String(name='is_latest_version')
+
+
+class StudyCatalog(graphene.ObjectType):
+    pdc_study_id = graphene.ID(name='pdc_study_id')
+    versions = graphene.List(StudyVersion, name='versions')
+
+
 class Study(graphene.ObjectType):
     study_id = graphene.ID(name='study_id')
+    pdc_study_id = graphene.String(name='pdc_study_id')
     study_name = graphene.String(name='study_name')
     analytical_fraction = graphene.String(name='analytical_fraction')
     experiment_type = graphene.String(name='experiment_type')
@@ -37,24 +69,32 @@ class Study(graphene.ObjectType):
 
 # Query Type
 class Query(graphene.ObjectType):
-    study = graphene.Field(Study, id=graphene.ID())
+    study = graphene.List(Study, id=graphene.ID(name='study_id'),
+                          pdc_study_id=graphene.String(name='pdc_study_id'),
+                          acceptDUA=graphene.Boolean())
 
-    def resolve_study(self, info, id):
-        study_data = api_data.get_study(id)
-        if study_data:
-            return Study(
-                study_id=study_data['study_id'],
-                study_name=study_data['study_name'],
-                analytical_fraction=study_data['analytical_fraction'],
-                experiment_type=study_data['experiment_type'],
-                cases_count=study_data['cases_count'],
-                aliquots_count=study_data['aliquots_count']
-            )
-        return None
+    studyCatalog = graphene.List(StudyCatalog, id=graphene.ID(name='pdc_study_id'),
+                                 acceptDUA=graphene.Boolean())
 
 
-# def main():
-def run_server():
+    def resolve_study(self, info, id=None, pdc_study_id=None, acceptDUA=False):
+        if not acceptDUA:
+            raise RuntimeError('You must accept the DUA to access this data!')
+        return [Study(**study) for study in api_data.get_studies(study_id=id, pdc_study_id=pdc_study_id)]
+
+
+    def resolve_studyCatalog(self, info, id, acceptDUA=False):
+        if not acceptDUA:
+            raise RuntimeError('You must accept the DUA to access this data!')
+
+        if (study := api_data.study_catalog[id]) is None:
+            return None
+
+        return [StudyCatalog(pdc_study_id=id,
+                             versions=[StudyVersion(**version) for version in study['versions']])]
+
+
+def get_server():
     # Create the schema
     schema = graphene.Schema(query=Query)
 
@@ -76,16 +116,6 @@ def run_server():
     # app.run(debug=True, port=5000)
     return app
 
-# if __name__ == "__main__":
-#     main()
-
-app = run_server()
-client = app.test_client()
-
-r = client.get('/graphql?query={__schema{queryType{name}}}')
-
-study_query = 'query={ study(id: "eb6aae30-9b42-4fe1-b3ed-22b55d730dfa") { study_id study_name analytical_fraction experiment_type cases_count aliquots_count } }'
-
-r2 = client.get(f'/graphql?{study_query}')
-
-print(r2.text)
+if __name__ == "__main__":
+    app = get_server()
+    app.run(debug=True, port=5000)
