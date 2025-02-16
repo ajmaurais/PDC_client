@@ -303,7 +303,7 @@ class Client():
         data = await asyncio.create_task(self._get(study_query))
 
         if study_id_task is None:
-            if data['data']['study'] is None:
+            if data['data']['study'] is None or len(data['data']['study']) == 0:
                 return None
             return data['data']['study'][0]
 

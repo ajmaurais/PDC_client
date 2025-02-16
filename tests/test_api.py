@@ -79,6 +79,10 @@ class TestStudyLevel(unittest.TestCase):
             self.assertTrue(len([s for s in data if s['is_latest_version']]))
 
 
+    def test_invalid_study_catalog(self):
+        self.assertIsNone(self.client.get_study_catalog('DUMMY'))
+
+
 class TestFileLevel(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
