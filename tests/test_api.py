@@ -9,6 +9,24 @@ import setup_tests
 
 
 class TestStudyLevel(unittest.TestCase):
+    '''
+    Unit tests for the StudyLevel API queries.
+
+    Attributes:
+        studies (list): A list of study metadata loaded from a JSON file.
+
+    Methods:
+        setUpClass(): Loads the study metadata from a JSON file before any tests are run.
+        setUp(): Initializes the API client before each test.
+        tearDown(): Cleans up the API client after each test.
+        do_sucessful_test(f, key, value): Helper method to test successful retrieval of study information.
+        test_study_id(): Tests the retrieval of study IDs.
+        test_pdc_study_id(): Tests the retrieval of PDC study IDs.
+        test_study_name(): Tests the retrieval of study names.
+        test_invalid_study_id(): Tests the handling of an invalid study ID.
+        test_invalid_pdc_study_id(): Tests the handling of an invalid PDC study ID.
+        test_invalid_study_name(): Tests the handling of an invalid study name.
+    '''
     @classmethod
     def setUpClass(cls):
         with open(setup_tests.STUDY_METADATA, 'r', encoding='utf-8') as inF:
@@ -50,6 +68,15 @@ class TestStudyLevel(unittest.TestCase):
 
     def test_invalid_study_name(self):
         self.assertIsNone(self.client.get_study_name('DUMMY'))
+
+
+    def test_only_latest_option(self):
+        for study in self.studies:
+            data = self.client.get_study_metadata(pdc_study_id='PDC000504',
+                                                  only_latest=False)
+            self.assertIsInstance(data, list)
+            self.assertTrue(all('is_latest_version' in s for s in data))
+            self.assertTrue(len([s for s in data if s['is_latest_version']]))
 
 
 class TestFileLevel(unittest.TestCase):

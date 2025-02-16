@@ -185,7 +185,30 @@ class Client():
         if len(data['data']['studyCatalog']) > 1:
             raise RuntimeError('More studies than expected for pdc_study_id!')
 
-        return data['data']['studyCatalog'][0]
+        versions = data['data']['studyCatalog'][0]
+        for study in versions['versions']:
+            if study['is_latest_version'] == 'yes':
+                study['is_latest_version'] = True
+            else:
+                study['is_latest_version'] = False
+        return versions
+
+
+    def get_study_catalog(self, pdc_study_id: str) -> list:
+        '''
+        Get studyCatalog for a pdc_study_id.
+
+        Parameters
+        ----------
+        pdc_study_id: str
+            The PDC study ID.
+
+        Returns
+        -------
+        study_catalog: list
+            A list of dictionaries where each dictionary is a version of the study.
+        '''
+        return self._loop.run_until_complete(self.async_get_study_catalog(pdc_study_id))
 
 
     async def async_get_study_id(self, pdc_study_id: str) -> str|None:
@@ -207,7 +230,7 @@ class Client():
             return None
 
         for version in data['versions']:
-            if version['is_latest_version'] == 'yes':
+            if version['is_latest_version']:
                 return version['study_id']
         return None
 
@@ -243,7 +266,8 @@ class Client():
 
 
     async def async_get_study_metadata(self, pdc_study_id: str|None=None,
-                                       study_id: str|None=None) -> list|None:
+                                       study_id: str|None=None,
+                                       only_latest: bool=True) -> dict|list|None:
         '''
         Async version of get_study_metadata
 
@@ -253,6 +277,8 @@ class Client():
             If None the study_id must be specified.
         study_id: str
             If None the pdc_study_id must be specified.
+        only_latest: bool
+            If True only the latest version of the study is returned.
 
         Returns
         -------
@@ -286,14 +312,24 @@ class Client():
         if study_id is None:
             return None
 
+        if only_latest:
+            for study in data['data']['study']:
+                if study['study_id'] == study_id:
+                    return study
+            raise RuntimeError('Could not find latest study for pdc_study_id!')
+
+        # add is_latest field to each study
         for study in data['data']['study']:
             if study['study_id'] == study_id:
-                return study
-        raise RuntimeError('Could not find latest study for pdc_study_id!')
+                study['is_latest_version'] = True
+            else:
+                study['is_latest_version'] = False
+        return data['data']['study']
 
 
     def get_study_metadata(self, pdc_study_id: str|None=None,
-                           study_id: Optional[str]=None) -> Optional[dict]:
+                           study_id: Optional[str]=None,
+                           **kwargs) -> Optional[dict]:
         '''
         Parameters
         ----------
@@ -301,6 +337,8 @@ class Client():
             If None the study_id must be specified.
         study_id: str
             If None the pdc_study_id must be specified.
+        kwargs: dict
+            Additional kwargs passed to async_get_study_metadata.
 
         Returns
         -------
@@ -308,7 +346,8 @@ class Client():
             The metadata or None if no metadata could be found for study_id
         '''
         return self._loop.run_until_complete(
-            self.async_get_study_metadata(pdc_study_id=pdc_study_id, study_id=study_id)
+            self.async_get_study_metadata(pdc_study_id=pdc_study_id,
+                                          study_id=study_id, **kwargs)
             )
 
 

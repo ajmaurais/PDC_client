@@ -2,11 +2,11 @@
   "PDC000110": {
     "versions": [
       {
-        "is_latest_version": "yes",
+        "is_latest_version": true,
         "study_id": "6338aad7-851b-4eea-ba90-ba50237cb875"
       },
       {
-        "is_latest_version": "no",
+        "is_latest_version": false,
         "study_id": "bc81da61-57b8-11e8-b07a-00a098d917f8"
       }
     ]
@@ -14,7 +14,7 @@
   "PDC000464": {
     "versions": [
       {
-        "is_latest_version": "yes",
+        "is_latest_version": true,
         "study_id": "7becf5c5-9d40-43f7-9c02-a71075944b30"
       }
     ]
@@ -22,7 +22,7 @@
   "PDC000504": {
     "versions": [
       {
-        "is_latest_version": "yes",
+        "is_latest_version": true,
         "study_id": "eb6aae30-9b42-4fe1-b3ed-22b55d730dfa"
       }
     ]
