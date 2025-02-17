@@ -41,8 +41,38 @@ class FilesPerStudy(graphene.ObjectType):
 
 class Aliquot(graphene.ObjectType):
     aliquot_id = graphene.ID(name='aliquot_id')
+    analyte_type = graphene.String(name='analyte_type')
 
 
 class FileMetadata(graphene.ObjectType):
     file_id = graphene.ID(name='file_id')
-    aliquots = graphene.List(Aliquot, name='aliqupts')
+    aliquots = graphene.List(Aliquot, name='aliquots')
+
+
+SAMPLE_STRING_KEYS = ['sample_id', 'sample_submitter_id', 'sample_type', 'tissue_type']
+
+class Sample(graphene.ObjectType):
+    sample_id = graphene.ID(name='sample_id')
+    sample_submitter_id = graphene.String(name='sample_submitter_id')
+    sample_type = graphene.String(name='sample_type')
+    tissue_type = graphene.String(name='tissue_type')
+    aliquots = graphene.List(Aliquot, name='aliquots')
+
+
+class CasesSamplesAliquots(graphene.ObjectType):
+    case_id = graphene.ID(name='case_id')
+    samples = graphene.List(Sample, name='samples')
+
+
+class Pagination(graphene.ObjectType):
+    count = graphene.Int(name='count')
+    offset = graphene.Int(name='from')
+    total = graphene.Int(name='total')
+    size = graphene.Int(name='size')
+
+
+class PaginatedCasesSamplesAliquots(graphene.ObjectType):
+    total = graphene.Int(name='total')
+    casesSamplesAliquots = graphene.List(CasesSamplesAliquots,
+                                          name='casesSamplesAliquots')
+    pagination = graphene.Field(Pagination, name='pagination')

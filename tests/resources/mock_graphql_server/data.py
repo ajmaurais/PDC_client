@@ -35,10 +35,45 @@ class Data:
         with open(ALIQUOT_METADATA, 'r', encoding='utf-8') as inF:
             aliquot_data = json.load(inF)
 
-        self.aliquots_per_file = dict()
+        self.file_metadata = dict()
+        self.index_study_file_ids = dict()
+        self.index_study_cases = dict()
+        self.cases = dict()
         for pdc_study_id, aliquots in aliquot_data.items():
+            study_id = self.get_study_id(pdc_study_id)
+            self.index_study_file_ids[study_id] = set()
+            self.index_study_cases[study_id] = set()
+
             for aliquot in aliquots:
-                self.aliquots_per_file[aliquot['aliquot_id']] = aliquot
+                self.index_study_file_ids[study_id].add(aliquot['file_id'])
+                self.index_study_cases[study_id].add(aliquot['case_id'])
+
+                if aliquot['file_id'] not in self.file_metadata:
+                    self.file_metadata[aliquot['file_id']] = dict()
+                    self.file_metadata[aliquot['file_id']]['aliquots'] = list()
+                self.file_metadata[aliquot['file_id']]['aliquots'].append({'aliquot_id': aliquot['aliquot_id']})
+
+                case_id = aliquot['case_id']
+                if case_id not in self.cases:
+                    self.cases[case_id] = dict()
+                    self.cases[case_id]['samples'] = dict()
+                    self.cases[case_id]['case_id'] = case_id
+
+                sample_id = aliquot['sample_id']
+                if sample_id not in self.cases[case_id]['samples']:
+                    self.cases[case_id]['samples'][sample_id] = dict()
+                    self.cases[case_id]['samples'][sample_id]['aliquots'] = list()
+                    self.cases[case_id]['samples'][sample_id]['sample_id'] = sample_id
+                    self.cases[case_id]['samples'][sample_id]['sample_submitter_id'] = aliquot['sample_submitter_id']
+                    self.cases[case_id]['samples'][sample_id]['sample_type'] = aliquot['sample_type']
+                    self.cases[case_id]['samples'][sample_id]['tissue_type'] = aliquot['tissue_type']
+
+                self.cases[case_id]['samples'][sample_id]['aliquots'].append({'aliquot_id': aliquot['aliquot_id'],
+                                                                              'analyte_type': aliquot['analyte_type']})
+
+        # convert index sets to lists
+        self.index_study_cases = {k: list(v) for k, v in self.index_study_cases.items()}
+        self.index_study_file_ids = {k: list(v) for k, v in self.index_study_file_ids.items()}
 
 
     def get_study_id(self, pdc_study_id):
@@ -115,13 +150,20 @@ class Data:
             raise ValueError('Both study_id and pdc_study_id cannot be provided!')
 
 
+    def get_total_cases_per_study(self, study_id):
+        return len(self.index_study_cases[study_id])
+
+
     def get_cases_per_study(self, study_id, offset):
-        pass
+        i = offset
+        total = self.get_total_cases_per_study(study_id)
+        while i < total:
+            yield self.cases[self.index_study_cases[study_id][i]]
+            i += 1
 
 
     def get_file_metadata(self, file_id):
-        pass
+        return self.file_metadata.get(file_id, None)
 
 
 api_data = Data()
-# api_data = 'data'
