@@ -5,7 +5,7 @@ import random
 
 from PDC_client.submodules import api
 
-import setup_tests
+from resources import data
 
 
 class TestStudyLevel(unittest.TestCase):
@@ -29,7 +29,7 @@ class TestStudyLevel(unittest.TestCase):
     '''
     @classmethod
     def setUpClass(cls):
-        with open(setup_tests.STUDY_METADATA, 'r', encoding='utf-8') as inF:
+        with open(data.STUDY_METADATA, 'r', encoding='utf-8') as inF:
             cls.studies = json.load(inF)
 
 
@@ -86,10 +86,10 @@ class TestStudyLevel(unittest.TestCase):
 class TestFileLevel(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        with open(setup_tests.FILE_METADATA, 'r', encoding='utf-8') as inF:
+        with open(data.FILE_METADATA, 'r', encoding='utf-8') as inF:
             cls.files = json.load(inF)
 
-        with open(setup_tests.STUDY_METADATA, 'r', encoding='utf-8') as inF:
+        with open(data.STUDY_METADATA, 'r', encoding='utf-8') as inF:
             study_list = json.load(inF)
         cls.studies = {study.pop('pdc_study_id'): study for study in study_list}
     
@@ -161,10 +161,10 @@ class TestFileLevel(unittest.TestCase):
 class TestAliquotLevel(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        with open(setup_tests.ALIQUOT_METADATA, 'r', encoding='utf-8') as inF:
+        with open(data.ALIQUOT_METADATA, 'r', encoding='utf-8') as inF:
             cls.aliquots = json.load(inF)
 
-        with open(setup_tests.STUDY_METADATA, 'r', encoding='utf-8') as inF:
+        with open(data.STUDY_METADATA, 'r', encoding='utf-8') as inF:
             study_list = json.load(inF)
         cls.studies = {study.pop('pdc_study_id'): study for study in study_list}
 
@@ -213,10 +213,10 @@ class TestAliquotLevel(unittest.TestCase):
 class TestCaseLevel(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        with open(setup_tests.CASE_METADATA, 'r', encoding='utf-8') as inF:
+        with open(data.CASE_METADATA, 'r', encoding='utf-8') as inF:
             cls.cases = json.load(inF)
 
-        with open(setup_tests.STUDY_METADATA, 'r', encoding='utf-8') as inF:
+        with open(data.STUDY_METADATA, 'r', encoding='utf-8') as inF:
             study_list = json.load(inF)
         cls.studies = {study.pop('pdc_study_id'): study for study in study_list}
     

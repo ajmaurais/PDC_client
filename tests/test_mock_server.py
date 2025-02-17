@@ -8,7 +8,9 @@ import json
 import time
 import httpx
 
-import setup_tests
+from resources import TEST_DIR
+from resources.setup_functions import make_work_dir
+from resources.data import STUDY_METADATA
 
 from PDC_client.submodules import api
 
@@ -30,20 +32,24 @@ class TestGraphQLServerBase(unittest.TestCase):
     def setUpClass(cls):
         '''Set up the test server before running tests.'''
 
-        with open(setup_tests.STUDY_METADATA, 'r', encoding='utf-8') as inF:
+        # setup dict to look up study ids
+        with open(STUDY_METADATA, 'r', encoding='utf-8') as inF:
             studies = json.load(inF)
         cls.study_ids = {study['pdc_study_id']: study['study_id'] for study in studies}
 
+        # return if server is already running
         if server_is_running():
             cls.server_process = None
             return
 
-        cls.work_dir = setup_tests.TEST_DIR + '/work/mock_graphql_server'
-        setup_tests.make_work_dir(cls.work_dir, clear_dir=True)
-        cls.server_log = open(setup_tests.TEST_DIR + '/server.log', 'w', encoding='utf-8')
+        cls.work_dir = TEST_DIR + '/work/mock_graphql_server'
+        make_work_dir(cls.work_dir, clear_dir=True)
+        cls.server_log = open(cls.work_dir + '/server.log', 'w', encoding='utf-8')
 
-        args = ['python', f'{setup_tests.TEST_DIR}/mock_graphql_server.py']
-        cls.server_process = subprocess.Popen(args, stderr=cls.server_log, stdout=cls.server_log)
+        args = ['python', f'{TEST_DIR}/mock_graphql_server.py']
+        args = ['python', '-m', 'resources.mock_graphql_server.server']
+        cls.server_process = subprocess.Popen(args, cwd=TEST_DIR,
+                                              stderr=cls.server_log, stdout=cls.server_log)
 
         timeout = 5
         start_time = time.time()

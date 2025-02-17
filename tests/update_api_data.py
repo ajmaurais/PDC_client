@@ -7,8 +7,8 @@ import difflib
 import subprocess
 import asyncio
 
-from setup_tests import STUDY_METADATA, STUDY_CATALOG
-from setup_tests import FILE_METADATA, ALIQUOT_METADATA, CASE_METADATA
+from resources.data import STUDY_METADATA, STUDY_CATALOG
+from resources.data import FILE_METADATA, ALIQUOT_METADATA, CASE_METADATA
 
 from PDC_client.submodules.api import Client
 

@@ -1,15 +1,6 @@
 
 import os
 
-TEST_DIR = os.path.dirname(os.path.abspath(__file__))
-
-STUDY_METADATA = f'{TEST_DIR}/data/api/studies.json'
-STUDY_CATALOG = f'{TEST_DIR}/data/api/study_catalog.json'
-FILE_METADATA = f'{TEST_DIR}/data/api/files.json'
-ALIQUOT_METADATA = f'{TEST_DIR}/data/api/aliquots.json'
-CASE_METADATA = f'{TEST_DIR}/data/api/cases.json'
-
-
 def make_work_dir(work_dir, clear_dir=False):
     '''
     Setup work directory for test.
