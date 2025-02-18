@@ -148,7 +148,7 @@ class Client():
         LOGGER.error('API query failed with response(s):', stacklevel=2)
         for error in errors:
             LOGGER.error('\n\tCode: %s\n\tEndpoint: %s\n\tMessage: %s\n',
-                        error['extensions']['code'],
+                        error['extensions']['code'] if 'extensions' in error else None,
                         ', '.join(error['path']),
                         error['message'],
                         stacklevel=2)
@@ -408,7 +408,10 @@ class Client():
         total = first_page['data'][endpoint_name]['total']
 
         if total <= page_limit:
-            return first_page['data'][endpoint_name][data_name]
+            data = first_page['data'][endpoint_name][data_name]
+            if len(data) != total:
+                raise RuntimeError(f"Expected {total} items, but got {len(data)} items.")
+            return data
 
         offset = page_limit
         page_tasks = list()
@@ -424,6 +427,8 @@ class Client():
         for page in [first_page] + [task.result() for task in page_tasks]:
             data += page['data'][endpoint_name][data_name]
 
+        if len(data) != total:
+            raise RuntimeError(f"Expected {total} items, but got {len(data)} items.")
         return data
 
 
@@ -431,7 +436,7 @@ class Client():
     def _case_aliquot_query(study_id: str, offset: int, limit: int):
         '''query to get study, cases, samples, and aliquots'''
         return '''query={
-            paginatedCasesSamplesAliquots (study_id: "%s" offset: %u limit: %u) {
+            paginatedCasesSamplesAliquots (study_id: "%s" offset: %u limit: %u acceptDUA: true) {
                 total
                 casesSamplesAliquots {
                     case_id
@@ -439,7 +444,7 @@ class Client():
                         aliquots { aliquot_id analyte_type }
                     }
                 }
-                pagination { count from page total pages size }
+                pagination { count from total size }
             } }''' % (study_id, offset, limit)
 
 
@@ -498,6 +503,9 @@ class Client():
 
             file_ids = [f['file_id'] for f in file_id_data['data']['filesPerStudy']]
 
+            if len(file_ids) != len(set(file_ids)):
+                raise RuntimeError('Duplicate file_ids in study!')
+
         aliquot_id_tasks = list()
         async with asyncio.TaskGroup() as tg:
             for file_id in file_ids:
@@ -506,12 +514,16 @@ class Client():
                 )
 
         # construct dictionary of aliquot_ids maped to file_ids
-        file_ids = dict()
-        for task in aliquot_id_tasks:
+        file_aliquot_ids = dict()
+        for file_id, task in zip(file_ids, aliquot_id_tasks):
             data = task.result()
-            file_id = data['data']['fileMetadata'][0]['file_id']
+            if data['data']['fileMetadata'] is None:
+                LOGGER.error("Error getting aliquot_ids for file: '%s'", file_id)
+                continue
+            query_file_id = data['data']['fileMetadata'][0]['file_id']
+            assert(file_id == query_file_id)
             for aliquot in data['data']['fileMetadata'][0]['aliquots']:
-                file_ids[aliquot['aliquot_id']] = file_id
+                file_aliquot_ids[aliquot['aliquot_id']] = file_id
 
         aliquot_data = await aliquot_task
 
@@ -527,9 +539,10 @@ class Client():
                     new_a.update({k: sample[k] for k in ('sample_id', 'sample_submitter_id',
                                                         'sample_type', 'tissue_type')})
                     new_a['case_id'] = case['case_id']
-                    new_a['file_id'] = file_ids.get(new_a['aliquot_id'], 'MISSING')
 
-                    aliquots.append(new_a)
+                    if aliquot['aliquot_id'] in file_aliquot_ids:
+                        new_a['file_id'] = file_aliquot_ids[new_a['aliquot_id']]
+                        aliquots.append(new_a)
 
         return aliquots
 
@@ -564,7 +577,7 @@ class Client():
                 demographics { demographic_id ethnicity gender race cause_of_death
                                vital_status year_of_birth year_of_death }
             }
-            pagination { count from page total pages size }
+            pagination { count from total size }
         } }''' % (study_id, offset, limit)
 
 

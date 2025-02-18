@@ -75,6 +75,9 @@ class TestGraphQLServerBase(unittest.TestCase):
 
 
 class TestRawRequests(TestGraphQLServerBase):
+    '''
+    Test the raw graphQL request used by Client match the result of the test server.
+    '''
     TEST_PDC_STUDY_ID = 'PDC000504'
     # TEST_PDC_STUDY_ID = 'PDC000110'
 
@@ -115,6 +118,12 @@ class TestRawRequests(TestGraphQLServerBase):
 
 
     def test_all_queries_covered(self):
+        '''
+        Check that all query functions in Client are covered by a test.
+
+        Test that all query functions in Client matching the pattern _[a-z_]+_query
+        have a corresponding test function in this class.
+        '''
         client_quries = [a for a in dir(api.Client)
                          if callable(getattr(api.Client, a)) and re.search(r'^_[a-z_]+_query$', a)]
 
@@ -223,11 +232,36 @@ class TestRawRequests(TestGraphQLServerBase):
 
 
     def test_study_case_query(self):
-        self.assertTrue(False)
+        self.assertTrue(server_is_running())
+
+        study_id = api_data.get_study_id(self.TEST_PDC_STUDY_ID)
+        limit = 10
+        offset = 0
+
+        query = api.Client._study_case_query(study_id, offset, limit)
+
+        pdc_data, test_data = self.get_paired_data(query)
+        pdc_data = pdc_data['data']['paginatedCaseDemographicsPerStudy']
+        test_data = test_data['data']['paginatedCaseDemographicsPerStudy']
+
+        self.assertEqual(pdc_data['total'], test_data['total'])
+        self.assertDictEqual(pdc_data['pagination'], test_data['pagination'])
+
+        pdc_cases = {case['case_id']: case['demographics'] for case in pdc_data['caseDemographicsPerStudy']}
+        test_cases = {case['case_id']: case['demographics'] for case in test_data['caseDemographicsPerStudy']}
+        self.assertEqual(len(pdc_cases), len(test_cases))
 
 
     def test_invalid_study_case_query(self):
-        self.assertTrue(False)
+        self.assertTrue(server_is_running())
+
+        limit = 10
+        offset = 0
+        query = api.Client._study_case_query('INVALID_STUDY', offset, limit)
+        pdc_data, test_data = self.get_paired_data(query)
+
+        self.assertIsNone(pdc_data['data']['paginatedCaseDemographicsPerStudy'])
+        self.assertIsNone(test_data['data']['paginatedCaseDemographicsPerStudy'])
 
 
     def test_study_file_id_query(self):
@@ -335,6 +369,9 @@ class TestRawRequests(TestGraphQLServerBase):
 
 
 class TestClient(TestGraphQLServerBase):
+    '''
+    Test the client functions that call the API.
+    '''
     TEST_PDC_STUDY_ID = 'PDC000504'
     # TEST_PDC_STUDY_ID = 'PDC000110'
 
@@ -359,6 +396,12 @@ class TestClient(TestGraphQLServerBase):
 
 
     def test_coverage(self):
+        '''
+        Check that all functions in Client that call the API are covered by a test.
+
+        Test that all functions in Client matching the pattern 'get_[a-z_]+'
+        have a corresponding test function in this class.
+        '''
         client_methods = [a for a in dir(api.Client)
                           if callable(getattr(api.Client, a)) and re.search(r'^get_[a-z_]+$', a)]
 
@@ -410,13 +453,25 @@ class TestClient(TestGraphQLServerBase):
 
 
     def test_get_study_catalog(self):
-        self.assertTrue(False)
+        pdc_data, test_data = self.get_data_pair('get_study_catalog', self.TEST_PDC_STUDY_ID)
+
+        self.assertIn('versions', pdc_data)
+        self.assertIn('versions', test_data)
+        pdc_data = pdc_data['versions']
+        test_data = test_data['versions']
+        self.assertEqual(len(pdc_data), len(test_data))
+
+        pdc_data = data_list_to_dict(pdc_data, 'study_id')
+        test_data = data_list_to_dict(test_data, 'study_id')
+
+        for study_id, version in pdc_data.items():
+            self.assertIn(study_id, test_data)
+            self.assertDictEqual(test_data[study_id], version)
 
 
     def test_get_study_aliquots(self):
-        pdc_data, test_data = self.get_data_pair('get_study_aliquots',
-                                                 api_data.get_study_id(self.TEST_PDC_STUDY_ID),
-                                                 page_limit=100)
+        study_id = api_data.get_study_id(self.TEST_PDC_STUDY_ID)
+        pdc_data, test_data = self.get_data_pair('get_study_aliquots', study_id, page_limit=50)
 
         self.assertEqual(len(pdc_data), len(test_data))
         pdc_data = data_list_to_dict(pdc_data, 'aliquot_id')
@@ -428,4 +483,13 @@ class TestClient(TestGraphQLServerBase):
 
 
     def test_get_study_cases(self):
-        self.assertTrue(False)
+        study_id = api_data.get_study_id(self.TEST_PDC_STUDY_ID)
+        pdc_data, test_data = self.get_data_pair('get_study_aliquots', study_id, page_limit=50)
+
+        self.assertEqual(len(pdc_data), len(test_data))
+        pdc_data = data_list_to_dict(pdc_data, 'aliquot_id')
+        test_data = data_list_to_dict(test_data, 'aliquot_id')
+
+        for case_id, case in pdc_data.items():
+            self.assertIn(case_id, test_data)
+            self.assertDictEqual(test_data[case_id], case)

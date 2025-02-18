@@ -59,9 +59,25 @@ class Sample(graphene.ObjectType):
     aliquots = graphene.List(Aliquot, name='aliquots')
 
 
+class Demographics(graphene.ObjectType):
+    demographic_id = graphene.ID(name='demographic_id')
+    cause_of_death = graphene.String(name='cause_of_death')
+    ethnicity = graphene.String()
+    gender = graphene.String()
+    race = graphene.String()
+    year_of_birth = graphene.String(name='year_of_birth')
+    year_of_death = graphene.String(name='year_of_death')
+    vital_status = graphene.String(name='vital_status')
+
+
 class CasesSamplesAliquots(graphene.ObjectType):
     case_id = graphene.ID(name='case_id')
     samples = graphene.List(Sample, name='samples')
+
+
+class CaseDemographicsPerStudy(graphene.ObjectType):
+    case_id = graphene.ID(name='case_id')
+    demographics = graphene.List(Demographics, name='demographics')
 
 
 class Pagination(graphene.ObjectType):
@@ -74,5 +90,12 @@ class Pagination(graphene.ObjectType):
 class PaginatedCasesSamplesAliquots(graphene.ObjectType):
     total = graphene.Int(name='total')
     casesSamplesAliquots = graphene.List(CasesSamplesAliquots,
-                                          name='casesSamplesAliquots')
+                                         name='casesSamplesAliquots')
+    pagination = graphene.Field(Pagination, name='pagination')
+
+
+class PaginatedCaseDemographicsPerStudy(graphene.ObjectType):
+    total = graphene.Int(name='total')
+    caseDemographicsPerStudy = graphene.List(CaseDemographicsPerStudy,
+                                             name='caseDemographicsPerStudy')
     pagination = graphene.Field(Pagination, name='pagination')

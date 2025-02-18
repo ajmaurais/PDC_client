@@ -7,6 +7,9 @@ from PDC_client.submodules import api
 
 from resources import data
 
+TEST_URL = 'http://localhost:5000/graphql'
+# TEST_URL = 'https://pdc.cancer.gov/graphql'
+
 
 class TestStudyLevel(unittest.TestCase):
     '''
@@ -34,7 +37,7 @@ class TestStudyLevel(unittest.TestCase):
 
 
     def setUp(self):
-        self.client = api.Client()
+        self.client = api.Client(url=TEST_URL)
 
 
     def tearDown(self):
@@ -104,7 +107,7 @@ class TestFileLevel(unittest.TestCase):
 
 
     def test_data(self):
-        with api.Client() as client:
+        with api.Client(url=TEST_URL) as client:
             for study, study_files in self.files.items():
                 test_study_files = client.get_study_raw_files(self.studies[study]['study_id'])
 
@@ -126,7 +129,7 @@ class TestFileLevel(unittest.TestCase):
 
 
     def test_invalid_study(self):
-        with api.Client() as client:
+        with api.Client(url=TEST_URL) as client:
             with self.assertLogs(level='ERROR') as cm:
                 ret = client.get_study_raw_files('DUMMY')
 
@@ -138,7 +141,7 @@ class TestFileLevel(unittest.TestCase):
         random.seed(1)
         test_studies = random.sample(list(self.files.keys()), min(len(self.files), 3))
 
-        with api.Client() as client:
+        with api.Client(url=TEST_URL) as client:
             # test behavior of n_files=0
             data = client.get_study_raw_files(self.studies[test_studies[0]]['study_id'], n_files=0)
             self.assertIsInstance(data, list)
@@ -179,12 +182,13 @@ class TestAliquotLevel(unittest.TestCase):
 
 
     def test_invalid_study(self):
-        with api.Client() as client:
+        with api.Client(url=TEST_URL) as client:
             with self.assertLogs(level='ERROR') as cm:
                 ret = client.get_study_aliquots('DUMMY')
 
         self.assertIsNone(ret)
-        self.assertTrue('API query failed with response' in cm.output[0])
+        self.assertTrue(any('API query failed with response' in o for o in cm.output) or
+                        any('Invalid query for study_id:' in o for o in cm.output))
 
 
     def test_data(self):
@@ -195,9 +199,9 @@ class TestAliquotLevel(unittest.TestCase):
 
         study_aliquots = self.aliquot_list_to_dict(study_aliquots)
         
-        with api.Client() as client:
+        with api.Client(url=TEST_URL) as client:
             test_study_aliquots = client.get_study_aliquots(self.studies[study]['study_id'],
-                                                                page_limit=page_len)
+                                                            page_limit=page_len)
 
         self.assertEqual(len(test_study_aliquots), self.studies[study]['aliquots_count'])
 
@@ -231,7 +235,7 @@ class TestCaseLevel(unittest.TestCase):
 
 
     def test_invalid_study(self):
-        with api.Client() as client:
+        with api.Client(url=TEST_URL) as client:
             with self.assertLogs(level='ERROR') as cm:
                 ret = client.get_study_cases('DUMMY')
 
@@ -240,9 +244,9 @@ class TestCaseLevel(unittest.TestCase):
 
 
     def test_data(self):
-        page_limit = 100
+        page_limit = 50
 
-        with api.Client() as client:
+        with api.Client(url=TEST_URL) as client:
             for study, study_cases in self.cases.items():
                 study_cases = self.case_list_to_dict(study_cases)
                 

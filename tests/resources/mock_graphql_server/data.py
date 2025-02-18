@@ -2,7 +2,8 @@
 import json
 from typing import Generator
 
-from ..data import STUDY_METADATA, STUDY_CATALOG, FILE_METADATA, ALIQUOT_METADATA
+from ..data import STUDY_METADATA, STUDY_CATALOG, FILE_METADATA
+from ..data import ALIQUOT_METADATA, CASE_METADATA
 
 class Data:
     def __init__(self):
@@ -74,6 +75,20 @@ class Data:
         # convert index sets to lists
         self.index_study_cases = {k: list(v) for k, v in self.index_study_cases.items()}
         self.index_study_file_ids = {k: list(v) for k, v in self.index_study_file_ids.items()}
+
+        # read case demographics metadata
+        with open(CASE_METADATA, 'r', encoding='utf-8') as inF:
+            case_data = json.load(inF)
+
+        # add case demographics to cases
+        for pdc_study_id, cases in case_data.items():
+            study_id = self.get_study_id(pdc_study_id)
+            for case in cases:
+                case_id = case['case_id']
+                if case_id not in self.cases:
+                    raise ValueError(f'Case {case_id} not found in aliquot data!')
+                case.pop('case_id')
+                self.cases[case_id]['demographics'] = case
 
 
     def get_study_id(self, pdc_study_id):

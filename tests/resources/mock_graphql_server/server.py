@@ -4,6 +4,7 @@ from flask_graphql import GraphQLView
 import graphene
 
 from .schema import Query
+from .schema import QueryError
 
 def get_server():
     # Create the schema
@@ -33,7 +34,19 @@ def get_server():
         query = request.json.get('query')
         try:
             result = schema.execute(query)
+            if result.errors:
+                raise QueryError(result.errors)
             return jsonify(result.data)
+        except QueryError:
+            response = jsonify({
+                'data': result.data,
+                'errors': [{
+                    'extensions': {'code': 'INTERNAL_SERVER_ERROR'},
+                    'path': request.path,
+                    'message': 'An error that I have set POOP'
+                } for e in result.errors]
+            })
+            return response
         except Exception as e:
             response = jsonify(f'Unexpected error occurred: {e}')
             response.status_code = 500

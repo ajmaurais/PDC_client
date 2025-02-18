@@ -5,6 +5,7 @@ from .models import Study, Url, StudyVersion, StudyCatalog, FilesPerStudy
 from .models import FileMetadata, Aliquot
 from .models import PaginatedCasesSamplesAliquots, CasesSamplesAliquots, Pagination
 from .models import SAMPLE_STRING_KEYS, Sample
+from .models import Demographics, PaginatedCaseDemographicsPerStudy, CaseDemographicsPerStudy
 
 class QueryError(Exception):
     pass
@@ -30,6 +31,11 @@ class Query(graphene.ObjectType):
                                                    id=graphene.ID(name='study_id'),
                                                    offset=graphene.Int(), limit=graphene.Int(),
                                                    acceptDUA=graphene.Boolean())
+
+    paginatedCaseDemographicsPerStudy = graphene.Field(PaginatedCaseDemographicsPerStudy,
+                                                       id=graphene.ID(name='study_id'),
+                                                       offset=graphene.Int(), limit=graphene.Int(),
+                                                       acceptDUA=graphene.Boolean())
 
     def resolve_study(self, info, id=None, pdc_study_id=None, acceptDUA=False):
         if not acceptDUA:
@@ -59,7 +65,10 @@ class Query(graphene.ObjectType):
         return ret
 
 
-    def resolve_paginatedCasesSamplesAliquots(self, info, id, offset=0, limit=100):
+    def resolve_paginatedCasesSamplesAliquots(self, info, id, offset=0, limit=100,
+                                              acceptDUA=False):
+        if not acceptDUA:
+            raise RuntimeError('You must accept the DUA to access this data!')
 
         total = api_data.get_total_cases_per_study(id)
         ret = PaginatedCasesSamplesAliquots(total=total)
@@ -96,3 +105,28 @@ class Query(graphene.ObjectType):
 
         return [FileMetadata(file_id=id,
                              aliquots=[Aliquot(**aliquot) for aliquot in file['aliquots']])]
+
+
+    def resolve_paginatedCaseDemographicsPerStudy(self, info, id, offset=0, limit=100,
+                                                  acceptDUA=False):
+        if not acceptDUA:
+            raise RuntimeError('You must accept the DUA to access this data!')
+
+        total = api_data.get_total_cases_per_study(id)
+        ret = PaginatedCaseDemographicsPerStudy(total=total)
+
+        caseDemographicsPerStudy = list()
+        i = 0
+        for case in api_data.get_cases_per_study(id, offset):
+            if i >= limit:
+                break
+            caseDemographicsPerStudy.append(
+                CaseDemographicsPerStudy(case_id=case['case_id'],
+                                         demographics=[Demographics(**case['demographics'])])
+                )
+            i += 1
+
+        ret.caseDemographicsPerStudy = caseDemographicsPerStudy
+        ret.pagination = Pagination(total=total, offset=offset, size=i,
+                                    count=len(caseDemographicsPerStudy))
+        return ret
