@@ -561,8 +561,8 @@ class Client():
             total
             caseDemographicsPerStudy {
                 case_id
-                demographics { ethnicity gender race cause_of_death
-                    vital_status year_of_birth year_of_death }
+                demographics { demographic_id ethnicity gender race cause_of_death
+                               vital_status year_of_birth year_of_death }
             }
             pagination { count from page total pages size }
         } }''' % (study_id, offset, limit)
