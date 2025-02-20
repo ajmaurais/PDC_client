@@ -9,21 +9,21 @@
     "study_name": "CPTAC PDAC BioTExt - Proteome"
   },
   {
-    "aliquots_count": 63,
-    "analytical_fraction": "Proteome",
-    "cases_count": 44,
-    "experiment_type": "TMT11",
-    "pdc_study_id": "PDC000464",
-    "study_id": "7becf5c5-9d40-43f7-9c02-a71075944b30",
-    "study_name": "CPTAC non-ccRCC Study - Proteome"
-  },
-  {
     "aliquots_count": 118,
-    "analytical_fraction": "Proteome",
+    "analytical_fraction": "Glycoproteome",
     "cases_count": 97,
     "experiment_type": "TMT10",
-    "pdc_study_id": "PDC000110",
-    "study_id": "6338aad7-851b-4eea-ba90-ba50237cb875",
-    "study_name": "Prospective Ovarian JHU Proteome"
+    "pdc_study_id": "PDC000251",
+    "study_id": "f115c648-5027-41ac-91ac-92b24d44f44e",
+    "study_name": "Prospective Ovarian JHU N-linked Glycosite-containing peptide"
+  },
+  {
+    "aliquots_count": 2,
+    "analytical_fraction": "Acetylome",
+    "cases_count": 2,
+    "experiment_type": "TMT11",
+    "pdc_study_id": "PDC000451",
+    "study_id": "46a0b9b0-9b50-44ec-8a0b-4db245fc4857",
+    "study_name": "CPTAC GBM Confirmatory Study - CompRef Acetylome"
   }
 ]

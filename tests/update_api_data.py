@@ -13,7 +13,7 @@ from resources.data import FILE_METADATA, ALIQUOT_METADATA, CASE_METADATA
 from PDC_client.submodules.api import Client
 
 
-STUDIES = ['PDC000504', 'PDC000464', 'PDC000110']
+STUDIES = ['PDC000504', 'PDC000251', 'PDC000451']
 
 ENDPOINTS = {'study': 'Study metadata',
              'studyCatalog': 'Study catalog',
