@@ -4,7 +4,8 @@ import sys
 import os
 from datetime import datetime
 
-from .submodules import api, io
+from .submodules.api import Client, BASE_URL
+from .submodules import io
 
 SUBCOMMANDS = {'studyID', 'PDCStudyID', 'studyName',
                'metadata', 'metadataToSky',
@@ -57,48 +58,60 @@ Available commands:
 
     def studyID(self, start=2):
         parser = argparse.ArgumentParser(description=Main.STUDY_ID_DESCRIPTION)
-        parser.add_argument('-u', '--baseUrl', default=api.BASE_URL,
-                            help=f'The base URL for the PDC API. {api.BASE_URL} is the default.')
+        parser.add_argument('-u', '--baseUrl', default=BASE_URL,
+                            help=f'The base URL for the PDC API. {BASE_URL} is the default.')
         parser.add_argument('--skipVerify', default=False, action='store_true',
                             help='Skip ssl verification?')
         parser.add_argument('pdc_study_id')
         args = parser.parse_args(self.argv[start:])
-        study_id = api.get_study_id(args.pdc_study_id, url=args.baseUrl,
-                                    verify=not args.skipVerify)
+
+        with Client(url=args.baseUrl, verify=not args.skipVerify) as client:
+            study_id = client.get_study_id(args.pdc_study_id)
+
         if study_id is None:
-            sys.stderr.write('ERROR: No study found matching study_id!\n')
+            sys.stderr.write('ERROR: No study found matching pdc_study_id!\n')
             sys.exit(1)
         sys.stdout.write(f'{study_id}\n')
 
 
     def PDCStudyID(self, start=2):
         parser = argparse.ArgumentParser(description=Main.PDC_STUDY_ID_DESCRIPTION)
-        parser.add_argument('-u', '--baseUrl', default=api.BASE_URL,
-                            help=f'The base URL for the PDC API. {api.BASE_URL} is the default.')
+        parser.add_argument('-u', '--baseUrl', default=BASE_URL,
+                            help=f'The base URL for the PDC API. {BASE_URL} is the default.')
         parser.add_argument('--skipVerify', default=False, action='store_true',
                             help='Skip ssl verification?')
         parser.add_argument('study_id')
         args = parser.parse_args(self.argv[start:])
-        pdc_study_id = api.get_pdc_study_id(args.study_id, url=args.baseUrl,
-                                            verify=not args.skipVerify)
+        
+        with Client(url=args.baseUrl, verify=not args.skipVerify) as client:
+            pdc_study_id = client.get_pdc_study_id(args.study_id)
+
+        if pdc_study_id is None:
+            sys.stderr.write('ERROR: No study found matching study_id!\n')
+            sys.exit(1)
         sys.stdout.write(f'{pdc_study_id}\n')
 
 
     def studyName(self, start=2):
         parser = argparse.ArgumentParser(description=Main.STUDY_NAME_DESCRIPTION)
-        parser.add_argument('-u', '--baseUrl', default=api.BASE_URL,
-                            help=f'The base URL for the PDC API. {api.BASE_URL} is the default.')
+        parser.add_argument('-u', '--baseUrl', default=BASE_URL,
+                            help=f'The base URL for the PDC API. {BASE_URL} is the default.')
         parser.add_argument('--skipVerify', default=False, action='store_true',
                             help='Skip ssl verification?')
         parser.add_argument('--normalize', default=False, action='store_true',
                             help='Remove special characters from study name so it a valid file name.')
         parser.add_argument('study_id')
         args = parser.parse_args(self.argv[start:])
-        study_name = api.get_study_name(args.study_id, url=args.baseUrl,
-                                        verify=not args.skipVerify)
+        
+        with Client(url=args.baseUrl, verify=not args.skipVerify) as client:
+            study_name = api.get_study_name(args.study_id)
+
+        if study_name is None:
+            sys.stderr.write('ERROR: No study found matching study_id!\n')
+            sys.exit(1)
+
         if args.normalize:
             study_name = io.normalize_fname(study_name)
-
         sys.stdout.write(f'{study_name}\n')
 
 
@@ -108,29 +121,39 @@ Available commands:
                             help='The output file format. Default is "json".')
         parser.add_argument('-n', '--nFiles', type=int, default=None,
                             help='The number of files to get metadata for. Default is all files in study')
-        parser.add_argument('-o', '--ofname', default='study_metadata',
-                            help='Output base name.')
-        parser.add_argument('-u', '--baseUrl', default=api.BASE_URL,
-                            help=f'The base URL for the PDC API. {api.BASE_URL} is the default.')
+        parser.add_argument('-u', '--baseUrl', default=BASE_URL,
+                            help=f'The base URL for the PDC API. {BASE_URL} is the default.')
         parser.add_argument('--skipVerify', default=False, action='store_true',
                             help='Skip ssl verification?')
         parser.add_argument('-a', '--skylineAnnotations', default=False, action='store_true',
                             help='Also save Skyline annotations csv file')
+        parser.add_argument('--flatten', default=False, action='store_true',
+                            help='Combine metadata into a single flat file. '
+                                 'Only compatable with DIA data.')
         parser.add_argument('study_id', help='The study id.')
         args = parser.parse_args(self.argv[start:])
 
-        ofname = f'{args.ofname}.{args.format}'
-        data = api.metadata(args.study_id, url=args.baseUrl, n_files=args.nFiles,
-                            verify=not args.skipVerify)
+        with Client(url=args.baseUrl, verify=not args.skipVerify) as client:
+            study_metadata = client.get_study_metadata(args.study_id)
+            files = client.get_study_raw_files(args.study_id, nFiles=args.nFiles)
+            aliquots = client.get_study_aliquots(args.study_id,
+                                                 file_ids=[f['file_id'] for f in files])
+            cases = client.get_study_cases(args.study_id)
 
-        if data is None:
-            sys.exit(1)
-        if len(data) == 0:
-            sys.stderr.write('ERROR: Could not find any data associated with study!\n')
-            sys.exit(1)
-        io.writeFileMetadata(data, ofname, format=args.format)
-        if args.skylineAnnotations:
-            io.writeSkylineAnnotations(data, f'{args.ofname}_annotations.csv')
+        metadata_files = {'study_metadata': study_metadata, 'files': files,
+                          'aliquots': aliquots, 'cases': cases}
+        pdc_study_id = study_metadata['pdc_study_id']
+        # for name, data in metadata_files.items():
+        #     with open(f'{}') as outF:
+
+        # if data is None:
+        #     sys.exit(1)
+        # if len(data) == 0:
+        #     sys.stderr.write('ERROR: Could not find any data associated with study!\n')
+        #     sys.exit(1)
+        # io.writeFileMetadata(data, ofname, format=args.format)
+        # if args.skylineAnnotations:
+        #     io.writeSkylineAnnotations(data, f'{args.ofname}_annotations.csv')
 
 
     def metadataToSky(self, start=2):
