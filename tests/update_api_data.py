@@ -10,7 +10,7 @@ import asyncio
 from resources.data import STUDY_METADATA, STUDY_CATALOG
 from resources.data import FILE_METADATA, ALIQUOT_METADATA, CASE_METADATA
 
-from PDC_client.submodules.api import Client
+from PDC_client.submodules.api import Client, BASE_URL
 
 
 STUDIES = ['PDC000504', 'PDC000251', 'PDC000451']
@@ -20,6 +20,18 @@ ENDPOINTS = {'study': 'Study metadata',
              'file': 'File metadata',
              'aliquot': 'Aliquot metadata',
              'case': 'Case metadata'}
+
+ENDPOINT_SORT_KEYS = {'study': 'study_id',
+                     'studyCatalog': 'study_id',
+                     'file': 'file_id',
+                     'aliquot': 'aliquot_id',
+                     'case': 'case_id'}
+
+TEST_DATA = {'study': STUDY_METADATA,
+             'studyCatalog': STUDY_CATALOG,
+             'file': FILE_METADATA,
+             'aliquot': ALIQUOT_METADATA,
+             'case': CASE_METADATA}
 
 # ANSI color codes
 RED = '\033[31m'    # Red for removals (-)
@@ -105,8 +117,48 @@ def n_diff(lhs, rhs):
     return added, removed
 
 
-def load_json_to_dict(fname):
+def sort_endpoint_data(data: dict|list, name: str) -> dict:
+    '''
+    Sort the data for a given endpoint based off ENDPOINT_SORT_KEYS.
+
+    Parameters
+    ----------
+    data: dict|list
+        The data to be sorted.
+    name: str
+        The name of the endpoint that is being sorted.
+
+    Returns
+    -------
+    data: dict
+        The sorted data.
+
+    Raises
+    ------
+    ValueError: If the endpoint is not in ENDPOINT_SORT_KEYS.
+    '''
+    if name == 'study':
+        data = sorted(data, key=lambda x: x[ENDPOINT_SORT_KEYS[name]])
+    elif name in ('file', 'aliquot', 'case'):
+        data = {k: sorted(v, key=lambda x: x[ENDPOINT_SORT_KEYS[name]])
+                for k, v in data.items()}
+    elif name == 'studyCatalog':
+        new_data = dict()
+        for k in sorted(data.keys()):
+            new_data[k] = {'versions': sorted(data[k]['versions'], key=lambda x: x['study_id'])}
+    else:
+        raise ValueError(f'Unknown endpoint {name}.')
+
+    return data
+
+
+def load_json_to_dict(name):
     ''' Load json file and handle cases where the file is empty or does not exist. '''
+
+    if name not in TEST_DATA:
+        raise ValueError(f'Unknown endpoint {name}.')
+
+    fname = TEST_DATA[name]
     if not os.path.isfile(fname):
         return ''
 
@@ -116,7 +168,8 @@ def load_json_to_dict(fname):
     if text == '':
         return ''
 
-    return json.loads(text)
+    data = json.loads(text)
+    return sort_endpoint_data(data, name)
 
 
 def update_test_data(files, color=True):
@@ -177,10 +230,10 @@ def update_test_data(files, color=True):
     sys.stdout.write(f'{n_deletions} deletion{"s" if n_deletions > 1 else ""}(-)\n')
 
 
-async def download_metadata(pdc_study_ids, endpoints):
+async def download_metadata(pdc_study_ids, endpoints, url=BASE_URL):
     ''' download all study_ids for pdc_study_ids '''
 
-    async with Client(timeout=30) as client:
+    async with Client(timeout=30, url=url) as client:
         study_id_tasks = list()
         async with asyncio.TaskGroup() as tg:
             for study in pdc_study_ids:
@@ -219,32 +272,36 @@ async def download_metadata(pdc_study_ids, endpoints):
 
     study_metadata = None
     if 'study' in endpoints:
-        study_metadata = [task.result() for task in study_metadata_tasks]
+        study_metadata = sort_endpoint_data([task.result() for task in study_metadata_tasks], 'study')
 
     study_catalog = None
     if 'studyCatalog' in endpoints:
-        study_catalog = {study_ids[study]: task.result()
-                         for study, task in zip(study_ids.keys(), study_catalog_tasks)}
+        study_catalog = sort_endpoint_data({study_ids[study]: task.result()
+                                            for study, task in zip(study_ids.keys(), study_catalog_tasks)},
+                                            'studyCatalog')
 
     raw_files = None
     if 'file' in endpoints:
         raw_files = {study_ids[study]: task.result()
-                    for study, task in zip(study_ids.keys(), file_tasks)}
+                     for study, task in zip(study_ids.keys(), file_tasks)}
 
         # remove url slot from file metadata because the urls are temporary
         for study in raw_files:
             for i in range(len(raw_files[study])):
                 raw_files[study][i].pop('url')
+        raw_files = sort_endpoint_data(raw_files, 'file')
 
     aliquots = None
     if 'aliquot' in endpoints:
-        aliquots = {study_ids[study]: task.result()
-                    for study, task in zip(study_ids.keys(), aliquot_tasks)}
+        aliquots = sort_endpoint_data({study_ids[study]: task.result()
+                                      for study, task in zip(study_ids.keys(), aliquot_tasks)},
+                                      'aliquot')
 
     cases = None
     if 'case' in endpoints:
-        cases = {study_ids[study]: task.result()
-                for study, task in zip(study_ids.keys(), case_tasks)}
+        cases = sort_endpoint_data({study_ids[study]: task.result()
+                                    for study, task in zip(study_ids.keys(), case_tasks)},
+                                    'case')
 
     return {'study': study_metadata,
             'studyCatalog': study_catalog,
@@ -275,6 +332,8 @@ def main():
     parser = argparse.ArgumentParser(description='This script checks if there are any changes to '
                                                  'the test api data in tests/data/api and prints '
                                                  'a summary of the differences.')
+    parser.add_argument('-u', '--baseUrl', default=BASE_URL, dest='url',
+                        help=f'The base URL for the PDC API. {BASE_URL} is the default.')
     parser.add_argument('--write', action='store_true', default=False,
                         help='Overwrite test files in data/api with new api data?')
     parser.add_argument('--plain', action='store_true', default=False,
@@ -295,16 +354,10 @@ def main():
     pdc_study_ids = STUDIES if all_studies else args.pdc_study_ids
 
     api_data = asyncio.run(
-        download_metadata(pdc_study_ids, args.endpoints)
+        download_metadata(pdc_study_ids, args.endpoints, url=args.url)
         )
 
-    test_data = {'study': STUDY_METADATA,
-                 'studyCatalog': STUDY_CATALOG,
-                 'file': FILE_METADATA,
-                 'aliquot': ALIQUOT_METADATA,
-                 'case': CASE_METADATA}
-
-    test_data = {key: [api_data[key], test_data[key]] for key, data in api_data.items()
+    test_data = {key: [api_data[key], key] for key, data in api_data.items()
                  if data is not None}
 
     # remove endpoints that are not specified
