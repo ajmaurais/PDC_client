@@ -11,20 +11,12 @@ import httpx
 from resources import TEST_DIR
 from resources.setup_functions import make_work_dir
 from resources.mock_graphql_server.data import api_data
+from resources.mock_graphql_server.server import server_is_running
 
 from PDC_client.submodules import api
 
 TEST_URL = 'http://localhost:5000/graphql'
 PDC_URL = api.BASE_URL
-
-def server_is_running():
-    ''' Check if mock graphql server is running.'''
-    query = 'query={ __schema { queryType { name }}}'
-    try:
-        response = httpx.get(f'{TEST_URL}?{query}')
-        return response.status_code == 200
-    except httpx.ConnectError:
-        return False
 
 
 def data_list_to_dict(data_list, key):
@@ -41,7 +33,7 @@ class TestGraphQLServerBase(unittest.TestCase):
         '''Set up the test server before running tests.'''
 
         # return if server is already running
-        if server_is_running():
+        if server_is_running(url=TEST_URL):
             cls.server_process = None
             return
 
@@ -57,7 +49,7 @@ class TestGraphQLServerBase(unittest.TestCase):
         timeout = 5
         start_time = time.time()
         while time.time() - start_time < timeout:
-            if server_is_running():
+            if server_is_running(url=TEST_URL):
                 cls.started_server = False
                 return
             time.sleep(0.5)
@@ -140,36 +132,26 @@ class TestRawRequests(TestGraphQLServerBase):
 
 
     def test_study_catalog_query(self):
-        self.assertTrue(server_is_running())
-
         query = api.Client._study_catalog_query(self.TEST_PDC_STUDY_ID)
         self.do_comparison_test(query)
 
 
     def test_invalid_study_catalog_query(self):
-        self.assertTrue(server_is_running())
-
         query = api.Client._study_catalog_query('INVALID_STUDY_ID')
         self.do_comparison_test(query)
 
 
     def test_study_metadata_query(self):
-        self.assertTrue(server_is_running())
-
         query = api.Client._study_metadata_query('pdc_study_id', self.TEST_PDC_STUDY_ID)
         self.do_comparison_test(query)
 
 
     def test_invalid_study_metadata_query(self):
-        self.assertTrue(server_is_running())
-
         query = api.Client._study_metadata_query('pdc_study_id', 'INVALID_STUDY_ID')
         self.do_comparison_test(query)
 
 
     def test_case_aliquot_query(self):
-        self.assertTrue(server_is_running())
-
         study_id = api_data.get_study_id(self.TEST_PDC_STUDY_ID)
         limit = 10
         offset = 0
@@ -189,8 +171,6 @@ class TestRawRequests(TestGraphQLServerBase):
 
 
     def test_invalid_case_aliquot_query(self):
-        self.assertTrue(server_is_running())
-
         limit = 10
         offset = 0
         query = api.Client._case_aliquot_query('INVALID_STUDY', offset, limit)
@@ -201,8 +181,6 @@ class TestRawRequests(TestGraphQLServerBase):
 
 
     def test_file_aliquot_query(self):
-        self.assertTrue(server_is_running())
-
         study_id = api_data.get_study_id(self.TEST_PDC_STUDY_ID)
         random.seed(0)
         for file_id in random.sample(list(api_data.index_study_file_ids[study_id]), 1):
@@ -220,8 +198,6 @@ class TestRawRequests(TestGraphQLServerBase):
 
 
     def test_invalid_file_aliquot_query(self):
-        self.assertTrue(server_is_running())
-
         query = api.Client._file_aliquot_query('INVALID_FILE_ID')
 
         pdc_data, test_data = self.get_paired_data(query)
@@ -232,8 +208,6 @@ class TestRawRequests(TestGraphQLServerBase):
 
 
     def test_study_case_query(self):
-        self.assertTrue(server_is_running())
-
         study_id = api_data.get_study_id(self.TEST_PDC_STUDY_ID)
         limit = 10
         offset = 0
@@ -253,8 +227,6 @@ class TestRawRequests(TestGraphQLServerBase):
 
 
     def test_invalid_study_case_query(self):
-        self.assertTrue(server_is_running())
-
         limit = 10
         offset = 0
         query = api.Client._study_case_query('INVALID_STUDY', offset, limit)
@@ -265,8 +237,6 @@ class TestRawRequests(TestGraphQLServerBase):
 
 
     def test_study_file_id_query(self):
-        self.assertTrue(server_is_running())
-
         query = api.Client._study_file_id_query(api_data.get_study_id(self.TEST_PDC_STUDY_ID))
         pdc_response = self.post(PDC_URL, query)
         test_response = self.post(TEST_URL, query)
@@ -288,8 +258,6 @@ class TestRawRequests(TestGraphQLServerBase):
 
 
     def test_invalid_study_file_id_query(self):
-        self.assertTrue(server_is_running())
-
         query = api.Client._study_raw_file_query('INVALID_STUDY_ID')
 
         pdc_response = self.post(PDC_URL, query)
@@ -310,8 +278,6 @@ class TestRawRequests(TestGraphQLServerBase):
 
 
     def test_study_raw_file_query(self):
-        self.assertTrue(server_is_running())
-
         query = api.Client._study_raw_file_query(api_data.get_study_id(self.TEST_PDC_STUDY_ID))
         pdc_response = self.post(PDC_URL, query)
         test_response = self.post(TEST_URL, query)
@@ -347,8 +313,6 @@ class TestRawRequests(TestGraphQLServerBase):
 
 
     def test_invalid_study_raw_file_query(self):
-        self.assertTrue(server_is_running())
-
         query = api.Client._study_raw_file_query('INVALID_STUDY_ID')
 
         pdc_response = self.post(PDC_URL, query)
@@ -366,6 +330,86 @@ class TestRawRequests(TestGraphQLServerBase):
         self.assertIn('errors', pdc_data)
         self.assertIn('errors', test_data)
         self.assertDictEqual(pdc_data['data'], test_data['data'])
+
+
+    def test_file_metadata_query(self):
+        random.seed(12)
+        test_files = {i: api_data.file_metadata[i] for i in 
+                      random.sample(list(api_data.file_metadata.keys()), 3)}
+
+        query_keys = ['file_name', 'file_type', 'data_category',
+                      'file_format', 'md5sum', 'file_size']
+
+        for file_id, file_data in test_files.items():
+            query = api.Client._file_metadata_query(file_id)
+            pdc_response = self.get(PDC_URL, query)
+            test_response = self.get(TEST_URL, query)
+            self.assertEqual(pdc_response.status_code, 200)
+            self.assertEqual(test_response.status_code, 200)
+
+            # Parse the response
+            pdc_data = pdc_response.json()['data']['fileMetadata']
+            test_data = test_response.json()['data']['fileMetadata']
+            self.assertEqual(len(pdc_data), 1)
+            self.assertEqual(len(test_data), 1)
+            pdc_data = pdc_data[0]
+            test_data = test_data[0]
+
+            for key in query_keys:
+                self.assertIn(key, pdc_data)
+                self.assertIn(key, test_data)
+                self.assertEqual(pdc_data[key], test_data[key])
+
+
+    def test_invalid_file_metadata_query(self):
+        query = api.Client._file_metadata_query('INVALID_FILE_ID')
+
+        pdc_response = self.get(PDC_URL, query)
+        test_response = self.get(TEST_URL, query)
+        self.assertEqual(pdc_response.status_code, 200)
+        self.assertEqual(test_response.status_code, 200)
+        self.assertIsNone(pdc_response.json()['data']['fileMetadata'])
+        self.assertIsNone(test_response.json()['data']['fileMetadata'])
+
+
+    def test_file_url_query(self):
+        random.seed(12)
+        test_files = {i: api_data.file_metadata[i] for i in 
+                      random.sample(list(api_data.file_metadata.keys()), 3)}
+
+        query_keys = ['file_name', 'file_type', 'data_category', 'file_format']
+
+        for file_id, file_data in test_files.items():
+            query = api.Client._file_url_query(*[file_data[key] for key in query_keys])
+            pdc_response = self.post(PDC_URL, query)
+            test_response = self.post(TEST_URL, query)
+            self.assertEqual(pdc_response.status_code, 200)
+            self.assertEqual(test_response.status_code, 200)
+            pdc_data = pdc_response.json()['data']['filesPerStudy']
+            test_data = test_response.json()['data']['filesPerStudy']
+            self.assertIsNotNone(pdc_data)
+            self.assertIsNotNone(test_data)
+            self.assertEqual(len(pdc_data), 1)
+            self.assertEqual(len(test_data), 1)
+            pdc_data = pdc_data[0]
+            test_data = test_data[0]
+
+            self.assertEqual(file_id, pdc_data['file_id'])
+            for key in ('file_id', 'md5sum', 'file_size'):
+                self.assertIn(key, pdc_data)
+                self.assertIn(key, test_data)
+                self.assertEqual(pdc_data[key], test_data[key])
+
+
+    def test_invalid_file_url_query(self):
+        query = api.Client._file_url_query('NA', 'NA', 'NA', 'NA')
+
+        pdc_response = self.post(PDC_URL, query)
+        test_response = self.post(TEST_URL, query)
+        self.assertEqual(pdc_response.status_code, 200)
+        self.assertEqual(test_response.status_code, 200)
+        self.assertEqual(len(pdc_response.json()['data']['filesPerStudy']), 0)
+        self.assertEqual(len(pdc_response.json()['data']['filesPerStudy']), 0)
 
 
 class TestClient(TestGraphQLServerBase):
@@ -493,3 +537,17 @@ class TestClient(TestGraphQLServerBase):
         for case_id, case in pdc_data.items():
             self.assertIn(case_id, test_data)
             self.assertDictEqual(test_data[case_id], case)
+    
+
+    def test_get_file_url(self):
+        random.seed(7)
+        test_files = {i: api_data.file_metadata[i] for i in 
+                      random.sample(list(api_data.file_metadata.keys()), 3)}
+
+        for file_id, file_data in test_files.items():
+            pdc_data, test_data = self.get_data_pair('get_file_url', file_id)
+            self.assertIn('url', pdc_data)
+            self.assertIn('url', test_data)
+            pdc_data['url'] = ''
+            test_data['url'] = ''
+            self.assertDictEqual(pdc_data, test_data)

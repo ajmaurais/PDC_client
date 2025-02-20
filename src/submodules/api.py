@@ -5,6 +5,7 @@ import sys
 from typing import Callable, Optional
 
 from httpx import Limits, AsyncClient
+from httpx import ConnectError
 
 from .logger import LOGGER
 
@@ -120,25 +121,37 @@ class Client():
     async def _post(self, query: str) -> dict:
         query = re.sub(r'\s+', ' ', query.strip())
         for _ in range(self.request_retries):
-            response = await self.client.post(self.url, json={'query': query})
-            if response.status_code == 200:
-                return response.json()
+            try:
+                response = await self.client.post(self.url, json={'query': query})
+                if response.status_code == 200:
+                    return response.json()
             # if response.status_code >= 400 and response.status_code < 500:
             #     break
-        sys.stderr.write(f'url:\n"{self.url}?{query}"\n')
-        raise RuntimeError(f'Failed with response code {response.status_code}!')
+            except ConnectError:
+                LOGGER.error('Invalid URL: %s', self.url, stacklevel=2)
+                return
+        LOGGER.error('Error in query:\n\t%s\n\tstatus_code: %s\n\ttext: %s',
+                     query, response.status_code, response.text,
+                     stacklevel=2)
+        return None
 
 
     async def _get(self, query) -> dict:
         query = re.sub(r'\s+', ' ', query.strip())
         for _ in range(self.request_retries):
-            response = await self.client.get(f'{self.url}?{query}')
-            if response.status_code == 200:
-                return response.json()
+            try:
+                response = await self.client.get(f'{self.url}?{query}')
+                if response.status_code == 200:
+                    return response.json()
             # if response.status_code >= 400 and response.status_code < 500:
             #     break
-        sys.stderr.write(f'url:\n"{self.url}?{query}"\n')
-        raise RuntimeError(f'Failed with response code {response.status_code}!')
+            except ConnectError:
+                LOGGER.error('Invalid URL: %s', self.url, stacklevel=2)
+                return
+        LOGGER.error('Error in query:\n\t%s\n\tstatus_code: %s\n\ttext: %s',
+                     query, response.status_code, response.text,
+                     stacklevel=2)
+        return None
 
 
     @staticmethod
@@ -179,7 +192,7 @@ class Client():
         query = self._study_catalog_query(pdc_study_id)
         data = await self._get(query)
 
-        if len(data['data']['studyCatalog']) == 0:
+        if data is None or len(data['data']['studyCatalog']) == 0:
             return None
 
         if len(data['data']['studyCatalog']) > 1:
@@ -302,6 +315,9 @@ class Client():
         study_query = self._study_metadata_query(id_name, _id)
         data = await asyncio.create_task(self._get(study_query))
 
+        if data is None:
+            return None
+
         if study_id_task is None:
             if data['data']['study'] is None or len(data['data']['study']) == 0:
                 return None
@@ -401,6 +417,9 @@ class Client():
         query = query_f(study_id, 0, page_limit)
         first_page = await self._get(query)
 
+        if first_page is None:
+            return None
+
         if first_page['data'][endpoint_name] is None:
             LOGGER.error("Invalid query for study_id: '%s'", study_id)
             return None
@@ -497,6 +516,9 @@ class Client():
             file_id_query = self._study_file_id_query(study_id)
             file_id_data = await self._post(file_id_query)
 
+            if file_id_data is None:
+                return None
+
             if 'errors' in file_id_data:
                 self._log_post_errors(file_id_data['errors'])
                 return None
@@ -517,7 +539,7 @@ class Client():
         file_aliquot_ids = dict()
         for file_id, task in zip(file_ids, aliquot_id_tasks):
             data = task.result()
-            if data['data']['fileMetadata'] is None:
+            if data is None or data['data']['fileMetadata'] is None:
                 LOGGER.error("Error getting aliquot_ids for file: '%s'", file_id)
                 continue
             query_file_id = data['data']['fileMetadata'][0]['file_id']
@@ -526,7 +548,6 @@ class Client():
                 file_aliquot_ids[aliquot['aliquot_id']] = file_id
 
         aliquot_data = await aliquot_task
-
         if aliquot_data is None:
             LOGGER.error("Invalid query for study_id: '%s'", study_id)
 
@@ -639,12 +660,13 @@ class Client():
 
 
     @staticmethod
-    def _study_raw_file_query(study_id):
+    def _study_raw_file_query(study_id, data_category='Raw Mass Spectra'):
+        data_category_str = '' if data_category is None else f'data_category: "{data_category}"'
         return '''query {
-            filesPerStudy (study_id: "%s" data_category: "Raw Mass Spectra" acceptDUA: true) {
+            filesPerStudy (study_id: "%s" %s acceptDUA: true) {
                 file_id file_name file_submitter_id md5sum file_size
                 data_category file_type file_format signedUrl {url}}
-            }''' % study_id
+            }''' % (study_id, data_category_str)
 
 
     async def async_get_study_raw_files(self, study_id: str,
@@ -669,6 +691,9 @@ class Client():
         # get a list of .raw files in study
         query = self._study_raw_file_query(study_id)
         payload = await self._post(query)
+
+        if payload is None:
+            return None
 
         if 'errors' in payload:
             self._log_post_errors(payload['errors'])
@@ -707,3 +732,76 @@ class Client():
             or None if no files could be found for study_id.
         '''
         return self._loop.run_until_complete(self.async_get_study_raw_files(study_id, **kwargs))
+
+
+    @staticmethod
+    def _file_metadata_query(file_id):
+        return '''query={
+            fileMetadata (file_id: "%s" acceptDUA: true) {
+                file_name file_type data_category file_format md5sum file_size
+            }}''' % file_id
+
+
+    @staticmethod
+    def _file_url_query(file_name, file_type, data_category, file_format):
+        return '''query { filesPerStudy (
+            file_name: "%s" file_type: "%s" data_category: "%s" file_format: "%s" acceptDUA: true) {
+                file_id, md5sum, file_size, signedUrl { url }
+            }}''' % (file_name, file_type, data_category, file_format)
+
+
+    async def async_get_file_url(self, file_id: str) -> dict|None:
+        '''
+        Async version of get_file_url
+        Parameters
+        ----------
+        file_id: str
+            The file ID.
+        Returns
+        -------
+        file_url: dict
+            A dictionary with the file_name, file_size, url, and md5
+            or None if no url could be found for file_id.
+        '''
+        # get file metadata
+        file_data = await self._get(self._file_metadata_query(file_id))
+        if file_data is None or file_data['data']['fileMetadata'] is None or \
+           len(file_data['data']['fileMetadata']) == 0:
+            LOGGER.error("No file found for file_id: '%s'", file_id)
+            return None
+        file_data = file_data['data']['fileMetadata'][0]
+
+        # get file url
+        query = self._file_url_query(*[file_data[k] for k in ('file_name', 'file_type',
+                                                              'data_category', 'file_format')])
+        payload = await self._post(query)
+
+        if 'errors' in payload:
+            self._log_post_errors(payload['errors'])
+            return None
+
+        match len(payload['data']['filesPerStudy']):
+            case 0:
+                LOGGER.error("No file found for file_id: '%s'", file_id)
+                return None
+            case 1:
+                url_data = payload['data']['filesPerStudy'][0]
+            case _:
+                raise RuntimeError(f'Ambigious file_id: {file_id}. Multiple files found!')
+
+        if file_id != url_data['file_id']:
+            raise RuntimeError(f'file_id does not match url_data for file_id: {file_id}')
+
+        if not all(file_data[k] == url_data[k] for k in ('file_size', 'md5sum')):
+            raise RuntimeError(f'file_data does not match url_data for file_id: {file_id}')
+
+        ret = dict()
+        ret['file_name'] = file_data['file_name']
+        ret['file_size'] = url_data['file_size']
+        ret['md5sum'] = url_data['md5sum']
+        ret['url'] = url_data['signedUrl']['url']
+        return ret
+
+
+    def get_file_url(self, file_id: str) -> dict|None:
+        return self._loop.run_until_complete(self.async_get_file_url(file_id))

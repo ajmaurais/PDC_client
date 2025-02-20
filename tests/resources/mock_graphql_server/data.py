@@ -89,7 +89,15 @@ class Data:
                     raise ValueError(f'Case {case_id} not found in aliquot data!')
                 case.pop('case_id')
                 self.cases[case_id]['demographics'] = case
-
+        
+        # add other file metadata to file_metadata
+        file_metadata_keys = ['file_name', 'file_type', 'file_format', 'data_category', 'md5sum', 'file_size']
+        for pdc_study_id, files in file_per_study.items():
+            for file in files:
+                file_id = file['file_id']
+                if file_id in self.file_metadata:
+                    for var in file_metadata_keys:
+                        self.file_metadata[file_id][var] = file[var]
 
     def get_study_id(self, pdc_study_id):
         '''
@@ -128,7 +136,10 @@ class Data:
 
     def get_files_per_study(self, study_id=None,
                             pdc_study_id=None,
-                            data_category=None) -> Generator[dict, None, None]:
+                            data_category=None,
+                            file_name=None,
+                            file_type=None,
+                            file_format=None) -> Generator[dict, None, None]:
         '''
         Retrieve file information based on study_id or pdc_study_id.
 
@@ -136,33 +147,24 @@ class Data:
             study_id (str, optional): The ID of the study to retrieve. Defaults to None.
             pdc_study_id (str, optional): The PDC study ID to retrieve. Defaults to None.
             data_category (str, optional): The data category to filter files. Defaults to None.
+            file_name (str, optional): The file name to filter files. Defaults to None.
+            file_type (str, optional): The file type to filter files. Defaults to None.
+            file_format (str, optional): The file format to filter files. Defaults to None.
 
         Yields:
-            dict: A dictionary containing the file information if found, otherwise None.
+            dict: A dictionary containing the file information if found.
         '''
-        parameter_count = sum(v is not None for v in (study_id, pdc_study_id))
-        if parameter_count == 0:
-            for study in self.files_per_study.values():
+        _study_id = study_id if study_id is not None else self.get_study_id(pdc_study_id)
+
+        for data_study_id, study in self.files_per_study.items():
+            if _study_id is None or _study_id == data_study_id:
                 for file in study:
-                    if data_category is None or file['data_category'] == data_category:
+                    match = data_category is None or file['data_category'] == data_category
+                    match &= file_name is None or file['file_name'] == file_name
+                    match &= file_type is None or file['file_type'] == file_type
+                    match &= file_format is None or file['file_format'] == file_format
+                    if match:
                         yield file
-
-        elif parameter_count == 1:
-            if pdc_study_id is not None:
-                study_id = self.get_study_id(pdc_study_id)
-                if study_id is None:
-                    return None
-
-            study = self.files_per_study.get(study_id)
-            if study is None:
-                return None
-
-            for file in study:
-                if data_category is None or file['data_category'] == data_category:
-                    yield file
-
-        else:
-            raise ValueError('Both study_id and pdc_study_id cannot be provided!')
 
 
     def get_total_cases_per_study(self, study_id):

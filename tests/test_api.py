@@ -75,7 +75,7 @@ class TestStudyLevel(unittest.TestCase):
 
     def test_only_latest_option(self):
         for study in self.studies:
-            data = self.client.get_study_metadata(pdc_study_id='PDC000504',
+            data = self.client.get_study_metadata(pdc_study_id=study['pdc_study_id'],
                                                   only_latest=False)
             self.assertIsInstance(data, list)
             self.assertTrue(all('is_latest_version' in s for s in data))
@@ -87,15 +87,14 @@ class TestStudyLevel(unittest.TestCase):
 
 
 class TestFileLevel(unittest.TestCase):
-    @classmethod
-    def setUpClass(cls):
+    def setUp(self):
         with open(data.FILE_METADATA, 'r', encoding='utf-8') as inF:
-            cls.files = json.load(inF)
+            self.files = json.load(inF)
 
         with open(data.STUDY_METADATA, 'r', encoding='utf-8') as inF:
             study_list = json.load(inF)
-        cls.studies = {study.pop('pdc_study_id'): study for study in study_list}
-    
+        self.studies = {study.pop('pdc_study_id'): study for study in study_list}
+
 
     @staticmethod
     def file_list_to_dict(file_list):
@@ -161,6 +160,44 @@ class TestFileLevel(unittest.TestCase):
                 self.assertEqual(len(data), subset_n_files)
 
 
+    def test_get_file_url(self):
+        expect_url = not TEST_URL.startswith('http://localhost')
+
+        random.seed(40)
+        test_study = 'PDC000504'
+        test_files = random.sample(self.files[test_study], min(len(self.files[test_study]), 5))
+
+        file_data_keys = ('file_name', 'file_size', 'md5sum')
+
+        with api.Client(url=TEST_URL) as client:
+            for file in test_files:
+                file_id = file['file_id']
+                target_data = {key: file[key] for key in file_data_keys}
+                api_data = client.get_file_url(file_id)
+
+                self.assertIn('url', api_data)
+                if expect_url:
+                    self.assertRegex(api_data['url'], r'^https://')
+                self.assertIsInstance(api_data['url'], str)
+                api_data.pop('url')
+                self.assertDictEqual(api_data, target_data)
+
+
+    def test_invalid_get_file_url(self):
+        with api.Client(url=TEST_URL) as client:
+            with self.assertLogs(level='ERROR') as cm:
+                ret = client.get_file_url('DUMMY')
+
+        self.assertIsNone(ret)
+        self.assertIn("No file found for file_id: 'DUMMY'", cm.output[0])
+
+
+    def test_get_file_url_duplicate(self):
+        if not TEST_URL.startswith('https://localhost'):
+            self.skipTest('Test only valid for mock server')
+
+
+
 class TestAliquotLevel(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
@@ -192,13 +229,13 @@ class TestAliquotLevel(unittest.TestCase):
 
 
     def test_data(self):
-        page_len = 100
+        page_len = 50
         # for study, study_aliquots in self.aliquots.items():
         study = 'PDC000504'
         study_aliquots = self.aliquots[study]
 
         study_aliquots = self.aliquot_list_to_dict(study_aliquots)
-        
+
         with api.Client(url=TEST_URL) as client:
             test_study_aliquots = client.get_study_aliquots(self.studies[study]['study_id'],
                                                             page_limit=page_len)
@@ -209,9 +246,15 @@ class TestAliquotLevel(unittest.TestCase):
 
         self.assertDictEqual(test_study_aliquots, study_aliquots)
 
+        file_ids = list(set(f['file_id'] for f in test_study_aliquots.values()))
+        with api.Client(url=TEST_URL) as client:
+            file_ids_aliquots = client.get_study_aliquots(self.studies[study]['study_id'],
+                                                          page_limit=page_len,
+                                                          file_ids=file_ids)
 
-    # def test_file_ids_arg(self):
-    #     pass
+        file_ids_aliquots = self.aliquot_list_to_dict(file_ids_aliquots)
+        self.assertEqual(len(file_ids_aliquots), len(test_study_aliquots))
+        self.assertDictEqual(file_ids_aliquots, test_study_aliquots)
 
 
 class TestCaseLevel(unittest.TestCase):
@@ -223,7 +266,7 @@ class TestCaseLevel(unittest.TestCase):
         with open(data.STUDY_METADATA, 'r', encoding='utf-8') as inF:
             study_list = json.load(inF)
         cls.studies = {study.pop('pdc_study_id'): study for study in study_list}
-    
+
 
     @staticmethod
     def case_list_to_dict(case_list):
@@ -249,7 +292,7 @@ class TestCaseLevel(unittest.TestCase):
         with api.Client(url=TEST_URL) as client:
             for study, study_cases in self.cases.items():
                 study_cases = self.case_list_to_dict(study_cases)
-                
+
                 test_study_cases = client.get_study_cases(self.studies[study]['study_id'],
                                                           page_limit=page_limit)
                 self.assertEqual(len(test_study_cases), self.studies[study]['cases_count'])

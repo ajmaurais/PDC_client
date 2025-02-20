@@ -22,6 +22,9 @@ class Query(graphene.ObjectType):
     filesPerStudy = graphene.List(FilesPerStudy, id=graphene.ID(name='study_id'),
                                   pdc_study_id=graphene.String(name='pdc_study_id'),
                                   data_category=graphene.String(name='data_category'),
+                                  file_name=graphene.String(name='file_name'),
+                                  file_type=graphene.String(name='file_type'),
+                                  file_format=graphene.String(name='file_format'),
                                   acceptDUA=graphene.Boolean())
 
     fileMetadata = graphene.List(FileMetadata, id=graphene.ID(name='file_id'),
@@ -54,12 +57,23 @@ class Query(graphene.ObjectType):
                              versions=[StudyVersion(**version) for version in study['versions']])]
 
 
-    def resolve_filesPerStudy(self, info, id=None, data_category=None, acceptDUA=False):
+    def resolve_filesPerStudy(self, info, id=None,
+                              data_category=None,
+                              file_name=None,
+                              file_type=None,
+                              file_format=None,
+                              acceptDUA=False):
         if not acceptDUA:
             raise RuntimeError('You must accept the DUA to access this data!')
 
-        ret = [FilesPerStudy(**file, signedUrl=Url('file_does_not_exist'))
-               for file in api_data.get_files_per_study(study_id=id)]
+        ret = []
+        for file in api_data.get_files_per_study(study_id=id,
+                                                 data_category=data_category,
+                                                 file_name=file_name,
+                                                 file_type=file_type,
+                                                 file_format=file_format):
+            ret.append(FilesPerStudy(**file, signedUrl=Url('file_does_not_exist')))
+
         if len(ret) == 0:
             raise QueryError(f"Incorrect string value: '{id}' for function uuid_to_bin")
         return ret
@@ -104,6 +118,12 @@ class Query(graphene.ObjectType):
             return None
 
         return [FileMetadata(file_id=id,
+                             data_category=file['data_category'],
+                             file_name=file['file_name'],
+                             file_type=file['file_type'],
+                             file_format=file['file_format'],
+                             file_size=file['file_size'],
+                             md5sum=file['md5sum'],
                              aliquots=[Aliquot(**aliquot) for aliquot in file['aliquots']])]
 
 

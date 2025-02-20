@@ -47,6 +47,12 @@ class Aliquot(graphene.ObjectType):
 class FileMetadata(graphene.ObjectType):
     file_id = graphene.ID(name='file_id')
     aliquots = graphene.List(Aliquot, name='aliquots')
+    file_name = graphene.String(name='file_name')
+    file_type = graphene.String(name='file_type')
+    file_format = graphene.String(name='file_format')
+    data_category = graphene.String(name='data_category')
+    md5sum = graphene.String(name='md5sum')
+    file_size = graphene.String(name='file_size')
 
 
 SAMPLE_STRING_KEYS = ['sample_id', 'sample_submitter_id', 'sample_type', 'tissue_type']

@@ -2,9 +2,20 @@
 from flask import Flask, request, jsonify
 from flask_graphql import GraphQLView
 import graphene
+from httpx import get, ConnectError
 
 from .schema import Query
 from .schema import QueryError
+
+def server_is_running(url='http://localhost:5000/graphql'):
+    ''' Check if mock graphql server is running.'''
+    query = 'query={ __schema { queryType { name }}}'
+    try:
+        response = get(f'{url}?{query}')
+        return response.status_code == 200
+    except ConnectError:
+        return False
+
 
 def get_server():
     # Create the schema
@@ -43,7 +54,7 @@ def get_server():
                 'errors': [{
                     'extensions': {'code': 'INTERNAL_SERVER_ERROR'},
                     'path': request.path,
-                    'message': 'An error that I have set POOP'
+                    'message': e.message,
                 } for e in result.errors]
             })
             return response
