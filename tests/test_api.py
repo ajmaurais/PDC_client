@@ -3,9 +3,10 @@ import unittest
 import json
 import random
 
-from PDC_client.submodules import api
-
 from resources import data
+from update_api_data import DUPLICATE_FILE_TEST_STUDIES
+
+from PDC_client.submodules import api
 
 TEST_URL = 'http://localhost:5000/graphql'
 # TEST_URL = 'https://pdc.cancer.gov/graphql'
@@ -193,9 +194,32 @@ class TestFileLevel(unittest.TestCase):
 
 
     def test_get_file_url_duplicate(self):
-        if not TEST_URL.startswith('https://localhost'):
+        if not TEST_URL.startswith('http://localhost'):
             self.skipTest('Test only valid for mock server')
 
+        duplicate_file_ids = []
+        duplicate_name_ids = []
+        gt_files = dict()
+        for study in DUPLICATE_FILE_TEST_STUDIES:
+            for file in self.files[study]:
+                if file['data_category'] == 'duplicate_file_test':
+                    duplicate_file_ids.append(file['file_id'])
+                    gt_files[file['file_id']] = file.copy()
+                if file['data_category'] == 'duplicate_name_test':
+                    duplicate_name_ids.append(file['file_id'])
+                    gt_files[file['file_id']] = file.copy()
+
+        self.assertEqual(len(duplicate_file_ids), 2)
+        self.assertEqual(len(duplicate_name_ids), 2)
+        gt_files = {k: {name: value for name, value in v.items() if name in ('file_name', 'file_size', 'md5sum')}
+                    for k, v in gt_files.items()}
+
+        with api.Client(url=TEST_URL) as client:
+            for file_id in duplicate_file_ids + duplicate_name_ids:
+                api_data = client.get_file_url(file_id)
+                self.assertIsInstance(api_data['url'], str)
+                api_data.pop('url')
+                self.assertDictEqual(api_data, gt_files[file_id])
 
 
 class TestAliquotLevel(unittest.TestCase):

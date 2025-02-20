@@ -558,7 +558,7 @@ class Client():
                 for aliquot in sample['aliquots']:
                     new_a = {k: aliquot[k] for k in ('aliquot_id', 'analyte_type')}
                     new_a.update({k: sample[k] for k in ('sample_id', 'sample_submitter_id',
-                                                        'sample_type', 'tissue_type')})
+                                                         'sample_type', 'tissue_type')})
                     new_a['case_id'] = case['case_id']
 
                     if aliquot['aliquot_id'] in file_aliquot_ids:
@@ -780,17 +780,14 @@ class Client():
             self._log_post_errors(payload['errors'])
             return None
 
-        match len(payload['data']['filesPerStudy']):
-            case 0:
-                LOGGER.error("No file found for file_id: '%s'", file_id)
-                return None
-            case 1:
-                url_data = payload['data']['filesPerStudy'][0]
-            case _:
-                raise RuntimeError(f'Ambigious file_id: {file_id}. Multiple files found!')
+        if len(payload['data']['filesPerStudy']) == 0:
+            LOGGER.error("No file found for file_id: '%s'", file_id)
+            return None
 
-        if file_id != url_data['file_id']:
-            raise RuntimeError(f'file_id does not match url_data for file_id: {file_id}')
+        url_datas = [file for file in payload['data']['filesPerStudy'] if file['file_id'] == file_id]
+        if len(url_datas) != 1:
+            raise RuntimeError(f'Ambigious file_id: {file_id}. Multiple files found!')
+        url_data = url_datas[0]
 
         if not all(file_data[k] == url_data[k] for k in ('file_size', 'md5sum')):
             raise RuntimeError(f'file_data does not match url_data for file_id: {file_id}')

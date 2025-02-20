@@ -32,11 +32,17 @@ class Data:
                 file['pdc_study_id'] = pdc_study_id
                 self.files_per_study[study_id].append(file)
 
+        self.file_metadata = dict()
+        file_metadata_keys = ['file_name', 'file_type', 'file_format', 'data_category', 'md5sum', 'file_size']
+        for pdc_study_id, files in self.files_per_study.items():
+            for file in files:
+                self.file_metadata[file['file_id']] = {key: file[key] for key in file_metadata_keys}
+                self.file_metadata[file['file_id']]['aliquots'] = list()
+
         # read aliquot data
         with open(ALIQUOT_METADATA, 'r', encoding='utf-8') as inF:
             aliquot_data = json.load(inF)
 
-        self.file_metadata = dict()
         self.index_study_file_ids = dict()
         self.index_study_cases = dict()
         self.cases = dict()
@@ -50,8 +56,7 @@ class Data:
                 self.index_study_cases[study_id].add(aliquot['case_id'])
 
                 if aliquot['file_id'] not in self.file_metadata:
-                    self.file_metadata[aliquot['file_id']] = dict()
-                    self.file_metadata[aliquot['file_id']]['aliquots'] = list()
+                    raise RuntimeError(f"Missing file metadata for file_id: '{aliquot['file_id']}'")
                 self.file_metadata[aliquot['file_id']]['aliquots'].append({'aliquot_id': aliquot['aliquot_id']})
 
                 case_id = aliquot['case_id']
@@ -89,15 +94,7 @@ class Data:
                     raise ValueError(f'Case {case_id} not found in aliquot data!')
                 case.pop('case_id')
                 self.cases[case_id]['demographics'] = case
-        
-        # add other file metadata to file_metadata
-        file_metadata_keys = ['file_name', 'file_type', 'file_format', 'data_category', 'md5sum', 'file_size']
-        for pdc_study_id, files in file_per_study.items():
-            for file in files:
-                file_id = file['file_id']
-                if file_id in self.file_metadata:
-                    for var in file_metadata_keys:
-                        self.file_metadata[file_id][var] = file[var]
+
 
     def get_study_id(self, pdc_study_id):
         '''

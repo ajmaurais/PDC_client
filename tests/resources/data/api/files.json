@@ -389,6 +389,46 @@
       "file_submitter_id": "13CPTAC_OVprospective_G_JHUZ_20160317_QE_r03.raw",
       "file_type": "Proprietary",
       "md5sum": "7a7a438efa1ebad1eed6cfe3e3417afd"
+    },
+    {
+      "data_category": "duplicate_file_test",
+      "file_format": "txt",
+      "file_id": "87751d4c-a850-1e2c-44dc-da6a797d76de",
+      "file_name": "empty_file.txt",
+      "file_size": "0",
+      "file_submitter_id": "empty_file_1.txt",
+      "file_type": "text",
+      "md5sum": "d41d8cd98f00b204e9800998ecf8427e"
+    },
+    {
+      "data_category": "duplicate_file_test",
+      "file_format": "txt",
+      "file_id": "61b339ff-2481-74e5-598b-88dbaa99e079",
+      "file_name": "empty_file.txt",
+      "file_size": "0",
+      "file_submitter_id": "empty_file_2.txt",
+      "file_type": "text",
+      "md5sum": "d41d8cd98f00b204e9800998ecf8427e"
+    },
+    {
+      "data_category": "duplicate_name_test",
+      "file_format": "txt",
+      "file_id": "7b87a9e2-5fef-e911-ff22-a27b02c7bff2",
+      "file_name": "not_empty_file.txt",
+      "file_size": "4",
+      "file_submitter_id": "empty_file_1.txt",
+      "file_type": "text",
+      "md5sum": "b026324c6904b2a9cb4b88d6d61c81d1"
+    },
+    {
+      "data_category": "duplicate_name_test",
+      "file_format": "txt",
+      "file_id": "75d0dd66-cf72-f858-a4b6-6f8c462804db",
+      "file_name": "not_empty_file.txt",
+      "file_size": "4",
+      "file_submitter_id": "empty_file_2.txt",
+      "file_type": "text",
+      "md5sum": "26ab0db90d72e28ad0ba1e22ee510510"
     }
   ],
   "PDC000451": [

@@ -6,14 +6,16 @@ import json
 import difflib
 import subprocess
 import asyncio
+import random
+from uuid import UUID
 
 from resources.data import STUDY_METADATA, STUDY_CATALOG
 from resources.data import FILE_METADATA, ALIQUOT_METADATA, CASE_METADATA
 
 from PDC_client.submodules.api import Client, BASE_URL
 
-
-STUDIES = ['PDC000504', 'PDC000251', 'PDC000451']
+DUPLICATE_FILE_TEST_STUDIES = ['PDC000251']
+STUDIES = ['PDC000504', 'PDC000451'] + DUPLICATE_FILE_TEST_STUDIES
 
 ENDPOINTS = {'study': 'Study metadata',
              'studyCatalog': 'Study catalog',
@@ -216,7 +218,7 @@ def update_test_data(files, color=True):
             added_s = '+' * round(added / plot_divisor)
             removed_s = '-' * round(removed / plot_divisor)
 
-            with open(files[name][1], 'w', encoding='utf-8') as outF:
+            with open(TEST_DATA[files[name][1]], 'w', encoding='utf-8') as outF:
                 json.dump(files[name][0], outF, indent=2, sort_keys=True)
 
             if color and sys.stdout.isatty():
@@ -228,6 +230,45 @@ def update_test_data(files, color=True):
     sys.stdout.write(f'{n_files} File{"s" if n_files > 1 else ""} changed, ')
     sys.stdout.write(f'{n_insertions} insertion{"s" if n_insertions > 1 else ""}(+), ')
     sys.stdout.write(f'{n_deletions} deletion{"s" if n_deletions > 1 else ""}(-)\n')
+
+
+def add_duplicate_files(files, studies):
+    random.seed(12)
+    for study in studies:
+        for i in range(2):
+            files[study].append({
+                'data_category': 'duplicate_file_test',
+                'file_format': 'txt',
+                'file_id': str(UUID(int=random.getrandbits(128))),
+                'file_name': 'empty_file.txt',
+                'file_size': '0',
+                'file_submitter_id': f'empty_file_{i+1}.txt',
+                'file_type': 'text',
+                'md5sum': 'd41d8cd98f00b204e9800998ecf8427e'
+            })
+
+        files[study].append({
+            'data_category': 'duplicate_name_test',
+            'file_format': 'txt',
+            'file_id': str(UUID(int=random.getrandbits(128))),
+            'file_name': 'not_empty_file.txt',
+            'file_size': '4',
+            'file_submitter_id': f'empty_file_{1}.txt',
+            'file_type': 'text',
+            'md5sum': 'b026324c6904b2a9cb4b88d6d61c81d1'
+        })
+        files[study].append({
+            'data_category': 'duplicate_name_test',
+            'file_format': 'txt',
+            'file_id': str(UUID(int=random.getrandbits(128))),
+            'file_name': 'not_empty_file.txt',
+            'file_size': '4',
+            'file_submitter_id': f'empty_file_{2}.txt',
+            'file_type': 'text',
+            'md5sum': '26ab0db90d72e28ad0ba1e22ee510510'
+        })
+
+    return files
 
 
 async def download_metadata(pdc_study_ids, endpoints, url=BASE_URL):
@@ -356,6 +397,12 @@ def main():
     api_data = asyncio.run(
         download_metadata(pdc_study_ids, args.endpoints, url=args.url)
         )
+
+    # add duplicate files to test data
+    if 'file' in args.endpoints:
+        api_data['file'] = add_duplicate_files(api_data['file'],
+                                            [study for study in DUPLICATE_FILE_TEST_STUDIES
+                                                if study in pdc_study_ids])
 
     test_data = {key: [api_data[key], key] for key, data in api_data.items()
                  if data is not None}
