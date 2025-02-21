@@ -21,7 +21,7 @@ PDC_TEST_FILE_IDS = [{'file_id': '4d6c2dec-ca0a-4bfe-aa01-b67c45b8c4e4',
                       'file_size': '2497',
                       'md5sum': '88f64d4343079f242f8a8561e8d89854'}]
 
-TESTS_URLS = [{'url': 'https://raw.githubusercontent.com/ajmaurais/PDC_client/refs/heads/dev/README.md',
-               'file_name': 'README.md',
-               'md5': md5_sum(f'{TEST_DIR}/../README.md'),
-               'size': getsize(f'{TEST_DIR}/../README.md')}]
+TEST_URLS = [{'url': 'https://raw.githubusercontent.com/ajmaurais/PDC_client/refs/heads/dev/README.md',
+              'file_name': 'README.md',
+              'md5sum': md5_sum(f'{TEST_DIR}/../README.md'),
+              'file_size': getsize(f'{TEST_DIR}/../README.md')}]

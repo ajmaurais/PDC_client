@@ -5,6 +5,7 @@ from csv import DictReader
 from hashlib import md5
 import re
 import httpx
+import warnings
 
 from .api import FILE_DATA_KEYS
 from .logger import LOGGER
@@ -78,6 +79,18 @@ def flatten_metadata(study_metadata, files, aliquots, cases):
     return ret
 
 
+def is_dia(study_metadata):
+    ''' Check if the study is a DIA study. '''
+    if not isinstance(study_metadata, dict):
+        raise ValueError('study_metadata must be a dictionary!')
+
+    experiment_type = study_metadata.get('experiment_type')
+    if experiment_type is None:
+        warnings.warn("'experiment_type' not found in study metadata.")
+        return False
+    return experiment_type.lower() == 'label free'
+
+
 def write_metadata_file(data: dict|list, ofname: str, format: str='json'):
     '''
     Write metadata file.
@@ -106,7 +119,7 @@ def write_metadata_file(data: dict|list, ofname: str, format: str='json'):
     if format in ('json', 'str'):
         if format == 'json':
             with open(ofname, 'w', encoding='utf-8') as outF:
-                json.dump(data, outF)
+                json.dump(data, outF, indent=2)
         else:
             print(json.dumps(data, indent=2))
 
@@ -167,7 +180,7 @@ def file_basename(url):
     return None if not match else match.group(1)
 
 
-def download_file(url, ofname, expected_md5=None, expected_size=None, n_retrys=2):
+def download_file(url, ofname, expected_md5=None, expected_size=None, n_retries=2):
     '''
     Download a single file.
 
@@ -186,7 +199,7 @@ def download_file(url, ofname, expected_md5=None, expected_size=None, n_retrys=2
     '''
 
     tries = 0
-    while tries < n_retrys:
+    while tries < n_retries:
         tries += 1
         try:
             with httpx.stream("GET", url) as response:
@@ -213,4 +226,5 @@ def download_file(url, ofname, expected_md5=None, expected_size=None, n_retrys=2
             return False
         return True
 
+    LOGGER.error('Failed to download file "%s" after %d attempt(s)', ofname, n_retries)
     return False

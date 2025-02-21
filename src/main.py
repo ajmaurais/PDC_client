@@ -51,7 +51,7 @@ Available commands:
         args = parser.parse_args(self.argv[1:(subcommand_start + 1)])
 
         if not args.command in SUBCOMMANDS:
-            sys.stderr.write(f'ERROR: {args.command} is an unknown command!\n')
+            LOGGER.error('%s is an unknown command!\n', args.command)
             parser.print_help()
             sys.exit(1)
         getattr(self, args.command)(subcommand_start + 1)
@@ -70,7 +70,7 @@ Available commands:
             study_id = client.get_study_id(args.pdc_study_id)
 
         if study_id is None:
-            sys.stderr.write('ERROR: No study found matching pdc_study_id!\n')
+            LOGGER.error('No study found matching pdc_study_id!\n')
             sys.exit(1)
         sys.stdout.write(f'{study_id}\n')
 
@@ -88,7 +88,7 @@ Available commands:
             pdc_study_id = client.get_pdc_study_id(args.study_id)
 
         if pdc_study_id is None:
-            sys.stderr.write('ERROR: No study found matching study_id!\n')
+            LOGGER.error('No study found matching study_id!\n')
             sys.exit(1)
         sys.stdout.write(f'{pdc_study_id}\n')
 
@@ -108,7 +108,7 @@ Available commands:
             study_name = client.get_study_name(args.study_id)
 
         if study_name is None:
-            sys.stderr.write('ERROR: No study found matching study_id!\n')
+            LOGGER.error('No study found matching study_id!\n')
             sys.exit(1)
 
         if args.normalize:
@@ -125,15 +125,16 @@ Available commands:
         parser.add_argument('--skipVerify', default=False, action='store_true',
                             help='Skip ssl verification?')
 
-        format = parser.add_argument_group('Output format options')
-        format.add_argument('-p', '--prefix', default='',
-                            help='The prefix to add to the output file names. Default is no prefix.')
-        format.add_argument('-f', '--format', choices=('json', 'tsv', 'str'), default = 'json',
+        f_args = parser.add_argument_group('Output format options')
+        f_args.add_argument('-p', '--prefix', default=None,
+                            help='The prefix to add to the output file names. '
+                                 'Default is the PDC study id.')
+        f_args.add_argument('-f', '--format', choices=('json', 'tsv', 'str'), default = 'json',
                             help="The output file format. Default is 'json'. "
                                  "'tsv' is only compatable with DIA data.")
-        format.add_argument('-a', '--skylineAnnotations', default=False, action='store_true',
+        f_args.add_argument('-a', '--skylineAnnotations', default=False, action='store_true',
                             help='Also save Skyline annotations csv file. Only compatable with DIA data.')
-        format.add_argument('--flatten', default=False, action='store_true',
+        f_args.add_argument('--flatten', default=False, action='store_true',
                             help='Combine metadata into a single flat file. '
                                  'Only compatable with DIA data.')
 
@@ -147,7 +148,7 @@ Available commands:
                 LOGGER.error('Could not retrieve metadata for study: %s', args.study_id)
                 sys.exit(1)
             experiment_type = study_metadata['experiment_type']
-            if experiment_type.lower() != 'label free' and \
+            if not io.is_dia(study_metadata) and \
                 (args.flatten or args.skylineAnnotations or args.format == 'tsv'):
                 LOGGER.error('Output format not supported for %s experiments', experiment_type)
                 sys.exit(1)
@@ -169,14 +170,14 @@ Available commands:
         if not all_good:
             sys.exit(1)
 
-        pdc_study_id = study_metadata['pdc_study_id']
+        prefix = f'{study_metadata["pdc_study_id"]}_' if args.prefix is None else args.prefix
         if args.flatten:
             if any(len(a['file_ids']) != 1 for a in aliquots):
                 LOGGER.error('Cannot flatten aliquots with more than 1 file_id.')
                 sys.exit(1)
 
             flat_data = io.flatten_metadata(**metadata_files)
-            io.write_metadata_file(flat_data, f'{pdc_study_id}_flat.{args.format}',
+            io.write_metadata_file(flat_data, f'{prefix}flat.{args.format}',
                                    format=args.format)
 
             if args.skylineAnnotations:
@@ -184,7 +185,7 @@ Available commands:
 
         else:
             for name, data in metadata_files.items():
-                io.write_metadata_file(data, f'{pdc_study_id}_{name}.{args.format}',
+                io.write_metadata_file(data, f'{prefix}{name}.{args.format}',
                                        format=args.format)
 
 
@@ -210,24 +211,32 @@ Available commands:
 
     def file(self, start=2):
         parser = argparse.ArgumentParser(description=Main.FILE_DESCRIPTION)
+        parser.add_argument('-u', '--baseUrl', default=BASE_URL,
+                            help=f'The base URL for the PDC API. {BASE_URL} is the default. '
+                                  'Only used with --fileID option.')
         parser.add_argument('-o', '--ofname', default=None,
                             help='Output file name.')
         parser.add_argument('-m', '--md5sum', default=None,
                             help='The expected file md5 sum. If blank, the check sum step is skipped.')
+        parser.add_argument('-s', '--size', default=None, type=int,
+                            help='The expected file size. If blank, the file size check is skipped.')
         parser.add_argument('--noBackup', action='store_true', default=False,
                             help='Don\'t backup duplicate files. '
                                  'By default, if the file already exists the new file is written to a tempory file as it is '
                                  'being downloaded and overwritten once the download is completed.')
         parser.add_argument('-f', '--force', action='store_true', default=False,
                             help='Re-download even if the target file already exists.')
-        parser.add_argument('url', help='The file url.')
+
+        source_args = parser.add_mutually_exclusive_group(required=True)
+        source_args.add_argument('--url', help='The file url.')
+        source_args.add_argument('--fileID', help='The PDC file_id.')
 
         args = parser.parse_args(self.argv[start:])
 
         if args.ofname is None:
-            ofname = io.fileBasename(args.url)
+            ofname = io.file_basename(args.url)
             if ofname is None:
-                sys.stderr.write('ERROR: Could not determine output file name!\n')
+                LOGGER.error('Could not determine output file name!\n')
                 sys.exit(1)
         else:
             ofname = args.ofname
@@ -244,10 +253,10 @@ Available commands:
             else:
                 remove_old = True
                 old_ofname = ofname
-                ofname += '_{}.tmp'.format(datetime.now().strftime("%y%m%d_%H%M%S"))
+                ofname += f'_{datetime.now().strftime("%y%m%d_%H%M%S")}.tmp'
 
-        if not io.downloadFile(args.url, ofname, expected_md5=args.md5sum):
-            sys.stderr.write(f'ERROR: Failed to download file: {ofname}\n')
+        if not io.download_file(args.url, ofname, expected_md5=args.md5sum):
+            LOGGER.error("Failed to download file: '%s'", ofname)
             sys.exit(1)
 
         if remove_old:

@@ -1,4 +1,5 @@
 
+import os
 import unittest
 import json
 import re
@@ -7,7 +8,7 @@ import random
 from resources.setup_functions import make_work_dir, run_command
 from resources import TEST_DIR
 from resources.data import FILE_METADATA, ALIQUOT_METADATA, CASE_METADATA, STUDY_METADATA
-from resources.data import PDC_TEST_URLS
+from resources.data import PDC_TEST_URLS, PDC_TEST_FILE_IDS, TEST_URLS
 
 from PDC_client.submodules import io
 
@@ -52,10 +53,8 @@ class TestMetadataFunctions(unittest.TestCase):
         with open(CASE_METADATA, 'r', encoding='utf-8') as inF:
             self.cases = json.load(inF)
 
-        self.study_types = {'dia': [k for k, v in self.studies.items()
-                                    if v['experiment_type'].lower() == 'label free'],
-                            'dda': [k for k, v in self.studies.items()
-                                    if v['experiment_type'].lower() != 'label free']}
+        self.study_types = {'dia': [k for k, v in self.studies.items() if io.is_dia(v)],
+                            'dda': [k for k, v in self.studies.items() if not io.is_dia(v)]}
 
 
     def test_flatten_dia_study(self):
@@ -150,16 +149,75 @@ class TestDownloadFile(unittest.TestCase):
 
 
     def test_download_file(self):
-        self.assertTrue(False)
+        for file in TEST_URLS:
+            self.assertTrue(io.download_file(file['url'], f"{self.work_dir}/{file['file_name']}",
+                                             expected_md5=file['md5'], expected_size=file['size']))
+            self.assertTrue(os.path.isfile(f'{self.work_dir}/{file["file_name"]}'))
+            self.assertEqual(io.md5_sum(f'{self.work_dir}/{file["file_name"]}'), file['md5'])
+            self.assertEqual(os.path.getsize(f'{self.work_dir}/{file["file_name"]}'), file['size'])
 
 
     def test_bad_md5(self):
-        self.assertTrue(False)
+        file = TEST_URLS[0]
+        target_md5 = io.md5_sum(f'{TEST_DIR}/../Dockerfile')
+        target_file_name = f'{self.work_dir}/{file["file_name"]}'
+        with self.assertLogs(level='ERROR') as cm:
+            self.assertFalse(io.download_file(file['url'], target_file_name,
+                                              expected_md5=target_md5,
+                                              expected_size=file['size'],
+                                              n_retries=1))
 
-
-    def test_bad_url(self):
-        self.assertTrue(False)
+        self.assertTrue(any(f'Expected MD5 checksum does not match for file "{target_file_name}"' in msg
+                            for msg in cm.output), cm.output)
 
 
     def test_bad_size(self):
-        self.assertTrue(False)
+        file = TEST_URLS[0]
+        target_size = 4
+        target_file_name = f'{self.work_dir}/{file["file_name"]}'
+        with self.assertLogs(level='ERROR') as cm:
+            self.assertFalse(io.download_file(file['url'], target_file_name,
+                                              expected_md5=file['md5'],
+                                              expected_size=target_size,
+                                              n_retries=1))
+
+        self.assertTrue(any(f'Expected file size does not match for file "{target_file_name}"' in msg
+                            for msg in cm.output), cm.output)
+
+
+    def test_bad_url(self):
+        file = TEST_URLS[0]
+        url = 'https://www.nowwhere.com/this/is/a/bad/url'
+        target_file_name = f'{self.work_dir}/{file["file_name"]}'
+        with self.assertLogs(level='ERROR') as cm:
+            self.assertFalse(io.download_file(url, target_file_name,
+                                              expected_md5=file['md5'],
+                                              expected_size=file['size'],
+                                              n_retries=1))
+
+        self.assertTrue(any(f'Failed to download file "{target_file_name}" after 1 attempt(s)' in msg
+                            for msg in cm.output), cm.output)
+
+
+    def test_skip_md5(self):
+        file = TEST_URLS[0]
+        target_file_name = f'{self.work_dir}/{file["file_name"]}'
+        with self.assertLogs(level='WARNING') as cm:
+            self.assertTrue(io.download_file(file['url'], target_file_name,
+                                             expected_size=file['size'],
+                                             n_retries=1))
+
+        self.assertTrue(any(f'Skipping md5 check for file "{target_file_name}"' in msg
+                            for msg in cm.output), cm.output)
+
+
+    def test_skip_size(self):
+        file = TEST_URLS[0]
+        target_file_name = f'{self.work_dir}/{file["file_name"]}'
+        with self.assertLogs(level='WARNING') as cm:
+            self.assertTrue(io.download_file(file['url'], target_file_name,
+                                             expected_md5=file['md5'],
+                                             n_retries=1))
+
+        self.assertTrue(any(f'Skipping size check for file "{target_file_name}"' in msg
+                            for msg in cm.output), cm.output)

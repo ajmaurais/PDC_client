@@ -14,6 +14,9 @@ BASE_URL ='https://proteomic.datacommons.cancer.gov/graphql'
 FILE_DATA_KEYS = ['file_id', 'file_name', 'file_submitter_id', 'md5sum', 'file_size',
                   'data_category', 'file_type', 'file_format', 'url']
 
+DATA_ID_KEYS = ["file_id", "file_submitter_id", "aliquot_id",
+                "sample_id", "case_id", "demographic_id"]
+
 class Client():
     '''
     Client class for interacting with the PDC API.
