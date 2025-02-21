@@ -8,8 +8,8 @@ from update_api_data import DUPLICATE_FILE_TEST_STUDIES
 
 from PDC_client.submodules import api
 
-TEST_URL = 'http://localhost:5000/graphql'
-# TEST_URL = 'https://pdc.cancer.gov/graphql'
+# TEST_URL = 'http://localhost:5000/graphql'
+TEST_URL = 'https://pdc.cancer.gov/graphql'
 
 
 class TestStudyLevel(unittest.TestCase):
@@ -107,6 +107,10 @@ class TestFileLevel(unittest.TestCase):
 
 
     def test_data(self):
+        for study in self.files:
+            self.files[study] = [file for file in self.files[study]
+                                 if file['data_category'] == 'Raw Mass Spectra']
+
         with api.Client(url=TEST_URL) as client:
             for study, study_files in self.files.items():
                 test_study_files = client.get_study_raw_files(self.studies[study]['study_id'])
@@ -270,7 +274,7 @@ class TestAliquotLevel(unittest.TestCase):
 
         self.assertDictEqual(test_study_aliquots, study_aliquots)
 
-        file_ids = list(set(f['file_id'] for f in test_study_aliquots.values()))
+        file_ids = list(set(file_id for f in test_study_aliquots.values() for file_id in f['file_ids']))
         with api.Client(url=TEST_URL) as client:
             file_ids_aliquots = client.get_study_aliquots(self.studies[study]['study_id'],
                                                           page_limit=page_len,

@@ -106,7 +106,7 @@ class Query(graphene.ObjectType):
             i += 1
 
         ret.casesSamplesAliquots = casesSamplesAliquots
-        ret.pagination = Pagination(total=total, offset=offset, size=i, count=len(casesSamplesAliquots))
+        ret.pagination = Pagination(total=total, offset=offset, count=len(casesSamplesAliquots))
         return ret
 
 
@@ -147,6 +147,6 @@ class Query(graphene.ObjectType):
             i += 1
 
         ret.caseDemographicsPerStudy = caseDemographicsPerStudy
-        ret.pagination = Pagination(total=total, offset=offset, size=i,
+        ret.pagination = Pagination(total=total, offset=offset,
                                     count=len(caseDemographicsPerStudy))
         return ret

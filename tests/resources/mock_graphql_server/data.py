@@ -33,31 +33,32 @@ class Data:
                 self.files_per_study[study_id].append(file)
 
         self.file_metadata = dict()
+        self.index_study_file_ids = dict()
         file_metadata_keys = ['file_name', 'file_type', 'file_format', 'data_category', 'md5sum', 'file_size']
-        for pdc_study_id, files in self.files_per_study.items():
+        for study_id, files in self.files_per_study.items():
+            self.index_study_file_ids[study_id] = list()
             for file in files:
                 self.file_metadata[file['file_id']] = {key: file[key] for key in file_metadata_keys}
                 self.file_metadata[file['file_id']]['aliquots'] = list()
+                self.index_study_file_ids[study_id].append(file['file_id'])
 
         # read aliquot data
         with open(ALIQUOT_METADATA, 'r', encoding='utf-8') as inF:
             aliquot_data = json.load(inF)
 
-        self.index_study_file_ids = dict()
         self.index_study_cases = dict()
         self.cases = dict()
         for pdc_study_id, aliquots in aliquot_data.items():
             study_id = self.get_study_id(pdc_study_id)
-            self.index_study_file_ids[study_id] = set()
             self.index_study_cases[study_id] = set()
 
             for aliquot in aliquots:
-                self.index_study_file_ids[study_id].add(aliquot['file_id'])
                 self.index_study_cases[study_id].add(aliquot['case_id'])
 
-                if aliquot['file_id'] not in self.file_metadata:
-                    raise RuntimeError(f"Missing file metadata for file_id: '{aliquot['file_id']}'")
-                self.file_metadata[aliquot['file_id']]['aliquots'].append({'aliquot_id': aliquot['aliquot_id']})
+                for file_id in aliquot['file_ids']:
+                    if file_id not in self.file_metadata:
+                        raise RuntimeError(f"Missing file metadata for file_id: '{aliquot['file_id']}'")
+                    self.file_metadata[file_id]['aliquots'].append({'aliquot_id': aliquot['aliquot_id']})
 
                 case_id = aliquot['case_id']
                 if case_id not in self.cases:
@@ -79,7 +80,6 @@ class Data:
 
         # convert index sets to lists
         self.index_study_cases = {k: list(v) for k, v in self.index_study_cases.items()}
-        self.index_study_file_ids = {k: list(v) for k, v in self.index_study_file_ids.items()}
 
         # read case demographics metadata
         with open(CASE_METADATA, 'r', encoding='utf-8') as inF:

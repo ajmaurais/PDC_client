@@ -13,7 +13,7 @@ CLIENT_TIMEOUT = 10
 BASE_URL ='https://proteomic.datacommons.cancer.gov/graphql'
 
 FILE_METADATA_KEYS = ['file_id', 'file_name', 'file_submitter_id', 'md5sum', 'file_size',
-                    'data_category', 'file_type', 'file_format', 'url']
+                      'data_category', 'file_type', 'file_format', 'url']
 
 class Client():
     '''
@@ -463,7 +463,7 @@ class Client():
                         aliquots { aliquot_id analyte_type }
                     }
                 }
-                pagination { count from total size }
+                pagination { count from total }
             } }''' % (study_id, offset, limit)
 
 
@@ -545,7 +545,13 @@ class Client():
             query_file_id = data['data']['fileMetadata'][0]['file_id']
             assert(file_id == query_file_id)
             for aliquot in data['data']['fileMetadata'][0]['aliquots']:
-                file_aliquot_ids[aliquot['aliquot_id']] = file_id
+                if aliquot['aliquot_id'] not in file_aliquot_ids:
+                    file_aliquot_ids[aliquot['aliquot_id']] = set()
+                file_aliquot_ids[aliquot['aliquot_id']].add(file_id)
+
+        # convert sets to lists
+        for aliquot_id in file_aliquot_ids:
+            file_aliquot_ids[aliquot_id] = list(file_aliquot_ids[aliquot_id])
 
         aliquot_data = await aliquot_task
         if aliquot_data is None:
@@ -562,7 +568,7 @@ class Client():
                     new_a['case_id'] = case['case_id']
 
                     if aliquot['aliquot_id'] in file_aliquot_ids:
-                        new_a['file_id'] = file_aliquot_ids[new_a['aliquot_id']]
+                        new_a['file_ids'] = file_aliquot_ids[new_a['aliquot_id']]
                         aliquots.append(new_a)
 
         return aliquots
@@ -598,7 +604,7 @@ class Client():
                 demographics { demographic_id ethnicity gender race cause_of_death
                                vital_status year_of_birth year_of_death }
             }
-            pagination { count from total size }
+            pagination { count from total }
         } }''' % (study_id, offset, limit)
 
 
@@ -753,13 +759,15 @@ class Client():
     async def async_get_file_url(self, file_id: str) -> dict|None:
         '''
         Async version of get_file_url
+
         Parameters
         ----------
         file_id: str
             The file ID.
+
         Returns
         -------
-        file_url: dict
+        file_data: dict
             A dictionary with the file_name, file_size, url, and md5
             or None if no url could be found for file_id.
         '''
@@ -801,4 +809,18 @@ class Client():
 
 
     def get_file_url(self, file_id: str) -> dict|None:
+        '''
+        Get file url, name, size and md5 for a file_id
+
+        Parameters
+        ----------
+        file_id: str
+            The file ID.
+
+        Returns
+        -------
+        file_data: dict
+            A dictionary with the file_name, file_size, url, and md5
+            or None if no url could be found for file_id.
+        '''
         return self._loop.run_until_complete(self.async_get_file_url(file_id))

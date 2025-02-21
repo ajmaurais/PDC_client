@@ -90,7 +90,6 @@ class Pagination(graphene.ObjectType):
     count = graphene.Int(name='count')
     offset = graphene.Int(name='from')
     total = graphene.Int(name='total')
-    size = graphene.Int(name='size')
 
 
 class PaginatedCasesSamplesAliquots(graphene.ObjectType):

@@ -28,6 +28,10 @@ def data_list_to_dict(data_list, key):
 
 
 class TestGraphQLServerBase(unittest.TestCase):
+    TEST_PDC_STUDY_ID = 'PDC000504'
+    # TEST_PDC_STUDY_ID = 'PDC000251'
+    # TEST_PDC_STUDY_ID = 'PDC000451'
+
     @classmethod
     def setUpClass(cls):
         '''Set up the test server before running tests.'''
@@ -70,8 +74,6 @@ class TestRawRequests(TestGraphQLServerBase):
     '''
     Test the raw graphQL request used by Client match the result of the test server.
     '''
-    TEST_PDC_STUDY_ID = 'PDC000504'
-    # TEST_PDC_STUDY_ID = 'PDC000110'
 
     def get(self, url, query):
         with httpx.Client(timeout=300) as client:
@@ -182,7 +184,7 @@ class TestRawRequests(TestGraphQLServerBase):
 
     def test_file_aliquot_query(self):
         study_id = api_data.get_study_id(self.TEST_PDC_STUDY_ID)
-        random.seed(0)
+        random.seed(-1)
         for file_id in random.sample(list(api_data.index_study_file_ids[study_id]), 1):
             query = api.Client._file_aliquot_query(file_id)
 
@@ -334,7 +336,7 @@ class TestRawRequests(TestGraphQLServerBase):
 
     def test_file_metadata_query(self):
         random.seed(12)
-        test_files = {i: api_data.file_metadata[i] for i in 
+        test_files = {i: api_data.file_metadata[i] for i in
                       random.sample(list(api_data.file_metadata.keys()), 3)}
 
         query_keys = ['file_name', 'file_type', 'data_category',
@@ -374,7 +376,7 @@ class TestRawRequests(TestGraphQLServerBase):
 
     def test_file_url_query(self):
         random.seed(12)
-        test_files = {i: api_data.file_metadata[i] for i in 
+        test_files = {i: api_data.file_metadata[i] for i in
                       random.sample(list(api_data.file_metadata.keys()), 3)}
 
         query_keys = ['file_name', 'file_type', 'data_category', 'file_format']
@@ -416,8 +418,6 @@ class TestClient(TestGraphQLServerBase):
     '''
     Test the client functions that call the API.
     '''
-    TEST_PDC_STUDY_ID = 'PDC000504'
-    # TEST_PDC_STUDY_ID = 'PDC000110'
 
     def get_data_pair(self, function_name, *args, **kwargs):
         with api.Client(url=PDC_URL) as client:
@@ -537,11 +537,11 @@ class TestClient(TestGraphQLServerBase):
         for case_id, case in pdc_data.items():
             self.assertIn(case_id, test_data)
             self.assertDictEqual(test_data[case_id], case)
-    
+
 
     def test_get_file_url(self):
         random.seed(7)
-        test_files = {i: api_data.file_metadata[i] for i in 
+        test_files = {i: api_data.file_metadata[i] for i in
                       random.sample(list(api_data.file_metadata.keys()), 3)}
 
         for file_id, file_data in test_files.items():

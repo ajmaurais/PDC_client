@@ -1,350 +1,140 @@
 {
   "PDC000251": [
     {
-      "aliquot_id": "526b8231-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_id": "526b6147-0881-11eb-bc0e-0aad30af8a83",
       "analyte_type": "Protein",
-      "case_id": "526a514c-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "b1d2217f-0277-11eb-bc0e-0aad30af8a83",
-      "sample_id": "526adc79-0881-11eb-bc0e-0aad30af8a83",
-      "sample_submitter_id": "fbb41c94-aabd-49cc-90b2-882c3e",
-      "sample_type": "Primary Tumor",
-      "tissue_type": "Not Reported"
-    },
-    {
-      "aliquot_id": "526b6f41-0881-11eb-bc0e-0aad30af8a83",
-      "analyte_type": "Protein",
-      "case_id": "526a42f3-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "b3e47ee3-0277-11eb-bc0e-0aad30af8a83",
-      "sample_id": "526ac797-0881-11eb-bc0e-0aad30af8a83",
-      "sample_submitter_id": "a3a26070-fb84-406a-8280-d555e6",
+      "case_id": "526a3222-0881-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "b65063e0-0277-11eb-bc0e-0aad30af8a83",
+        "b63d4e36-0277-11eb-bc0e-0aad30af8a83",
+        "b60df3cc-0277-11eb-bc0e-0aad30af8a83"
+      ],
+      "sample_id": "526ab38d-0881-11eb-bc0e-0aad30af8a83",
+      "sample_submitter_id": "1abbcb28-f221-4cd4-8c01-37b9bb",
       "sample_type": "Solid Tissue Normal",
       "tissue_type": "Not Reported"
     },
     {
-      "aliquot_id": "526b6e6f-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_id": "526b623a-0881-11eb-bc0e-0aad30af8a83",
       "analyte_type": "Protein",
-      "case_id": "526a42f3-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "b3e47ee3-0277-11eb-bc0e-0aad30af8a83",
-      "sample_id": "526ac672-0881-11eb-bc0e-0aad30af8a83",
-      "sample_submitter_id": "347e379b-77c0-4dd3-aa25-18c9d1",
+      "case_id": "526a3222-0881-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "b65063e0-0277-11eb-bc0e-0aad30af8a83",
+        "b63d4e36-0277-11eb-bc0e-0aad30af8a83",
+        "b60df3cc-0277-11eb-bc0e-0aad30af8a83"
+      ],
+      "sample_id": "526ab5e8-0881-11eb-bc0e-0aad30af8a83",
+      "sample_submitter_id": "9b90eb78-2f50-4aeb-b010-d642f9",
       "sample_type": "Primary Tumor",
       "tissue_type": "Not Reported"
     },
     {
-      "aliquot_id": "526be2ab-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_id": "526b630e-0881-11eb-bc0e-0aad30af8a83",
       "analyte_type": "Protein",
-      "case_id": "526aabd0-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "b52a3a4a-0277-11eb-bc0e-0aad30af8a83",
-      "sample_id": "526b4b77-0881-11eb-bc0e-0aad30af8a83",
-      "sample_submitter_id": "2b4ce90c-8036-4207-ac3e-54a76f",
-      "sample_type": "Primary Tumor",
-      "tissue_type": "Not Reported"
-    },
-    {
-      "aliquot_id": "526be379-0881-11eb-bc0e-0aad30af8a83",
-      "analyte_type": "Protein",
-      "case_id": "526aabd0-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "b52a3a4a-0277-11eb-bc0e-0aad30af8a83",
-      "sample_id": "526b49b6-0881-11eb-bc0e-0aad30af8a83",
-      "sample_submitter_id": "21efd60f-6a31-4b98-9477-16a905",
+      "case_id": "526a3812-0881-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "b1cd4c91-0277-11eb-bc0e-0aad30af8a83",
+        "b1c97847-0277-11eb-bc0e-0aad30af8a83",
+        "b1d37b19-0277-11eb-bc0e-0aad30af8a83"
+      ],
+      "sample_id": "526ab71c-0881-11eb-bc0e-0aad30af8a83",
+      "sample_submitter_id": "b22659b9-e12c-4725-a7db-a833de",
       "sample_type": "Solid Tissue Normal",
       "tissue_type": "Not Reported"
     },
     {
-      "aliquot_id": "526bf23c-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_id": "526b64c8-0881-11eb-bc0e-0aad30af8a83",
       "analyte_type": "Protein",
-      "case_id": "526ab2b2-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "bc82509a-0277-11eb-bc0e-0aad30af8a83",
-      "sample_id": "526b5f5f-0881-11eb-bc0e-0aad30af8a83",
-      "sample_submitter_id": "pooled sample",
-      "sample_type": "Not Reported",
-      "tissue_type": "Not Reported"
-    },
-    {
-      "aliquot_id": "526bad8b-0881-11eb-bc0e-0aad30af8a83",
-      "analyte_type": "Protein",
-      "case_id": "526a7bd7-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "b1cb5217-0277-11eb-bc0e-0aad30af8a83",
-      "sample_id": "526b0b46-0881-11eb-bc0e-0aad30af8a83",
-      "sample_submitter_id": "161317f3-1a39-438e-af45-cd2502",
-      "sample_type": "Primary Tumor",
-      "tissue_type": "Not Reported"
-    },
-    {
-      "aliquot_id": "526b756b-0881-11eb-bc0e-0aad30af8a83",
-      "analyte_type": "Protein",
-      "case_id": "526a47af-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "b1d37b19-0277-11eb-bc0e-0aad30af8a83",
-      "sample_id": "526acf2e-0881-11eb-bc0e-0aad30af8a83",
-      "sample_submitter_id": "8e17b45e-6a06-4e4e-913d-7b1edb",
-      "sample_type": "Primary Tumor",
-      "tissue_type": "Not Reported"
-    },
-    {
-      "aliquot_id": "526bd536-0881-11eb-bc0e-0aad30af8a83",
-      "analyte_type": "Protein",
-      "case_id": "526a9d9d-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "b1d2217f-0277-11eb-bc0e-0aad30af8a83",
-      "sample_id": "526b36f7-0881-11eb-bc0e-0aad30af8a83",
-      "sample_submitter_id": "6530147a-efe9-4df6-ac2f-03ece3",
-      "sample_type": "Primary Tumor",
-      "tissue_type": "Not Reported"
-    },
-    {
-      "aliquot_id": "526bbf6b-0881-11eb-bc0e-0aad30af8a83",
-      "analyte_type": "Protein",
-      "case_id": "526a8c5a-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "b395df11-0277-11eb-bc0e-0aad30af8a83",
-      "sample_id": "526b20e0-0881-11eb-bc0e-0aad30af8a83",
-      "sample_submitter_id": "2115808b-6a0d-49bc-a8d7-b83bde",
-      "sample_type": "Primary Tumor",
-      "tissue_type": "Not Reported"
-    },
-    {
-      "aliquot_id": "526bc03f-0881-11eb-bc0e-0aad30af8a83",
-      "analyte_type": "Protein",
-      "case_id": "526a8c5a-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "b395df11-0277-11eb-bc0e-0aad30af8a83",
-      "sample_id": "526b1fc9-0881-11eb-bc0e-0aad30af8a83",
-      "sample_submitter_id": "1db5574d-aca7-403c-8100-6e705f",
+      "case_id": "526a3949-0881-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "b81f3c14-0277-11eb-bc0e-0aad30af8a83",
+        "b85aa18d-0277-11eb-bc0e-0aad30af8a83",
+        "b7962152-0277-11eb-bc0e-0aad30af8a83"
+      ],
+      "sample_id": "526ab94f-0881-11eb-bc0e-0aad30af8a83",
+      "sample_submitter_id": "0745488e-0bfb-4d1f-8228-dedf76",
       "sample_type": "Solid Tissue Normal",
-      "tissue_type": "Not Reported"
-    },
-    {
-      "aliquot_id": "526b8ada-0881-11eb-bc0e-0aad30af8a83",
-      "analyte_type": "Protein",
-      "case_id": "526a5c31-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "b52a3a4a-0277-11eb-bc0e-0aad30af8a83",
-      "sample_id": "526ae4d2-0881-11eb-bc0e-0aad30af8a83",
-      "sample_submitter_id": "927f0958-db5a-4bc5-92b7-2a3695",
-      "sample_type": "Primary Tumor",
-      "tissue_type": "Not Reported"
-    },
-    {
-      "aliquot_id": "526bc744-0881-11eb-bc0e-0aad30af8a83",
-      "analyte_type": "Protein",
-      "case_id": "526a90f2-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "bb231629-0277-11eb-bc0e-0aad30af8a83",
-      "sample_id": "526b285a-0881-11eb-bc0e-0aad30af8a83",
-      "sample_submitter_id": "e23eb014-69c1-460a-b9d4-9786c8",
-      "sample_type": "Solid Tissue Normal",
-      "tissue_type": "Not Reported"
-    },
-    {
-      "aliquot_id": "526bc567-0881-11eb-bc0e-0aad30af8a83",
-      "analyte_type": "Protein",
-      "case_id": "526a90f2-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "bb231629-0277-11eb-bc0e-0aad30af8a83",
-      "sample_id": "526b2690-0881-11eb-bc0e-0aad30af8a83",
-      "sample_submitter_id": "1c9145ad-1981-4871-aa7e-8b11de",
-      "sample_type": "Primary Tumor",
-      "tissue_type": "Not Reported"
-    },
-    {
-      "aliquot_id": "526bdce5-0881-11eb-bc0e-0aad30af8a83",
-      "analyte_type": "Protein",
-      "case_id": "526aa60a-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "bc82509a-0277-11eb-bc0e-0aad30af8a83",
-      "sample_id": "526b4159-0881-11eb-bc0e-0aad30af8a83",
-      "sample_submitter_id": "8234f8ea-bdbd-45b0-bd0b-16f1e7",
-      "sample_type": "Primary Tumor",
       "tissue_type": "Not Reported"
     },
     {
       "aliquot_id": "526b65a3-0881-11eb-bc0e-0aad30af8a83",
       "analyte_type": "Protein",
       "case_id": "526a3b90-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "bb231629-0277-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "baf0b780-0277-11eb-bc0e-0aad30af8a83",
+        "bb231629-0277-11eb-bc0e-0aad30af8a83",
+        "baa3afb8-0277-11eb-bc0e-0aad30af8a83"
+      ],
       "sample_id": "526aba87-0881-11eb-bc0e-0aad30af8a83",
       "sample_submitter_id": "8ed739dd-ae0f-4881-971a-db3cf4",
       "sample_type": "Solid Tissue Normal",
       "tissue_type": "Not Reported"
     },
     {
-      "aliquot_id": "526be61f-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_id": "526b6674-0881-11eb-bc0e-0aad30af8a83",
       "analyte_type": "Protein",
-      "case_id": "526aae61-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "bc82509a-0277-11eb-bc0e-0aad30af8a83",
-      "sample_id": "526b4e60-0881-11eb-bc0e-0aad30af8a83",
-      "sample_submitter_id": "2433b136-fc7b-4cea-b958-bc6efb",
-      "sample_type": "Primary Tumor",
-      "tissue_type": "Not Reported"
-    },
-    {
-      "aliquot_id": "526bb8c9-0881-11eb-bc0e-0aad30af8a83",
-      "analyte_type": "Protein",
-      "case_id": "526a847d-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "b74bf326-0277-11eb-bc0e-0aad30af8a83",
-      "sample_id": "526b16c6-0881-11eb-bc0e-0aad30af8a83",
-      "sample_submitter_id": "91b287fd-eadb-442d-abcd-20b741",
-      "sample_type": "Primary Tumor",
-      "tissue_type": "Not Reported"
-    },
-    {
-      "aliquot_id": "526be887-0881-11eb-bc0e-0aad30af8a83",
-      "analyte_type": "Protein",
-      "case_id": "526ab1ce-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "b85aa18d-0277-11eb-bc0e-0aad30af8a83",
-      "sample_id": "526b525e-0881-11eb-bc0e-0aad30af8a83",
-      "sample_submitter_id": "QC1",
-      "sample_type": "Not Reported",
-      "tissue_type": "Not Reported"
-    },
-    {
-      "aliquot_id": "526be963-0881-11eb-bc0e-0aad30af8a83",
-      "analyte_type": "Protein",
-      "case_id": "526ab1ce-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "bc82509a-0277-11eb-bc0e-0aad30af8a83",
-      "sample_id": "526b53e0-0881-11eb-bc0e-0aad30af8a83",
-      "sample_submitter_id": "QC2",
-      "sample_type": "Not Reported",
-      "tissue_type": "Not Reported"
-    },
-    {
-      "aliquot_id": "526beb55-0881-11eb-bc0e-0aad30af8a83",
-      "analyte_type": "Protein",
-      "case_id": "526ab1ce-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "bb231629-0277-11eb-bc0e-0aad30af8a83",
-      "sample_id": "526b55ab-0881-11eb-bc0e-0aad30af8a83",
-      "sample_submitter_id": "QC3",
-      "sample_type": "Not Reported",
-      "tissue_type": "Not Reported"
-    },
-    {
-      "aliquot_id": "526bec2a-0881-11eb-bc0e-0aad30af8a83",
-      "analyte_type": "Protein",
-      "case_id": "526ab1ce-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "b3e47ee3-0277-11eb-bc0e-0aad30af8a83",
-      "sample_id": "526b56c5-0881-11eb-bc0e-0aad30af8a83",
-      "sample_submitter_id": "QC4",
-      "sample_type": "Not Reported",
-      "tissue_type": "Not Reported"
-    },
-    {
-      "aliquot_id": "526becf7-0881-11eb-bc0e-0aad30af8a83",
-      "analyte_type": "Protein",
-      "case_id": "526ab1ce-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "b1d37b19-0277-11eb-bc0e-0aad30af8a83",
-      "sample_id": "526b5888-0881-11eb-bc0e-0aad30af8a83",
-      "sample_submitter_id": "QC5",
-      "sample_type": "Not Reported",
-      "tissue_type": "Not Reported"
-    },
-    {
-      "aliquot_id": "526bedc1-0881-11eb-bc0e-0aad30af8a83",
-      "analyte_type": "Protein",
-      "case_id": "526ab1ce-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "b1d2217f-0277-11eb-bc0e-0aad30af8a83",
-      "sample_id": "526b5996-0881-11eb-bc0e-0aad30af8a83",
-      "sample_submitter_id": "QC6",
-      "sample_type": "Not Reported",
-      "tissue_type": "Not Reported"
-    },
-    {
-      "aliquot_id": "526bee8e-0881-11eb-bc0e-0aad30af8a83",
-      "analyte_type": "Protein",
-      "case_id": "526ab1ce-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "b74bf326-0277-11eb-bc0e-0aad30af8a83",
-      "sample_id": "526b5b60-0881-11eb-bc0e-0aad30af8a83",
-      "sample_submitter_id": "QC7",
-      "sample_type": "Not Reported",
-      "tissue_type": "Not Reported"
-    },
-    {
-      "aliquot_id": "526bef60-0881-11eb-bc0e-0aad30af8a83",
-      "analyte_type": "Protein",
-      "case_id": "526ab1ce-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "b52a3a4a-0277-11eb-bc0e-0aad30af8a83",
-      "sample_id": "526b5c74-0881-11eb-bc0e-0aad30af8a83",
-      "sample_submitter_id": "QC8",
-      "sample_type": "Not Reported",
-      "tissue_type": "Not Reported"
-    },
-    {
-      "aliquot_id": "526bf02b-0881-11eb-bc0e-0aad30af8a83",
-      "analyte_type": "Protein",
-      "case_id": "526ab1ce-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "ba1c18d8-0277-11eb-bc0e-0aad30af8a83",
-      "sample_id": "526b5e46-0881-11eb-bc0e-0aad30af8a83",
-      "sample_submitter_id": "QC9",
-      "sample_type": "Not Reported",
-      "tissue_type": "Not Reported"
-    },
-    {
-      "aliquot_id": "526ba8be-0881-11eb-bc0e-0aad30af8a83",
-      "analyte_type": "Protein",
-      "case_id": "526a77f1-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "b504669d-0277-11eb-bc0e-0aad30af8a83",
-      "sample_id": "526b071b-0881-11eb-bc0e-0aad30af8a83",
-      "sample_submitter_id": "1b2ab076-c72f-4bbe-b9f9-657d24",
-      "sample_type": "Primary Tumor",
-      "tissue_type": "Not Reported"
-    },
-    {
-      "aliquot_id": "526bc2cd-0881-11eb-bc0e-0aad30af8a83",
-      "analyte_type": "Protein",
-      "case_id": "526a8f0c-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "b1cb5217-0277-11eb-bc0e-0aad30af8a83",
-      "sample_id": "526b257d-0881-11eb-bc0e-0aad30af8a83",
-      "sample_submitter_id": "7edfd606-4bee-4529-9fec-1ca7f0",
+      "case_id": "526a3c86-0881-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "b1c8a412-0277-11eb-bc0e-0aad30af8a83",
+        "b1d2217f-0277-11eb-bc0e-0aad30af8a83",
+        "b1d0c57c-0277-11eb-bc0e-0aad30af8a83"
+      ],
+      "sample_id": "526abbe6-0881-11eb-bc0e-0aad30af8a83",
+      "sample_submitter_id": "1556af7e-c2ae-4fce-9aae-87c459",
       "sample_type": "Solid Tissue Normal",
       "tissue_type": "Not Reported"
     },
     {
-      "aliquot_id": "526bc48d-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_id": "526b6836-0881-11eb-bc0e-0aad30af8a83",
       "analyte_type": "Protein",
-      "case_id": "526a8f0c-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "b1cb5217-0277-11eb-bc0e-0aad30af8a83",
-      "sample_id": "526b23b3-0881-11eb-bc0e-0aad30af8a83",
-      "sample_submitter_id": "7c7ce2d7-6c8a-424e-8e6c-d14ad1",
+      "case_id": "526a3c86-0881-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "b1c8a412-0277-11eb-bc0e-0aad30af8a83",
+        "b1d2217f-0277-11eb-bc0e-0aad30af8a83",
+        "b1d0c57c-0277-11eb-bc0e-0aad30af8a83"
+      ],
+      "sample_id": "526abda4-0881-11eb-bc0e-0aad30af8a83",
+      "sample_submitter_id": "1a10c200-3895-4648-b951-94f99f",
       "sample_type": "Primary Tumor",
       "tissue_type": "Not Reported"
     },
     {
-      "aliquot_id": "526b9892-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_id": "526b6916-0881-11eb-bc0e-0aad30af8a83",
       "analyte_type": "Protein",
-      "case_id": "526a69a7-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "b65063e0-0277-11eb-bc0e-0aad30af8a83",
-      "sample_id": "526af583-0881-11eb-bc0e-0aad30af8a83",
-      "sample_submitter_id": "f6c215ea-5381-4521-bb61-be8e97",
+      "case_id": "526a3d60-0881-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "b34a56ca-0277-11eb-bc0e-0aad30af8a83",
+        "b1cee1e2-0277-11eb-bc0e-0aad30af8a83",
+        "b395df11-0277-11eb-bc0e-0aad30af8a83"
+      ],
+      "sample_id": "526abeba-0881-11eb-bc0e-0aad30af8a83",
+      "sample_submitter_id": "eb0a53df-7620-4024-8d2d-051142",
       "sample_type": "Primary Tumor",
       "tissue_type": "Not Reported"
     },
     {
-      "aliquot_id": "526be540-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_id": "526b69fc-0881-11eb-bc0e-0aad30af8a83",
       "analyte_type": "Protein",
-      "case_id": "526aad86-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "b85aa18d-0277-11eb-bc0e-0aad30af8a83",
-      "sample_id": "526b4c90-0881-11eb-bc0e-0aad30af8a83",
-      "sample_submitter_id": "6319b36b-533c-4e86-8e12-80552e",
+      "case_id": "526a3f3c-0881-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "b3a85e57-0277-11eb-bc0e-0aad30af8a83",
+        "b3e47ee3-0277-11eb-bc0e-0aad30af8a83",
+        "b3b462e0-0277-11eb-bc0e-0aad30af8a83"
+      ],
+      "sample_id": "526ac082-0881-11eb-bc0e-0aad30af8a83",
+      "sample_submitter_id": "2f901c90-617e-46da-9fac-d68369",
       "sample_type": "Primary Tumor",
-      "tissue_type": "Not Reported"
-    },
-    {
-      "aliquot_id": "526b7abf-0881-11eb-bc0e-0aad30af8a83",
-      "analyte_type": "Protein",
-      "case_id": "526a4a82-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "b85aa18d-0277-11eb-bc0e-0aad30af8a83",
-      "sample_id": "526ad4de-0881-11eb-bc0e-0aad30af8a83",
-      "sample_submitter_id": "62f5840e-6cd7-4200-b651-645e53",
-      "sample_type": "Primary Tumor",
-      "tissue_type": "Not Reported"
-    },
-    {
-      "aliquot_id": "526b79ec-0881-11eb-bc0e-0aad30af8a83",
-      "analyte_type": "Protein",
-      "case_id": "526a4a82-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "b85aa18d-0277-11eb-bc0e-0aad30af8a83",
-      "sample_id": "526ad3c1-0881-11eb-bc0e-0aad30af8a83",
-      "sample_submitter_id": "092af714-b97a-457c-b0e9-8c20e8",
-      "sample_type": "Solid Tissue Normal",
       "tissue_type": "Not Reported"
     },
     {
       "aliquot_id": "526b6b1d-0881-11eb-bc0e-0aad30af8a83",
       "analyte_type": "Protein",
       "case_id": "526a4022-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "b504669d-0277-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "b504669d-0277-11eb-bc0e-0aad30af8a83",
+        "b49785c5-0277-11eb-bc0e-0aad30af8a83",
+        "b4150862-0277-11eb-bc0e-0aad30af8a83"
+      ],
       "sample_id": "526ac37d-0881-11eb-bc0e-0aad30af8a83",
       "sample_submitter_id": "d38f40fb-dd78-43b2-8b7b-4b6977",
       "sample_type": "Primary Tumor",
@@ -354,149 +144,69 @@
       "aliquot_id": "526b6bf0-0881-11eb-bc0e-0aad30af8a83",
       "analyte_type": "Protein",
       "case_id": "526a4022-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "b504669d-0277-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "b504669d-0277-11eb-bc0e-0aad30af8a83",
+        "b49785c5-0277-11eb-bc0e-0aad30af8a83",
+        "b4150862-0277-11eb-bc0e-0aad30af8a83"
+      ],
       "sample_id": "526ac1a3-0881-11eb-bc0e-0aad30af8a83",
       "sample_submitter_id": "2b73e01c-347a-4dae-a71d-752aeb",
       "sample_type": "Solid Tissue Normal",
       "tissue_type": "Not Reported"
     },
     {
-      "aliquot_id": "526bbcef-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_id": "526b6d95-0881-11eb-bc0e-0aad30af8a83",
       "analyte_type": "Protein",
-      "case_id": "526a89a7-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "b65063e0-0277-11eb-bc0e-0aad30af8a83",
-      "sample_id": "526b1d02-0881-11eb-bc0e-0aad30af8a83",
-      "sample_submitter_id": "61f76fe6-a1c6-41b8-bdc2-2f9209",
+      "case_id": "526a41f5-0881-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "b504669d-0277-11eb-bc0e-0aad30af8a83",
+        "b49785c5-0277-11eb-bc0e-0aad30af8a83",
+        "b4150862-0277-11eb-bc0e-0aad30af8a83"
+      ],
+      "sample_id": "526ac49a-0881-11eb-bc0e-0aad30af8a83",
+      "sample_submitter_id": "685ec3c2-e67a-40d3-9eb3-aa01c9",
       "sample_type": "Solid Tissue Normal",
       "tissue_type": "Not Reported"
     },
     {
-      "aliquot_id": "526b7d6d-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_id": "526b6e6f-0881-11eb-bc0e-0aad30af8a83",
       "analyte_type": "Protein",
-      "case_id": "526a4d66-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "ba1c18d8-0277-11eb-bc0e-0aad30af8a83",
-      "sample_id": "526ad7c1-0881-11eb-bc0e-0aad30af8a83",
-      "sample_submitter_id": "256ac9f5-1e19-44b4-92fb-fef3fc",
+      "case_id": "526a42f3-0881-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "b3a85e57-0277-11eb-bc0e-0aad30af8a83",
+        "b3e47ee3-0277-11eb-bc0e-0aad30af8a83",
+        "b3b462e0-0277-11eb-bc0e-0aad30af8a83"
+      ],
+      "sample_id": "526ac672-0881-11eb-bc0e-0aad30af8a83",
+      "sample_submitter_id": "347e379b-77c0-4dd3-aa25-18c9d1",
       "sample_type": "Primary Tumor",
       "tissue_type": "Not Reported"
     },
     {
-      "aliquot_id": "526b69fc-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_id": "526b6f41-0881-11eb-bc0e-0aad30af8a83",
       "analyte_type": "Protein",
-      "case_id": "526a3f3c-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "b3e47ee3-0277-11eb-bc0e-0aad30af8a83",
-      "sample_id": "526ac082-0881-11eb-bc0e-0aad30af8a83",
-      "sample_submitter_id": "2f901c90-617e-46da-9fac-d68369",
-      "sample_type": "Primary Tumor",
+      "case_id": "526a42f3-0881-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "b3a85e57-0277-11eb-bc0e-0aad30af8a83",
+        "b3e47ee3-0277-11eb-bc0e-0aad30af8a83",
+        "b3b462e0-0277-11eb-bc0e-0aad30af8a83"
+      ],
+      "sample_id": "526ac797-0881-11eb-bc0e-0aad30af8a83",
+      "sample_submitter_id": "a3a26070-fb84-406a-8280-d555e6",
+      "sample_type": "Solid Tissue Normal",
       "tissue_type": "Not Reported"
     },
     {
-      "aliquot_id": "526bbc17-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_id": "526b711b-0881-11eb-bc0e-0aad30af8a83",
       "analyte_type": "Protein",
-      "case_id": "526a88d1-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "b1cb5217-0277-11eb-bc0e-0aad30af8a83",
-      "sample_id": "526b1b42-0881-11eb-bc0e-0aad30af8a83",
-      "sample_submitter_id": "51c1c79e-5a8e-4b0a-bf92-1c0cab",
-      "sample_type": "Primary Tumor",
-      "tissue_type": "Not Reported"
-    },
-    {
-      "aliquot_id": "526bda36-0881-11eb-bc0e-0aad30af8a83",
-      "analyte_type": "Protein",
-      "case_id": "526aa2aa-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "b85aa18d-0277-11eb-bc0e-0aad30af8a83",
-      "sample_id": "526b3cfb-0881-11eb-bc0e-0aad30af8a83",
-      "sample_submitter_id": "e7b656bf-3c34-4ba1-bdf3-c7eefe",
-      "sample_type": "Primary Tumor",
-      "tissue_type": "Not Reported"
-    },
-    {
-      "aliquot_id": "526b9f6a-0881-11eb-bc0e-0aad30af8a83",
-      "analyte_type": "Protein",
-      "case_id": "526a6ec8-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "b395df11-0277-11eb-bc0e-0aad30af8a83",
-      "sample_id": "526afcfb-0881-11eb-bc0e-0aad30af8a83",
-      "sample_submitter_id": "41d0619e-b299-42e2-ac32-29e784",
-      "sample_type": "Primary Tumor",
-      "tissue_type": "Not Reported"
-    },
-    {
-      "aliquot_id": "526bab8a-0881-11eb-bc0e-0aad30af8a83",
-      "analyte_type": "Protein",
-      "case_id": "526a79a5-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "b1d37b19-0277-11eb-bc0e-0aad30af8a83",
-      "sample_id": "526b0a2a-0881-11eb-bc0e-0aad30af8a83",
-      "sample_submitter_id": "69d552be-7cb2-4bb4-b602-a27b3e",
-      "sample_type": "Primary Tumor",
-      "tissue_type": "Not Reported"
-    },
-    {
-      "aliquot_id": "526b8dd4-0881-11eb-bc0e-0aad30af8a83",
-      "analyte_type": "Protein",
-      "case_id": "526a5f28-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "b52a3a4a-0277-11eb-bc0e-0aad30af8a83",
-      "sample_id": "526ae7bb-0881-11eb-bc0e-0aad30af8a83",
-      "sample_submitter_id": "5c3971ee-87c7-4dff-b66e-f18892",
-      "sample_type": "Primary Tumor",
-      "tissue_type": "Not Reported"
-    },
-    {
-      "aliquot_id": "526b8bb0-0881-11eb-bc0e-0aad30af8a83",
-      "analyte_type": "Protein",
-      "case_id": "526a5d16-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "b395df11-0277-11eb-bc0e-0aad30af8a83",
-      "sample_id": "526ae69a-0881-11eb-bc0e-0aad30af8a83",
-      "sample_submitter_id": "8d78194e-fbef-4819-a7b5-b73ae9",
-      "sample_type": "Primary Tumor",
-      "tissue_type": "Not Reported"
-    },
-    {
-      "aliquot_id": "526bb46c-0881-11eb-bc0e-0aad30af8a83",
-      "analyte_type": "Protein",
-      "case_id": "526a8125-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "ba1c18d8-0277-11eb-bc0e-0aad30af8a83",
-      "sample_id": "526b12ba-0881-11eb-bc0e-0aad30af8a83",
-      "sample_submitter_id": "9c8e78bf-b03e-4ba0-9909-5ff070",
-      "sample_type": "Primary Tumor",
-      "tissue_type": "Not Reported"
-    },
-    {
-      "aliquot_id": "526be1d7-0881-11eb-bc0e-0aad30af8a83",
-      "analyte_type": "Protein",
-      "case_id": "526aab00-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "bc82509a-0277-11eb-bc0e-0aad30af8a83",
-      "sample_id": "526b48a5-0881-11eb-bc0e-0aad30af8a83",
-      "sample_submitter_id": "3a380577-c134-47ba-a1ce-988d7c",
-      "sample_type": "Primary Tumor",
-      "tissue_type": "Not Reported"
-    },
-    {
-      "aliquot_id": "526b7c96-0881-11eb-bc0e-0aad30af8a83",
-      "analyte_type": "Protein",
-      "case_id": "526a4b64-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "b85aa18d-0277-11eb-bc0e-0aad30af8a83",
-      "sample_id": "526ad6a5-0881-11eb-bc0e-0aad30af8a83",
-      "sample_submitter_id": "558333b0-ea23-4303-9e3c-4932b1",
-      "sample_type": "Primary Tumor",
-      "tissue_type": "Not Reported"
-    },
-    {
-      "aliquot_id": "526bd832-0881-11eb-bc0e-0aad30af8a83",
-      "analyte_type": "Protein",
-      "case_id": "526aa0b0-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "b74bf326-0277-11eb-bc0e-0aad30af8a83",
-      "sample_id": "526b3a00-0881-11eb-bc0e-0aad30af8a83",
-      "sample_submitter_id": "28d0abdb-f682-4bd3-9425-a9c508",
-      "sample_type": "Primary Tumor",
-      "tissue_type": "Not Reported"
-    },
-    {
-      "aliquot_id": "526bc1f8-0881-11eb-bc0e-0aad30af8a83",
-      "analyte_type": "Protein",
-      "case_id": "526a8e33-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "b74bf326-0277-11eb-bc0e-0aad30af8a83",
-      "sample_id": "526b22a0-0881-11eb-bc0e-0aad30af8a83",
-      "sample_submitter_id": "994f9b8e-46cb-413f-8ec8-2c2fed",
+      "case_id": "526a44db-0881-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "bbb8b3e5-0277-11eb-bc0e-0aad30af8a83",
+        "bc82509a-0277-11eb-bc0e-0aad30af8a83",
+        "bb796c6c-0277-11eb-bc0e-0aad30af8a83"
+      ],
+      "sample_id": "526ac970-0881-11eb-bc0e-0aad30af8a83",
+      "sample_submitter_id": "340a3769-3031-41ae-bb08-a2f696",
       "sample_type": "Solid Tissue Normal",
       "tissue_type": "Not Reported"
     },
@@ -504,27 +214,25 @@
       "aliquot_id": "526b7203-0881-11eb-bc0e-0aad30af8a83",
       "analyte_type": "Protein",
       "case_id": "526a44db-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "bc82509a-0277-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "bbb8b3e5-0277-11eb-bc0e-0aad30af8a83",
+        "bc82509a-0277-11eb-bc0e-0aad30af8a83",
+        "bb796c6c-0277-11eb-bc0e-0aad30af8a83"
+      ],
       "sample_id": "526aca87-0881-11eb-bc0e-0aad30af8a83",
       "sample_submitter_id": "51a4ce2f-4166-4c6b-a7e0-942d0a",
       "sample_type": "Primary Tumor",
       "tissue_type": "Not Reported"
     },
     {
-      "aliquot_id": "526b711b-0881-11eb-bc0e-0aad30af8a83",
-      "analyte_type": "Protein",
-      "case_id": "526a44db-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "bc82509a-0277-11eb-bc0e-0aad30af8a83",
-      "sample_id": "526ac970-0881-11eb-bc0e-0aad30af8a83",
-      "sample_submitter_id": "340a3769-3031-41ae-bb08-a2f696",
-      "sample_type": "Solid Tissue Normal",
-      "tissue_type": "Not Reported"
-    },
-    {
       "aliquot_id": "526b72d9-0881-11eb-bc0e-0aad30af8a83",
       "analyte_type": "Protein",
       "case_id": "526a45be-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "b74bf326-0277-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "b74bf326-0277-11eb-bc0e-0aad30af8a83",
+        "b6661fb7-0277-11eb-bc0e-0aad30af8a83",
+        "b68842c6-0277-11eb-bc0e-0aad30af8a83"
+      ],
       "sample_id": "526acd9d-0881-11eb-bc0e-0aad30af8a83",
       "sample_submitter_id": "a583d3ff-8165-43e9-b764-23b7ef",
       "sample_type": "Solid Tissue Normal",
@@ -534,169 +242,41 @@
       "aliquot_id": "526b7491-0881-11eb-bc0e-0aad30af8a83",
       "analyte_type": "Protein",
       "case_id": "526a45be-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "b74bf326-0277-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "b74bf326-0277-11eb-bc0e-0aad30af8a83",
+        "b6661fb7-0277-11eb-bc0e-0aad30af8a83",
+        "b68842c6-0277-11eb-bc0e-0aad30af8a83"
+      ],
       "sample_id": "526acc6e-0881-11eb-bc0e-0aad30af8a83",
       "sample_submitter_id": "5ea22f5e-307b-491d-801f-8b7fa6",
       "sample_type": "Primary Tumor",
       "tissue_type": "Not Reported"
     },
     {
-      "aliquot_id": "526b623a-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_id": "526b756b-0881-11eb-bc0e-0aad30af8a83",
       "analyte_type": "Protein",
-      "case_id": "526a3222-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "b65063e0-0277-11eb-bc0e-0aad30af8a83",
-      "sample_id": "526ab5e8-0881-11eb-bc0e-0aad30af8a83",
-      "sample_submitter_id": "9b90eb78-2f50-4aeb-b010-d642f9",
+      "case_id": "526a47af-0881-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "b1cd4c91-0277-11eb-bc0e-0aad30af8a83",
+        "b1c97847-0277-11eb-bc0e-0aad30af8a83",
+        "b1d37b19-0277-11eb-bc0e-0aad30af8a83"
+      ],
+      "sample_id": "526acf2e-0881-11eb-bc0e-0aad30af8a83",
+      "sample_submitter_id": "8e17b45e-6a06-4e4e-913d-7b1edb",
       "sample_type": "Primary Tumor",
       "tissue_type": "Not Reported"
     },
     {
-      "aliquot_id": "526b6147-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_id": "526b7751-0881-11eb-bc0e-0aad30af8a83",
       "analyte_type": "Protein",
-      "case_id": "526a3222-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "b65063e0-0277-11eb-bc0e-0aad30af8a83",
-      "sample_id": "526ab38d-0881-11eb-bc0e-0aad30af8a83",
-      "sample_submitter_id": "1abbcb28-f221-4cd4-8c01-37b9bb",
-      "sample_type": "Solid Tissue Normal",
-      "tissue_type": "Not Reported"
-    },
-    {
-      "aliquot_id": "526b932d-0881-11eb-bc0e-0aad30af8a83",
-      "analyte_type": "Protein",
-      "case_id": "526a6387-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "b1cb5217-0277-11eb-bc0e-0aad30af8a83",
-      "sample_id": "526aed76-0881-11eb-bc0e-0aad30af8a83",
-      "sample_submitter_id": "efc971f8-54c5-4531-a792-705ecf",
-      "sample_type": "Primary Tumor",
-      "tissue_type": "Not Reported"
-    },
-    {
-      "aliquot_id": "526bae65-0881-11eb-bc0e-0aad30af8a83",
-      "analyte_type": "Protein",
-      "case_id": "526a7cfe-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "b65063e0-0277-11eb-bc0e-0aad30af8a83",
-      "sample_id": "526b0cfc-0881-11eb-bc0e-0aad30af8a83",
-      "sample_submitter_id": "15524912-685a-47ce-a824-567848",
-      "sample_type": "Primary Tumor",
-      "tissue_type": "Not Reported"
-    },
-    {
-      "aliquot_id": "526bdb0e-0881-11eb-bc0e-0aad30af8a83",
-      "analyte_type": "Protein",
-      "case_id": "526aa37f-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "b85aa18d-0277-11eb-bc0e-0aad30af8a83",
-      "sample_id": "526b3ed5-0881-11eb-bc0e-0aad30af8a83",
-      "sample_submitter_id": "52c064a7-78d9-4a1a-85b4-27c6d1",
-      "sample_type": "Primary Tumor",
-      "tissue_type": "Not Reported"
-    },
-    {
-      "aliquot_id": "526be10c-0881-11eb-bc0e-0aad30af8a83",
-      "analyte_type": "Protein",
-      "case_id": "526aaa31-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "b1d37b19-0277-11eb-bc0e-0aad30af8a83",
-      "sample_id": "526b46ec-0881-11eb-bc0e-0aad30af8a83",
-      "sample_submitter_id": "a03d1103-b809-42c4-ad5c-5aff58",
-      "sample_type": "Primary Tumor",
-      "tissue_type": "Not Reported"
-    },
-    {
-      "aliquot_id": "526bb07d-0881-11eb-bc0e-0aad30af8a83",
-      "analyte_type": "Protein",
-      "case_id": "526a7dd0-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "b1d37b19-0277-11eb-bc0e-0aad30af8a83",
-      "sample_id": "526b0e18-0881-11eb-bc0e-0aad30af8a83",
-      "sample_submitter_id": "0cc794c3-5bf5-4621-b238-58a0f6",
-      "sample_type": "Primary Tumor",
-      "tissue_type": "Not Reported"
-    },
-    {
-      "aliquot_id": "526b9da9-0881-11eb-bc0e-0aad30af8a83",
-      "analyte_type": "Protein",
-      "case_id": "526a6df9-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "b504669d-0277-11eb-bc0e-0aad30af8a83",
-      "sample_id": "526afb3f-0881-11eb-bc0e-0aad30af8a83",
-      "sample_submitter_id": "2224c03f-b7b1-4368-887e-2b4cdf",
-      "sample_type": "Primary Tumor",
-      "tissue_type": "Not Reported"
-    },
-    {
-      "aliquot_id": "526ba234-0881-11eb-bc0e-0aad30af8a83",
-      "analyte_type": "Protein",
-      "case_id": "526a717c-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "b85aa18d-0277-11eb-bc0e-0aad30af8a83",
-      "sample_id": "526affcc-0881-11eb-bc0e-0aad30af8a83",
-      "sample_submitter_id": "285fed94-1495-448e-879b-b55de9",
-      "sample_type": "Primary Tumor",
-      "tissue_type": "Not Reported"
-    },
-    {
-      "aliquot_id": "526bb705-0881-11eb-bc0e-0aad30af8a83",
-      "analyte_type": "Protein",
-      "case_id": "526a83a7-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "bb231629-0277-11eb-bc0e-0aad30af8a83",
-      "sample_id": "526b15ac-0881-11eb-bc0e-0aad30af8a83",
-      "sample_submitter_id": "7069e990-4a4e-4984-a66d-4d835a",
-      "sample_type": "Primary Tumor",
-      "tissue_type": "Not Reported"
-    },
-    {
-      "aliquot_id": "526b85e4-0881-11eb-bc0e-0aad30af8a83",
-      "analyte_type": "Protein",
-      "case_id": "526a5774-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "b74bf326-0277-11eb-bc0e-0aad30af8a83",
-      "sample_id": "526ae0a2-0881-11eb-bc0e-0aad30af8a83",
-      "sample_submitter_id": "2ed8beb2-bc63-4bad-b5fe-1916a0",
-      "sample_type": "Primary Tumor",
-      "tissue_type": "Not Reported"
-    },
-    {
-      "aliquot_id": "526be03f-0881-11eb-bc0e-0aad30af8a83",
-      "analyte_type": "Protein",
-      "case_id": "526aa956-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "b1cb5217-0277-11eb-bc0e-0aad30af8a83",
-      "sample_id": "526b45df-0881-11eb-bc0e-0aad30af8a83",
-      "sample_submitter_id": "ce1e5dfc-2ef1-4633-af93-5ea4d9",
-      "sample_type": "Primary Tumor",
-      "tissue_type": "Not Reported"
-    },
-    {
-      "aliquot_id": "526b630e-0881-11eb-bc0e-0aad30af8a83",
-      "analyte_type": "Protein",
-      "case_id": "526a3812-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "b1d37b19-0277-11eb-bc0e-0aad30af8a83",
-      "sample_id": "526ab71c-0881-11eb-bc0e-0aad30af8a83",
-      "sample_submitter_id": "b22659b9-e12c-4725-a7db-a833de",
-      "sample_type": "Solid Tissue Normal",
-      "tissue_type": "Not Reported"
-    },
-    {
-      "aliquot_id": "526bd258-0881-11eb-bc0e-0aad30af8a83",
-      "analyte_type": "Protein",
-      "case_id": "526a9aa9-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "bb231629-0277-11eb-bc0e-0aad30af8a83",
-      "sample_id": "526b3350-0881-11eb-bc0e-0aad30af8a83",
-      "sample_submitter_id": "05387aad-2a1f-42c2-8d6f-950598",
-      "sample_type": "Primary Tumor",
-      "tissue_type": "Not Reported"
-    },
-    {
-      "aliquot_id": "526b9a48-0881-11eb-bc0e-0aad30af8a83",
-      "analyte_type": "Protein",
-      "case_id": "526a6a80-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "b395df11-0277-11eb-bc0e-0aad30af8a83",
-      "sample_id": "526af745-0881-11eb-bc0e-0aad30af8a83",
-      "sample_submitter_id": "fe83e13f-9754-403b-8f74-d6caf8",
-      "sample_type": "Primary Tumor",
-      "tissue_type": "Not Reported"
-    },
-    {
-      "aliquot_id": "526b9cd6-0881-11eb-bc0e-0aad30af8a83",
-      "analyte_type": "Protein",
-      "case_id": "526a6d21-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "ba1c18d8-0277-11eb-bc0e-0aad30af8a83",
-      "sample_id": "526afa25-0881-11eb-bc0e-0aad30af8a83",
-      "sample_submitter_id": "af95e2c6-25c4-4ab8-bf06-3e15ff",
+      "case_id": "526a488e-0881-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "b1cd4c91-0277-11eb-bc0e-0aad30af8a83",
+        "b1c97847-0277-11eb-bc0e-0aad30af8a83",
+        "b1d37b19-0277-11eb-bc0e-0aad30af8a83"
+      ],
+      "sample_id": "526ad0eb-0881-11eb-bc0e-0aad30af8a83",
+      "sample_submitter_id": "3490835c-c004-45ed-91f3-7c206f",
       "sample_type": "Primary Tumor",
       "tissue_type": "Not Reported"
     },
@@ -704,319 +284,83 @@
       "aliquot_id": "526b7826-0881-11eb-bc0e-0aad30af8a83",
       "analyte_type": "Protein",
       "case_id": "526a488e-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "b1d37b19-0277-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "b1cd4c91-0277-11eb-bc0e-0aad30af8a83",
+        "b1c97847-0277-11eb-bc0e-0aad30af8a83",
+        "b1d37b19-0277-11eb-bc0e-0aad30af8a83"
+      ],
       "sample_id": "526ad204-0881-11eb-bc0e-0aad30af8a83",
       "sample_submitter_id": "6e209757-a7f4-45af-b5f3-2ebc02",
       "sample_type": "Solid Tissue Normal",
       "tissue_type": "Not Reported"
     },
     {
-      "aliquot_id": "526b7751-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_id": "526b79ec-0881-11eb-bc0e-0aad30af8a83",
       "analyte_type": "Protein",
-      "case_id": "526a488e-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "b1d37b19-0277-11eb-bc0e-0aad30af8a83",
-      "sample_id": "526ad0eb-0881-11eb-bc0e-0aad30af8a83",
-      "sample_submitter_id": "3490835c-c004-45ed-91f3-7c206f",
-      "sample_type": "Primary Tumor",
-      "tissue_type": "Not Reported"
-    },
-    {
-      "aliquot_id": "526bb380-0881-11eb-bc0e-0aad30af8a83",
-      "analyte_type": "Protein",
-      "case_id": "526a8051-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "bc82509a-0277-11eb-bc0e-0aad30af8a83",
-      "sample_id": "526b10ee-0881-11eb-bc0e-0aad30af8a83",
-      "sample_submitter_id": "79b60f32-6cca-4cb6-9a1e-22a3ac",
-      "sample_type": "Primary Tumor",
-      "tissue_type": "Not Reported"
-    },
-    {
-      "aliquot_id": "526bd60e-0881-11eb-bc0e-0aad30af8a83",
-      "analyte_type": "Protein",
-      "case_id": "526a9fbc-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "bc82509a-0277-11eb-bc0e-0aad30af8a83",
-      "sample_id": "526b38c4-0881-11eb-bc0e-0aad30af8a83",
-      "sample_submitter_id": "49bd51fe-48a1-4828-b66e-b30c38",
-      "sample_type": "Primary Tumor",
-      "tissue_type": "Not Reported"
-    },
-    {
-      "aliquot_id": "526bddb6-0881-11eb-bc0e-0aad30af8a83",
-      "analyte_type": "Protein",
-      "case_id": "526aa6dd-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "b3e47ee3-0277-11eb-bc0e-0aad30af8a83",
-      "sample_id": "526b431e-0881-11eb-bc0e-0aad30af8a83",
-      "sample_submitter_id": "2563cb02-d58a-4286-8634-7502cd",
-      "sample_type": "Primary Tumor",
-      "tissue_type": "Not Reported"
-    },
-    {
-      "aliquot_id": "526bcf80-0881-11eb-bc0e-0aad30af8a83",
-      "analyte_type": "Protein",
-      "case_id": "526a9779-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "ba1c18d8-0277-11eb-bc0e-0aad30af8a83",
-      "sample_id": "526b3084-0881-11eb-bc0e-0aad30af8a83",
-      "sample_submitter_id": "cfd76f9a-ce60-4ec7-8e6b-a8fc31",
-      "sample_type": "Primary Tumor",
-      "tissue_type": "Not Reported"
-    },
-    {
-      "aliquot_id": "526ba5f0-0881-11eb-bc0e-0aad30af8a83",
-      "analyte_type": "Protein",
-      "case_id": "526a751a-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "b74bf326-0277-11eb-bc0e-0aad30af8a83",
-      "sample_id": "526b03fe-0881-11eb-bc0e-0aad30af8a83",
-      "sample_submitter_id": "7d953d1d-84b6-4ecd-b1d7-1ed865",
-      "sample_type": "Primary Tumor",
-      "tissue_type": "Not Reported"
-    },
-    {
-      "aliquot_id": "526bd328-0881-11eb-bc0e-0aad30af8a83",
-      "analyte_type": "Protein",
-      "case_id": "526a9cc6-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "b1cb5217-0277-11eb-bc0e-0aad30af8a83",
-      "sample_id": "526b35c3-0881-11eb-bc0e-0aad30af8a83",
-      "sample_submitter_id": "46c73531-f531-4ec3-97fe-b39d9d",
-      "sample_type": "Primary Tumor",
-      "tissue_type": "Not Reported"
-    },
-    {
-      "aliquot_id": "526bd053-0881-11eb-bc0e-0aad30af8a83",
-      "analyte_type": "Protein",
-      "case_id": "526a99c0-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "b52a3a4a-0277-11eb-bc0e-0aad30af8a83",
-      "sample_id": "526b323d-0881-11eb-bc0e-0aad30af8a83",
-      "sample_submitter_id": "e6850782-fd2a-4c53-b682-1852fe",
-      "sample_type": "Primary Tumor",
-      "tissue_type": "Not Reported"
-    },
-    {
-      "aliquot_id": "526b6d95-0881-11eb-bc0e-0aad30af8a83",
-      "analyte_type": "Protein",
-      "case_id": "526a41f5-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "b504669d-0277-11eb-bc0e-0aad30af8a83",
-      "sample_id": "526ac49a-0881-11eb-bc0e-0aad30af8a83",
-      "sample_submitter_id": "685ec3c2-e67a-40d3-9eb3-aa01c9",
+      "case_id": "526a4a82-0881-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "b81f3c14-0277-11eb-bc0e-0aad30af8a83",
+        "b85aa18d-0277-11eb-bc0e-0aad30af8a83",
+        "b7962152-0277-11eb-bc0e-0aad30af8a83"
+      ],
+      "sample_id": "526ad3c1-0881-11eb-bc0e-0aad30af8a83",
+      "sample_submitter_id": "092af714-b97a-457c-b0e9-8c20e8",
       "sample_type": "Solid Tissue Normal",
       "tissue_type": "Not Reported"
     },
     {
-      "aliquot_id": "526b9188-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_id": "526b7abf-0881-11eb-bc0e-0aad30af8a83",
       "analyte_type": "Protein",
-      "case_id": "526a62a5-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "b1d2217f-0277-11eb-bc0e-0aad30af8a83",
-      "sample_id": "526aec5e-0881-11eb-bc0e-0aad30af8a83",
-      "sample_submitter_id": "3d3e1888-d67e-4c69-ba83-112d0f",
+      "case_id": "526a4a82-0881-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "b81f3c14-0277-11eb-bc0e-0aad30af8a83",
+        "b85aa18d-0277-11eb-bc0e-0aad30af8a83",
+        "b7962152-0277-11eb-bc0e-0aad30af8a83"
+      ],
+      "sample_id": "526ad4de-0881-11eb-bc0e-0aad30af8a83",
+      "sample_submitter_id": "62f5840e-6cd7-4200-b651-645e53",
       "sample_type": "Primary Tumor",
       "tissue_type": "Not Reported"
     },
     {
-      "aliquot_id": "526ba31b-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_id": "526b7c96-0881-11eb-bc0e-0aad30af8a83",
       "analyte_type": "Protein",
-      "case_id": "526a724a-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "b65063e0-0277-11eb-bc0e-0aad30af8a83",
-      "sample_id": "526b00e8-0881-11eb-bc0e-0aad30af8a83",
-      "sample_submitter_id": "10c2d629-0287-4511-ac25-f29031",
+      "case_id": "526a4b64-0881-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "b81f3c14-0277-11eb-bc0e-0aad30af8a83",
+        "b85aa18d-0277-11eb-bc0e-0aad30af8a83",
+        "b7962152-0277-11eb-bc0e-0aad30af8a83"
+      ],
+      "sample_id": "526ad6a5-0881-11eb-bc0e-0aad30af8a83",
+      "sample_submitter_id": "558333b0-ea23-4303-9e3c-4932b1",
       "sample_type": "Primary Tumor",
       "tissue_type": "Not Reported"
     },
     {
-      "aliquot_id": "526b8307-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_id": "526b7d6d-0881-11eb-bc0e-0aad30af8a83",
       "analyte_type": "Protein",
-      "case_id": "526a53ac-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "b65063e0-0277-11eb-bc0e-0aad30af8a83",
-      "sample_id": "526add8e-0881-11eb-bc0e-0aad30af8a83",
-      "sample_submitter_id": "9e0d47e0-f633-468b-b82b-4d752d",
+      "case_id": "526a4d66-0881-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "ba1c18d8-0277-11eb-bc0e-0aad30af8a83",
+        "b94ff47a-0277-11eb-bc0e-0aad30af8a83",
+        "b9164b40-0277-11eb-bc0e-0aad30af8a83"
+      ],
+      "sample_id": "526ad7c1-0881-11eb-bc0e-0aad30af8a83",
+      "sample_submitter_id": "256ac9f5-1e19-44b4-92fb-fef3fc",
       "sample_type": "Primary Tumor",
       "tissue_type": "Not Reported"
     },
     {
-      "aliquot_id": "526b979c-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_id": "526b7f4d-0881-11eb-bc0e-0aad30af8a83",
       "analyte_type": "Protein",
-      "case_id": "526a67e6-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "b52a3a4a-0277-11eb-bc0e-0aad30af8a83",
-      "sample_id": "526af413-0881-11eb-bc0e-0aad30af8a83",
-      "sample_submitter_id": "eb3f3494-7057-4afe-b212-e6e9a3",
-      "sample_type": "Primary Tumor",
-      "tissue_type": "Not Reported"
-    },
-    {
-      "aliquot_id": "526b88c5-0881-11eb-bc0e-0aad30af8a83",
-      "analyte_type": "Protein",
-      "case_id": "526a5ae9-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "b395df11-0277-11eb-bc0e-0aad30af8a83",
-      "sample_id": "526ae3ba-0881-11eb-bc0e-0aad30af8a83",
-      "sample_submitter_id": "2dc28da8-7ff1-4b9b-b5bd-17cc25",
-      "sample_type": "Primary Tumor",
-      "tissue_type": "Not Reported"
-    },
-    {
-      "aliquot_id": "526b87ee-0881-11eb-bc0e-0aad30af8a83",
-      "analyte_type": "Protein",
-      "case_id": "526a587e-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "b3e47ee3-0277-11eb-bc0e-0aad30af8a83",
-      "sample_id": "526ae1fe-0881-11eb-bc0e-0aad30af8a83",
-      "sample_submitter_id": "0c87932d-b6fd-4eb5-b86a-a34d07",
-      "sample_type": "Primary Tumor",
-      "tissue_type": "Not Reported"
-    },
-    {
-      "aliquot_id": "526bca01-0881-11eb-bc0e-0aad30af8a83",
-      "analyte_type": "Protein",
-      "case_id": "526a91cb-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "ba1c18d8-0277-11eb-bc0e-0aad30af8a83",
-      "sample_id": "526b2b50-0881-11eb-bc0e-0aad30af8a83",
-      "sample_submitter_id": "627e6e36-3dca-4ee5-9755-6f3510",
-      "sample_type": "Primary Tumor",
-      "tissue_type": "Not Reported"
-    },
-    {
-      "aliquot_id": "526bc822-0881-11eb-bc0e-0aad30af8a83",
-      "analyte_type": "Protein",
-      "case_id": "526a91cb-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "ba1c18d8-0277-11eb-bc0e-0aad30af8a83",
-      "sample_id": "526b2971-0881-11eb-bc0e-0aad30af8a83",
-      "sample_submitter_id": "31c15e30-21d4-4843-bd4a-9cd0d8",
-      "sample_type": "Solid Tissue Normal",
-      "tissue_type": "Not Reported"
-    },
-    {
-      "aliquot_id": "526b9676-0881-11eb-bc0e-0aad30af8a83",
-      "analyte_type": "Protein",
-      "case_id": "526a6716-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "b74bf326-0277-11eb-bc0e-0aad30af8a83",
-      "sample_id": "526af23a-0881-11eb-bc0e-0aad30af8a83",
-      "sample_submitter_id": "4ccb249a-6722-491e-97e9-e3b4e7",
-      "sample_type": "Primary Tumor",
-      "tissue_type": "Not Reported"
-    },
-    {
-      "aliquot_id": "526baab1-0881-11eb-bc0e-0aad30af8a83",
-      "analyte_type": "Protein",
-      "case_id": "526a78cd-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "b1cb5217-0277-11eb-bc0e-0aad30af8a83",
-      "sample_id": "526b0874-0881-11eb-bc0e-0aad30af8a83",
-      "sample_submitter_id": "3dcf8b3c-c0c5-4dfa-9543-5d30fb",
-      "sample_type": "Primary Tumor",
-      "tissue_type": "Not Reported"
-    },
-    {
-      "aliquot_id": "526b9408-0881-11eb-bc0e-0aad30af8a83",
-      "analyte_type": "Protein",
-      "case_id": "526a6457-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "b1d2217f-0277-11eb-bc0e-0aad30af8a83",
-      "sample_id": "526aef46-0881-11eb-bc0e-0aad30af8a83",
-      "sample_submitter_id": "a8853382-b726-4ce8-98d5-ca89df",
-      "sample_type": "Primary Tumor",
-      "tissue_type": "Not Reported"
-    },
-    {
-      "aliquot_id": "526be7be-0881-11eb-bc0e-0aad30af8a83",
-      "analyte_type": "Protein",
-      "case_id": "526aafff-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "b3e47ee3-0277-11eb-bc0e-0aad30af8a83",
-      "sample_id": "526b513f-0881-11eb-bc0e-0aad30af8a83",
-      "sample_submitter_id": "c17b0ff9-9057-4848-a0cc-abb25f",
-      "sample_type": "Primary Tumor",
-      "tissue_type": "Not Reported"
-    },
-    {
-      "aliquot_id": "526b6836-0881-11eb-bc0e-0aad30af8a83",
-      "analyte_type": "Protein",
-      "case_id": "526a3c86-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "b1d2217f-0277-11eb-bc0e-0aad30af8a83",
-      "sample_id": "526abda4-0881-11eb-bc0e-0aad30af8a83",
-      "sample_submitter_id": "1a10c200-3895-4648-b951-94f99f",
-      "sample_type": "Primary Tumor",
-      "tissue_type": "Not Reported"
-    },
-    {
-      "aliquot_id": "526b6674-0881-11eb-bc0e-0aad30af8a83",
-      "analyte_type": "Protein",
-      "case_id": "526a3c86-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "b1d2217f-0277-11eb-bc0e-0aad30af8a83",
-      "sample_id": "526abbe6-0881-11eb-bc0e-0aad30af8a83",
-      "sample_submitter_id": "1556af7e-c2ae-4fce-9aae-87c459",
-      "sample_type": "Solid Tissue Normal",
-      "tissue_type": "Not Reported"
-    },
-    {
-      "aliquot_id": "526ba03d-0881-11eb-bc0e-0aad30af8a83",
-      "analyte_type": "Protein",
-      "case_id": "526a70a6-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "b504669d-0277-11eb-bc0e-0aad30af8a83",
-      "sample_id": "526afe0f-0881-11eb-bc0e-0aad30af8a83",
-      "sample_submitter_id": "318d53c3-216b-4de1-a098-77d6dd",
-      "sample_type": "Primary Tumor",
-      "tissue_type": "Not Reported"
-    },
-    {
-      "aliquot_id": "526bbdba-0881-11eb-bc0e-0aad30af8a83",
-      "analyte_type": "Protein",
-      "case_id": "526a8b79-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "bb231629-0277-11eb-bc0e-0aad30af8a83",
-      "sample_id": "526b1e15-0881-11eb-bc0e-0aad30af8a83",
-      "sample_submitter_id": "1de8d3d8-fc0e-4be0-8aa7-127c7b",
-      "sample_type": "Primary Tumor",
-      "tissue_type": "Not Reported"
-    },
-    {
-      "aliquot_id": "526b94d2-0881-11eb-bc0e-0aad30af8a83",
-      "analyte_type": "Protein",
-      "case_id": "526a662f-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "b395df11-0277-11eb-bc0e-0aad30af8a83",
-      "sample_id": "526af059-0881-11eb-bc0e-0aad30af8a83",
-      "sample_submitter_id": "08296da7-70ea-44df-8646-09f2cc",
-      "sample_type": "Primary Tumor",
-      "tissue_type": "Not Reported"
-    },
-    {
-      "aliquot_id": "526bdc01-0881-11eb-bc0e-0aad30af8a83",
-      "analyte_type": "Protein",
-      "case_id": "526aa526-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "b52a3a4a-0277-11eb-bc0e-0aad30af8a83",
-      "sample_id": "526b4000-0881-11eb-bc0e-0aad30af8a83",
-      "sample_submitter_id": "74a45e5a-a35a-4c60-a4b4-f3f5ea",
-      "sample_type": "Primary Tumor",
-      "tissue_type": "Not Reported"
-    },
-    {
-      "aliquot_id": "526b64c8-0881-11eb-bc0e-0aad30af8a83",
-      "analyte_type": "Protein",
-      "case_id": "526a3949-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "b85aa18d-0277-11eb-bc0e-0aad30af8a83",
-      "sample_id": "526ab94f-0881-11eb-bc0e-0aad30af8a83",
-      "sample_submitter_id": "0745488e-0bfb-4d1f-8228-dedf76",
-      "sample_type": "Solid Tissue Normal",
-      "tissue_type": "Not Reported"
-    },
-    {
-      "aliquot_id": "526b90a3-0881-11eb-bc0e-0aad30af8a83",
-      "analyte_type": "Protein",
-      "case_id": "526a60d3-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "ba1c18d8-0277-11eb-bc0e-0aad30af8a83",
-      "sample_id": "526aea92-0881-11eb-bc0e-0aad30af8a83",
-      "sample_submitter_id": "e3ebe010-cd31-4b5d-8fcb-b7103b",
-      "sample_type": "Primary Tumor",
-      "tissue_type": "Not Reported"
-    },
-    {
-      "aliquot_id": "526b6916-0881-11eb-bc0e-0aad30af8a83",
-      "analyte_type": "Protein",
-      "case_id": "526a3d60-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "b395df11-0277-11eb-bc0e-0aad30af8a83",
-      "sample_id": "526abeba-0881-11eb-bc0e-0aad30af8a83",
-      "sample_submitter_id": "eb0a53df-7620-4024-8d2d-051142",
-      "sample_type": "Primary Tumor",
-      "tissue_type": "Not Reported"
-    },
-    {
-      "aliquot_id": "526b9b1d-0881-11eb-bc0e-0aad30af8a83",
-      "analyte_type": "Protein",
-      "case_id": "526a6b52-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "b504669d-0277-11eb-bc0e-0aad30af8a83",
-      "sample_id": "526af861-0881-11eb-bc0e-0aad30af8a83",
-      "sample_submitter_id": "d4791079-c826-4fc7-9d9b-ee20ba",
+      "case_id": "526a4e47-0881-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "b1c62d32-0277-11eb-bc0e-0aad30af8a83",
+        "b1c744be-0277-11eb-bc0e-0aad30af8a83",
+        "b1cb5217-0277-11eb-bc0e-0aad30af8a83"
+      ],
+      "sample_id": "526ad98a-0881-11eb-bc0e-0aad30af8a83",
+      "sample_submitter_id": "9a7a86d3-bbf2-4d36-941d-c75c03",
       "sample_type": "Primary Tumor",
       "tissue_type": "Not Reported"
     },
@@ -1024,9 +368,139 @@
       "aliquot_id": "526b8047-0881-11eb-bc0e-0aad30af8a83",
       "analyte_type": "Protein",
       "case_id": "526a5065-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "bb231629-0277-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "baf0b780-0277-11eb-bc0e-0aad30af8a83",
+        "bb231629-0277-11eb-bc0e-0aad30af8a83",
+        "baa3afb8-0277-11eb-bc0e-0aad30af8a83"
+      ],
       "sample_id": "526adaa3-0881-11eb-bc0e-0aad30af8a83",
       "sample_submitter_id": "1772e913-f62e-446a-8cf3-720348",
+      "sample_type": "Primary Tumor",
+      "tissue_type": "Not Reported"
+    },
+    {
+      "aliquot_id": "526b8231-0881-11eb-bc0e-0aad30af8a83",
+      "analyte_type": "Protein",
+      "case_id": "526a514c-0881-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "b1c8a412-0277-11eb-bc0e-0aad30af8a83",
+        "b1d2217f-0277-11eb-bc0e-0aad30af8a83",
+        "b1d0c57c-0277-11eb-bc0e-0aad30af8a83"
+      ],
+      "sample_id": "526adc79-0881-11eb-bc0e-0aad30af8a83",
+      "sample_submitter_id": "fbb41c94-aabd-49cc-90b2-882c3e",
+      "sample_type": "Primary Tumor",
+      "tissue_type": "Not Reported"
+    },
+    {
+      "aliquot_id": "526b8307-0881-11eb-bc0e-0aad30af8a83",
+      "analyte_type": "Protein",
+      "case_id": "526a53ac-0881-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "b65063e0-0277-11eb-bc0e-0aad30af8a83",
+        "b63d4e36-0277-11eb-bc0e-0aad30af8a83",
+        "b60df3cc-0277-11eb-bc0e-0aad30af8a83"
+      ],
+      "sample_id": "526add8e-0881-11eb-bc0e-0aad30af8a83",
+      "sample_submitter_id": "9e0d47e0-f633-468b-b82b-4d752d",
+      "sample_type": "Primary Tumor",
+      "tissue_type": "Not Reported"
+    },
+    {
+      "aliquot_id": "526b8502-0881-11eb-bc0e-0aad30af8a83",
+      "analyte_type": "Protein",
+      "case_id": "526a548e-0881-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "b3a85e57-0277-11eb-bc0e-0aad30af8a83",
+        "b3e47ee3-0277-11eb-bc0e-0aad30af8a83",
+        "b3b462e0-0277-11eb-bc0e-0aad30af8a83"
+      ],
+      "sample_id": "526adf71-0881-11eb-bc0e-0aad30af8a83",
+      "sample_submitter_id": "27f3ca2d-a86f-479d-8e7e-5307c7",
+      "sample_type": "Primary Tumor",
+      "tissue_type": "Not Reported"
+    },
+    {
+      "aliquot_id": "526b85e4-0881-11eb-bc0e-0aad30af8a83",
+      "analyte_type": "Protein",
+      "case_id": "526a5774-0881-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "b74bf326-0277-11eb-bc0e-0aad30af8a83",
+        "b6661fb7-0277-11eb-bc0e-0aad30af8a83",
+        "b68842c6-0277-11eb-bc0e-0aad30af8a83"
+      ],
+      "sample_id": "526ae0a2-0881-11eb-bc0e-0aad30af8a83",
+      "sample_submitter_id": "2ed8beb2-bc63-4bad-b5fe-1916a0",
+      "sample_type": "Primary Tumor",
+      "tissue_type": "Not Reported"
+    },
+    {
+      "aliquot_id": "526b87ee-0881-11eb-bc0e-0aad30af8a83",
+      "analyte_type": "Protein",
+      "case_id": "526a587e-0881-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "b3a85e57-0277-11eb-bc0e-0aad30af8a83",
+        "b3e47ee3-0277-11eb-bc0e-0aad30af8a83",
+        "b3b462e0-0277-11eb-bc0e-0aad30af8a83"
+      ],
+      "sample_id": "526ae1fe-0881-11eb-bc0e-0aad30af8a83",
+      "sample_submitter_id": "0c87932d-b6fd-4eb5-b86a-a34d07",
+      "sample_type": "Primary Tumor",
+      "tissue_type": "Not Reported"
+    },
+    {
+      "aliquot_id": "526b88c5-0881-11eb-bc0e-0aad30af8a83",
+      "analyte_type": "Protein",
+      "case_id": "526a5ae9-0881-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "b34a56ca-0277-11eb-bc0e-0aad30af8a83",
+        "b1cee1e2-0277-11eb-bc0e-0aad30af8a83",
+        "b395df11-0277-11eb-bc0e-0aad30af8a83"
+      ],
+      "sample_id": "526ae3ba-0881-11eb-bc0e-0aad30af8a83",
+      "sample_submitter_id": "2dc28da8-7ff1-4b9b-b5bd-17cc25",
+      "sample_type": "Primary Tumor",
+      "tissue_type": "Not Reported"
+    },
+    {
+      "aliquot_id": "526b8ada-0881-11eb-bc0e-0aad30af8a83",
+      "analyte_type": "Protein",
+      "case_id": "526a5c31-0881-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "b52a3a4a-0277-11eb-bc0e-0aad30af8a83",
+        "b51859f7-0277-11eb-bc0e-0aad30af8a83",
+        "b507e610-0277-11eb-bc0e-0aad30af8a83"
+      ],
+      "sample_id": "526ae4d2-0881-11eb-bc0e-0aad30af8a83",
+      "sample_submitter_id": "927f0958-db5a-4bc5-92b7-2a3695",
+      "sample_type": "Primary Tumor",
+      "tissue_type": "Not Reported"
+    },
+    {
+      "aliquot_id": "526b8bb0-0881-11eb-bc0e-0aad30af8a83",
+      "analyte_type": "Protein",
+      "case_id": "526a5d16-0881-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "b34a56ca-0277-11eb-bc0e-0aad30af8a83",
+        "b1cee1e2-0277-11eb-bc0e-0aad30af8a83",
+        "b395df11-0277-11eb-bc0e-0aad30af8a83"
+      ],
+      "sample_id": "526ae69a-0881-11eb-bc0e-0aad30af8a83",
+      "sample_submitter_id": "8d78194e-fbef-4819-a7b5-b73ae9",
+      "sample_type": "Primary Tumor",
+      "tissue_type": "Not Reported"
+    },
+    {
+      "aliquot_id": "526b8dd4-0881-11eb-bc0e-0aad30af8a83",
+      "analyte_type": "Protein",
+      "case_id": "526a5f28-0881-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "b52a3a4a-0277-11eb-bc0e-0aad30af8a83",
+        "b51859f7-0277-11eb-bc0e-0aad30af8a83",
+        "b507e610-0277-11eb-bc0e-0aad30af8a83"
+      ],
+      "sample_id": "526ae7bb-0881-11eb-bc0e-0aad30af8a83",
+      "sample_submitter_id": "5c3971ee-87c7-4dff-b66e-f18892",
       "sample_type": "Primary Tumor",
       "tissue_type": "Not Reported"
     },
@@ -1034,9 +508,237 @@
       "aliquot_id": "526b8ecb-0881-11eb-bc0e-0aad30af8a83",
       "analyte_type": "Protein",
       "case_id": "526a6002-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "ba1c18d8-0277-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "ba1c18d8-0277-11eb-bc0e-0aad30af8a83",
+        "b94ff47a-0277-11eb-bc0e-0aad30af8a83",
+        "b9164b40-0277-11eb-bc0e-0aad30af8a83"
+      ],
       "sample_id": "526ae97d-0881-11eb-bc0e-0aad30af8a83",
       "sample_submitter_id": "42d860a3-8a0c-4c44-a09a-9ad8cf",
+      "sample_type": "Primary Tumor",
+      "tissue_type": "Not Reported"
+    },
+    {
+      "aliquot_id": "526b90a3-0881-11eb-bc0e-0aad30af8a83",
+      "analyte_type": "Protein",
+      "case_id": "526a60d3-0881-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "ba1c18d8-0277-11eb-bc0e-0aad30af8a83",
+        "b94ff47a-0277-11eb-bc0e-0aad30af8a83",
+        "b9164b40-0277-11eb-bc0e-0aad30af8a83"
+      ],
+      "sample_id": "526aea92-0881-11eb-bc0e-0aad30af8a83",
+      "sample_submitter_id": "e3ebe010-cd31-4b5d-8fcb-b7103b",
+      "sample_type": "Primary Tumor",
+      "tissue_type": "Not Reported"
+    },
+    {
+      "aliquot_id": "526b9188-0881-11eb-bc0e-0aad30af8a83",
+      "analyte_type": "Protein",
+      "case_id": "526a62a5-0881-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "b1c8a412-0277-11eb-bc0e-0aad30af8a83",
+        "b1d2217f-0277-11eb-bc0e-0aad30af8a83",
+        "b1d0c57c-0277-11eb-bc0e-0aad30af8a83"
+      ],
+      "sample_id": "526aec5e-0881-11eb-bc0e-0aad30af8a83",
+      "sample_submitter_id": "3d3e1888-d67e-4c69-ba83-112d0f",
+      "sample_type": "Primary Tumor",
+      "tissue_type": "Not Reported"
+    },
+    {
+      "aliquot_id": "526b932d-0881-11eb-bc0e-0aad30af8a83",
+      "analyte_type": "Protein",
+      "case_id": "526a6387-0881-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "b1c62d32-0277-11eb-bc0e-0aad30af8a83",
+        "b1c744be-0277-11eb-bc0e-0aad30af8a83",
+        "b1cb5217-0277-11eb-bc0e-0aad30af8a83"
+      ],
+      "sample_id": "526aed76-0881-11eb-bc0e-0aad30af8a83",
+      "sample_submitter_id": "efc971f8-54c5-4531-a792-705ecf",
+      "sample_type": "Primary Tumor",
+      "tissue_type": "Not Reported"
+    },
+    {
+      "aliquot_id": "526b9408-0881-11eb-bc0e-0aad30af8a83",
+      "analyte_type": "Protein",
+      "case_id": "526a6457-0881-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "b1c8a412-0277-11eb-bc0e-0aad30af8a83",
+        "b1d2217f-0277-11eb-bc0e-0aad30af8a83",
+        "b1d0c57c-0277-11eb-bc0e-0aad30af8a83"
+      ],
+      "sample_id": "526aef46-0881-11eb-bc0e-0aad30af8a83",
+      "sample_submitter_id": "a8853382-b726-4ce8-98d5-ca89df",
+      "sample_type": "Primary Tumor",
+      "tissue_type": "Not Reported"
+    },
+    {
+      "aliquot_id": "526b94d2-0881-11eb-bc0e-0aad30af8a83",
+      "analyte_type": "Protein",
+      "case_id": "526a662f-0881-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "b34a56ca-0277-11eb-bc0e-0aad30af8a83",
+        "b1cee1e2-0277-11eb-bc0e-0aad30af8a83",
+        "b395df11-0277-11eb-bc0e-0aad30af8a83"
+      ],
+      "sample_id": "526af059-0881-11eb-bc0e-0aad30af8a83",
+      "sample_submitter_id": "08296da7-70ea-44df-8646-09f2cc",
+      "sample_type": "Primary Tumor",
+      "tissue_type": "Not Reported"
+    },
+    {
+      "aliquot_id": "526b9676-0881-11eb-bc0e-0aad30af8a83",
+      "analyte_type": "Protein",
+      "case_id": "526a6716-0881-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "b74bf326-0277-11eb-bc0e-0aad30af8a83",
+        "b6661fb7-0277-11eb-bc0e-0aad30af8a83",
+        "b68842c6-0277-11eb-bc0e-0aad30af8a83"
+      ],
+      "sample_id": "526af23a-0881-11eb-bc0e-0aad30af8a83",
+      "sample_submitter_id": "4ccb249a-6722-491e-97e9-e3b4e7",
+      "sample_type": "Primary Tumor",
+      "tissue_type": "Not Reported"
+    },
+    {
+      "aliquot_id": "526b979c-0881-11eb-bc0e-0aad30af8a83",
+      "analyte_type": "Protein",
+      "case_id": "526a67e6-0881-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "b52a3a4a-0277-11eb-bc0e-0aad30af8a83",
+        "b51859f7-0277-11eb-bc0e-0aad30af8a83",
+        "b507e610-0277-11eb-bc0e-0aad30af8a83"
+      ],
+      "sample_id": "526af413-0881-11eb-bc0e-0aad30af8a83",
+      "sample_submitter_id": "eb3f3494-7057-4afe-b212-e6e9a3",
+      "sample_type": "Primary Tumor",
+      "tissue_type": "Not Reported"
+    },
+    {
+      "aliquot_id": "526b9892-0881-11eb-bc0e-0aad30af8a83",
+      "analyte_type": "Protein",
+      "case_id": "526a69a7-0881-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "b65063e0-0277-11eb-bc0e-0aad30af8a83",
+        "b63d4e36-0277-11eb-bc0e-0aad30af8a83",
+        "b60df3cc-0277-11eb-bc0e-0aad30af8a83"
+      ],
+      "sample_id": "526af583-0881-11eb-bc0e-0aad30af8a83",
+      "sample_submitter_id": "f6c215ea-5381-4521-bb61-be8e97",
+      "sample_type": "Primary Tumor",
+      "tissue_type": "Not Reported"
+    },
+    {
+      "aliquot_id": "526b9a48-0881-11eb-bc0e-0aad30af8a83",
+      "analyte_type": "Protein",
+      "case_id": "526a6a80-0881-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "b34a56ca-0277-11eb-bc0e-0aad30af8a83",
+        "b1cee1e2-0277-11eb-bc0e-0aad30af8a83",
+        "b395df11-0277-11eb-bc0e-0aad30af8a83"
+      ],
+      "sample_id": "526af745-0881-11eb-bc0e-0aad30af8a83",
+      "sample_submitter_id": "fe83e13f-9754-403b-8f74-d6caf8",
+      "sample_type": "Primary Tumor",
+      "tissue_type": "Not Reported"
+    },
+    {
+      "aliquot_id": "526b9b1d-0881-11eb-bc0e-0aad30af8a83",
+      "analyte_type": "Protein",
+      "case_id": "526a6b52-0881-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "b504669d-0277-11eb-bc0e-0aad30af8a83",
+        "b49785c5-0277-11eb-bc0e-0aad30af8a83",
+        "b4150862-0277-11eb-bc0e-0aad30af8a83"
+      ],
+      "sample_id": "526af861-0881-11eb-bc0e-0aad30af8a83",
+      "sample_submitter_id": "d4791079-c826-4fc7-9d9b-ee20ba",
+      "sample_type": "Primary Tumor",
+      "tissue_type": "Not Reported"
+    },
+    {
+      "aliquot_id": "526b9cd6-0881-11eb-bc0e-0aad30af8a83",
+      "analyte_type": "Protein",
+      "case_id": "526a6d21-0881-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "ba1c18d8-0277-11eb-bc0e-0aad30af8a83",
+        "b94ff47a-0277-11eb-bc0e-0aad30af8a83",
+        "b9164b40-0277-11eb-bc0e-0aad30af8a83"
+      ],
+      "sample_id": "526afa25-0881-11eb-bc0e-0aad30af8a83",
+      "sample_submitter_id": "af95e2c6-25c4-4ab8-bf06-3e15ff",
+      "sample_type": "Primary Tumor",
+      "tissue_type": "Not Reported"
+    },
+    {
+      "aliquot_id": "526b9da9-0881-11eb-bc0e-0aad30af8a83",
+      "analyte_type": "Protein",
+      "case_id": "526a6df9-0881-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "b504669d-0277-11eb-bc0e-0aad30af8a83",
+        "b49785c5-0277-11eb-bc0e-0aad30af8a83",
+        "b4150862-0277-11eb-bc0e-0aad30af8a83"
+      ],
+      "sample_id": "526afb3f-0881-11eb-bc0e-0aad30af8a83",
+      "sample_submitter_id": "2224c03f-b7b1-4368-887e-2b4cdf",
+      "sample_type": "Primary Tumor",
+      "tissue_type": "Not Reported"
+    },
+    {
+      "aliquot_id": "526b9f6a-0881-11eb-bc0e-0aad30af8a83",
+      "analyte_type": "Protein",
+      "case_id": "526a6ec8-0881-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "b34a56ca-0277-11eb-bc0e-0aad30af8a83",
+        "b1cee1e2-0277-11eb-bc0e-0aad30af8a83",
+        "b395df11-0277-11eb-bc0e-0aad30af8a83"
+      ],
+      "sample_id": "526afcfb-0881-11eb-bc0e-0aad30af8a83",
+      "sample_submitter_id": "41d0619e-b299-42e2-ac32-29e784",
+      "sample_type": "Primary Tumor",
+      "tissue_type": "Not Reported"
+    },
+    {
+      "aliquot_id": "526ba03d-0881-11eb-bc0e-0aad30af8a83",
+      "analyte_type": "Protein",
+      "case_id": "526a70a6-0881-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "b504669d-0277-11eb-bc0e-0aad30af8a83",
+        "b49785c5-0277-11eb-bc0e-0aad30af8a83",
+        "b4150862-0277-11eb-bc0e-0aad30af8a83"
+      ],
+      "sample_id": "526afe0f-0881-11eb-bc0e-0aad30af8a83",
+      "sample_submitter_id": "318d53c3-216b-4de1-a098-77d6dd",
+      "sample_type": "Primary Tumor",
+      "tissue_type": "Not Reported"
+    },
+    {
+      "aliquot_id": "526ba234-0881-11eb-bc0e-0aad30af8a83",
+      "analyte_type": "Protein",
+      "case_id": "526a717c-0881-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "b81f3c14-0277-11eb-bc0e-0aad30af8a83",
+        "b85aa18d-0277-11eb-bc0e-0aad30af8a83",
+        "b7962152-0277-11eb-bc0e-0aad30af8a83"
+      ],
+      "sample_id": "526affcc-0881-11eb-bc0e-0aad30af8a83",
+      "sample_submitter_id": "285fed94-1495-448e-879b-b55de9",
+      "sample_type": "Primary Tumor",
+      "tissue_type": "Not Reported"
+    },
+    {
+      "aliquot_id": "526ba31b-0881-11eb-bc0e-0aad30af8a83",
+      "analyte_type": "Protein",
+      "case_id": "526a724a-0881-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "b65063e0-0277-11eb-bc0e-0aad30af8a83",
+        "b63d4e36-0277-11eb-bc0e-0aad30af8a83",
+        "b60df3cc-0277-11eb-bc0e-0aad30af8a83"
+      ],
+      "sample_id": "526b00e8-0881-11eb-bc0e-0aad30af8a83",
+      "sample_submitter_id": "10c2d629-0287-4511-ac25-f29031",
       "sample_type": "Primary Tumor",
       "tissue_type": "Not Reported"
     },
@@ -1044,29 +746,27 @@
       "aliquot_id": "526ba4fb-0881-11eb-bc0e-0aad30af8a83",
       "analyte_type": "Protein",
       "case_id": "526a743e-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "b504669d-0277-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "b504669d-0277-11eb-bc0e-0aad30af8a83",
+        "b49785c5-0277-11eb-bc0e-0aad30af8a83",
+        "b4150862-0277-11eb-bc0e-0aad30af8a83"
+      ],
       "sample_id": "526b02b7-0881-11eb-bc0e-0aad30af8a83",
       "sample_submitter_id": "e9d416e7-f661-400a-896e-388545",
       "sample_type": "Primary Tumor",
       "tissue_type": "Not Reported"
     },
     {
-      "aliquot_id": "526bb587-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_id": "526ba5f0-0881-11eb-bc0e-0aad30af8a83",
       "analyte_type": "Protein",
-      "case_id": "526a82cb-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "b504669d-0277-11eb-bc0e-0aad30af8a83",
-      "sample_id": "526b13d4-0881-11eb-bc0e-0aad30af8a83",
-      "sample_submitter_id": "d109a3c0-350e-47f5-bda0-61899c",
-      "sample_type": "Primary Tumor",
-      "tissue_type": "Not Reported"
-    },
-    {
-      "aliquot_id": "526bb9a4-0881-11eb-bc0e-0aad30af8a83",
-      "analyte_type": "Protein",
-      "case_id": "526a8634-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "b1d2217f-0277-11eb-bc0e-0aad30af8a83",
-      "sample_id": "526b18ac-0881-11eb-bc0e-0aad30af8a83",
-      "sample_submitter_id": "bd266bdd-12e4-42cb-9c49-911bfc",
+      "case_id": "526a751a-0881-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "b74bf326-0277-11eb-bc0e-0aad30af8a83",
+        "b6661fb7-0277-11eb-bc0e-0aad30af8a83",
+        "b68842c6-0277-11eb-bc0e-0aad30af8a83"
+      ],
+      "sample_id": "526b03fe-0881-11eb-bc0e-0aad30af8a83",
+      "sample_submitter_id": "7d953d1d-84b6-4ecd-b1d7-1ed865",
       "sample_type": "Primary Tumor",
       "tissue_type": "Not Reported"
     },
@@ -1074,39 +774,97 @@
       "aliquot_id": "526ba7e7-0881-11eb-bc0e-0aad30af8a83",
       "analyte_type": "Protein",
       "case_id": "526a75e7-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "b1d37b19-0277-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "b1cd4c91-0277-11eb-bc0e-0aad30af8a83",
+        "b1c97847-0277-11eb-bc0e-0aad30af8a83",
+        "b1d37b19-0277-11eb-bc0e-0aad30af8a83"
+      ],
       "sample_id": "526b05eb-0881-11eb-bc0e-0aad30af8a83",
       "sample_submitter_id": "50997c44-1c8b-4d34-b535-4a6cc2",
       "sample_type": "Primary Tumor",
       "tissue_type": "Not Reported"
     },
     {
-      "aliquot_id": "526bba73-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_id": "526ba8be-0881-11eb-bc0e-0aad30af8a83",
       "analyte_type": "Protein",
-      "case_id": "526a8712-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "b395df11-0277-11eb-bc0e-0aad30af8a83",
-      "sample_id": "526b19e4-0881-11eb-bc0e-0aad30af8a83",
-      "sample_submitter_id": "a65d8e76-640f-4341-a561-afbb57",
-      "sample_type": "Solid Tissue Normal",
+      "case_id": "526a77f1-0881-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "b504669d-0277-11eb-bc0e-0aad30af8a83",
+        "b49785c5-0277-11eb-bc0e-0aad30af8a83",
+        "b4150862-0277-11eb-bc0e-0aad30af8a83"
+      ],
+      "sample_id": "526b071b-0881-11eb-bc0e-0aad30af8a83",
+      "sample_submitter_id": "1b2ab076-c72f-4bbe-b9f9-657d24",
+      "sample_type": "Primary Tumor",
       "tissue_type": "Not Reported"
     },
     {
-      "aliquot_id": "526bccba-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_id": "526baab1-0881-11eb-bc0e-0aad30af8a83",
       "analyte_type": "Protein",
-      "case_id": "526a9497-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "b1d2217f-0277-11eb-bc0e-0aad30af8a83",
-      "sample_id": "526b2dbd-0881-11eb-bc0e-0aad30af8a83",
-      "sample_submitter_id": "3fbf076a-824b-4eac-b6dc-bf5e59",
-      "sample_type": "Solid Tissue Normal",
+      "case_id": "526a78cd-0881-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "b1c62d32-0277-11eb-bc0e-0aad30af8a83",
+        "b1c744be-0277-11eb-bc0e-0aad30af8a83",
+        "b1cb5217-0277-11eb-bc0e-0aad30af8a83"
+      ],
+      "sample_id": "526b0874-0881-11eb-bc0e-0aad30af8a83",
+      "sample_submitter_id": "3dcf8b3c-c0c5-4dfa-9543-5d30fb",
+      "sample_type": "Primary Tumor",
       "tissue_type": "Not Reported"
     },
     {
-      "aliquot_id": "526b7f4d-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_id": "526bab8a-0881-11eb-bc0e-0aad30af8a83",
       "analyte_type": "Protein",
-      "case_id": "526a4e47-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "b1cb5217-0277-11eb-bc0e-0aad30af8a83",
-      "sample_id": "526ad98a-0881-11eb-bc0e-0aad30af8a83",
-      "sample_submitter_id": "9a7a86d3-bbf2-4d36-941d-c75c03",
+      "case_id": "526a79a5-0881-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "b1cd4c91-0277-11eb-bc0e-0aad30af8a83",
+        "b1c97847-0277-11eb-bc0e-0aad30af8a83",
+        "b1d37b19-0277-11eb-bc0e-0aad30af8a83"
+      ],
+      "sample_id": "526b0a2a-0881-11eb-bc0e-0aad30af8a83",
+      "sample_submitter_id": "69d552be-7cb2-4bb4-b602-a27b3e",
+      "sample_type": "Primary Tumor",
+      "tissue_type": "Not Reported"
+    },
+    {
+      "aliquot_id": "526bad8b-0881-11eb-bc0e-0aad30af8a83",
+      "analyte_type": "Protein",
+      "case_id": "526a7bd7-0881-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "b1c62d32-0277-11eb-bc0e-0aad30af8a83",
+        "b1c744be-0277-11eb-bc0e-0aad30af8a83",
+        "b1cb5217-0277-11eb-bc0e-0aad30af8a83"
+      ],
+      "sample_id": "526b0b46-0881-11eb-bc0e-0aad30af8a83",
+      "sample_submitter_id": "161317f3-1a39-438e-af45-cd2502",
+      "sample_type": "Primary Tumor",
+      "tissue_type": "Not Reported"
+    },
+    {
+      "aliquot_id": "526bae65-0881-11eb-bc0e-0aad30af8a83",
+      "analyte_type": "Protein",
+      "case_id": "526a7cfe-0881-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "b65063e0-0277-11eb-bc0e-0aad30af8a83",
+        "b63d4e36-0277-11eb-bc0e-0aad30af8a83",
+        "b60df3cc-0277-11eb-bc0e-0aad30af8a83"
+      ],
+      "sample_id": "526b0cfc-0881-11eb-bc0e-0aad30af8a83",
+      "sample_submitter_id": "15524912-685a-47ce-a824-567848",
+      "sample_type": "Primary Tumor",
+      "tissue_type": "Not Reported"
+    },
+    {
+      "aliquot_id": "526bb07d-0881-11eb-bc0e-0aad30af8a83",
+      "analyte_type": "Protein",
+      "case_id": "526a7dd0-0881-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "b1cd4c91-0277-11eb-bc0e-0aad30af8a83",
+        "b1c97847-0277-11eb-bc0e-0aad30af8a83",
+        "b1d37b19-0277-11eb-bc0e-0aad30af8a83"
+      ],
+      "sample_id": "526b0e18-0881-11eb-bc0e-0aad30af8a83",
+      "sample_submitter_id": "0cc794c3-5bf5-4621-b238-58a0f6",
       "sample_type": "Primary Tumor",
       "tissue_type": "Not Reported"
     },
@@ -1114,49 +872,279 @@
       "aliquot_id": "526bb15d-0881-11eb-bc0e-0aad30af8a83",
       "analyte_type": "Protein",
       "case_id": "526a7f76-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "b65063e0-0277-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "b65063e0-0277-11eb-bc0e-0aad30af8a83",
+        "b63d4e36-0277-11eb-bc0e-0aad30af8a83",
+        "b60df3cc-0277-11eb-bc0e-0aad30af8a83"
+      ],
       "sample_id": "526b0fdf-0881-11eb-bc0e-0aad30af8a83",
       "sample_submitter_id": "76e77c6b-c80e-4391-bdbb-e1dcea",
       "sample_type": "Primary Tumor",
       "tissue_type": "Not Reported"
     },
     {
-      "aliquot_id": "526bd921-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_id": "526bb380-0881-11eb-bc0e-0aad30af8a83",
       "analyte_type": "Protein",
-      "case_id": "526aa1ce-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "b65063e0-0277-11eb-bc0e-0aad30af8a83",
-      "sample_id": "526b3be1-0881-11eb-bc0e-0aad30af8a83",
-      "sample_submitter_id": "3946a96c-e0ae-442f-83b4-a9350e",
+      "case_id": "526a8051-0881-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "bbb8b3e5-0277-11eb-bc0e-0aad30af8a83",
+        "bc82509a-0277-11eb-bc0e-0aad30af8a83",
+        "bb796c6c-0277-11eb-bc0e-0aad30af8a83"
+      ],
+      "sample_id": "526b10ee-0881-11eb-bc0e-0aad30af8a83",
+      "sample_submitter_id": "79b60f32-6cca-4cb6-9a1e-22a3ac",
       "sample_type": "Primary Tumor",
       "tissue_type": "Not Reported"
     },
     {
-      "aliquot_id": "526be6ef-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_id": "526bb46c-0881-11eb-bc0e-0aad30af8a83",
       "analyte_type": "Protein",
-      "case_id": "526aaf30-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "bb231629-0277-11eb-bc0e-0aad30af8a83",
-      "sample_id": "526b4f6b-0881-11eb-bc0e-0aad30af8a83",
-      "sample_submitter_id": "35a345a4-e954-4c81-ae3f-7797cd",
+      "case_id": "526a8125-0881-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "ba1c18d8-0277-11eb-bc0e-0aad30af8a83",
+        "b94ff47a-0277-11eb-bc0e-0aad30af8a83",
+        "b9164b40-0277-11eb-bc0e-0aad30af8a83"
+      ],
+      "sample_id": "526b12ba-0881-11eb-bc0e-0aad30af8a83",
+      "sample_submitter_id": "9c8e78bf-b03e-4ba0-9909-5ff070",
       "sample_type": "Primary Tumor",
       "tissue_type": "Not Reported"
     },
     {
-      "aliquot_id": "526bcd8c-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_id": "526bb587-0881-11eb-bc0e-0aad30af8a83",
       "analyte_type": "Protein",
-      "case_id": "526a9697-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "b3e47ee3-0277-11eb-bc0e-0aad30af8a83",
-      "sample_id": "526b2f70-0881-11eb-bc0e-0aad30af8a83",
-      "sample_submitter_id": "3e746bea-ed68-40e6-b348-6ddf08",
+      "case_id": "526a82cb-0881-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "b504669d-0277-11eb-bc0e-0aad30af8a83",
+        "b49785c5-0277-11eb-bc0e-0aad30af8a83",
+        "b4150862-0277-11eb-bc0e-0aad30af8a83"
+      ],
+      "sample_id": "526b13d4-0881-11eb-bc0e-0aad30af8a83",
+      "sample_submitter_id": "d109a3c0-350e-47f5-bda0-61899c",
+      "sample_type": "Primary Tumor",
+      "tissue_type": "Not Reported"
+    },
+    {
+      "aliquot_id": "526bb705-0881-11eb-bc0e-0aad30af8a83",
+      "analyte_type": "Protein",
+      "case_id": "526a83a7-0881-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "baf0b780-0277-11eb-bc0e-0aad30af8a83",
+        "bb231629-0277-11eb-bc0e-0aad30af8a83",
+        "baa3afb8-0277-11eb-bc0e-0aad30af8a83"
+      ],
+      "sample_id": "526b15ac-0881-11eb-bc0e-0aad30af8a83",
+      "sample_submitter_id": "7069e990-4a4e-4984-a66d-4d835a",
+      "sample_type": "Primary Tumor",
+      "tissue_type": "Not Reported"
+    },
+    {
+      "aliquot_id": "526bb8c9-0881-11eb-bc0e-0aad30af8a83",
+      "analyte_type": "Protein",
+      "case_id": "526a847d-0881-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "b74bf326-0277-11eb-bc0e-0aad30af8a83",
+        "b6661fb7-0277-11eb-bc0e-0aad30af8a83",
+        "b68842c6-0277-11eb-bc0e-0aad30af8a83"
+      ],
+      "sample_id": "526b16c6-0881-11eb-bc0e-0aad30af8a83",
+      "sample_submitter_id": "91b287fd-eadb-442d-abcd-20b741",
+      "sample_type": "Primary Tumor",
+      "tissue_type": "Not Reported"
+    },
+    {
+      "aliquot_id": "526bb9a4-0881-11eb-bc0e-0aad30af8a83",
+      "analyte_type": "Protein",
+      "case_id": "526a8634-0881-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "b1c8a412-0277-11eb-bc0e-0aad30af8a83",
+        "b1d2217f-0277-11eb-bc0e-0aad30af8a83",
+        "b1d0c57c-0277-11eb-bc0e-0aad30af8a83"
+      ],
+      "sample_id": "526b18ac-0881-11eb-bc0e-0aad30af8a83",
+      "sample_submitter_id": "bd266bdd-12e4-42cb-9c49-911bfc",
+      "sample_type": "Primary Tumor",
+      "tissue_type": "Not Reported"
+    },
+    {
+      "aliquot_id": "526bba73-0881-11eb-bc0e-0aad30af8a83",
+      "analyte_type": "Protein",
+      "case_id": "526a8712-0881-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "b34a56ca-0277-11eb-bc0e-0aad30af8a83",
+        "b1cee1e2-0277-11eb-bc0e-0aad30af8a83",
+        "b395df11-0277-11eb-bc0e-0aad30af8a83"
+      ],
+      "sample_id": "526b19e4-0881-11eb-bc0e-0aad30af8a83",
+      "sample_submitter_id": "a65d8e76-640f-4341-a561-afbb57",
       "sample_type": "Solid Tissue Normal",
       "tissue_type": "Not Reported"
     },
     {
-      "aliquot_id": "526b8502-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_id": "526bbc17-0881-11eb-bc0e-0aad30af8a83",
       "analyte_type": "Protein",
-      "case_id": "526a548e-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "b3e47ee3-0277-11eb-bc0e-0aad30af8a83",
-      "sample_id": "526adf71-0881-11eb-bc0e-0aad30af8a83",
-      "sample_submitter_id": "27f3ca2d-a86f-479d-8e7e-5307c7",
+      "case_id": "526a88d1-0881-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "b1c62d32-0277-11eb-bc0e-0aad30af8a83",
+        "b1c744be-0277-11eb-bc0e-0aad30af8a83",
+        "b1cb5217-0277-11eb-bc0e-0aad30af8a83"
+      ],
+      "sample_id": "526b1b42-0881-11eb-bc0e-0aad30af8a83",
+      "sample_submitter_id": "51c1c79e-5a8e-4b0a-bf92-1c0cab",
+      "sample_type": "Primary Tumor",
+      "tissue_type": "Not Reported"
+    },
+    {
+      "aliquot_id": "526bbcef-0881-11eb-bc0e-0aad30af8a83",
+      "analyte_type": "Protein",
+      "case_id": "526a89a7-0881-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "b65063e0-0277-11eb-bc0e-0aad30af8a83",
+        "b63d4e36-0277-11eb-bc0e-0aad30af8a83",
+        "b60df3cc-0277-11eb-bc0e-0aad30af8a83"
+      ],
+      "sample_id": "526b1d02-0881-11eb-bc0e-0aad30af8a83",
+      "sample_submitter_id": "61f76fe6-a1c6-41b8-bdc2-2f9209",
+      "sample_type": "Solid Tissue Normal",
+      "tissue_type": "Not Reported"
+    },
+    {
+      "aliquot_id": "526bbdba-0881-11eb-bc0e-0aad30af8a83",
+      "analyte_type": "Protein",
+      "case_id": "526a8b79-0881-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "baf0b780-0277-11eb-bc0e-0aad30af8a83",
+        "bb231629-0277-11eb-bc0e-0aad30af8a83",
+        "baa3afb8-0277-11eb-bc0e-0aad30af8a83"
+      ],
+      "sample_id": "526b1e15-0881-11eb-bc0e-0aad30af8a83",
+      "sample_submitter_id": "1de8d3d8-fc0e-4be0-8aa7-127c7b",
+      "sample_type": "Primary Tumor",
+      "tissue_type": "Not Reported"
+    },
+    {
+      "aliquot_id": "526bbf6b-0881-11eb-bc0e-0aad30af8a83",
+      "analyte_type": "Protein",
+      "case_id": "526a8c5a-0881-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "b34a56ca-0277-11eb-bc0e-0aad30af8a83",
+        "b1cee1e2-0277-11eb-bc0e-0aad30af8a83",
+        "b395df11-0277-11eb-bc0e-0aad30af8a83"
+      ],
+      "sample_id": "526b20e0-0881-11eb-bc0e-0aad30af8a83",
+      "sample_submitter_id": "2115808b-6a0d-49bc-a8d7-b83bde",
+      "sample_type": "Primary Tumor",
+      "tissue_type": "Not Reported"
+    },
+    {
+      "aliquot_id": "526bc03f-0881-11eb-bc0e-0aad30af8a83",
+      "analyte_type": "Protein",
+      "case_id": "526a8c5a-0881-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "b34a56ca-0277-11eb-bc0e-0aad30af8a83",
+        "b1cee1e2-0277-11eb-bc0e-0aad30af8a83",
+        "b395df11-0277-11eb-bc0e-0aad30af8a83"
+      ],
+      "sample_id": "526b1fc9-0881-11eb-bc0e-0aad30af8a83",
+      "sample_submitter_id": "1db5574d-aca7-403c-8100-6e705f",
+      "sample_type": "Solid Tissue Normal",
+      "tissue_type": "Not Reported"
+    },
+    {
+      "aliquot_id": "526bc1f8-0881-11eb-bc0e-0aad30af8a83",
+      "analyte_type": "Protein",
+      "case_id": "526a8e33-0881-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "b74bf326-0277-11eb-bc0e-0aad30af8a83",
+        "b6661fb7-0277-11eb-bc0e-0aad30af8a83",
+        "b68842c6-0277-11eb-bc0e-0aad30af8a83"
+      ],
+      "sample_id": "526b22a0-0881-11eb-bc0e-0aad30af8a83",
+      "sample_submitter_id": "994f9b8e-46cb-413f-8ec8-2c2fed",
+      "sample_type": "Solid Tissue Normal",
+      "tissue_type": "Not Reported"
+    },
+    {
+      "aliquot_id": "526bc2cd-0881-11eb-bc0e-0aad30af8a83",
+      "analyte_type": "Protein",
+      "case_id": "526a8f0c-0881-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "b1c62d32-0277-11eb-bc0e-0aad30af8a83",
+        "b1c744be-0277-11eb-bc0e-0aad30af8a83",
+        "b1cb5217-0277-11eb-bc0e-0aad30af8a83"
+      ],
+      "sample_id": "526b257d-0881-11eb-bc0e-0aad30af8a83",
+      "sample_submitter_id": "7edfd606-4bee-4529-9fec-1ca7f0",
+      "sample_type": "Solid Tissue Normal",
+      "tissue_type": "Not Reported"
+    },
+    {
+      "aliquot_id": "526bc48d-0881-11eb-bc0e-0aad30af8a83",
+      "analyte_type": "Protein",
+      "case_id": "526a8f0c-0881-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "b1c62d32-0277-11eb-bc0e-0aad30af8a83",
+        "b1c744be-0277-11eb-bc0e-0aad30af8a83",
+        "b1cb5217-0277-11eb-bc0e-0aad30af8a83"
+      ],
+      "sample_id": "526b23b3-0881-11eb-bc0e-0aad30af8a83",
+      "sample_submitter_id": "7c7ce2d7-6c8a-424e-8e6c-d14ad1",
+      "sample_type": "Primary Tumor",
+      "tissue_type": "Not Reported"
+    },
+    {
+      "aliquot_id": "526bc567-0881-11eb-bc0e-0aad30af8a83",
+      "analyte_type": "Protein",
+      "case_id": "526a90f2-0881-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "baf0b780-0277-11eb-bc0e-0aad30af8a83",
+        "bb231629-0277-11eb-bc0e-0aad30af8a83",
+        "baa3afb8-0277-11eb-bc0e-0aad30af8a83"
+      ],
+      "sample_id": "526b2690-0881-11eb-bc0e-0aad30af8a83",
+      "sample_submitter_id": "1c9145ad-1981-4871-aa7e-8b11de",
+      "sample_type": "Primary Tumor",
+      "tissue_type": "Not Reported"
+    },
+    {
+      "aliquot_id": "526bc744-0881-11eb-bc0e-0aad30af8a83",
+      "analyte_type": "Protein",
+      "case_id": "526a90f2-0881-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "baf0b780-0277-11eb-bc0e-0aad30af8a83",
+        "bb231629-0277-11eb-bc0e-0aad30af8a83",
+        "baa3afb8-0277-11eb-bc0e-0aad30af8a83"
+      ],
+      "sample_id": "526b285a-0881-11eb-bc0e-0aad30af8a83",
+      "sample_submitter_id": "e23eb014-69c1-460a-b9d4-9786c8",
+      "sample_type": "Solid Tissue Normal",
+      "tissue_type": "Not Reported"
+    },
+    {
+      "aliquot_id": "526bc822-0881-11eb-bc0e-0aad30af8a83",
+      "analyte_type": "Protein",
+      "case_id": "526a91cb-0881-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "ba1c18d8-0277-11eb-bc0e-0aad30af8a83",
+        "b94ff47a-0277-11eb-bc0e-0aad30af8a83",
+        "b9164b40-0277-11eb-bc0e-0aad30af8a83"
+      ],
+      "sample_id": "526b2971-0881-11eb-bc0e-0aad30af8a83",
+      "sample_submitter_id": "31c15e30-21d4-4843-bd4a-9cd0d8",
+      "sample_type": "Solid Tissue Normal",
+      "tissue_type": "Not Reported"
+    },
+    {
+      "aliquot_id": "526bca01-0881-11eb-bc0e-0aad30af8a83",
+      "analyte_type": "Protein",
+      "case_id": "526a91cb-0881-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "ba1c18d8-0277-11eb-bc0e-0aad30af8a83",
+        "b94ff47a-0277-11eb-bc0e-0aad30af8a83",
+        "b9164b40-0277-11eb-bc0e-0aad30af8a83"
+      ],
+      "sample_id": "526b2b50-0881-11eb-bc0e-0aad30af8a83",
+      "sample_submitter_id": "627e6e36-3dca-4ee5-9755-6f3510",
       "sample_type": "Primary Tumor",
       "tissue_type": "Not Reported"
     },
@@ -1164,583 +1152,637 @@
       "aliquot_id": "526bcad6-0881-11eb-bc0e-0aad30af8a83",
       "analyte_type": "Protein",
       "case_id": "526a93bc-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "bc82509a-0277-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "bbb8b3e5-0277-11eb-bc0e-0aad30af8a83",
+        "bc82509a-0277-11eb-bc0e-0aad30af8a83",
+        "bb796c6c-0277-11eb-bc0e-0aad30af8a83"
+      ],
       "sample_id": "526b2c74-0881-11eb-bc0e-0aad30af8a83",
       "sample_submitter_id": "b9c1f22e-61f7-45ed-b3b4-5094c7",
       "sample_type": "Solid Tissue Normal",
       "tissue_type": "Not Reported"
     },
     {
+      "aliquot_id": "526bccba-0881-11eb-bc0e-0aad30af8a83",
+      "analyte_type": "Protein",
+      "case_id": "526a9497-0881-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "b1c8a412-0277-11eb-bc0e-0aad30af8a83",
+        "b1d2217f-0277-11eb-bc0e-0aad30af8a83",
+        "b1d0c57c-0277-11eb-bc0e-0aad30af8a83"
+      ],
+      "sample_id": "526b2dbd-0881-11eb-bc0e-0aad30af8a83",
+      "sample_submitter_id": "3fbf076a-824b-4eac-b6dc-bf5e59",
+      "sample_type": "Solid Tissue Normal",
+      "tissue_type": "Not Reported"
+    },
+    {
+      "aliquot_id": "526bcd8c-0881-11eb-bc0e-0aad30af8a83",
+      "analyte_type": "Protein",
+      "case_id": "526a9697-0881-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "b3a85e57-0277-11eb-bc0e-0aad30af8a83",
+        "b3e47ee3-0277-11eb-bc0e-0aad30af8a83",
+        "b3b462e0-0277-11eb-bc0e-0aad30af8a83"
+      ],
+      "sample_id": "526b2f70-0881-11eb-bc0e-0aad30af8a83",
+      "sample_submitter_id": "3e746bea-ed68-40e6-b348-6ddf08",
+      "sample_type": "Solid Tissue Normal",
+      "tissue_type": "Not Reported"
+    },
+    {
+      "aliquot_id": "526bcf80-0881-11eb-bc0e-0aad30af8a83",
+      "analyte_type": "Protein",
+      "case_id": "526a9779-0881-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "ba1c18d8-0277-11eb-bc0e-0aad30af8a83",
+        "b94ff47a-0277-11eb-bc0e-0aad30af8a83",
+        "b9164b40-0277-11eb-bc0e-0aad30af8a83"
+      ],
+      "sample_id": "526b3084-0881-11eb-bc0e-0aad30af8a83",
+      "sample_submitter_id": "cfd76f9a-ce60-4ec7-8e6b-a8fc31",
+      "sample_type": "Primary Tumor",
+      "tissue_type": "Not Reported"
+    },
+    {
+      "aliquot_id": "526bd053-0881-11eb-bc0e-0aad30af8a83",
+      "analyte_type": "Protein",
+      "case_id": "526a99c0-0881-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "b52a3a4a-0277-11eb-bc0e-0aad30af8a83",
+        "b51859f7-0277-11eb-bc0e-0aad30af8a83",
+        "b507e610-0277-11eb-bc0e-0aad30af8a83"
+      ],
+      "sample_id": "526b323d-0881-11eb-bc0e-0aad30af8a83",
+      "sample_submitter_id": "e6850782-fd2a-4c53-b682-1852fe",
+      "sample_type": "Primary Tumor",
+      "tissue_type": "Not Reported"
+    },
+    {
+      "aliquot_id": "526bd258-0881-11eb-bc0e-0aad30af8a83",
+      "analyte_type": "Protein",
+      "case_id": "526a9aa9-0881-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "baf0b780-0277-11eb-bc0e-0aad30af8a83",
+        "bb231629-0277-11eb-bc0e-0aad30af8a83",
+        "baa3afb8-0277-11eb-bc0e-0aad30af8a83"
+      ],
+      "sample_id": "526b3350-0881-11eb-bc0e-0aad30af8a83",
+      "sample_submitter_id": "05387aad-2a1f-42c2-8d6f-950598",
+      "sample_type": "Primary Tumor",
+      "tissue_type": "Not Reported"
+    },
+    {
+      "aliquot_id": "526bd328-0881-11eb-bc0e-0aad30af8a83",
+      "analyte_type": "Protein",
+      "case_id": "526a9cc6-0881-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "b1c62d32-0277-11eb-bc0e-0aad30af8a83",
+        "b1c744be-0277-11eb-bc0e-0aad30af8a83",
+        "b1cb5217-0277-11eb-bc0e-0aad30af8a83"
+      ],
+      "sample_id": "526b35c3-0881-11eb-bc0e-0aad30af8a83",
+      "sample_submitter_id": "46c73531-f531-4ec3-97fe-b39d9d",
+      "sample_type": "Primary Tumor",
+      "tissue_type": "Not Reported"
+    },
+    {
+      "aliquot_id": "526bd536-0881-11eb-bc0e-0aad30af8a83",
+      "analyte_type": "Protein",
+      "case_id": "526a9d9d-0881-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "b1c8a412-0277-11eb-bc0e-0aad30af8a83",
+        "b1d2217f-0277-11eb-bc0e-0aad30af8a83",
+        "b1d0c57c-0277-11eb-bc0e-0aad30af8a83"
+      ],
+      "sample_id": "526b36f7-0881-11eb-bc0e-0aad30af8a83",
+      "sample_submitter_id": "6530147a-efe9-4df6-ac2f-03ece3",
+      "sample_type": "Primary Tumor",
+      "tissue_type": "Not Reported"
+    },
+    {
+      "aliquot_id": "526bd60e-0881-11eb-bc0e-0aad30af8a83",
+      "analyte_type": "Protein",
+      "case_id": "526a9fbc-0881-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "bbb8b3e5-0277-11eb-bc0e-0aad30af8a83",
+        "bc82509a-0277-11eb-bc0e-0aad30af8a83",
+        "bb796c6c-0277-11eb-bc0e-0aad30af8a83"
+      ],
+      "sample_id": "526b38c4-0881-11eb-bc0e-0aad30af8a83",
+      "sample_submitter_id": "49bd51fe-48a1-4828-b66e-b30c38",
+      "sample_type": "Primary Tumor",
+      "tissue_type": "Not Reported"
+    },
+    {
+      "aliquot_id": "526bd832-0881-11eb-bc0e-0aad30af8a83",
+      "analyte_type": "Protein",
+      "case_id": "526aa0b0-0881-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "b74bf326-0277-11eb-bc0e-0aad30af8a83",
+        "b6661fb7-0277-11eb-bc0e-0aad30af8a83",
+        "b68842c6-0277-11eb-bc0e-0aad30af8a83"
+      ],
+      "sample_id": "526b3a00-0881-11eb-bc0e-0aad30af8a83",
+      "sample_submitter_id": "28d0abdb-f682-4bd3-9425-a9c508",
+      "sample_type": "Primary Tumor",
+      "tissue_type": "Not Reported"
+    },
+    {
+      "aliquot_id": "526bd921-0881-11eb-bc0e-0aad30af8a83",
+      "analyte_type": "Protein",
+      "case_id": "526aa1ce-0881-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "b65063e0-0277-11eb-bc0e-0aad30af8a83",
+        "b63d4e36-0277-11eb-bc0e-0aad30af8a83",
+        "b60df3cc-0277-11eb-bc0e-0aad30af8a83"
+      ],
+      "sample_id": "526b3be1-0881-11eb-bc0e-0aad30af8a83",
+      "sample_submitter_id": "3946a96c-e0ae-442f-83b4-a9350e",
+      "sample_type": "Primary Tumor",
+      "tissue_type": "Not Reported"
+    },
+    {
+      "aliquot_id": "526bda36-0881-11eb-bc0e-0aad30af8a83",
+      "analyte_type": "Protein",
+      "case_id": "526aa2aa-0881-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "b81f3c14-0277-11eb-bc0e-0aad30af8a83",
+        "b85aa18d-0277-11eb-bc0e-0aad30af8a83",
+        "b7962152-0277-11eb-bc0e-0aad30af8a83"
+      ],
+      "sample_id": "526b3cfb-0881-11eb-bc0e-0aad30af8a83",
+      "sample_submitter_id": "e7b656bf-3c34-4ba1-bdf3-c7eefe",
+      "sample_type": "Primary Tumor",
+      "tissue_type": "Not Reported"
+    },
+    {
+      "aliquot_id": "526bdb0e-0881-11eb-bc0e-0aad30af8a83",
+      "analyte_type": "Protein",
+      "case_id": "526aa37f-0881-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "b81f3c14-0277-11eb-bc0e-0aad30af8a83",
+        "b85aa18d-0277-11eb-bc0e-0aad30af8a83",
+        "b7962152-0277-11eb-bc0e-0aad30af8a83"
+      ],
+      "sample_id": "526b3ed5-0881-11eb-bc0e-0aad30af8a83",
+      "sample_submitter_id": "52c064a7-78d9-4a1a-85b4-27c6d1",
+      "sample_type": "Primary Tumor",
+      "tissue_type": "Not Reported"
+    },
+    {
+      "aliquot_id": "526bdc01-0881-11eb-bc0e-0aad30af8a83",
+      "analyte_type": "Protein",
+      "case_id": "526aa526-0881-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "b52a3a4a-0277-11eb-bc0e-0aad30af8a83",
+        "b51859f7-0277-11eb-bc0e-0aad30af8a83",
+        "b507e610-0277-11eb-bc0e-0aad30af8a83"
+      ],
+      "sample_id": "526b4000-0881-11eb-bc0e-0aad30af8a83",
+      "sample_submitter_id": "74a45e5a-a35a-4c60-a4b4-f3f5ea",
+      "sample_type": "Primary Tumor",
+      "tissue_type": "Not Reported"
+    },
+    {
+      "aliquot_id": "526bdce5-0881-11eb-bc0e-0aad30af8a83",
+      "analyte_type": "Protein",
+      "case_id": "526aa60a-0881-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "bbb8b3e5-0277-11eb-bc0e-0aad30af8a83",
+        "bc82509a-0277-11eb-bc0e-0aad30af8a83",
+        "bb796c6c-0277-11eb-bc0e-0aad30af8a83"
+      ],
+      "sample_id": "526b4159-0881-11eb-bc0e-0aad30af8a83",
+      "sample_submitter_id": "8234f8ea-bdbd-45b0-bd0b-16f1e7",
+      "sample_type": "Primary Tumor",
+      "tissue_type": "Not Reported"
+    },
+    {
+      "aliquot_id": "526bddb6-0881-11eb-bc0e-0aad30af8a83",
+      "analyte_type": "Protein",
+      "case_id": "526aa6dd-0881-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "b3a85e57-0277-11eb-bc0e-0aad30af8a83",
+        "b3e47ee3-0277-11eb-bc0e-0aad30af8a83",
+        "b3b462e0-0277-11eb-bc0e-0aad30af8a83"
+      ],
+      "sample_id": "526b431e-0881-11eb-bc0e-0aad30af8a83",
+      "sample_submitter_id": "2563cb02-d58a-4286-8634-7502cd",
+      "sample_type": "Primary Tumor",
+      "tissue_type": "Not Reported"
+    },
+    {
       "aliquot_id": "526bdf68-0881-11eb-bc0e-0aad30af8a83",
       "analyte_type": "Protein",
       "case_id": "526aa7b2-0881-11eb-bc0e-0aad30af8a83",
-      "file_id": "b52a3a4a-0277-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "b52a3a4a-0277-11eb-bc0e-0aad30af8a83",
+        "b51859f7-0277-11eb-bc0e-0aad30af8a83",
+        "b507e610-0277-11eb-bc0e-0aad30af8a83"
+      ],
       "sample_id": "526b4436-0881-11eb-bc0e-0aad30af8a83",
       "sample_submitter_id": "80873a0c-1f40-4d51-bab1-3f2071",
       "sample_type": "Primary Tumor",
+      "tissue_type": "Not Reported"
+    },
+    {
+      "aliquot_id": "526be03f-0881-11eb-bc0e-0aad30af8a83",
+      "analyte_type": "Protein",
+      "case_id": "526aa956-0881-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "b1c62d32-0277-11eb-bc0e-0aad30af8a83",
+        "b1c744be-0277-11eb-bc0e-0aad30af8a83",
+        "b1cb5217-0277-11eb-bc0e-0aad30af8a83"
+      ],
+      "sample_id": "526b45df-0881-11eb-bc0e-0aad30af8a83",
+      "sample_submitter_id": "ce1e5dfc-2ef1-4633-af93-5ea4d9",
+      "sample_type": "Primary Tumor",
+      "tissue_type": "Not Reported"
+    },
+    {
+      "aliquot_id": "526be10c-0881-11eb-bc0e-0aad30af8a83",
+      "analyte_type": "Protein",
+      "case_id": "526aaa31-0881-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "b1cd4c91-0277-11eb-bc0e-0aad30af8a83",
+        "b1c97847-0277-11eb-bc0e-0aad30af8a83",
+        "b1d37b19-0277-11eb-bc0e-0aad30af8a83"
+      ],
+      "sample_id": "526b46ec-0881-11eb-bc0e-0aad30af8a83",
+      "sample_submitter_id": "a03d1103-b809-42c4-ad5c-5aff58",
+      "sample_type": "Primary Tumor",
+      "tissue_type": "Not Reported"
+    },
+    {
+      "aliquot_id": "526be1d7-0881-11eb-bc0e-0aad30af8a83",
+      "analyte_type": "Protein",
+      "case_id": "526aab00-0881-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "bbb8b3e5-0277-11eb-bc0e-0aad30af8a83",
+        "bc82509a-0277-11eb-bc0e-0aad30af8a83",
+        "bb796c6c-0277-11eb-bc0e-0aad30af8a83"
+      ],
+      "sample_id": "526b48a5-0881-11eb-bc0e-0aad30af8a83",
+      "sample_submitter_id": "3a380577-c134-47ba-a1ce-988d7c",
+      "sample_type": "Primary Tumor",
+      "tissue_type": "Not Reported"
+    },
+    {
+      "aliquot_id": "526be2ab-0881-11eb-bc0e-0aad30af8a83",
+      "analyte_type": "Protein",
+      "case_id": "526aabd0-0881-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "b52a3a4a-0277-11eb-bc0e-0aad30af8a83",
+        "b51859f7-0277-11eb-bc0e-0aad30af8a83",
+        "b507e610-0277-11eb-bc0e-0aad30af8a83"
+      ],
+      "sample_id": "526b4b77-0881-11eb-bc0e-0aad30af8a83",
+      "sample_submitter_id": "2b4ce90c-8036-4207-ac3e-54a76f",
+      "sample_type": "Primary Tumor",
+      "tissue_type": "Not Reported"
+    },
+    {
+      "aliquot_id": "526be379-0881-11eb-bc0e-0aad30af8a83",
+      "analyte_type": "Protein",
+      "case_id": "526aabd0-0881-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "b52a3a4a-0277-11eb-bc0e-0aad30af8a83",
+        "b51859f7-0277-11eb-bc0e-0aad30af8a83",
+        "b507e610-0277-11eb-bc0e-0aad30af8a83"
+      ],
+      "sample_id": "526b49b6-0881-11eb-bc0e-0aad30af8a83",
+      "sample_submitter_id": "21efd60f-6a31-4b98-9477-16a905",
+      "sample_type": "Solid Tissue Normal",
+      "tissue_type": "Not Reported"
+    },
+    {
+      "aliquot_id": "526be540-0881-11eb-bc0e-0aad30af8a83",
+      "analyte_type": "Protein",
+      "case_id": "526aad86-0881-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "b81f3c14-0277-11eb-bc0e-0aad30af8a83",
+        "b85aa18d-0277-11eb-bc0e-0aad30af8a83",
+        "b7962152-0277-11eb-bc0e-0aad30af8a83"
+      ],
+      "sample_id": "526b4c90-0881-11eb-bc0e-0aad30af8a83",
+      "sample_submitter_id": "6319b36b-533c-4e86-8e12-80552e",
+      "sample_type": "Primary Tumor",
+      "tissue_type": "Not Reported"
+    },
+    {
+      "aliquot_id": "526be61f-0881-11eb-bc0e-0aad30af8a83",
+      "analyte_type": "Protein",
+      "case_id": "526aae61-0881-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "bbb8b3e5-0277-11eb-bc0e-0aad30af8a83",
+        "bc82509a-0277-11eb-bc0e-0aad30af8a83",
+        "bb796c6c-0277-11eb-bc0e-0aad30af8a83"
+      ],
+      "sample_id": "526b4e60-0881-11eb-bc0e-0aad30af8a83",
+      "sample_submitter_id": "2433b136-fc7b-4cea-b958-bc6efb",
+      "sample_type": "Primary Tumor",
+      "tissue_type": "Not Reported"
+    },
+    {
+      "aliquot_id": "526be6ef-0881-11eb-bc0e-0aad30af8a83",
+      "analyte_type": "Protein",
+      "case_id": "526aaf30-0881-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "baf0b780-0277-11eb-bc0e-0aad30af8a83",
+        "bb231629-0277-11eb-bc0e-0aad30af8a83",
+        "baa3afb8-0277-11eb-bc0e-0aad30af8a83"
+      ],
+      "sample_id": "526b4f6b-0881-11eb-bc0e-0aad30af8a83",
+      "sample_submitter_id": "35a345a4-e954-4c81-ae3f-7797cd",
+      "sample_type": "Primary Tumor",
+      "tissue_type": "Not Reported"
+    },
+    {
+      "aliquot_id": "526be7be-0881-11eb-bc0e-0aad30af8a83",
+      "analyte_type": "Protein",
+      "case_id": "526aafff-0881-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "b3a85e57-0277-11eb-bc0e-0aad30af8a83",
+        "b3e47ee3-0277-11eb-bc0e-0aad30af8a83",
+        "b3b462e0-0277-11eb-bc0e-0aad30af8a83"
+      ],
+      "sample_id": "526b513f-0881-11eb-bc0e-0aad30af8a83",
+      "sample_submitter_id": "c17b0ff9-9057-4848-a0cc-abb25f",
+      "sample_type": "Primary Tumor",
+      "tissue_type": "Not Reported"
+    },
+    {
+      "aliquot_id": "526be887-0881-11eb-bc0e-0aad30af8a83",
+      "analyte_type": "Protein",
+      "case_id": "526ab1ce-0881-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "b81f3c14-0277-11eb-bc0e-0aad30af8a83",
+        "b85aa18d-0277-11eb-bc0e-0aad30af8a83",
+        "b7962152-0277-11eb-bc0e-0aad30af8a83"
+      ],
+      "sample_id": "526b525e-0881-11eb-bc0e-0aad30af8a83",
+      "sample_submitter_id": "QC1",
+      "sample_type": "Not Reported",
+      "tissue_type": "Not Reported"
+    },
+    {
+      "aliquot_id": "526be963-0881-11eb-bc0e-0aad30af8a83",
+      "analyte_type": "Protein",
+      "case_id": "526ab1ce-0881-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "bbb8b3e5-0277-11eb-bc0e-0aad30af8a83",
+        "bc82509a-0277-11eb-bc0e-0aad30af8a83",
+        "bb796c6c-0277-11eb-bc0e-0aad30af8a83"
+      ],
+      "sample_id": "526b53e0-0881-11eb-bc0e-0aad30af8a83",
+      "sample_submitter_id": "QC2",
+      "sample_type": "Not Reported",
+      "tissue_type": "Not Reported"
+    },
+    {
+      "aliquot_id": "526beb55-0881-11eb-bc0e-0aad30af8a83",
+      "analyte_type": "Protein",
+      "case_id": "526ab1ce-0881-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "baf0b780-0277-11eb-bc0e-0aad30af8a83",
+        "bb231629-0277-11eb-bc0e-0aad30af8a83",
+        "baa3afb8-0277-11eb-bc0e-0aad30af8a83"
+      ],
+      "sample_id": "526b55ab-0881-11eb-bc0e-0aad30af8a83",
+      "sample_submitter_id": "QC3",
+      "sample_type": "Not Reported",
+      "tissue_type": "Not Reported"
+    },
+    {
+      "aliquot_id": "526bec2a-0881-11eb-bc0e-0aad30af8a83",
+      "analyte_type": "Protein",
+      "case_id": "526ab1ce-0881-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "b3a85e57-0277-11eb-bc0e-0aad30af8a83",
+        "b3e47ee3-0277-11eb-bc0e-0aad30af8a83",
+        "b3b462e0-0277-11eb-bc0e-0aad30af8a83"
+      ],
+      "sample_id": "526b56c5-0881-11eb-bc0e-0aad30af8a83",
+      "sample_submitter_id": "QC4",
+      "sample_type": "Not Reported",
+      "tissue_type": "Not Reported"
+    },
+    {
+      "aliquot_id": "526becf7-0881-11eb-bc0e-0aad30af8a83",
+      "analyte_type": "Protein",
+      "case_id": "526ab1ce-0881-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "b1cd4c91-0277-11eb-bc0e-0aad30af8a83",
+        "b1c97847-0277-11eb-bc0e-0aad30af8a83",
+        "b1d37b19-0277-11eb-bc0e-0aad30af8a83"
+      ],
+      "sample_id": "526b5888-0881-11eb-bc0e-0aad30af8a83",
+      "sample_submitter_id": "QC5",
+      "sample_type": "Not Reported",
+      "tissue_type": "Not Reported"
+    },
+    {
+      "aliquot_id": "526bedc1-0881-11eb-bc0e-0aad30af8a83",
+      "analyte_type": "Protein",
+      "case_id": "526ab1ce-0881-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "b1c8a412-0277-11eb-bc0e-0aad30af8a83",
+        "b1d2217f-0277-11eb-bc0e-0aad30af8a83",
+        "b1d0c57c-0277-11eb-bc0e-0aad30af8a83"
+      ],
+      "sample_id": "526b5996-0881-11eb-bc0e-0aad30af8a83",
+      "sample_submitter_id": "QC6",
+      "sample_type": "Not Reported",
+      "tissue_type": "Not Reported"
+    },
+    {
+      "aliquot_id": "526bee8e-0881-11eb-bc0e-0aad30af8a83",
+      "analyte_type": "Protein",
+      "case_id": "526ab1ce-0881-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "b74bf326-0277-11eb-bc0e-0aad30af8a83",
+        "b6661fb7-0277-11eb-bc0e-0aad30af8a83",
+        "b68842c6-0277-11eb-bc0e-0aad30af8a83"
+      ],
+      "sample_id": "526b5b60-0881-11eb-bc0e-0aad30af8a83",
+      "sample_submitter_id": "QC7",
+      "sample_type": "Not Reported",
+      "tissue_type": "Not Reported"
+    },
+    {
+      "aliquot_id": "526bef60-0881-11eb-bc0e-0aad30af8a83",
+      "analyte_type": "Protein",
+      "case_id": "526ab1ce-0881-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "b52a3a4a-0277-11eb-bc0e-0aad30af8a83",
+        "b51859f7-0277-11eb-bc0e-0aad30af8a83",
+        "b507e610-0277-11eb-bc0e-0aad30af8a83"
+      ],
+      "sample_id": "526b5c74-0881-11eb-bc0e-0aad30af8a83",
+      "sample_submitter_id": "QC8",
+      "sample_type": "Not Reported",
+      "tissue_type": "Not Reported"
+    },
+    {
+      "aliquot_id": "526bf02b-0881-11eb-bc0e-0aad30af8a83",
+      "analyte_type": "Protein",
+      "case_id": "526ab1ce-0881-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "ba1c18d8-0277-11eb-bc0e-0aad30af8a83",
+        "b94ff47a-0277-11eb-bc0e-0aad30af8a83",
+        "b9164b40-0277-11eb-bc0e-0aad30af8a83"
+      ],
+      "sample_id": "526b5e46-0881-11eb-bc0e-0aad30af8a83",
+      "sample_submitter_id": "QC9",
+      "sample_type": "Not Reported",
+      "tissue_type": "Not Reported"
+    },
+    {
+      "aliquot_id": "526bf23c-0881-11eb-bc0e-0aad30af8a83",
+      "analyte_type": "Protein",
+      "case_id": "526ab2b2-0881-11eb-bc0e-0aad30af8a83",
+      "file_ids": [
+        "b1c8a412-0277-11eb-bc0e-0aad30af8a83",
+        "b81f3c14-0277-11eb-bc0e-0aad30af8a83",
+        "b94ff47a-0277-11eb-bc0e-0aad30af8a83",
+        "bb231629-0277-11eb-bc0e-0aad30af8a83",
+        "b1c744be-0277-11eb-bc0e-0aad30af8a83",
+        "b1c97847-0277-11eb-bc0e-0aad30af8a83",
+        "b3e47ee3-0277-11eb-bc0e-0aad30af8a83",
+        "baa3afb8-0277-11eb-bc0e-0aad30af8a83",
+        "b1d0c57c-0277-11eb-bc0e-0aad30af8a83",
+        "b1cd4c91-0277-11eb-bc0e-0aad30af8a83",
+        "b63d4e36-0277-11eb-bc0e-0aad30af8a83",
+        "b60df3cc-0277-11eb-bc0e-0aad30af8a83",
+        "b1c62d32-0277-11eb-bc0e-0aad30af8a83",
+        "b4150862-0277-11eb-bc0e-0aad30af8a83",
+        "b1d2217f-0277-11eb-bc0e-0aad30af8a83",
+        "b3b462e0-0277-11eb-bc0e-0aad30af8a83",
+        "b9164b40-0277-11eb-bc0e-0aad30af8a83",
+        "bbb8b3e5-0277-11eb-bc0e-0aad30af8a83",
+        "b1cee1e2-0277-11eb-bc0e-0aad30af8a83",
+        "b74bf326-0277-11eb-bc0e-0aad30af8a83",
+        "baf0b780-0277-11eb-bc0e-0aad30af8a83",
+        "b504669d-0277-11eb-bc0e-0aad30af8a83",
+        "b49785c5-0277-11eb-bc0e-0aad30af8a83",
+        "b3a85e57-0277-11eb-bc0e-0aad30af8a83",
+        "bb796c6c-0277-11eb-bc0e-0aad30af8a83",
+        "ba1c18d8-0277-11eb-bc0e-0aad30af8a83",
+        "b68842c6-0277-11eb-bc0e-0aad30af8a83",
+        "b52a3a4a-0277-11eb-bc0e-0aad30af8a83",
+        "b395df11-0277-11eb-bc0e-0aad30af8a83",
+        "b6661fb7-0277-11eb-bc0e-0aad30af8a83",
+        "b85aa18d-0277-11eb-bc0e-0aad30af8a83",
+        "b65063e0-0277-11eb-bc0e-0aad30af8a83",
+        "b1d37b19-0277-11eb-bc0e-0aad30af8a83",
+        "b51859f7-0277-11eb-bc0e-0aad30af8a83",
+        "b7962152-0277-11eb-bc0e-0aad30af8a83",
+        "bc82509a-0277-11eb-bc0e-0aad30af8a83",
+        "b507e610-0277-11eb-bc0e-0aad30af8a83",
+        "b1cb5217-0277-11eb-bc0e-0aad30af8a83",
+        "b34a56ca-0277-11eb-bc0e-0aad30af8a83"
+      ],
+      "sample_id": "526b5f5f-0881-11eb-bc0e-0aad30af8a83",
+      "sample_submitter_id": "pooled sample",
+      "sample_type": "Not Reported",
       "tissue_type": "Not Reported"
     }
   ],
   "PDC000451": [
     {
-      "aliquot_id": "6ec07a96-d0b0-11e9-9a07-0a80fada099c",
+      "aliquot_id": "6e8c6366-d0b0-11e9-9a07-0a80fada099c",
       "analyte_type": "Protein",
-      "case_id": "f1ee500a-cf1e-11e9-9a07-0a80fada099c",
-      "file_id": "de95bacc-9a64-43a7-839c-f67198dfeada",
-      "sample_id": "ae7ed6cd-d0a6-11e9-9a07-0a80fada099c",
-      "sample_submitter_id": "WHIM-P94",
+      "case_id": "f1ee4ead-cf1e-11e9-9a07-0a80fada099c",
+      "file_ids": [
+        "aec9977f-ebda-4a85-805e-59cce58879a7",
+        "5f2a2c56-0ab9-4093-85d5-9e9a03cba500",
+        "4cc78809-87a6-4572-98c8-59cabb1370b7",
+        "5297353f-4cf9-42e4-81dc-a01e18ff8898",
+        "ba79915b-5674-4b89-8955-c2b7d93e0e71",
+        "777e7537-3adc-4555-ba7a-dac9f429373f",
+        "0995824f-3f7c-472e-8ae7-ac82d0e67c0d",
+        "c7cbedec-fcea-474c-a9c2-d7f1f8e758b6",
+        "de95bacc-9a64-43a7-839c-f67198dfeada",
+        "1d94225b-a0d8-471b-8c06-c4ad06fb73ad",
+        "7fbf0c84-5ccf-4fcc-ba4b-e92e10e82c6c",
+        "0345eeae-3c1d-4101-a0f9-f5b3bcb81720"
+      ],
+      "sample_id": "ae67a900-d0a6-11e9-9a07-0a80fada099c",
+      "sample_submitter_id": "WHIM-P93",
       "sample_type": "Xenograft Tissue",
       "tissue_type": "Not Reported"
     },
     {
-      "aliquot_id": "6e8c6366-d0b0-11e9-9a07-0a80fada099c",
+      "aliquot_id": "6ec07a96-d0b0-11e9-9a07-0a80fada099c",
       "analyte_type": "Protein",
-      "case_id": "f1ee4ead-cf1e-11e9-9a07-0a80fada099c",
-      "file_id": "de95bacc-9a64-43a7-839c-f67198dfeada",
-      "sample_id": "ae67a900-d0a6-11e9-9a07-0a80fada099c",
-      "sample_submitter_id": "WHIM-P93",
+      "case_id": "f1ee500a-cf1e-11e9-9a07-0a80fada099c",
+      "file_ids": [
+        "aec9977f-ebda-4a85-805e-59cce58879a7",
+        "5f2a2c56-0ab9-4093-85d5-9e9a03cba500",
+        "4cc78809-87a6-4572-98c8-59cabb1370b7",
+        "5297353f-4cf9-42e4-81dc-a01e18ff8898",
+        "ba79915b-5674-4b89-8955-c2b7d93e0e71",
+        "777e7537-3adc-4555-ba7a-dac9f429373f",
+        "0995824f-3f7c-472e-8ae7-ac82d0e67c0d",
+        "c7cbedec-fcea-474c-a9c2-d7f1f8e758b6",
+        "de95bacc-9a64-43a7-839c-f67198dfeada",
+        "1d94225b-a0d8-471b-8c06-c4ad06fb73ad",
+        "7fbf0c84-5ccf-4fcc-ba4b-e92e10e82c6c",
+        "0345eeae-3c1d-4101-a0f9-f5b3bcb81720"
+      ],
+      "sample_id": "ae7ed6cd-d0a6-11e9-9a07-0a80fada099c",
+      "sample_submitter_id": "WHIM-P94",
       "sample_type": "Xenograft Tissue",
       "tissue_type": "Not Reported"
     }
   ],
   "PDC000504": [
     {
-      "aliquot_id": "eef2eb97-614c-4f4b-9ee3-9d6ab1c19b01",
+      "aliquot_id": "0154372b-d56a-4e05-866b-279e26a2c0f0",
       "analyte_type": "Protein",
-      "case_id": "7bfcbba7-db38-48ef-8c0e-d60ce4e756ab",
-      "file_id": "7859c372-b3f9-4c18-8db0-b58fec694ad2",
-      "sample_id": "8d01e8fc-a258-4c76-a066-b4ec303bf200",
-      "sample_submitter_id": "C3N-02754-03",
+      "case_id": "d176f43a-527a-4e4f-bcba-8097209f8a61",
+      "file_ids": [
+        "36272d5c-f498-4a07-a59f-7c6eb0b4b540"
+      ],
+      "sample_id": "c7725069-1b9a-422b-83f0-779a1bf434dd",
+      "sample_submitter_id": "C3L-01039-05",
       "sample_type": "Solid Tissue Normal",
       "tissue_type": "Normal"
-    },
-    {
-      "aliquot_id": "a0598317-6435-48af-9e36-b2fcf30ddf9f",
-      "analyte_type": "Protein",
-      "case_id": "7bfcbba7-db38-48ef-8c0e-d60ce4e756ab",
-      "file_id": "9c14f02b-893e-4ba8-a1a9-1d3751a69e4a",
-      "sample_id": "8d01e8fc-a258-4c76-a066-b4ec303bf200",
-      "sample_submitter_id": "C3N-02754-03",
-      "sample_type": "Solid Tissue Normal",
-      "tissue_type": "Normal"
-    },
-    {
-      "aliquot_id": "9148d27d-06d0-420a-823b-2c534a1be20c",
-      "analyte_type": "Protein",
-      "case_id": "7bfcbba7-db38-48ef-8c0e-d60ce4e756ab",
-      "file_id": "06c714b5-bf2f-49a9-8df2-a5236e1bec66",
-      "sample_id": "8d01e8fc-a258-4c76-a066-b4ec303bf200",
-      "sample_submitter_id": "C3N-02754-03",
-      "sample_type": "Solid Tissue Normal",
-      "tissue_type": "Normal"
-    },
-    {
-      "aliquot_id": "ac70cdc7-c606-4b41-8a17-88646b599a1c",
-      "analyte_type": "Protein",
-      "case_id": "7bfcbba7-db38-48ef-8c0e-d60ce4e756ab",
-      "file_id": "95041635-8d46-43b7-8a8a-f52ff7f3e738",
-      "sample_id": "1c4a6f83-0521-4a15-b691-a646f21b0a46",
-      "sample_submitter_id": "C3N-02754-01",
-      "sample_type": "Primary Tumor",
-      "tissue_type": "Tumor"
-    },
-    {
-      "aliquot_id": "709d24d5-21be-4faf-8682-74c7c6523272",
-      "analyte_type": "Protein",
-      "case_id": "7bfcbba7-db38-48ef-8c0e-d60ce4e756ab",
-      "file_id": "c1081064-d6c6-40af-9468-7f083d97f894",
-      "sample_id": "1c4a6f83-0521-4a15-b691-a646f21b0a46",
-      "sample_submitter_id": "C3N-02754-01",
-      "sample_type": "Primary Tumor",
-      "tissue_type": "Tumor"
-    },
-    {
-      "aliquot_id": "56a7f4ea-b181-4282-ac5d-192e96c36393",
-      "analyte_type": "Protein",
-      "case_id": "7bfcbba7-db38-48ef-8c0e-d60ce4e756ab",
-      "file_id": "69dd4f00-2b20-4a15-bb6a-a8b0e29aa4cd",
-      "sample_id": "1c4a6f83-0521-4a15-b691-a646f21b0a46",
-      "sample_submitter_id": "C3N-02754-01",
-      "sample_type": "Primary Tumor",
-      "tissue_type": "Tumor"
-    },
-    {
-      "aliquot_id": "fa899faa-c8f7-4214-964f-3db1b0a33970",
-      "analyte_type": "Protein",
-      "case_id": "7b1fa6fd-6c33-4e14-b20a-048a7f5a836c",
-      "file_id": "89fb6a69-8eb2-494b-85d0-604f38520608",
-      "sample_id": "f534fd85-394a-4dea-95f4-9ba3fb54ffda",
-      "sample_submitter_id": "C3N-02696-05",
-      "sample_type": "Solid Tissue Normal",
-      "tissue_type": "Normal"
-    },
-    {
-      "aliquot_id": "c7687cd6-9999-4ef4-903e-52a151355c70",
-      "analyte_type": "Protein",
-      "case_id": "7b1fa6fd-6c33-4e14-b20a-048a7f5a836c",
-      "file_id": "aaaebe46-0b55-49c7-ba2f-37603833c8cd",
-      "sample_id": "f534fd85-394a-4dea-95f4-9ba3fb54ffda",
-      "sample_submitter_id": "C3N-02696-05",
-      "sample_type": "Solid Tissue Normal",
-      "tissue_type": "Normal"
-    },
-    {
-      "aliquot_id": "09cdc0a4-b435-44e7-8a8c-84f0d8218341",
-      "analyte_type": "Protein",
-      "case_id": "7b1fa6fd-6c33-4e14-b20a-048a7f5a836c",
-      "file_id": "f922d8b2-e380-4750-8fe2-f672a48e00e4",
-      "sample_id": "f534fd85-394a-4dea-95f4-9ba3fb54ffda",
-      "sample_submitter_id": "C3N-02696-05",
-      "sample_type": "Solid Tissue Normal",
-      "tissue_type": "Normal"
-    },
-    {
-      "aliquot_id": "9c0d7911-7fb9-4ebd-b554-aa67f7d1de33",
-      "analyte_type": "Protein",
-      "case_id": "7b1fa6fd-6c33-4e14-b20a-048a7f5a836c",
-      "file_id": "e5ea5f86-4e14-432f-a1bd-1e21807de873",
-      "sample_id": "81c759dd-df19-4532-8fe5-544de13bc4b2",
-      "sample_submitter_id": "C3N-02696-02",
-      "sample_type": "Primary Tumor",
-      "tissue_type": "Tumor"
-    },
-    {
-      "aliquot_id": "4f1fb2ff-1291-492a-b480-03e7fc9229e6",
-      "analyte_type": "Protein",
-      "case_id": "7b1fa6fd-6c33-4e14-b20a-048a7f5a836c",
-      "file_id": "b0075172-3128-451b-a46a-8bd02af06d99",
-      "sample_id": "81c759dd-df19-4532-8fe5-544de13bc4b2",
-      "sample_submitter_id": "C3N-02696-02",
-      "sample_type": "Primary Tumor",
-      "tissue_type": "Tumor"
-    },
-    {
-      "aliquot_id": "4eaab718-1732-471b-aac6-162259715ba0",
-      "analyte_type": "Protein",
-      "case_id": "7b1fa6fd-6c33-4e14-b20a-048a7f5a836c",
-      "file_id": "872bece7-3503-4a0b-841e-0cc7c95a812c",
-      "sample_id": "81c759dd-df19-4532-8fe5-544de13bc4b2",
-      "sample_submitter_id": "C3N-02696-02",
-      "sample_type": "Primary Tumor",
-      "tissue_type": "Tumor"
-    },
-    {
-      "aliquot_id": "d205644c-64c9-4a9f-936c-49ce9d222f94",
-      "analyte_type": "Protein",
-      "case_id": "421c43ec-df99-4e7b-830a-bad7835a4a78",
-      "file_id": "d34ab597-2b79-4327-9f21-2e1f6d7757f8",
-      "sample_id": "86531313-b3f8-48c1-a225-d88a534b1e23",
-      "sample_submitter_id": "C3L-02888-04",
-      "sample_type": "Solid Tissue Normal",
-      "tissue_type": "Normal"
-    },
-    {
-      "aliquot_id": "caa7119e-130f-4701-8b78-e6e8d7fc6170",
-      "analyte_type": "Protein",
-      "case_id": "421c43ec-df99-4e7b-830a-bad7835a4a78",
-      "file_id": "89e11118-6f0f-4652-a038-f6084deb1a88",
-      "sample_id": "86531313-b3f8-48c1-a225-d88a534b1e23",
-      "sample_submitter_id": "C3L-02888-04",
-      "sample_type": "Solid Tissue Normal",
-      "tissue_type": "Normal"
-    },
-    {
-      "aliquot_id": "afc344db-371e-4681-840c-17d7ef81985f",
-      "analyte_type": "Protein",
-      "case_id": "421c43ec-df99-4e7b-830a-bad7835a4a78",
-      "file_id": "2ca6ca47-9aa1-473f-ad95-575e03d5c038",
-      "sample_id": "86531313-b3f8-48c1-a225-d88a534b1e23",
-      "sample_submitter_id": "C3L-02888-04",
-      "sample_type": "Solid Tissue Normal",
-      "tissue_type": "Normal"
-    },
-    {
-      "aliquot_id": "fe3e1176-1cce-4384-8839-51478ef45e6d",
-      "analyte_type": "Protein",
-      "case_id": "421c43ec-df99-4e7b-830a-bad7835a4a78",
-      "file_id": "a513a764-c1d1-4330-a019-e075e4416700",
-      "sample_id": "3e6ad475-0fb4-4340-89c2-d6e2a2e412cf",
-      "sample_submitter_id": "C3L-02888-02",
-      "sample_type": "Primary Tumor",
-      "tissue_type": "Tumor"
-    },
-    {
-      "aliquot_id": "defc5b3b-c4e1-4c8e-b605-f4647ef418ed",
-      "analyte_type": "Protein",
-      "case_id": "421c43ec-df99-4e7b-830a-bad7835a4a78",
-      "file_id": "786db455-11a8-41b3-9fe4-6fdf11f26d93",
-      "sample_id": "3e6ad475-0fb4-4340-89c2-d6e2a2e412cf",
-      "sample_submitter_id": "C3L-02888-02",
-      "sample_type": "Primary Tumor",
-      "tissue_type": "Tumor"
-    },
-    {
-      "aliquot_id": "7018ee06-c0b4-4904-aec7-53b10aead2c4",
-      "analyte_type": "Protein",
-      "case_id": "421c43ec-df99-4e7b-830a-bad7835a4a78",
-      "file_id": "83e0ae7c-6bf5-444a-93b2-33ad1bc03eb7",
-      "sample_id": "3e6ad475-0fb4-4340-89c2-d6e2a2e412cf",
-      "sample_submitter_id": "C3L-02888-02",
-      "sample_type": "Primary Tumor",
-      "tissue_type": "Tumor"
-    },
-    {
-      "aliquot_id": "c489b915-0a1f-432a-9803-4322d06af89e",
-      "analyte_type": "Protein",
-      "case_id": "63b89ae5-e930-4840-b062-1f1ff1365d95",
-      "file_id": "a3e077d2-aa81-42ba-b0a9-858c3b4856dd",
-      "sample_id": "b338662a-3a88-48e0-8f6a-97afea65f7c5",
-      "sample_submitter_id": "C3N-02594-04",
-      "sample_type": "Solid Tissue Normal",
-      "tissue_type": "Normal"
-    },
-    {
-      "aliquot_id": "9b4b6390-d501-4174-a9fc-b0f3ce5a6cc9",
-      "analyte_type": "Protein",
-      "case_id": "63b89ae5-e930-4840-b062-1f1ff1365d95",
-      "file_id": "b409c7e5-72ce-4f7f-bef1-86c00dd0e8ee",
-      "sample_id": "b338662a-3a88-48e0-8f6a-97afea65f7c5",
-      "sample_submitter_id": "C3N-02594-04",
-      "sample_type": "Solid Tissue Normal",
-      "tissue_type": "Normal"
-    },
-    {
-      "aliquot_id": "8fa569bd-fd59-433d-bbfe-5d1887ea4200",
-      "analyte_type": "Protein",
-      "case_id": "63b89ae5-e930-4840-b062-1f1ff1365d95",
-      "file_id": "729eeb7b-ef63-4a2c-b1c9-1afe17c33789",
-      "sample_id": "b338662a-3a88-48e0-8f6a-97afea65f7c5",
-      "sample_submitter_id": "C3N-02594-04",
-      "sample_type": "Solid Tissue Normal",
-      "tissue_type": "Normal"
-    },
-    {
-      "aliquot_id": "c07a6f26-c51b-47b1-bf68-4d15187b1712",
-      "analyte_type": "Protein",
-      "case_id": "63b89ae5-e930-4840-b062-1f1ff1365d95",
-      "file_id": "58eb732a-b1a2-4322-828e-6e86c4e3bf22",
-      "sample_id": "354fb48f-886f-4ede-90d4-ec220410cb1a",
-      "sample_submitter_id": "C3N-02594-01",
-      "sample_type": "Not Reported",
-      "tissue_type": "Not Reported"
-    },
-    {
-      "aliquot_id": "9ffd1fd8-3f0a-4334-8556-16491c639077",
-      "analyte_type": "Protein",
-      "case_id": "63b89ae5-e930-4840-b062-1f1ff1365d95",
-      "file_id": "ebc4457f-ab03-4345-b5c0-7d22e863dc72",
-      "sample_id": "354fb48f-886f-4ede-90d4-ec220410cb1a",
-      "sample_submitter_id": "C3N-02594-01",
-      "sample_type": "Not Reported",
-      "tissue_type": "Not Reported"
-    },
-    {
-      "aliquot_id": "cef94ef8-e446-422b-9d1f-b0c65b8b10a5",
-      "analyte_type": "Protein",
-      "case_id": "760cd860-16e3-47a5-9210-aad75d5b8c8c",
-      "file_id": "67f5302c-1f5b-48ff-a5b0-31b536e419dd",
-      "sample_id": "b65cc58e-075b-426a-bbd4-30b205bfb612",
-      "sample_submitter_id": "C3N-01899-03",
-      "sample_type": "Solid Tissue Normal",
-      "tissue_type": "Normal"
-    },
-    {
-      "aliquot_id": "87a24acb-9874-4593-b2df-97b851f7367a",
-      "analyte_type": "Protein",
-      "case_id": "760cd860-16e3-47a5-9210-aad75d5b8c8c",
-      "file_id": "b0431b92-8cbf-4819-a8c2-384af8bcee2c",
-      "sample_id": "b65cc58e-075b-426a-bbd4-30b205bfb612",
-      "sample_submitter_id": "C3N-01899-03",
-      "sample_type": "Solid Tissue Normal",
-      "tissue_type": "Normal"
-    },
-    {
-      "aliquot_id": "7a1294d5-6d91-4f11-a139-23e9a0a9e44f",
-      "analyte_type": "Protein",
-      "case_id": "760cd860-16e3-47a5-9210-aad75d5b8c8c",
-      "file_id": "d93b22b2-8da9-4aa7-8b73-de9155d86dd1",
-      "sample_id": "b65cc58e-075b-426a-bbd4-30b205bfb612",
-      "sample_submitter_id": "C3N-01899-03",
-      "sample_type": "Solid Tissue Normal",
-      "tissue_type": "Normal"
-    },
-    {
-      "aliquot_id": "f0e36cdd-954c-4973-be8e-de31d1465205",
-      "analyte_type": "Protein",
-      "case_id": "760cd860-16e3-47a5-9210-aad75d5b8c8c",
-      "file_id": "2cbdb74d-599c-4d82-845f-42317993cdbc",
-      "sample_id": "10296614-6678-46dc-8190-022f7bff500d",
-      "sample_submitter_id": "C3N-01899-02",
-      "sample_type": "Primary Tumor",
-      "tissue_type": "Tumor"
-    },
-    {
-      "aliquot_id": "ec187d67-b77c-4fe7-9cba-cb549e4491fc",
-      "analyte_type": "Protein",
-      "case_id": "760cd860-16e3-47a5-9210-aad75d5b8c8c",
-      "file_id": "14de8a47-dd8b-4491-86a6-37d2e7a20d2e",
-      "sample_id": "10296614-6678-46dc-8190-022f7bff500d",
-      "sample_submitter_id": "C3N-01899-02",
-      "sample_type": "Primary Tumor",
-      "tissue_type": "Tumor"
     },
     {
       "aliquot_id": "0919a8f4-dad5-407c-b7f6-b8060baff3a5",
       "analyte_type": "Protein",
       "case_id": "760cd860-16e3-47a5-9210-aad75d5b8c8c",
-      "file_id": "347ebbdc-0ae3-438d-ab90-255758ae48fd",
+      "file_ids": [
+        "347ebbdc-0ae3-438d-ab90-255758ae48fd"
+      ],
       "sample_id": "10296614-6678-46dc-8190-022f7bff500d",
       "sample_submitter_id": "C3N-01899-02",
       "sample_type": "Primary Tumor",
       "tissue_type": "Tumor"
     },
     {
-      "aliquot_id": "3a9bd7a5-ddc9-4fab-89af-36eaa59840ac",
+      "aliquot_id": "098afb30-766b-4411-9be6-cbbd5c8d9cff",
       "analyte_type": "Protein",
-      "case_id": "18fa5b39-8d49-47f4-adb1-c8295bf67032",
-      "file_id": "5eaf31e4-86b2-4876-896f-6977b1fac2b4",
-      "sample_id": "7a507f48-7513-498b-9f1a-f88ab11ba2c5",
-      "sample_submitter_id": "C3L-03622-03",
-      "sample_type": "Not Reported",
-      "tissue_type": "Not Reported"
-    },
-    {
-      "aliquot_id": "36fa7d3c-a060-4b71-b813-eff622746bf8",
-      "analyte_type": "Protein",
-      "case_id": "18fa5b39-8d49-47f4-adb1-c8295bf67032",
-      "file_id": "b21c0876-1f0e-4c71-b296-3a76abb96231",
-      "sample_id": "7a507f48-7513-498b-9f1a-f88ab11ba2c5",
-      "sample_submitter_id": "C3L-03622-03",
-      "sample_type": "Not Reported",
-      "tissue_type": "Not Reported"
-    },
-    {
-      "aliquot_id": "b503609c-6895-4b26-90fa-92fdc1a39bf3",
-      "analyte_type": "Protein",
-      "case_id": "18fa5b39-8d49-47f4-adb1-c8295bf67032",
-      "file_id": "da7884de-dfd2-4915-aa61-4d19b5d7887f",
-      "sample_id": "6eb425d9-ec53-479e-9118-d165b4d3121e",
-      "sample_submitter_id": "C3L-03622-02",
-      "sample_type": "Not Reported",
-      "tissue_type": "Not Reported"
-    },
-    {
-      "aliquot_id": "61d4f39e-1936-461c-a422-98e60220ba6f",
-      "analyte_type": "Protein",
-      "case_id": "18fa5b39-8d49-47f4-adb1-c8295bf67032",
-      "file_id": "7c9fa3cf-46ed-46f6-9976-bac3f020f8ff",
-      "sample_id": "6eb425d9-ec53-479e-9118-d165b4d3121e",
-      "sample_submitter_id": "C3L-03622-02",
-      "sample_type": "Not Reported",
-      "tissue_type": "Not Reported"
-    },
-    {
-      "aliquot_id": "4e66860e-749b-4e75-a264-3cd8ae95dcac",
-      "analyte_type": "Protein",
-      "case_id": "8e6654ba-0c12-4244-83f1-a6420f2163e8",
-      "file_id": "2e9e520f-4f7f-46c3-9c63-94318a7e2ff8",
-      "sample_id": "122d8369-2f08-4097-bfac-24455c026828",
-      "sample_submitter_id": "C3L-03629-04",
-      "sample_type": "Not Reported",
-      "tissue_type": "Not Reported"
-    },
-    {
-      "aliquot_id": "358f2037-3ae2-48ea-8d9a-7482dfd53a4e",
-      "analyte_type": "Protein",
-      "case_id": "8e6654ba-0c12-4244-83f1-a6420f2163e8",
-      "file_id": "f95f45c1-e087-4ada-af07-9382cfec4477",
-      "sample_id": "122d8369-2f08-4097-bfac-24455c026828",
-      "sample_submitter_id": "C3L-03629-04",
-      "sample_type": "Not Reported",
-      "tissue_type": "Not Reported"
-    },
-    {
-      "aliquot_id": "b74a74eb-8b81-4a0d-90c0-1e9b4680e168",
-      "analyte_type": "Protein",
-      "case_id": "8e6654ba-0c12-4244-83f1-a6420f2163e8",
-      "file_id": "f50c4fcf-1021-415e-9dad-f5560abeed4d",
-      "sample_id": "09c001b2-2590-4395-a7e4-8e59a076b1e0",
-      "sample_submitter_id": "C3L-03629-02",
+      "case_id": "6fd23aa1-ca9f-4299-9eeb-81683ee4acc3",
+      "file_ids": [
+        "40bfb783-2bfb-43ba-a405-83147a463a29"
+      ],
+      "sample_id": "e4ae5991-4be9-411b-b8a9-555ce5e9067b",
+      "sample_submitter_id": "C3N-02930-01",
       "sample_type": "Primary Tumor",
       "tissue_type": "Tumor"
     },
     {
-      "aliquot_id": "a33914a8-5c1c-4c6f-8b19-004c07fc0b3c",
+      "aliquot_id": "09cdc0a4-b435-44e7-8a8c-84f0d8218341",
       "analyte_type": "Protein",
-      "case_id": "8e6654ba-0c12-4244-83f1-a6420f2163e8",
-      "file_id": "84a246bd-28c3-45ed-ad0b-958a6c72b173",
-      "sample_id": "09c001b2-2590-4395-a7e4-8e59a076b1e0",
-      "sample_submitter_id": "C3L-03629-02",
-      "sample_type": "Primary Tumor",
-      "tissue_type": "Tumor"
-    },
-    {
-      "aliquot_id": "842ed394-aac6-4219-b158-df81253844c0",
-      "analyte_type": "Protein",
-      "case_id": "8e6654ba-0c12-4244-83f1-a6420f2163e8",
-      "file_id": "fa0f46df-0d27-49fe-a0b6-94a8249b26b0",
-      "sample_id": "09c001b2-2590-4395-a7e4-8e59a076b1e0",
-      "sample_submitter_id": "C3L-03629-02",
-      "sample_type": "Primary Tumor",
-      "tissue_type": "Tumor"
-    },
-    {
-      "aliquot_id": "f2d79c98-ce1c-4fe7-87ba-be4da0ca967d",
-      "analyte_type": "Protein",
-      "case_id": "1862470d-0aca-47f8-9ddd-371db1a98c70",
-      "file_id": "7b2b8034-e0de-48df-8d66-4132a27c0f1d",
-      "sample_id": "4c4703c3-38f0-49d4-81ca-8c4bd294ca9f",
-      "sample_submitter_id": "C3N-01898-04",
-      "sample_type": "Primary Tumor",
-      "tissue_type": "Tumor"
-    },
-    {
-      "aliquot_id": "be6b9f72-e603-402a-884f-8238093c092e",
-      "analyte_type": "Protein",
-      "case_id": "1862470d-0aca-47f8-9ddd-371db1a98c70",
-      "file_id": "824ad83b-0478-4fe7-881b-c4f8ba59b832",
-      "sample_id": "4c4703c3-38f0-49d4-81ca-8c4bd294ca9f",
-      "sample_submitter_id": "C3N-01898-04",
-      "sample_type": "Primary Tumor",
-      "tissue_type": "Tumor"
-    },
-    {
-      "aliquot_id": "1a09eae4-8a7c-4c4e-ab63-5bcd0cce19a8",
-      "analyte_type": "Protein",
-      "case_id": "1862470d-0aca-47f8-9ddd-371db1a98c70",
-      "file_id": "9b7242b2-13aa-4e60-b435-9be26290b0cb",
-      "sample_id": "4c4703c3-38f0-49d4-81ca-8c4bd294ca9f",
-      "sample_submitter_id": "C3N-01898-04",
-      "sample_type": "Primary Tumor",
-      "tissue_type": "Tumor"
-    },
-    {
-      "aliquot_id": "b1bdb690-ed01-4427-8c48-50bdc967cb0d",
-      "analyte_type": "Protein",
-      "case_id": "1862470d-0aca-47f8-9ddd-371db1a98c70",
-      "file_id": "75117835-b635-4fe2-ae04-57102059a21b",
-      "sample_id": "270b8eca-e503-4ce2-acb0-2d2eeb30fda4",
-      "sample_submitter_id": "C3N-01898-05",
-      "sample_type": "Solid Tissue Normal",
-      "tissue_type": "Normal"
-    },
-    {
-      "aliquot_id": "62e5785c-2665-4423-a86c-1bb92e67efa9",
-      "analyte_type": "Protein",
-      "case_id": "1862470d-0aca-47f8-9ddd-371db1a98c70",
-      "file_id": "88a18adc-7dd3-432d-9eeb-49fa1be6f579",
-      "sample_id": "270b8eca-e503-4ce2-acb0-2d2eeb30fda4",
-      "sample_submitter_id": "C3N-01898-05",
-      "sample_type": "Solid Tissue Normal",
-      "tissue_type": "Normal"
-    },
-    {
-      "aliquot_id": "4cea5a46-6538-4739-9097-2d0aa0571fa9",
-      "analyte_type": "Protein",
-      "case_id": "1862470d-0aca-47f8-9ddd-371db1a98c70",
-      "file_id": "95a39a34-bf73-4a61-9f86-2b4279f1eedd",
-      "sample_id": "270b8eca-e503-4ce2-acb0-2d2eeb30fda4",
-      "sample_submitter_id": "C3N-01898-05",
-      "sample_type": "Solid Tissue Normal",
-      "tissue_type": "Normal"
-    },
-    {
-      "aliquot_id": "e16cc55f-92a0-482f-91f6-5af495b66825",
-      "analyte_type": "Protein",
-      "case_id": "9a3d9daa-c653-46d1-8ba2-c066e3eb5ea8",
-      "file_id": "3865304c-e1a3-4d59-a7d8-39d0c8c23bb4",
-      "sample_id": "ed43a104-ab28-4c00-ab03-dbf6c2761c9a",
-      "sample_submitter_id": "C3N-02765-02",
-      "sample_type": "Primary Tumor",
-      "tissue_type": "Tumor"
-    },
-    {
-      "aliquot_id": "c79f8af2-47af-4503-98a5-a79695a146e4",
-      "analyte_type": "Protein",
-      "case_id": "9a3d9daa-c653-46d1-8ba2-c066e3eb5ea8",
-      "file_id": "caa21996-1b85-4136-8b94-88843a1e760b",
-      "sample_id": "ed43a104-ab28-4c00-ab03-dbf6c2761c9a",
-      "sample_submitter_id": "C3N-02765-02",
-      "sample_type": "Primary Tumor",
-      "tissue_type": "Tumor"
-    },
-    {
-      "aliquot_id": "a217485d-8c90-4895-b491-f22f7871f814",
-      "analyte_type": "Protein",
-      "case_id": "9a3d9daa-c653-46d1-8ba2-c066e3eb5ea8",
-      "file_id": "c2d825f8-da2d-49ab-a460-def8a60ea2f6",
-      "sample_id": "ed43a104-ab28-4c00-ab03-dbf6c2761c9a",
-      "sample_submitter_id": "C3N-02765-02",
-      "sample_type": "Primary Tumor",
-      "tissue_type": "Tumor"
-    },
-    {
-      "aliquot_id": "9c295bff-21df-4d26-957c-aeb80ed6ca91",
-      "analyte_type": "Protein",
-      "case_id": "9a3d9daa-c653-46d1-8ba2-c066e3eb5ea8",
-      "file_id": "17fe46ac-2fae-4024-b0bb-8c20ff481346",
-      "sample_id": "ed43a104-ab28-4c00-ab03-dbf6c2761c9a",
-      "sample_submitter_id": "C3N-02765-02",
-      "sample_type": "Primary Tumor",
-      "tissue_type": "Tumor"
-    },
-    {
-      "aliquot_id": "d961b56e-c819-45e5-92f6-22bab25335c7",
-      "analyte_type": "Protein",
-      "case_id": "9a3d9daa-c653-46d1-8ba2-c066e3eb5ea8",
-      "file_id": "1b369e01-f30b-4e57-8daa-684ee42450e2",
-      "sample_id": "8f1cd1c5-6770-4503-90fb-12cba99a844b",
-      "sample_submitter_id": "C3N-02765-03",
-      "sample_type": "Solid Tissue Normal",
-      "tissue_type": "Normal"
-    },
-    {
-      "aliquot_id": "b74a213b-c64d-4ff1-ad7d-205f9e207d37",
-      "analyte_type": "Protein",
-      "case_id": "0eddd8e2-c532-4f08-9b4e-3a6d86befcb2",
-      "file_id": "29346016-9590-4ea0-be4f-ab8f829356ed",
-      "sample_id": "f97077fe-78ba-49b2-ba7b-320d0e2323fc",
-      "sample_submitter_id": "C3N-02996-02",
-      "sample_type": "Primary Tumor",
-      "tissue_type": "Tumor"
-    },
-    {
-      "aliquot_id": "6543ccf8-b6b5-4883-ba20-1082b09bcd25",
-      "analyte_type": "Protein",
-      "case_id": "0eddd8e2-c532-4f08-9b4e-3a6d86befcb2",
-      "file_id": "501aadcb-341e-4ac0-93c1-9cf55ac1ed05",
-      "sample_id": "f97077fe-78ba-49b2-ba7b-320d0e2323fc",
-      "sample_submitter_id": "C3N-02996-02",
-      "sample_type": "Primary Tumor",
-      "tissue_type": "Tumor"
-    },
-    {
-      "aliquot_id": "4ed2e5b0-4b3b-4d87-af18-8012389eda15",
-      "analyte_type": "Protein",
-      "case_id": "0eddd8e2-c532-4f08-9b4e-3a6d86befcb2",
-      "file_id": "0d79d520-0c6c-44f9-acec-d7f86fa3d1f7",
-      "sample_id": "f97077fe-78ba-49b2-ba7b-320d0e2323fc",
-      "sample_submitter_id": "C3N-02996-02",
-      "sample_type": "Primary Tumor",
-      "tissue_type": "Tumor"
-    },
-    {
-      "aliquot_id": "580b8e18-bd2b-4ec7-9e19-b5cfdb3a0da4",
-      "analyte_type": "Protein",
-      "case_id": "0eddd8e2-c532-4f08-9b4e-3a6d86befcb2",
-      "file_id": "cc44abcc-1554-4309-99ae-f8b8c1f2c792",
-      "sample_id": "da67f12b-d7e4-485d-a774-7a197253702a",
-      "sample_submitter_id": "C3N-02996-04",
-      "sample_type": "Solid Tissue Normal",
-      "tissue_type": "Normal"
-    },
-    {
-      "aliquot_id": "174798a9-dfac-4249-b3ec-bf2db95c32bb",
-      "analyte_type": "Protein",
-      "case_id": "0eddd8e2-c532-4f08-9b4e-3a6d86befcb2",
-      "file_id": "2c56aa18-eae8-42ce-8c1d-a2ac0681b072",
-      "sample_id": "da67f12b-d7e4-485d-a774-7a197253702a",
-      "sample_submitter_id": "C3N-02996-04",
+      "case_id": "7b1fa6fd-6c33-4e14-b20a-048a7f5a836c",
+      "file_ids": [
+        "f922d8b2-e380-4750-8fe2-f672a48e00e4"
+      ],
+      "sample_id": "f534fd85-394a-4dea-95f4-9ba3fb54ffda",
+      "sample_submitter_id": "C3N-02696-05",
       "sample_type": "Solid Tissue Normal",
       "tissue_type": "Normal"
     },
@@ -1748,47 +1790,177 @@
       "aliquot_id": "0cc526e2-e0a0-4f1f-bfed-41c21610c212",
       "analyte_type": "Protein",
       "case_id": "0eddd8e2-c532-4f08-9b4e-3a6d86befcb2",
-      "file_id": "f7e29552-e5ec-4c6b-9fc2-8f0e5972986b",
+      "file_ids": [
+        "f7e29552-e5ec-4c6b-9fc2-8f0e5972986b"
+      ],
       "sample_id": "da67f12b-d7e4-485d-a774-7a197253702a",
       "sample_submitter_id": "C3N-02996-04",
       "sample_type": "Solid Tissue Normal",
       "tissue_type": "Normal"
     },
     {
-      "aliquot_id": "c56b5847-a07e-4e25-96c8-835dacb6ae23",
+      "aliquot_id": "139203ac-6898-4260-a2eb-00d081bce214",
       "analyte_type": "Protein",
-      "case_id": "ef1ba9c5-91da-48b7-ac49-0a8f00bfba64",
-      "file_id": "6fb35d1d-1353-41a6-b421-0305846fc9a0",
-      "sample_id": "5e16c745-5fec-462b-bb77-35ef6a973a5b",
-      "sample_submitter_id": "C3L-02956-06",
+      "case_id": "9ac78a5e-393f-48ba-9385-cad0175801e5",
+      "file_ids": [
+        "29f12455-7c98-4887-ad28-c228d34ba474"
+      ],
+      "sample_id": "83a87fbf-6b9c-45e4-a334-406e25ab40a9",
+      "sample_submitter_id": "C3N-01385-02",
+      "sample_type": "Primary Tumor",
+      "tissue_type": "Tumor"
+    },
+    {
+      "aliquot_id": "174798a9-dfac-4249-b3ec-bf2db95c32bb",
+      "analyte_type": "Protein",
+      "case_id": "0eddd8e2-c532-4f08-9b4e-3a6d86befcb2",
+      "file_ids": [
+        "2c56aa18-eae8-42ce-8c1d-a2ac0681b072"
+      ],
+      "sample_id": "da67f12b-d7e4-485d-a774-7a197253702a",
+      "sample_submitter_id": "C3N-02996-04",
       "sample_type": "Solid Tissue Normal",
       "tissue_type": "Normal"
     },
     {
-      "aliquot_id": "b1f6406b-b1b1-4e6c-84f0-d4dec6b13d87",
+      "aliquot_id": "187fe18b-f2fb-4220-8f39-a8ea83b88834",
       "analyte_type": "Protein",
-      "case_id": "ef1ba9c5-91da-48b7-ac49-0a8f00bfba64",
-      "file_id": "13f1ed16-5236-402c-8b6f-6e07eca98482",
-      "sample_id": "5e16c745-5fec-462b-bb77-35ef6a973a5b",
-      "sample_submitter_id": "C3L-02956-06",
+      "case_id": "d176f43a-527a-4e4f-bcba-8097209f8a61",
+      "file_ids": [
+        "8901e225-34ef-4ae7-9a7c-7a858c4e138a"
+      ],
+      "sample_id": "c7725069-1b9a-422b-83f0-779a1bf434dd",
+      "sample_submitter_id": "C3L-01039-05",
       "sample_type": "Solid Tissue Normal",
       "tissue_type": "Normal"
+    },
+    {
+      "aliquot_id": "1a09eae4-8a7c-4c4e-ab63-5bcd0cce19a8",
+      "analyte_type": "Protein",
+      "case_id": "1862470d-0aca-47f8-9ddd-371db1a98c70",
+      "file_ids": [
+        "9b7242b2-13aa-4e60-b435-9be26290b0cb"
+      ],
+      "sample_id": "4c4703c3-38f0-49d4-81ca-8c4bd294ca9f",
+      "sample_submitter_id": "C3N-01898-04",
+      "sample_type": "Primary Tumor",
+      "tissue_type": "Tumor"
+    },
+    {
+      "aliquot_id": "1d842e6d-9a81-492f-bbad-a5e654f999a7",
+      "analyte_type": "Protein",
+      "case_id": "6fd23aa1-ca9f-4299-9eeb-81683ee4acc3",
+      "file_ids": [
+        "7a4dfc01-2d1a-4947-9028-5fbab0b6273f"
+      ],
+      "sample_id": "dccfab3b-90a9-42ad-97e8-28e4860d1e5b",
+      "sample_submitter_id": "C3N-02930-03",
+      "sample_type": "Solid Tissue Normal",
+      "tissue_type": "Normal"
+    },
+    {
+      "aliquot_id": "2c37bde6-8be9-4cc3-8dca-89b5a505d0aa",
+      "analyte_type": "Protein",
+      "case_id": "9ac78a5e-393f-48ba-9385-cad0175801e5",
+      "file_ids": [
+        "5e8a7437-6b21-4888-80ed-6214dbdced61"
+      ],
+      "sample_id": "83a87fbf-6b9c-45e4-a334-406e25ab40a9",
+      "sample_submitter_id": "C3N-01385-02",
+      "sample_type": "Primary Tumor",
+      "tissue_type": "Tumor"
+    },
+    {
+      "aliquot_id": "33ce13b2-cb75-41b2-ae33-4eae8f494c0a",
+      "analyte_type": "Protein",
+      "case_id": "a0ddc659-d393-4469-b1d1-d61dcdbc5b06",
+      "file_ids": [
+        "776dba19-d718-4688-b0d1-62369e9b98f5"
+      ],
+      "sample_id": "e871e4fe-98c0-4348-8517-494b9837205c",
+      "sample_submitter_id": "C3L-03348-03",
+      "sample_type": "Primary Tumor",
+      "tissue_type": "Tumor"
+    },
+    {
+      "aliquot_id": "358f2037-3ae2-48ea-8d9a-7482dfd53a4e",
+      "analyte_type": "Protein",
+      "case_id": "8e6654ba-0c12-4244-83f1-a6420f2163e8",
+      "file_ids": [
+        "f95f45c1-e087-4ada-af07-9382cfec4477"
+      ],
+      "sample_id": "122d8369-2f08-4097-bfac-24455c026828",
+      "sample_submitter_id": "C3L-03629-04",
+      "sample_type": "Not Reported",
+      "tissue_type": "Not Reported"
+    },
+    {
+      "aliquot_id": "36fa7d3c-a060-4b71-b813-eff622746bf8",
+      "analyte_type": "Protein",
+      "case_id": "18fa5b39-8d49-47f4-adb1-c8295bf67032",
+      "file_ids": [
+        "b21c0876-1f0e-4c71-b296-3a76abb96231"
+      ],
+      "sample_id": "7a507f48-7513-498b-9f1a-f88ab11ba2c5",
+      "sample_submitter_id": "C3L-03622-03",
+      "sample_type": "Not Reported",
+      "tissue_type": "Not Reported"
     },
     {
       "aliquot_id": "399905bc-127b-4b49-abd0-548de3769319",
       "analyte_type": "Protein",
       "case_id": "ef1ba9c5-91da-48b7-ac49-0a8f00bfba64",
-      "file_id": "eb850efb-02cc-49a6-9c73-770c711cf2e7",
+      "file_ids": [
+        "eb850efb-02cc-49a6-9c73-770c711cf2e7"
+      ],
       "sample_id": "5e16c745-5fec-462b-bb77-35ef6a973a5b",
       "sample_submitter_id": "C3L-02956-06",
       "sample_type": "Solid Tissue Normal",
       "tissue_type": "Normal"
     },
     {
-      "aliquot_id": "961d7545-4542-4541-b4fc-b799cec4873f",
+      "aliquot_id": "3a9bd7a5-ddc9-4fab-89af-36eaa59840ac",
+      "analyte_type": "Protein",
+      "case_id": "18fa5b39-8d49-47f4-adb1-c8295bf67032",
+      "file_ids": [
+        "5eaf31e4-86b2-4876-896f-6977b1fac2b4"
+      ],
+      "sample_id": "7a507f48-7513-498b-9f1a-f88ab11ba2c5",
+      "sample_submitter_id": "C3L-03622-03",
+      "sample_type": "Not Reported",
+      "tissue_type": "Not Reported"
+    },
+    {
+      "aliquot_id": "3ae7f4e7-b6c0-4cac-a780-a3a3aa7b05c8",
+      "analyte_type": "Protein",
+      "case_id": "d176f43a-527a-4e4f-bcba-8097209f8a61",
+      "file_ids": [
+        "f3d80e95-e5f0-4578-a0a5-091f0b600831"
+      ],
+      "sample_id": "f7a1906a-c68a-4aa5-9073-e8ce9037fbb4",
+      "sample_submitter_id": "C3L-01039-03",
+      "sample_type": "Primary Tumor",
+      "tissue_type": "Tumor"
+    },
+    {
+      "aliquot_id": "425ee0f9-7fe4-438c-beb2-f1b227adb72b",
+      "analyte_type": "Protein",
+      "case_id": "a0ddc659-d393-4469-b1d1-d61dcdbc5b06",
+      "file_ids": [
+        "e0e5886d-041e-4726-9af6-a663d5ea086a"
+      ],
+      "sample_id": "e871e4fe-98c0-4348-8517-494b9837205c",
+      "sample_submitter_id": "C3L-03348-03",
+      "sample_type": "Primary Tumor",
+      "tissue_type": "Tumor"
+    },
+    {
+      "aliquot_id": "4b1e729a-a6f6-40db-87a2-d31a25b4aa24",
       "analyte_type": "Protein",
       "case_id": "ef1ba9c5-91da-48b7-ac49-0a8f00bfba64",
-      "file_id": "2525e714-9b4b-4e65-b4a4-2f9e4b865c0e",
+      "file_ids": [
+        "db0be551-059b-4e40-8950-b38a134f81a3"
+      ],
       "sample_id": "578272d9-59b0-447a-b91d-5f239c12718b",
       "sample_submitter_id": "C3L-02956-01",
       "sample_type": "Primary Tumor",
@@ -1798,49 +1970,71 @@
       "aliquot_id": "4c49e964-c677-4ffc-beb4-b92de2b9e9da",
       "analyte_type": "Protein",
       "case_id": "ef1ba9c5-91da-48b7-ac49-0a8f00bfba64",
-      "file_id": "3bf9edb1-a147-46bd-bed5-396410cc206b",
+      "file_ids": [
+        "3bf9edb1-a147-46bd-bed5-396410cc206b"
+      ],
       "sample_id": "578272d9-59b0-447a-b91d-5f239c12718b",
       "sample_submitter_id": "C3L-02956-01",
       "sample_type": "Primary Tumor",
       "tissue_type": "Tumor"
     },
     {
-      "aliquot_id": "4b1e729a-a6f6-40db-87a2-d31a25b4aa24",
+      "aliquot_id": "4cea5a46-6538-4739-9097-2d0aa0571fa9",
       "analyte_type": "Protein",
-      "case_id": "ef1ba9c5-91da-48b7-ac49-0a8f00bfba64",
-      "file_id": "db0be551-059b-4e40-8950-b38a134f81a3",
-      "sample_id": "578272d9-59b0-447a-b91d-5f239c12718b",
-      "sample_submitter_id": "C3L-02956-01",
+      "case_id": "1862470d-0aca-47f8-9ddd-371db1a98c70",
+      "file_ids": [
+        "95a39a34-bf73-4a61-9f86-2b4279f1eedd"
+      ],
+      "sample_id": "270b8eca-e503-4ce2-acb0-2d2eeb30fda4",
+      "sample_submitter_id": "C3N-01898-05",
+      "sample_type": "Solid Tissue Normal",
+      "tissue_type": "Normal"
+    },
+    {
+      "aliquot_id": "4e66860e-749b-4e75-a264-3cd8ae95dcac",
+      "analyte_type": "Protein",
+      "case_id": "8e6654ba-0c12-4244-83f1-a6420f2163e8",
+      "file_ids": [
+        "2e9e520f-4f7f-46c3-9c63-94318a7e2ff8"
+      ],
+      "sample_id": "122d8369-2f08-4097-bfac-24455c026828",
+      "sample_submitter_id": "C3L-03629-04",
+      "sample_type": "Not Reported",
+      "tissue_type": "Not Reported"
+    },
+    {
+      "aliquot_id": "4eaab718-1732-471b-aac6-162259715ba0",
+      "analyte_type": "Protein",
+      "case_id": "7b1fa6fd-6c33-4e14-b20a-048a7f5a836c",
+      "file_ids": [
+        "872bece7-3503-4a0b-841e-0cc7c95a812c"
+      ],
+      "sample_id": "81c759dd-df19-4532-8fe5-544de13bc4b2",
+      "sample_submitter_id": "C3N-02696-02",
       "sample_type": "Primary Tumor",
       "tissue_type": "Tumor"
     },
     {
-      "aliquot_id": "da54b458-26b3-44a4-8d6a-f30eb1f182f6",
+      "aliquot_id": "4ed2e5b0-4b3b-4d87-af18-8012389eda15",
       "analyte_type": "Protein",
-      "case_id": "d176f43a-527a-4e4f-bcba-8097209f8a61",
-      "file_id": "52b063f6-65be-468e-9b2b-459d5d97dc55",
-      "sample_id": "f7a1906a-c68a-4aa5-9073-e8ce9037fbb4",
-      "sample_submitter_id": "C3L-01039-03",
+      "case_id": "0eddd8e2-c532-4f08-9b4e-3a6d86befcb2",
+      "file_ids": [
+        "0d79d520-0c6c-44f9-acec-d7f86fa3d1f7"
+      ],
+      "sample_id": "f97077fe-78ba-49b2-ba7b-320d0e2323fc",
+      "sample_submitter_id": "C3N-02996-02",
       "sample_type": "Primary Tumor",
       "tissue_type": "Tumor"
     },
     {
-      "aliquot_id": "55e30653-fa4c-4907-a034-cc01c339ec02",
+      "aliquot_id": "4f1fb2ff-1291-492a-b480-03e7fc9229e6",
       "analyte_type": "Protein",
-      "case_id": "d176f43a-527a-4e4f-bcba-8097209f8a61",
-      "file_id": "457ddff2-541a-4fc9-aa5b-ab739944002e",
-      "sample_id": "f7a1906a-c68a-4aa5-9073-e8ce9037fbb4",
-      "sample_submitter_id": "C3L-01039-03",
-      "sample_type": "Primary Tumor",
-      "tissue_type": "Tumor"
-    },
-    {
-      "aliquot_id": "3ae7f4e7-b6c0-4cac-a780-a3a3aa7b05c8",
-      "analyte_type": "Protein",
-      "case_id": "d176f43a-527a-4e4f-bcba-8097209f8a61",
-      "file_id": "f3d80e95-e5f0-4578-a0a5-091f0b600831",
-      "sample_id": "f7a1906a-c68a-4aa5-9073-e8ce9037fbb4",
-      "sample_submitter_id": "C3L-01039-03",
+      "case_id": "7b1fa6fd-6c33-4e14-b20a-048a7f5a836c",
+      "file_ids": [
+        "b0075172-3128-451b-a46a-8bd02af06d99"
+      ],
+      "sample_id": "81c759dd-df19-4532-8fe5-544de13bc4b2",
+      "sample_submitter_id": "C3N-02696-02",
       "sample_type": "Primary Tumor",
       "tissue_type": "Tumor"
     },
@@ -1848,189 +2042,83 @@
       "aliquot_id": "4ff71256-cf97-4439-9978-d74fe7c4d5ab",
       "analyte_type": "Protein",
       "case_id": "d176f43a-527a-4e4f-bcba-8097209f8a61",
-      "file_id": "850f5651-d030-4f82-8fd8-57527f0549e4",
+      "file_ids": [
+        "850f5651-d030-4f82-8fd8-57527f0549e4"
+      ],
       "sample_id": "c7725069-1b9a-422b-83f0-779a1bf434dd",
       "sample_submitter_id": "C3L-01039-05",
       "sample_type": "Solid Tissue Normal",
       "tissue_type": "Normal"
     },
     {
-      "aliquot_id": "187fe18b-f2fb-4220-8f39-a8ea83b88834",
+      "aliquot_id": "55e30653-fa4c-4907-a034-cc01c339ec02",
       "analyte_type": "Protein",
       "case_id": "d176f43a-527a-4e4f-bcba-8097209f8a61",
-      "file_id": "8901e225-34ef-4ae7-9a7c-7a858c4e138a",
-      "sample_id": "c7725069-1b9a-422b-83f0-779a1bf434dd",
-      "sample_submitter_id": "C3L-01039-05",
-      "sample_type": "Solid Tissue Normal",
-      "tissue_type": "Normal"
-    },
-    {
-      "aliquot_id": "0154372b-d56a-4e05-866b-279e26a2c0f0",
-      "analyte_type": "Protein",
-      "case_id": "d176f43a-527a-4e4f-bcba-8097209f8a61",
-      "file_id": "36272d5c-f498-4a07-a59f-7c6eb0b4b540",
-      "sample_id": "c7725069-1b9a-422b-83f0-779a1bf434dd",
-      "sample_submitter_id": "C3L-01039-05",
-      "sample_type": "Solid Tissue Normal",
-      "tissue_type": "Normal"
-    },
-    {
-      "aliquot_id": "9eadbb20-68eb-4254-8d50-48e4b625aeaa",
-      "analyte_type": "Protein",
-      "case_id": "a0ddc659-d393-4469-b1d1-d61dcdbc5b06",
-      "file_id": "49a1e73e-4c5b-4db7-ba18-1457fa4a7115",
-      "sample_id": "e871e4fe-98c0-4348-8517-494b9837205c",
-      "sample_submitter_id": "C3L-03348-03",
+      "file_ids": [
+        "457ddff2-541a-4fc9-aa5b-ab739944002e"
+      ],
+      "sample_id": "f7a1906a-c68a-4aa5-9073-e8ce9037fbb4",
+      "sample_submitter_id": "C3L-01039-03",
       "sample_type": "Primary Tumor",
       "tissue_type": "Tumor"
     },
     {
-      "aliquot_id": "425ee0f9-7fe4-438c-beb2-f1b227adb72b",
+      "aliquot_id": "56a7f4ea-b181-4282-ac5d-192e96c36393",
       "analyte_type": "Protein",
-      "case_id": "a0ddc659-d393-4469-b1d1-d61dcdbc5b06",
-      "file_id": "e0e5886d-041e-4726-9af6-a663d5ea086a",
-      "sample_id": "e871e4fe-98c0-4348-8517-494b9837205c",
-      "sample_submitter_id": "C3L-03348-03",
+      "case_id": "7bfcbba7-db38-48ef-8c0e-d60ce4e756ab",
+      "file_ids": [
+        "69dd4f00-2b20-4a15-bb6a-a8b0e29aa4cd"
+      ],
+      "sample_id": "1c4a6f83-0521-4a15-b691-a646f21b0a46",
+      "sample_submitter_id": "C3N-02754-01",
       "sample_type": "Primary Tumor",
       "tissue_type": "Tumor"
-    },
-    {
-      "aliquot_id": "33ce13b2-cb75-41b2-ae33-4eae8f494c0a",
-      "analyte_type": "Protein",
-      "case_id": "a0ddc659-d393-4469-b1d1-d61dcdbc5b06",
-      "file_id": "776dba19-d718-4688-b0d1-62369e9b98f5",
-      "sample_id": "e871e4fe-98c0-4348-8517-494b9837205c",
-      "sample_submitter_id": "C3L-03348-03",
-      "sample_type": "Primary Tumor",
-      "tissue_type": "Tumor"
-    },
-    {
-      "aliquot_id": "e72ddf81-6d30-4351-be24-d1dd72fe28cf",
-      "analyte_type": "Protein",
-      "case_id": "a0ddc659-d393-4469-b1d1-d61dcdbc5b06",
-      "file_id": "a0a9b78d-82ea-4043-a822-75c6e20e743c",
-      "sample_id": "d960c269-ec9c-459c-9169-89a92e3675da",
-      "sample_submitter_id": "C3L-03348-04",
-      "sample_type": "Solid Tissue Normal",
-      "tissue_type": "Normal"
-    },
-    {
-      "aliquot_id": "bf0d06dd-d8d9-4932-9bd9-1ec22fb8fcb9",
-      "analyte_type": "Protein",
-      "case_id": "a0ddc659-d393-4469-b1d1-d61dcdbc5b06",
-      "file_id": "9c036500-adbe-4383-85c0-9c7e8ea8760d",
-      "sample_id": "d960c269-ec9c-459c-9169-89a92e3675da",
-      "sample_submitter_id": "C3L-03348-04",
-      "sample_type": "Solid Tissue Normal",
-      "tissue_type": "Normal"
-    },
-    {
-      "aliquot_id": "f144868c-4554-4f35-816e-ae23666452c3",
-      "analyte_type": "Protein",
-      "case_id": "6fd23aa1-ca9f-4299-9eeb-81683ee4acc3",
-      "file_id": "cb7f34d5-5b43-40e8-b497-f524fae36d17",
-      "sample_id": "e4ae5991-4be9-411b-b8a9-555ce5e9067b",
-      "sample_submitter_id": "C3N-02930-01",
-      "sample_type": "Primary Tumor",
-      "tissue_type": "Tumor"
-    },
-    {
-      "aliquot_id": "7a4e9207-bacd-41dd-9589-b2d95e21e813",
-      "analyte_type": "Protein",
-      "case_id": "6fd23aa1-ca9f-4299-9eeb-81683ee4acc3",
-      "file_id": "b41e38c8-3548-4ab3-b3cf-78ff882f85f5",
-      "sample_id": "e4ae5991-4be9-411b-b8a9-555ce5e9067b",
-      "sample_submitter_id": "C3N-02930-01",
-      "sample_type": "Primary Tumor",
-      "tissue_type": "Tumor"
-    },
-    {
-      "aliquot_id": "098afb30-766b-4411-9be6-cbbd5c8d9cff",
-      "analyte_type": "Protein",
-      "case_id": "6fd23aa1-ca9f-4299-9eeb-81683ee4acc3",
-      "file_id": "40bfb783-2bfb-43ba-a405-83147a463a29",
-      "sample_id": "e4ae5991-4be9-411b-b8a9-555ce5e9067b",
-      "sample_submitter_id": "C3N-02930-01",
-      "sample_type": "Primary Tumor",
-      "tissue_type": "Tumor"
-    },
-    {
-      "aliquot_id": "9142c94a-5c71-4bba-b15a-f64093efc537",
-      "analyte_type": "Protein",
-      "case_id": "6fd23aa1-ca9f-4299-9eeb-81683ee4acc3",
-      "file_id": "ac09cff2-3ff9-46ae-9f9e-41ef22db71a8",
-      "sample_id": "dccfab3b-90a9-42ad-97e8-28e4860d1e5b",
-      "sample_submitter_id": "C3N-02930-03",
-      "sample_type": "Solid Tissue Normal",
-      "tissue_type": "Normal"
     },
     {
       "aliquot_id": "57b09803-6c35-4de8-a8c4-5b812f8ce33e",
       "analyte_type": "Protein",
       "case_id": "6fd23aa1-ca9f-4299-9eeb-81683ee4acc3",
-      "file_id": "b7f7aba1-ecee-495a-ad72-38085aca0fcb",
+      "file_ids": [
+        "b7f7aba1-ecee-495a-ad72-38085aca0fcb"
+      ],
       "sample_id": "dccfab3b-90a9-42ad-97e8-28e4860d1e5b",
       "sample_submitter_id": "C3N-02930-03",
       "sample_type": "Solid Tissue Normal",
       "tissue_type": "Normal"
     },
     {
-      "aliquot_id": "1d842e6d-9a81-492f-bbad-a5e654f999a7",
+      "aliquot_id": "580b8e18-bd2b-4ec7-9e19-b5cfdb3a0da4",
       "analyte_type": "Protein",
-      "case_id": "6fd23aa1-ca9f-4299-9eeb-81683ee4acc3",
-      "file_id": "7a4dfc01-2d1a-4947-9028-5fbab0b6273f",
-      "sample_id": "dccfab3b-90a9-42ad-97e8-28e4860d1e5b",
-      "sample_submitter_id": "C3N-02930-03",
+      "case_id": "0eddd8e2-c532-4f08-9b4e-3a6d86befcb2",
+      "file_ids": [
+        "cc44abcc-1554-4309-99ae-f8b8c1f2c792"
+      ],
+      "sample_id": "da67f12b-d7e4-485d-a774-7a197253702a",
+      "sample_submitter_id": "C3N-02996-04",
       "sample_type": "Solid Tissue Normal",
       "tissue_type": "Normal"
     },
     {
-      "aliquot_id": "863081b8-98d3-4669-a9d3-50b15a62b7ca",
+      "aliquot_id": "61d4f39e-1936-461c-a422-98e60220ba6f",
       "analyte_type": "Protein",
-      "case_id": "9ac78a5e-393f-48ba-9385-cad0175801e5",
-      "file_id": "2c242bcf-fe47-4743-a2ab-bb0507ab4ce5",
-      "sample_id": "83a87fbf-6b9c-45e4-a334-406e25ab40a9",
-      "sample_submitter_id": "C3N-01385-02",
-      "sample_type": "Primary Tumor",
-      "tissue_type": "Tumor"
+      "case_id": "18fa5b39-8d49-47f4-adb1-c8295bf67032",
+      "file_ids": [
+        "7c9fa3cf-46ed-46f6-9976-bac3f020f8ff"
+      ],
+      "sample_id": "6eb425d9-ec53-479e-9118-d165b4d3121e",
+      "sample_submitter_id": "C3L-03622-02",
+      "sample_type": "Not Reported",
+      "tissue_type": "Not Reported"
     },
     {
-      "aliquot_id": "2c37bde6-8be9-4cc3-8dca-89b5a505d0aa",
+      "aliquot_id": "62e5785c-2665-4423-a86c-1bb92e67efa9",
       "analyte_type": "Protein",
-      "case_id": "9ac78a5e-393f-48ba-9385-cad0175801e5",
-      "file_id": "5e8a7437-6b21-4888-80ed-6214dbdced61",
-      "sample_id": "83a87fbf-6b9c-45e4-a334-406e25ab40a9",
-      "sample_submitter_id": "C3N-01385-02",
-      "sample_type": "Primary Tumor",
-      "tissue_type": "Tumor"
-    },
-    {
-      "aliquot_id": "139203ac-6898-4260-a2eb-00d081bce214",
-      "analyte_type": "Protein",
-      "case_id": "9ac78a5e-393f-48ba-9385-cad0175801e5",
-      "file_id": "29f12455-7c98-4887-ad28-c228d34ba474",
-      "sample_id": "83a87fbf-6b9c-45e4-a334-406e25ab40a9",
-      "sample_submitter_id": "C3N-01385-02",
-      "sample_type": "Primary Tumor",
-      "tissue_type": "Tumor"
-    },
-    {
-      "aliquot_id": "ffa286bc-4074-4e6f-b668-83e47f9d6423",
-      "analyte_type": "Protein",
-      "case_id": "9ac78a5e-393f-48ba-9385-cad0175801e5",
-      "file_id": "ecdd213f-df71-4857-97b6-72ce578bf6f0",
-      "sample_id": "32a7a213-eaa8-4820-acef-658a117d45c1",
-      "sample_submitter_id": "C3N-01385-05",
-      "sample_type": "Solid Tissue Normal",
-      "tissue_type": "Normal"
-    },
-    {
-      "aliquot_id": "f5c14832-aebc-4be4-8428-dd7ce725aee3",
-      "analyte_type": "Protein",
-      "case_id": "9ac78a5e-393f-48ba-9385-cad0175801e5",
-      "file_id": "91a7675a-6c5b-4f67-bfd7-a859d6a07b90",
-      "sample_id": "32a7a213-eaa8-4820-acef-658a117d45c1",
-      "sample_submitter_id": "C3N-01385-05",
+      "case_id": "1862470d-0aca-47f8-9ddd-371db1a98c70",
+      "file_ids": [
+        "88a18adc-7dd3-432d-9eeb-49fa1be6f579"
+      ],
+      "sample_id": "270b8eca-e503-4ce2-acb0-2d2eeb30fda4",
+      "sample_submitter_id": "C3N-01898-05",
       "sample_type": "Solid Tissue Normal",
       "tissue_type": "Normal"
     },
@@ -2038,7 +2126,621 @@
       "aliquot_id": "64b18f4b-fd4c-4fd5-add6-5631ed495ecd",
       "analyte_type": "Protein",
       "case_id": "9ac78a5e-393f-48ba-9385-cad0175801e5",
-      "file_id": "1d26eac7-d61b-48c4-8c33-f9cc7bd71cac",
+      "file_ids": [
+        "1d26eac7-d61b-48c4-8c33-f9cc7bd71cac"
+      ],
+      "sample_id": "32a7a213-eaa8-4820-acef-658a117d45c1",
+      "sample_submitter_id": "C3N-01385-05",
+      "sample_type": "Solid Tissue Normal",
+      "tissue_type": "Normal"
+    },
+    {
+      "aliquot_id": "6543ccf8-b6b5-4883-ba20-1082b09bcd25",
+      "analyte_type": "Protein",
+      "case_id": "0eddd8e2-c532-4f08-9b4e-3a6d86befcb2",
+      "file_ids": [
+        "501aadcb-341e-4ac0-93c1-9cf55ac1ed05"
+      ],
+      "sample_id": "f97077fe-78ba-49b2-ba7b-320d0e2323fc",
+      "sample_submitter_id": "C3N-02996-02",
+      "sample_type": "Primary Tumor",
+      "tissue_type": "Tumor"
+    },
+    {
+      "aliquot_id": "7018ee06-c0b4-4904-aec7-53b10aead2c4",
+      "analyte_type": "Protein",
+      "case_id": "421c43ec-df99-4e7b-830a-bad7835a4a78",
+      "file_ids": [
+        "83e0ae7c-6bf5-444a-93b2-33ad1bc03eb7"
+      ],
+      "sample_id": "3e6ad475-0fb4-4340-89c2-d6e2a2e412cf",
+      "sample_submitter_id": "C3L-02888-02",
+      "sample_type": "Primary Tumor",
+      "tissue_type": "Tumor"
+    },
+    {
+      "aliquot_id": "709d24d5-21be-4faf-8682-74c7c6523272",
+      "analyte_type": "Protein",
+      "case_id": "7bfcbba7-db38-48ef-8c0e-d60ce4e756ab",
+      "file_ids": [
+        "c1081064-d6c6-40af-9468-7f083d97f894"
+      ],
+      "sample_id": "1c4a6f83-0521-4a15-b691-a646f21b0a46",
+      "sample_submitter_id": "C3N-02754-01",
+      "sample_type": "Primary Tumor",
+      "tissue_type": "Tumor"
+    },
+    {
+      "aliquot_id": "7a1294d5-6d91-4f11-a139-23e9a0a9e44f",
+      "analyte_type": "Protein",
+      "case_id": "760cd860-16e3-47a5-9210-aad75d5b8c8c",
+      "file_ids": [
+        "d93b22b2-8da9-4aa7-8b73-de9155d86dd1"
+      ],
+      "sample_id": "b65cc58e-075b-426a-bbd4-30b205bfb612",
+      "sample_submitter_id": "C3N-01899-03",
+      "sample_type": "Solid Tissue Normal",
+      "tissue_type": "Normal"
+    },
+    {
+      "aliquot_id": "7a4e9207-bacd-41dd-9589-b2d95e21e813",
+      "analyte_type": "Protein",
+      "case_id": "6fd23aa1-ca9f-4299-9eeb-81683ee4acc3",
+      "file_ids": [
+        "b41e38c8-3548-4ab3-b3cf-78ff882f85f5"
+      ],
+      "sample_id": "e4ae5991-4be9-411b-b8a9-555ce5e9067b",
+      "sample_submitter_id": "C3N-02930-01",
+      "sample_type": "Primary Tumor",
+      "tissue_type": "Tumor"
+    },
+    {
+      "aliquot_id": "842ed394-aac6-4219-b158-df81253844c0",
+      "analyte_type": "Protein",
+      "case_id": "8e6654ba-0c12-4244-83f1-a6420f2163e8",
+      "file_ids": [
+        "fa0f46df-0d27-49fe-a0b6-94a8249b26b0"
+      ],
+      "sample_id": "09c001b2-2590-4395-a7e4-8e59a076b1e0",
+      "sample_submitter_id": "C3L-03629-02",
+      "sample_type": "Primary Tumor",
+      "tissue_type": "Tumor"
+    },
+    {
+      "aliquot_id": "863081b8-98d3-4669-a9d3-50b15a62b7ca",
+      "analyte_type": "Protein",
+      "case_id": "9ac78a5e-393f-48ba-9385-cad0175801e5",
+      "file_ids": [
+        "2c242bcf-fe47-4743-a2ab-bb0507ab4ce5"
+      ],
+      "sample_id": "83a87fbf-6b9c-45e4-a334-406e25ab40a9",
+      "sample_submitter_id": "C3N-01385-02",
+      "sample_type": "Primary Tumor",
+      "tissue_type": "Tumor"
+    },
+    {
+      "aliquot_id": "87a24acb-9874-4593-b2df-97b851f7367a",
+      "analyte_type": "Protein",
+      "case_id": "760cd860-16e3-47a5-9210-aad75d5b8c8c",
+      "file_ids": [
+        "b0431b92-8cbf-4819-a8c2-384af8bcee2c"
+      ],
+      "sample_id": "b65cc58e-075b-426a-bbd4-30b205bfb612",
+      "sample_submitter_id": "C3N-01899-03",
+      "sample_type": "Solid Tissue Normal",
+      "tissue_type": "Normal"
+    },
+    {
+      "aliquot_id": "8fa569bd-fd59-433d-bbfe-5d1887ea4200",
+      "analyte_type": "Protein",
+      "case_id": "63b89ae5-e930-4840-b062-1f1ff1365d95",
+      "file_ids": [
+        "729eeb7b-ef63-4a2c-b1c9-1afe17c33789"
+      ],
+      "sample_id": "b338662a-3a88-48e0-8f6a-97afea65f7c5",
+      "sample_submitter_id": "C3N-02594-04",
+      "sample_type": "Solid Tissue Normal",
+      "tissue_type": "Normal"
+    },
+    {
+      "aliquot_id": "9142c94a-5c71-4bba-b15a-f64093efc537",
+      "analyte_type": "Protein",
+      "case_id": "6fd23aa1-ca9f-4299-9eeb-81683ee4acc3",
+      "file_ids": [
+        "ac09cff2-3ff9-46ae-9f9e-41ef22db71a8"
+      ],
+      "sample_id": "dccfab3b-90a9-42ad-97e8-28e4860d1e5b",
+      "sample_submitter_id": "C3N-02930-03",
+      "sample_type": "Solid Tissue Normal",
+      "tissue_type": "Normal"
+    },
+    {
+      "aliquot_id": "9148d27d-06d0-420a-823b-2c534a1be20c",
+      "analyte_type": "Protein",
+      "case_id": "7bfcbba7-db38-48ef-8c0e-d60ce4e756ab",
+      "file_ids": [
+        "06c714b5-bf2f-49a9-8df2-a5236e1bec66"
+      ],
+      "sample_id": "8d01e8fc-a258-4c76-a066-b4ec303bf200",
+      "sample_submitter_id": "C3N-02754-03",
+      "sample_type": "Solid Tissue Normal",
+      "tissue_type": "Normal"
+    },
+    {
+      "aliquot_id": "961d7545-4542-4541-b4fc-b799cec4873f",
+      "analyte_type": "Protein",
+      "case_id": "ef1ba9c5-91da-48b7-ac49-0a8f00bfba64",
+      "file_ids": [
+        "2525e714-9b4b-4e65-b4a4-2f9e4b865c0e"
+      ],
+      "sample_id": "578272d9-59b0-447a-b91d-5f239c12718b",
+      "sample_submitter_id": "C3L-02956-01",
+      "sample_type": "Primary Tumor",
+      "tissue_type": "Tumor"
+    },
+    {
+      "aliquot_id": "9b4b6390-d501-4174-a9fc-b0f3ce5a6cc9",
+      "analyte_type": "Protein",
+      "case_id": "63b89ae5-e930-4840-b062-1f1ff1365d95",
+      "file_ids": [
+        "b409c7e5-72ce-4f7f-bef1-86c00dd0e8ee"
+      ],
+      "sample_id": "b338662a-3a88-48e0-8f6a-97afea65f7c5",
+      "sample_submitter_id": "C3N-02594-04",
+      "sample_type": "Solid Tissue Normal",
+      "tissue_type": "Normal"
+    },
+    {
+      "aliquot_id": "9c0d7911-7fb9-4ebd-b554-aa67f7d1de33",
+      "analyte_type": "Protein",
+      "case_id": "7b1fa6fd-6c33-4e14-b20a-048a7f5a836c",
+      "file_ids": [
+        "e5ea5f86-4e14-432f-a1bd-1e21807de873"
+      ],
+      "sample_id": "81c759dd-df19-4532-8fe5-544de13bc4b2",
+      "sample_submitter_id": "C3N-02696-02",
+      "sample_type": "Primary Tumor",
+      "tissue_type": "Tumor"
+    },
+    {
+      "aliquot_id": "9c295bff-21df-4d26-957c-aeb80ed6ca91",
+      "analyte_type": "Protein",
+      "case_id": "9a3d9daa-c653-46d1-8ba2-c066e3eb5ea8",
+      "file_ids": [
+        "17fe46ac-2fae-4024-b0bb-8c20ff481346"
+      ],
+      "sample_id": "ed43a104-ab28-4c00-ab03-dbf6c2761c9a",
+      "sample_submitter_id": "C3N-02765-02",
+      "sample_type": "Primary Tumor",
+      "tissue_type": "Tumor"
+    },
+    {
+      "aliquot_id": "9eadbb20-68eb-4254-8d50-48e4b625aeaa",
+      "analyte_type": "Protein",
+      "case_id": "a0ddc659-d393-4469-b1d1-d61dcdbc5b06",
+      "file_ids": [
+        "49a1e73e-4c5b-4db7-ba18-1457fa4a7115"
+      ],
+      "sample_id": "e871e4fe-98c0-4348-8517-494b9837205c",
+      "sample_submitter_id": "C3L-03348-03",
+      "sample_type": "Primary Tumor",
+      "tissue_type": "Tumor"
+    },
+    {
+      "aliquot_id": "9ffd1fd8-3f0a-4334-8556-16491c639077",
+      "analyte_type": "Protein",
+      "case_id": "63b89ae5-e930-4840-b062-1f1ff1365d95",
+      "file_ids": [
+        "ebc4457f-ab03-4345-b5c0-7d22e863dc72"
+      ],
+      "sample_id": "354fb48f-886f-4ede-90d4-ec220410cb1a",
+      "sample_submitter_id": "C3N-02594-01",
+      "sample_type": "Not Reported",
+      "tissue_type": "Not Reported"
+    },
+    {
+      "aliquot_id": "a0598317-6435-48af-9e36-b2fcf30ddf9f",
+      "analyte_type": "Protein",
+      "case_id": "7bfcbba7-db38-48ef-8c0e-d60ce4e756ab",
+      "file_ids": [
+        "9c14f02b-893e-4ba8-a1a9-1d3751a69e4a"
+      ],
+      "sample_id": "8d01e8fc-a258-4c76-a066-b4ec303bf200",
+      "sample_submitter_id": "C3N-02754-03",
+      "sample_type": "Solid Tissue Normal",
+      "tissue_type": "Normal"
+    },
+    {
+      "aliquot_id": "a217485d-8c90-4895-b491-f22f7871f814",
+      "analyte_type": "Protein",
+      "case_id": "9a3d9daa-c653-46d1-8ba2-c066e3eb5ea8",
+      "file_ids": [
+        "c2d825f8-da2d-49ab-a460-def8a60ea2f6"
+      ],
+      "sample_id": "ed43a104-ab28-4c00-ab03-dbf6c2761c9a",
+      "sample_submitter_id": "C3N-02765-02",
+      "sample_type": "Primary Tumor",
+      "tissue_type": "Tumor"
+    },
+    {
+      "aliquot_id": "a33914a8-5c1c-4c6f-8b19-004c07fc0b3c",
+      "analyte_type": "Protein",
+      "case_id": "8e6654ba-0c12-4244-83f1-a6420f2163e8",
+      "file_ids": [
+        "84a246bd-28c3-45ed-ad0b-958a6c72b173"
+      ],
+      "sample_id": "09c001b2-2590-4395-a7e4-8e59a076b1e0",
+      "sample_submitter_id": "C3L-03629-02",
+      "sample_type": "Primary Tumor",
+      "tissue_type": "Tumor"
+    },
+    {
+      "aliquot_id": "ac70cdc7-c606-4b41-8a17-88646b599a1c",
+      "analyte_type": "Protein",
+      "case_id": "7bfcbba7-db38-48ef-8c0e-d60ce4e756ab",
+      "file_ids": [
+        "95041635-8d46-43b7-8a8a-f52ff7f3e738"
+      ],
+      "sample_id": "1c4a6f83-0521-4a15-b691-a646f21b0a46",
+      "sample_submitter_id": "C3N-02754-01",
+      "sample_type": "Primary Tumor",
+      "tissue_type": "Tumor"
+    },
+    {
+      "aliquot_id": "afc344db-371e-4681-840c-17d7ef81985f",
+      "analyte_type": "Protein",
+      "case_id": "421c43ec-df99-4e7b-830a-bad7835a4a78",
+      "file_ids": [
+        "2ca6ca47-9aa1-473f-ad95-575e03d5c038"
+      ],
+      "sample_id": "86531313-b3f8-48c1-a225-d88a534b1e23",
+      "sample_submitter_id": "C3L-02888-04",
+      "sample_type": "Solid Tissue Normal",
+      "tissue_type": "Normal"
+    },
+    {
+      "aliquot_id": "b1bdb690-ed01-4427-8c48-50bdc967cb0d",
+      "analyte_type": "Protein",
+      "case_id": "1862470d-0aca-47f8-9ddd-371db1a98c70",
+      "file_ids": [
+        "75117835-b635-4fe2-ae04-57102059a21b"
+      ],
+      "sample_id": "270b8eca-e503-4ce2-acb0-2d2eeb30fda4",
+      "sample_submitter_id": "C3N-01898-05",
+      "sample_type": "Solid Tissue Normal",
+      "tissue_type": "Normal"
+    },
+    {
+      "aliquot_id": "b1f6406b-b1b1-4e6c-84f0-d4dec6b13d87",
+      "analyte_type": "Protein",
+      "case_id": "ef1ba9c5-91da-48b7-ac49-0a8f00bfba64",
+      "file_ids": [
+        "13f1ed16-5236-402c-8b6f-6e07eca98482"
+      ],
+      "sample_id": "5e16c745-5fec-462b-bb77-35ef6a973a5b",
+      "sample_submitter_id": "C3L-02956-06",
+      "sample_type": "Solid Tissue Normal",
+      "tissue_type": "Normal"
+    },
+    {
+      "aliquot_id": "b503609c-6895-4b26-90fa-92fdc1a39bf3",
+      "analyte_type": "Protein",
+      "case_id": "18fa5b39-8d49-47f4-adb1-c8295bf67032",
+      "file_ids": [
+        "da7884de-dfd2-4915-aa61-4d19b5d7887f"
+      ],
+      "sample_id": "6eb425d9-ec53-479e-9118-d165b4d3121e",
+      "sample_submitter_id": "C3L-03622-02",
+      "sample_type": "Not Reported",
+      "tissue_type": "Not Reported"
+    },
+    {
+      "aliquot_id": "b74a213b-c64d-4ff1-ad7d-205f9e207d37",
+      "analyte_type": "Protein",
+      "case_id": "0eddd8e2-c532-4f08-9b4e-3a6d86befcb2",
+      "file_ids": [
+        "29346016-9590-4ea0-be4f-ab8f829356ed"
+      ],
+      "sample_id": "f97077fe-78ba-49b2-ba7b-320d0e2323fc",
+      "sample_submitter_id": "C3N-02996-02",
+      "sample_type": "Primary Tumor",
+      "tissue_type": "Tumor"
+    },
+    {
+      "aliquot_id": "b74a74eb-8b81-4a0d-90c0-1e9b4680e168",
+      "analyte_type": "Protein",
+      "case_id": "8e6654ba-0c12-4244-83f1-a6420f2163e8",
+      "file_ids": [
+        "f50c4fcf-1021-415e-9dad-f5560abeed4d"
+      ],
+      "sample_id": "09c001b2-2590-4395-a7e4-8e59a076b1e0",
+      "sample_submitter_id": "C3L-03629-02",
+      "sample_type": "Primary Tumor",
+      "tissue_type": "Tumor"
+    },
+    {
+      "aliquot_id": "be6b9f72-e603-402a-884f-8238093c092e",
+      "analyte_type": "Protein",
+      "case_id": "1862470d-0aca-47f8-9ddd-371db1a98c70",
+      "file_ids": [
+        "824ad83b-0478-4fe7-881b-c4f8ba59b832"
+      ],
+      "sample_id": "4c4703c3-38f0-49d4-81ca-8c4bd294ca9f",
+      "sample_submitter_id": "C3N-01898-04",
+      "sample_type": "Primary Tumor",
+      "tissue_type": "Tumor"
+    },
+    {
+      "aliquot_id": "bf0d06dd-d8d9-4932-9bd9-1ec22fb8fcb9",
+      "analyte_type": "Protein",
+      "case_id": "a0ddc659-d393-4469-b1d1-d61dcdbc5b06",
+      "file_ids": [
+        "9c036500-adbe-4383-85c0-9c7e8ea8760d"
+      ],
+      "sample_id": "d960c269-ec9c-459c-9169-89a92e3675da",
+      "sample_submitter_id": "C3L-03348-04",
+      "sample_type": "Solid Tissue Normal",
+      "tissue_type": "Normal"
+    },
+    {
+      "aliquot_id": "c07a6f26-c51b-47b1-bf68-4d15187b1712",
+      "analyte_type": "Protein",
+      "case_id": "63b89ae5-e930-4840-b062-1f1ff1365d95",
+      "file_ids": [
+        "58eb732a-b1a2-4322-828e-6e86c4e3bf22"
+      ],
+      "sample_id": "354fb48f-886f-4ede-90d4-ec220410cb1a",
+      "sample_submitter_id": "C3N-02594-01",
+      "sample_type": "Not Reported",
+      "tissue_type": "Not Reported"
+    },
+    {
+      "aliquot_id": "c489b915-0a1f-432a-9803-4322d06af89e",
+      "analyte_type": "Protein",
+      "case_id": "63b89ae5-e930-4840-b062-1f1ff1365d95",
+      "file_ids": [
+        "a3e077d2-aa81-42ba-b0a9-858c3b4856dd"
+      ],
+      "sample_id": "b338662a-3a88-48e0-8f6a-97afea65f7c5",
+      "sample_submitter_id": "C3N-02594-04",
+      "sample_type": "Solid Tissue Normal",
+      "tissue_type": "Normal"
+    },
+    {
+      "aliquot_id": "c56b5847-a07e-4e25-96c8-835dacb6ae23",
+      "analyte_type": "Protein",
+      "case_id": "ef1ba9c5-91da-48b7-ac49-0a8f00bfba64",
+      "file_ids": [
+        "6fb35d1d-1353-41a6-b421-0305846fc9a0"
+      ],
+      "sample_id": "5e16c745-5fec-462b-bb77-35ef6a973a5b",
+      "sample_submitter_id": "C3L-02956-06",
+      "sample_type": "Solid Tissue Normal",
+      "tissue_type": "Normal"
+    },
+    {
+      "aliquot_id": "c7687cd6-9999-4ef4-903e-52a151355c70",
+      "analyte_type": "Protein",
+      "case_id": "7b1fa6fd-6c33-4e14-b20a-048a7f5a836c",
+      "file_ids": [
+        "aaaebe46-0b55-49c7-ba2f-37603833c8cd"
+      ],
+      "sample_id": "f534fd85-394a-4dea-95f4-9ba3fb54ffda",
+      "sample_submitter_id": "C3N-02696-05",
+      "sample_type": "Solid Tissue Normal",
+      "tissue_type": "Normal"
+    },
+    {
+      "aliquot_id": "c79f8af2-47af-4503-98a5-a79695a146e4",
+      "analyte_type": "Protein",
+      "case_id": "9a3d9daa-c653-46d1-8ba2-c066e3eb5ea8",
+      "file_ids": [
+        "caa21996-1b85-4136-8b94-88843a1e760b"
+      ],
+      "sample_id": "ed43a104-ab28-4c00-ab03-dbf6c2761c9a",
+      "sample_submitter_id": "C3N-02765-02",
+      "sample_type": "Primary Tumor",
+      "tissue_type": "Tumor"
+    },
+    {
+      "aliquot_id": "caa7119e-130f-4701-8b78-e6e8d7fc6170",
+      "analyte_type": "Protein",
+      "case_id": "421c43ec-df99-4e7b-830a-bad7835a4a78",
+      "file_ids": [
+        "89e11118-6f0f-4652-a038-f6084deb1a88"
+      ],
+      "sample_id": "86531313-b3f8-48c1-a225-d88a534b1e23",
+      "sample_submitter_id": "C3L-02888-04",
+      "sample_type": "Solid Tissue Normal",
+      "tissue_type": "Normal"
+    },
+    {
+      "aliquot_id": "cef94ef8-e446-422b-9d1f-b0c65b8b10a5",
+      "analyte_type": "Protein",
+      "case_id": "760cd860-16e3-47a5-9210-aad75d5b8c8c",
+      "file_ids": [
+        "67f5302c-1f5b-48ff-a5b0-31b536e419dd"
+      ],
+      "sample_id": "b65cc58e-075b-426a-bbd4-30b205bfb612",
+      "sample_submitter_id": "C3N-01899-03",
+      "sample_type": "Solid Tissue Normal",
+      "tissue_type": "Normal"
+    },
+    {
+      "aliquot_id": "d205644c-64c9-4a9f-936c-49ce9d222f94",
+      "analyte_type": "Protein",
+      "case_id": "421c43ec-df99-4e7b-830a-bad7835a4a78",
+      "file_ids": [
+        "d34ab597-2b79-4327-9f21-2e1f6d7757f8"
+      ],
+      "sample_id": "86531313-b3f8-48c1-a225-d88a534b1e23",
+      "sample_submitter_id": "C3L-02888-04",
+      "sample_type": "Solid Tissue Normal",
+      "tissue_type": "Normal"
+    },
+    {
+      "aliquot_id": "d961b56e-c819-45e5-92f6-22bab25335c7",
+      "analyte_type": "Protein",
+      "case_id": "9a3d9daa-c653-46d1-8ba2-c066e3eb5ea8",
+      "file_ids": [
+        "1b369e01-f30b-4e57-8daa-684ee42450e2"
+      ],
+      "sample_id": "8f1cd1c5-6770-4503-90fb-12cba99a844b",
+      "sample_submitter_id": "C3N-02765-03",
+      "sample_type": "Solid Tissue Normal",
+      "tissue_type": "Normal"
+    },
+    {
+      "aliquot_id": "da54b458-26b3-44a4-8d6a-f30eb1f182f6",
+      "analyte_type": "Protein",
+      "case_id": "d176f43a-527a-4e4f-bcba-8097209f8a61",
+      "file_ids": [
+        "52b063f6-65be-468e-9b2b-459d5d97dc55"
+      ],
+      "sample_id": "f7a1906a-c68a-4aa5-9073-e8ce9037fbb4",
+      "sample_submitter_id": "C3L-01039-03",
+      "sample_type": "Primary Tumor",
+      "tissue_type": "Tumor"
+    },
+    {
+      "aliquot_id": "defc5b3b-c4e1-4c8e-b605-f4647ef418ed",
+      "analyte_type": "Protein",
+      "case_id": "421c43ec-df99-4e7b-830a-bad7835a4a78",
+      "file_ids": [
+        "786db455-11a8-41b3-9fe4-6fdf11f26d93"
+      ],
+      "sample_id": "3e6ad475-0fb4-4340-89c2-d6e2a2e412cf",
+      "sample_submitter_id": "C3L-02888-02",
+      "sample_type": "Primary Tumor",
+      "tissue_type": "Tumor"
+    },
+    {
+      "aliquot_id": "e16cc55f-92a0-482f-91f6-5af495b66825",
+      "analyte_type": "Protein",
+      "case_id": "9a3d9daa-c653-46d1-8ba2-c066e3eb5ea8",
+      "file_ids": [
+        "3865304c-e1a3-4d59-a7d8-39d0c8c23bb4"
+      ],
+      "sample_id": "ed43a104-ab28-4c00-ab03-dbf6c2761c9a",
+      "sample_submitter_id": "C3N-02765-02",
+      "sample_type": "Primary Tumor",
+      "tissue_type": "Tumor"
+    },
+    {
+      "aliquot_id": "e72ddf81-6d30-4351-be24-d1dd72fe28cf",
+      "analyte_type": "Protein",
+      "case_id": "a0ddc659-d393-4469-b1d1-d61dcdbc5b06",
+      "file_ids": [
+        "a0a9b78d-82ea-4043-a822-75c6e20e743c"
+      ],
+      "sample_id": "d960c269-ec9c-459c-9169-89a92e3675da",
+      "sample_submitter_id": "C3L-03348-04",
+      "sample_type": "Solid Tissue Normal",
+      "tissue_type": "Normal"
+    },
+    {
+      "aliquot_id": "ec187d67-b77c-4fe7-9cba-cb549e4491fc",
+      "analyte_type": "Protein",
+      "case_id": "760cd860-16e3-47a5-9210-aad75d5b8c8c",
+      "file_ids": [
+        "14de8a47-dd8b-4491-86a6-37d2e7a20d2e"
+      ],
+      "sample_id": "10296614-6678-46dc-8190-022f7bff500d",
+      "sample_submitter_id": "C3N-01899-02",
+      "sample_type": "Primary Tumor",
+      "tissue_type": "Tumor"
+    },
+    {
+      "aliquot_id": "eef2eb97-614c-4f4b-9ee3-9d6ab1c19b01",
+      "analyte_type": "Protein",
+      "case_id": "7bfcbba7-db38-48ef-8c0e-d60ce4e756ab",
+      "file_ids": [
+        "7859c372-b3f9-4c18-8db0-b58fec694ad2"
+      ],
+      "sample_id": "8d01e8fc-a258-4c76-a066-b4ec303bf200",
+      "sample_submitter_id": "C3N-02754-03",
+      "sample_type": "Solid Tissue Normal",
+      "tissue_type": "Normal"
+    },
+    {
+      "aliquot_id": "f0e36cdd-954c-4973-be8e-de31d1465205",
+      "analyte_type": "Protein",
+      "case_id": "760cd860-16e3-47a5-9210-aad75d5b8c8c",
+      "file_ids": [
+        "2cbdb74d-599c-4d82-845f-42317993cdbc"
+      ],
+      "sample_id": "10296614-6678-46dc-8190-022f7bff500d",
+      "sample_submitter_id": "C3N-01899-02",
+      "sample_type": "Primary Tumor",
+      "tissue_type": "Tumor"
+    },
+    {
+      "aliquot_id": "f144868c-4554-4f35-816e-ae23666452c3",
+      "analyte_type": "Protein",
+      "case_id": "6fd23aa1-ca9f-4299-9eeb-81683ee4acc3",
+      "file_ids": [
+        "cb7f34d5-5b43-40e8-b497-f524fae36d17"
+      ],
+      "sample_id": "e4ae5991-4be9-411b-b8a9-555ce5e9067b",
+      "sample_submitter_id": "C3N-02930-01",
+      "sample_type": "Primary Tumor",
+      "tissue_type": "Tumor"
+    },
+    {
+      "aliquot_id": "f2d79c98-ce1c-4fe7-87ba-be4da0ca967d",
+      "analyte_type": "Protein",
+      "case_id": "1862470d-0aca-47f8-9ddd-371db1a98c70",
+      "file_ids": [
+        "7b2b8034-e0de-48df-8d66-4132a27c0f1d"
+      ],
+      "sample_id": "4c4703c3-38f0-49d4-81ca-8c4bd294ca9f",
+      "sample_submitter_id": "C3N-01898-04",
+      "sample_type": "Primary Tumor",
+      "tissue_type": "Tumor"
+    },
+    {
+      "aliquot_id": "f5c14832-aebc-4be4-8428-dd7ce725aee3",
+      "analyte_type": "Protein",
+      "case_id": "9ac78a5e-393f-48ba-9385-cad0175801e5",
+      "file_ids": [
+        "91a7675a-6c5b-4f67-bfd7-a859d6a07b90"
+      ],
+      "sample_id": "32a7a213-eaa8-4820-acef-658a117d45c1",
+      "sample_submitter_id": "C3N-01385-05",
+      "sample_type": "Solid Tissue Normal",
+      "tissue_type": "Normal"
+    },
+    {
+      "aliquot_id": "fa899faa-c8f7-4214-964f-3db1b0a33970",
+      "analyte_type": "Protein",
+      "case_id": "7b1fa6fd-6c33-4e14-b20a-048a7f5a836c",
+      "file_ids": [
+        "89fb6a69-8eb2-494b-85d0-604f38520608"
+      ],
+      "sample_id": "f534fd85-394a-4dea-95f4-9ba3fb54ffda",
+      "sample_submitter_id": "C3N-02696-05",
+      "sample_type": "Solid Tissue Normal",
+      "tissue_type": "Normal"
+    },
+    {
+      "aliquot_id": "fe3e1176-1cce-4384-8839-51478ef45e6d",
+      "analyte_type": "Protein",
+      "case_id": "421c43ec-df99-4e7b-830a-bad7835a4a78",
+      "file_ids": [
+        "a513a764-c1d1-4330-a019-e075e4416700"
+      ],
+      "sample_id": "3e6ad475-0fb4-4340-89c2-d6e2a2e412cf",
+      "sample_submitter_id": "C3L-02888-02",
+      "sample_type": "Primary Tumor",
+      "tissue_type": "Tumor"
+    },
+    {
+      "aliquot_id": "ffa286bc-4074-4e6f-b668-83e47f9d6423",
+      "analyte_type": "Protein",
+      "case_id": "9ac78a5e-393f-48ba-9385-cad0175801e5",
+      "file_ids": [
+        "ecdd213f-df71-4857-97b6-72ce578bf6f0"
+      ],
       "sample_id": "32a7a213-eaa8-4820-acef-658a117d45c1",
       "sample_submitter_id": "C3N-01385-05",
       "sample_type": "Solid Tissue Normal",
