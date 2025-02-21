@@ -39,6 +39,7 @@ def get_server():
         except Exception as e:
             response = jsonify(f'Unexpected error occurred: {e}')
             response.status_code = 500
+            return response
 
     @app.route('/graphql/filesPerStudy', methods=['POST'])
     def graphql_files_per_study():
