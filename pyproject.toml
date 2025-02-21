@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = 'PDC_client'
 authors=[{name='Aaron Maurais', email='maurais@uw.edu'}]
-description = 'Tools to interact with the NCI Proteomic Data Commons (PDC) API'
+description = 'A CLI to interact with the NCI Proteomic Data Commons (PDC) API'
 readme = 'README.md'
 dynamic=['version']
 dependencies = [
