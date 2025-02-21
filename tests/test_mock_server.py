@@ -28,9 +28,9 @@ def data_list_to_dict(data_list, key):
 
 
 class TestGraphQLServerBase(unittest.TestCase):
-    TEST_PDC_STUDY_ID = 'PDC000504'
+    # TEST_PDC_STUDY_ID = 'PDC000504'
     # TEST_PDC_STUDY_ID = 'PDC000251'
-    # TEST_PDC_STUDY_ID = 'PDC000451'
+    TEST_PDC_STUDY_ID = 'PDC000451'
 
     @classmethod
     def setUpClass(cls):

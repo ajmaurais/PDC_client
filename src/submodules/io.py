@@ -1,19 +1,20 @@
-
 import sys
+import os
 import json
 from csv import DictReader
 from hashlib import md5
 import re
-# import requests
+import httpx
 
-from .api import FILE_METADATA_KEYS
+from .api import FILE_DATA_KEYS
+from .logger import LOGGER
 
 RAW_BASENAME_RE = re.compile(r'/([^/]+\.raw)')
-RAW_DIRNAME_RE = re.compile(r'cloudfront\.net\/(.*)\/([^/]+\.raw)')
 FILE_EXT_RE = re.compile(r'^([\w\-%& \\\/=\+]+)\.(.*)$')
 
 
-def normalize_fname(s):
+def normalize_fname(s: str) -> str:
+    ''' Convert non-alphanumeric characters to underscores.'''
     ret = s
     ret = re.sub('[^a-zA-Z_]+', ' ', ret)
     ret = re.sub(r'\s+', '_', ret)
@@ -35,18 +36,66 @@ def _write_row(itterable, ostream, sep='\t', quote=None):
     ostream.write('\n')
 
 
-def writeFileMetadata(data, ofname, format='json'):
+def flatten_metadata(study_metadata, files, aliquots, cases):
     '''
-    Write file metadata.
+    Flatten aliquot and case metadata into a single dict for each file.
 
     Parameters:
-        data (list): List of dictionaries representing the metadata for each file.
+        study_metadata (dict): The study metadata.
+        files (list): List of file metadata.
+        aliquots (list): List of aliquot metadata.
+        cases (list): List of case metadata.
+
+    Returns:
+        data (list): List of dictionaries with the flattened metadata for each file.
+    '''
+
+    if any(len(a['file_ids']) != 1 for a in aliquots):
+        raise ValueError('Cannot flatten aliquots with more than 1 file_id.')
+
+    ret = []
+    for file in files:
+        ret.append(file)
+        ret[-1]['experiment_type'] = study_metadata['experiment_type']
+        ret[-1]['analytical_fraction'] = study_metadata['analytical_fraction']
+
+        # add aliquot metadata
+        file_id = file['file_id']
+        aliquot_data = next((a for a in aliquots if a['file_ids'][0] == file_id), None)
+        if aliquot_data is None:
+            raise ValueError(f'No aliquot data found for file_id: {file_id}')
+        for k, v in aliquot_data.items():
+            if k != 'file_ids':
+                ret[-1][k] = v
+
+        # add case metadata
+        case_data = next((c for c in cases if c['case_id'] == aliquot_data['case_id']), None)
+        if case_data is None:
+            raise ValueError(f'No case data found for file_id: {file_id}')
+        for k, v in case_data.items():
+            ret[-1][k] = v
+
+    return ret
+
+
+def write_metadata_file(data: dict|list, ofname: str, format: str='json'):
+    '''
+    Write metadata file.
+
+    Parameters:
+        data (dict|list): The metadata to write.
+            If a dict, the metadata is written as a single json object.
         ofname (str): Output file name.
         format (str): Output file format. One of ["json", "tsv", "str"]
 
     Raises:
         ValueError: If unknown output file format.
     '''
+
+    if isinstance(data, dict):
+        with open(ofname, 'w', encoding='utf-8') as outF:
+            json.dump(data, outF, indent=2)
+        return
 
     # make sure all the keys are the same
     keys = data[0].keys()
@@ -56,13 +105,13 @@ def writeFileMetadata(data, ofname, format='json'):
 
     if format in ('json', 'str'):
         if format == 'json':
-            with open(ofname, 'w') as outF:
+            with open(ofname, 'w', encoding='utf-8') as outF:
                 json.dump(data, outF)
         else:
-            print(json.dumps(data, indent = 2))
+            print(json.dumps(data, indent=2))
 
     elif format == 'tsv':
-        with open(ofname, 'w') as outF:
+        with open(ofname, 'w', encoding='utf-8') as outF:
             _write_row(keys, outF, sep='\t')
             for file in data:
                 _write_row([file[key] for key in keys], outF, sep='\t')
@@ -80,7 +129,7 @@ def readFileMetadata(fp, format):
 
 def writeSkylineAnnotations(data, ofname):
 
-    file_annotations = [key for key in data[0].keys() if key not in FILE_METADATA_KEYS]
+    file_annotations = [key for key in data[0].keys() if key not in FILE_DATA_KEYS]
 
     # make csv headers
     headers = ['ElementLocator']
@@ -103,7 +152,7 @@ def md5_sum(fname):
     return file_hash.hexdigest()
 
 
-def fileBasename(url):
+def file_basename(url):
     '''
     Attempt to extract raw file basename from url.
 
@@ -118,26 +167,7 @@ def fileBasename(url):
     return None if not match else match.group(1)
 
 
-def splitRawPath(url):
-    '''
-    Attempt to extract raw file path, dirname, and basename from url.
-
-    Parameters:
-        url (str): The full url.
-
-    Returns:
-        dirname (str): The raw file directory name
-        basename (str): The file basename
-    '''
-
-    match = RAW_DIRNAME_RE.search(url)
-    if match:
-        return match.groups()
-    else:
-        return None
-
-
-def downloadFile(url, ofname, expected_md5=None, nRetrys=2):
+def download_file(url, ofname, expected_md5=None, expected_size=None, n_retrys=2):
     '''
     Download a single file.
 
@@ -148,32 +178,39 @@ def downloadFile(url, ofname, expected_md5=None, nRetrys=2):
         url (str): The file url.
         ofname (str): The name of the file to write.
         expected_md5 (str): Expected md5 sum. None to skip checksum.
-        nRetrys (int): defaults to 5.
+        expected_size (int): Expected file size. None to skip size check.
+        n_retrys (int): defaults to 5.
 
     Returns:
         sucess (bool): True if sucessfull, False if not.
     '''
 
     tries = 0
-    while tries < nRetrys:
+    while tries < n_retrys:
         tries += 1
         try:
-            with requests.get(url, stream=True) as fstream:
-                fstream.raise_for_status()
+            with httpx.stream("GET", url) as response:
+                response.raise_for_status()
                 with open(ofname, 'wb') as outF:
-                    for chunk in fstream.iter_content(chunk_size=8192):
+                    for chunk in response.iter_bytes(chunk_size=8192):
                         outF.write(chunk)
-        except (requests.Timeout, requests.ConnectionError):
+        except (httpx.TimeoutException, httpx.RequestError):
             continue
-        except (requests.exceptions.RequestException) as error:
-            sys.stderr.write('Failed to download file "{}" because "{}"'.format(ofname, error))
+        except (httpx.HTTPStatusError) as error:
+            LOGGER.error('Failed to download file "%s" because "%s"', ofname, error)
             continue
 
-        if expected_md5 is None or md5_sum(ofname) == expected_md5:
-            return True
-        else:
-            sys.stderr.write('Checksums do not match!')
+        if expected_md5 is None:
+            LOGGER.warning('Skipping md5 check for file "%s"', ofname)
+        elif md5_sum(ofname) != expected_md5:
+            LOGGER.error('Expected MD5 checksum does not match for file "%s"', ofname)
+            return False
+
+        if expected_size is None:
+            LOGGER.warning('Skipping size check for file "%s"', ofname)
+        elif os.path.getsize(ofname) != expected_size:
+            LOGGER.error('Expected file size does not match for file "%s"', ofname)
+            return False
+        return True
 
     return False
-
-

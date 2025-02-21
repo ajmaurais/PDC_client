@@ -6,6 +6,7 @@ from datetime import datetime
 
 from .submodules.api import Client, BASE_URL
 from .submodules import io
+from .submodules.logger import LOGGER
 
 SUBCOMMANDS = {'studyID', 'PDCStudyID', 'studyName',
                'metadata', 'metadataToSky',
@@ -82,7 +83,7 @@ Available commands:
                             help='Skip ssl verification?')
         parser.add_argument('study_id')
         args = parser.parse_args(self.argv[start:])
-        
+
         with Client(url=args.baseUrl, verify=not args.skipVerify) as client:
             pdc_study_id = client.get_pdc_study_id(args.study_id)
 
@@ -102,9 +103,9 @@ Available commands:
                             help='Remove special characters from study name so it a valid file name.')
         parser.add_argument('study_id')
         args = parser.parse_args(self.argv[start:])
-        
+
         with Client(url=args.baseUrl, verify=not args.skipVerify) as client:
-            study_name = api.get_study_name(args.study_id)
+            study_name = client.get_study_name(args.study_id)
 
         if study_name is None:
             sys.stderr.write('ERROR: No study found matching study_id!\n')
@@ -117,43 +118,74 @@ Available commands:
 
     def metadata(self, start=2):
         parser = argparse.ArgumentParser(description=Main.METADATA_DESCRIPTION)
-        parser.add_argument('-f', '--format', choices=['json', 'tsv', 'str'], default = 'json',
-                            help='The output file format. Default is "json".')
-        parser.add_argument('-n', '--nFiles', type=int, default=None,
+        parser.add_argument('-n', '--nFiles', type=int, default=None, dest='n_files',
                             help='The number of files to get metadata for. Default is all files in study')
         parser.add_argument('-u', '--baseUrl', default=BASE_URL,
                             help=f'The base URL for the PDC API. {BASE_URL} is the default.')
         parser.add_argument('--skipVerify', default=False, action='store_true',
                             help='Skip ssl verification?')
-        parser.add_argument('-a', '--skylineAnnotations', default=False, action='store_true',
-                            help='Also save Skyline annotations csv file')
-        parser.add_argument('--flatten', default=False, action='store_true',
+
+        format = parser.add_argument_group('Output format options')
+        format.add_argument('-p', '--prefix', default='',
+                            help='The prefix to add to the output file names. Default is no prefix.')
+        format.add_argument('-f', '--format', choices=('json', 'tsv', 'str'), default = 'json',
+                            help="The output file format. Default is 'json'. "
+                                 "'tsv' is only compatable with DIA data.")
+        format.add_argument('-a', '--skylineAnnotations', default=False, action='store_true',
+                            help='Also save Skyline annotations csv file. Only compatable with DIA data.')
+        format.add_argument('--flatten', default=False, action='store_true',
                             help='Combine metadata into a single flat file. '
                                  'Only compatable with DIA data.')
+
         parser.add_argument('study_id', help='The study id.')
         args = parser.parse_args(self.argv[start:])
 
         with Client(url=args.baseUrl, verify=not args.skipVerify) as client:
-            study_metadata = client.get_study_metadata(args.study_id)
-            files = client.get_study_raw_files(args.study_id, nFiles=args.nFiles)
+            # get study metadata and check that output options are compatable with experiment type
+            study_metadata = client.get_study_metadata(study_id=args.study_id)
+            if study_metadata is None:
+                LOGGER.error('Could not retrieve metadata for study: %s', args.study_id)
+                sys.exit(1)
+            experiment_type = study_metadata['experiment_type']
+            if experiment_type.lower() != 'label free' and \
+                (args.flatten or args.skylineAnnotations or args.format == 'tsv'):
+                LOGGER.error('Output format not supported for %s experiments', experiment_type)
+                sys.exit(1)
+
+            # download remaining metadata
+            files = client.get_study_raw_files(args.study_id, n_files=args.n_files)
             aliquots = client.get_study_aliquots(args.study_id,
                                                  file_ids=[f['file_id'] for f in files])
             cases = client.get_study_cases(args.study_id)
 
+        # check that no metadata is missing
         metadata_files = {'study_metadata': study_metadata, 'files': files,
                           'aliquots': aliquots, 'cases': cases}
-        pdc_study_id = study_metadata['pdc_study_id']
-        # for name, data in metadata_files.items():
-        #     with open(f'{}') as outF:
+        all_good = True
+        for name, data in metadata_files.items():
+            if data is None:
+                LOGGER.error("Could not retreive %s data for study: '%s'", name, args.study_id)
+                all_good = False
+        if not all_good:
+            sys.exit(1)
 
-        # if data is None:
-        #     sys.exit(1)
-        # if len(data) == 0:
-        #     sys.stderr.write('ERROR: Could not find any data associated with study!\n')
-        #     sys.exit(1)
-        # io.writeFileMetadata(data, ofname, format=args.format)
-        # if args.skylineAnnotations:
-        #     io.writeSkylineAnnotations(data, f'{args.ofname}_annotations.csv')
+        pdc_study_id = study_metadata['pdc_study_id']
+        if args.flatten:
+            if any(len(a['file_ids']) != 1 for a in aliquots):
+                LOGGER.error('Cannot flatten aliquots with more than 1 file_id.')
+                sys.exit(1)
+
+            flat_data = io.flatten_metadata(**metadata_files)
+            io.write_metadata_file(flat_data, f'{pdc_study_id}_flat.{args.format}',
+                                   format=args.format)
+
+            if args.skylineAnnotations:
+                io.writeSkylineAnnotations(flat_data, 'skyline_annotations.csv')
+
+        else:
+            for name, data in metadata_files.items():
+                io.write_metadata_file(data, f'{pdc_study_id}_{name}.{args.format}',
+                                       format=args.format)
 
 
     def metadataToSky(self, start=2):

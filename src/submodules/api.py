@@ -1,7 +1,6 @@
 
 import re
 import asyncio
-import sys
 from typing import Callable, Optional
 
 from httpx import Limits, AsyncClient
@@ -12,8 +11,8 @@ from .logger import LOGGER
 CLIENT_TIMEOUT = 10
 BASE_URL ='https://proteomic.datacommons.cancer.gov/graphql'
 
-FILE_METADATA_KEYS = ['file_id', 'file_name', 'file_submitter_id', 'md5sum', 'file_size',
-                      'data_category', 'file_type', 'file_format', 'url']
+FILE_DATA_KEYS = ['file_id', 'file_name', 'file_submitter_id', 'md5sum', 'file_size',
+                  'data_category', 'file_type', 'file_format', 'url']
 
 class Client():
     '''
@@ -54,16 +53,38 @@ class Client():
         Asynchronously gets the raw files for a study.
     get_study_raw_files(study_id: str, **kwargs) -> list|None:
         Gets the raw files for a study.
+    async async_get_file_url(file_id: str) -> dict|None:
+        Asynchronously gets the URL for a file.
+    get_file_url(file_id: str) -> dict|None:
+        Gets the URL for a file.
     '''
 
     def __init__(self,
                  url: str = BASE_URL,
-                 timeout: Optional[int] = CLIENT_TIMEOUT,
-                 verify: Optional[bool] = True,
-                 max_connections: Optional[int] = 5,
-                 max_keepalive_connections: Optional[int] = 5,
-                 keepalive_expiry: Optional[int] = 5,
-                 request_retries: Optional[int] = 5):
+                 timeout: Optional[int]=CLIENT_TIMEOUT,
+                 verify: Optional[bool]=True,
+                 max_connections: Optional[int]=5,
+                 max_keepalive_connections: Optional[int]=5,
+                 keepalive_expiry: Optional[int]=5,
+                 request_retries: Optional[int]=5):
+        '''
+        Parameters
+        ----------
+        url: str
+            The base URL for the API.
+        timeout: int
+            The timeout for requests in seconds.
+        verify: bool
+            Whether to verify SSL certificates.
+        max_connections: int
+            The maximum number of connections to allow.
+        max_keepalive_connections: int
+            The maximum number of connections to keep alive.
+        keepalive_expiry: int
+            The number of seconds to keep a connection alive.
+        request_retries: int
+            The number of times to retry a request in case of failure.
+        '''
 
         self.url = url
         self.request_retries = request_retries
