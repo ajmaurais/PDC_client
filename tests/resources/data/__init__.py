@@ -12,14 +12,22 @@ CASE_METADATA = f'{TEST_DIR}/resources/data/api/cases.json'
 
 PDC_TEST_URLS = f'{TEST_DIR}/resources/data/test_urls.json'
 
-PDC_TEST_FILE_IDS = [{'file_id': '4d6c2dec-ca0a-4bfe-aa01-b67c45b8c4e4',
-                      'file_name': 'CPTAC3_non-ccRCC_JHU_Phosphoproteome.label.txt',
-                      'file_size': '272',
-                      'md5sum': 'b9498a8e0a62588ab482c21d7bf3cf1f'},
-                     {'file_id': '22c6de9a-ef6d-4c8c-9a03-1e3e4f8dc4aa',
-                      'file_name': 'CPTAC3_non-ccRCC_JHU_Phosphoproteome.sample.txt',
-                      'file_size': '2497',
-                      'md5sum': '88f64d4343079f242f8a8561e8d89854'}]
+PDC_TEST_FILE_IDS = [{"file_id": "127602b9-a2b4-4683-816d-741ebb8bec82",
+                      "file_size": "395",
+                      "md5sum": "2b30abf33e9931aa1c96061d164fb302",
+                      "file_name": "NCI7_Proteomic_Coverage_JHU_Phosphoproteome.sample.txt"},
+                     {"file_id": "b2e6a890-1d98-4df1-90a2-d3e1ddb5f72d",
+                      "file_size": "503",
+                      "md5sum": "5dbbc14c6abb2fc2b402b45ff21b5fbe",
+                      "file_name": "NCI7_Experimental_JHU_Proteome.sample.txt"},
+                     {"file_id": "e83aa0ba-8047-402b-a52c-4ea8d5253248",
+                      "file_size": "548",
+                      "md5sum": "cfea698450943c780657daa4d2fc5cc7",
+                      "file_name": "102CPTAC_COprospective_W_VU_20160806_09CO018_f06.raw.cap.psm"},
+                      {"file_id": "c7d8a4f2-ba60-45ee-a6cb-2046c5f05713",
+                       "file_size": "2067",
+                       "md5sum": "289464c687fda336abc099fa5d926fef",
+                       "file_name": "Phospho_FN12_N221T222_240min_C2_081814.psm"}]
 
 TEST_URLS = [{'url': 'https://raw.githubusercontent.com/ajmaurais/PDC_client/refs/heads/dev/README.md',
               'file_name': 'README.md',
