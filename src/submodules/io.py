@@ -180,7 +180,9 @@ def file_basename(url):
     return None if not match else match.group(1)
 
 
-def download_file(url, ofname, expected_md5=None, expected_size=None, n_retries=2):
+def download_file(url: str, ofname: str,
+                  expected_md5: str=None, expected_size: int=None,
+                  n_retries:int=2) -> bool:
     '''
     Download a single file.
 

@@ -8,7 +8,7 @@ from resources.mock_graphql_server.data import api_data
 from resources.data import PDC_TEST_FILE_IDS, TEST_URLS
 
 from PDC_client import main
-from PDC_client.submodules.io import is_dia
+from PDC_client.submodules.io import is_dia, md5_sum
 from PDC_client.submodules.api import Client
 
 
@@ -27,7 +27,7 @@ class TestStudySubcommands(unittest.TestCase):
     def test_study_id(self):
         target = api_data.get_study_id(TEST_PDC_STUDY_ID)
 
-        args = ['PDC_client', 'studyID', TEST_PDC_STUDY_ID, '-u', TEST_URL]
+        args = ['PDC_client', 'studyID', '-u', TEST_URL, TEST_PDC_STUDY_ID]
         result = setup_functions.run_command(args, self.work_dir, prefix='study_id')
 
         self.assertEqual(result.returncode, 0)
@@ -38,7 +38,7 @@ class TestStudySubcommands(unittest.TestCase):
         study_id = api_data.get_study_id(TEST_PDC_STUDY_ID)
         target = api_data.studies[study_id]['study_name']
 
-        args = ['PDC_client', 'studyName', study_id, '-u', TEST_URL]
+        args = ['PDC_client', 'studyName', '-u', TEST_URL, study_id]
         result = setup_functions.run_command(args, self.work_dir, prefix='study_name')
 
         self.assertEqual(result.returncode, 0)
@@ -49,7 +49,7 @@ class TestStudySubcommands(unittest.TestCase):
         study_id = api_data.get_study_id(TEST_PDC_STUDY_ID)
         target = TEST_PDC_STUDY_ID
 
-        args = ['PDC_client', 'PDCStudyID', study_id, '-u', TEST_URL]
+        args = ['PDC_client', 'PDCStudyID', '-u', TEST_URL, study_id]
         result = setup_functions.run_command(args, self.work_dir, prefix='pdc_study_id')
 
         self.assertEqual(result.returncode, 0)
@@ -118,7 +118,7 @@ class TestFileSubcommands(unittest.TestCase):
         setup_functions.make_work_dir(cls.work_dir, clear_dir=True)
         cls.test_file_id_index = 0
 
-        cls.mock_server_active = TEST_URL.startswith('http://localhost')
+        cls.mock_server_active = TEST_URL.startswith('http://127.0.0.1')
 
         cls.pdc_file_url = None
         if not cls.mock_server_active:
@@ -129,31 +129,43 @@ class TestFileSubcommands(unittest.TestCase):
     def test_file_id(self):
         if self.mock_server_active:
             self.skipTest('Not implemented for mock server')
+        self.assertIsNotNone(self.pdc_file_url, 'Test file data lookup in setup failed!')
 
+        ofname = f'{self.work_dir}/test_pdc_file_id_download.txt'
+        args = ['PDC_client', 'file', f'--ofname={ofname}',
+               '--baseUrl', TEST_URL, '--fileID',
+               PDC_TEST_FILE_IDS[self.test_file_id_index]['file_id']]
+        result = setup_functions.run_command(args, self.work_dir, prefix='file_id')
 
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertEqual(os.path.isfile(ofname), True, f'{ofname} does not exist')
 
 
     def test_pdc_url(self):
         if self.mock_server_active:
             self.skipTest('Not implemented for mock server')
+        self.assertIsNotNone(self.pdc_file_url, 'Test file URL lookup in setup failed!')
 
-        ofname = 'test_pdc_url_download.txt'
+        ofname = f'{self.work_dir}/test_pdc_url_download.txt'
         args = ['PDC_client', 'file', f'--ofname={ofname}',
-                f'--md5sum={self.pdc_file_url["md5sum"]}', f'--size={self.pdc_file_url["file_size"]})',
+                f'--md5sum={self.pdc_file_url["md5sum"]}', f'--size={self.pdc_file_url["file_size"]}',
                 '--url', self.pdc_file_url['url']]
         result = setup_functions.run_command(args, self.work_dir, prefix='url')
 
         self.assertEqual(result.returncode, 0, result.stderr)
-        target_path = f'{self.work_dir}/{ofname}'
-        self.assertEqual(os.path.isfile(target_path), True, f'{target_path} does not exist')
+        self.assertEqual(os.path.isfile(ofname), True, f'{ofname} does not exist')
+        self.assertEqual(os.path.getsize(ofname), int(self.pdc_file_url['file_size']))
+        self.assertEqual(md5_sum(ofname), self.pdc_file_url['md5sum'])
 
 
     def test_url(self):
         for file in TEST_URLS:
-            args = ['PDC_client', 'file', '--ofname=test_url_download.txt',
+            ofname = f'{self.work_dir}/test_url_download.txt'
+            args = ['PDC_client', 'file', f'--ofname={ofname}',
                     '--md5sum', file['md5sum'], '--size', str(file['file_size']), '--url', file['url']]
             result = setup_functions.run_command(args, self.work_dir, prefix='test_url')
 
             self.assertEqual(result.returncode, 0, result.stderr)
-            target_path = f'{self.work_dir}/test_url_download.txt'
-            self.assertEqual(os.path.isfile(target_path), True, f'{target_path} does not exist')
+            self.assertEqual(os.path.isfile(ofname), True, f'{ofname} does not exist')
+            self.assertEqual(os.path.getsize(ofname), int(file['file_size']))
+            self.assertEqual(md5_sum(ofname), file['md5sum'])

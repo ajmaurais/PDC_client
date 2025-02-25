@@ -229,12 +229,28 @@ Available commands:
 
         source_args = parser.add_mutually_exclusive_group(required=True)
         source_args.add_argument('--url', help='The file url.')
-        source_args.add_argument('--fileID', help='The PDC file_id.')
+        source_args.add_argument('--fileID', dest='file_id', help='The PDC file_id.')
 
         args = parser.parse_args(self.argv[start:])
 
+        # setup file data
+        url = args.url
+        md5sum = args.md5sum
+        size = args.size
+        if args.file_id is not None:
+            with Client(url=args.baseUrl) as client:
+                file_data = client.get_file_url(args.file_id)
+
+            if file_data is None:
+                LOGGER.error('Could not retrieve file data for file_id: %s', args.file_id)
+                sys.exit(1)
+
+            url = file_data['url']
+            md5sum = md5sum if md5sum is not None else file_data['md5sum']
+            size = size if size is not None else int(file_data['file_size'])
+
         if args.ofname is None:
-            ofname = io.file_basename(args.url)
+            ofname = io.file_basename(url)
             if ofname is None:
                 LOGGER.error('Could not determine output file name!\n')
                 sys.exit(1)
@@ -243,8 +259,8 @@ Available commands:
 
         remove_old = False
         if os.path.isfile(ofname):
-            if not args.force and args.md5sum is not None:
-                if io.md5_sum(ofname) == args.md5sum:
+            if not args.force and md5sum is not None:
+                if io.md5_sum(ofname) == md5sum:
                     sys.stdout.write(f'The file: "{ofname}" has already been downloaded. Use --force option to override.\n')
                     sys.exit(0)
 
@@ -255,7 +271,7 @@ Available commands:
                 old_ofname = ofname
                 ofname += f'_{datetime.now().strftime("%y%m%d_%H%M%S")}.tmp'
 
-        if not io.download_file(args.url, ofname, expected_md5=args.md5sum):
+        if not io.download_file(url, ofname, expected_md5=md5sum, expected_size=size):
             LOGGER.error("Failed to download file: '%s'", ofname)
             sys.exit(1)
 
@@ -267,4 +283,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
