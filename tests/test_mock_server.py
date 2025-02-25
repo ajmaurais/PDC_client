@@ -15,7 +15,7 @@ from resources.mock_graphql_server.server import server_is_running
 
 from PDC_client.submodules import api
 
-TEST_URL = 'http://localhost:5000/graphql'
+TEST_URL = 'http://127.0.0.1:5000/graphql'
 PDC_URL = api.BASE_URL
 
 

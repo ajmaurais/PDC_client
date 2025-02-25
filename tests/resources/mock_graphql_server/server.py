@@ -1,13 +1,13 @@
 
 from flask import Flask, request, jsonify
-from flask_graphql import GraphQLView
+from graphql_server.flask import GraphQLView
 import graphene
 from httpx import get, ConnectError
 
 from .schema import Query
 from .schema import QueryError
 
-def server_is_running(url='http://localhost:5000/graphql'):
+def server_is_running(url='http://127.0.0.1:5000'):
     ''' Check if mock graphql server is running.'''
     query = 'query={ __schema { queryType { name }}}'
     try:

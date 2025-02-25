@@ -8,7 +8,7 @@ from update_api_data import DUPLICATE_FILE_TEST_STUDIES
 
 from PDC_client.submodules import api
 
-# TEST_URL = 'http://localhost:5000/graphql'
+# TEST_URL = 'http://127.0.0.1:5000/graphql'
 TEST_URL = 'https://pdc.cancer.gov/graphql'
 
 
@@ -166,7 +166,7 @@ class TestFileLevel(unittest.TestCase):
 
 
     def test_get_file_url(self):
-        expect_url = not TEST_URL.startswith('http://localhost')
+        expect_url = not TEST_URL.startswith('http://127.0.0.1')
 
         random.seed(40)
         test_study = 'PDC000504'
@@ -198,7 +198,7 @@ class TestFileLevel(unittest.TestCase):
 
 
     def test_get_file_url_duplicate(self):
-        if not TEST_URL.startswith('http://localhost'):
+        if not TEST_URL.startswith('http://127.0.0.1'):
             self.skipTest('Test only valid for mock server')
 
         duplicate_file_ids = []

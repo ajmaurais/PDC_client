@@ -151,10 +151,10 @@ class TestDownloadFile(unittest.TestCase):
     def test_download_file(self):
         for file in TEST_URLS:
             self.assertTrue(io.download_file(file['url'], f"{self.work_dir}/{file['file_name']}",
-                                             expected_md5=file['md5'], expected_size=file['size']))
+                                             expected_md5=file['md5sum'], expected_size=file['file_size']))
             self.assertTrue(os.path.isfile(f'{self.work_dir}/{file["file_name"]}'))
-            self.assertEqual(io.md5_sum(f'{self.work_dir}/{file["file_name"]}'), file['md5'])
-            self.assertEqual(os.path.getsize(f'{self.work_dir}/{file["file_name"]}'), file['size'])
+            self.assertEqual(io.md5_sum(f'{self.work_dir}/{file["file_name"]}'), file['md5sum'])
+            self.assertEqual(os.path.getsize(f'{self.work_dir}/{file["file_name"]}'), file['file_size'])
 
 
     def test_bad_md5(self):
@@ -164,7 +164,7 @@ class TestDownloadFile(unittest.TestCase):
         with self.assertLogs(level='ERROR') as cm:
             self.assertFalse(io.download_file(file['url'], target_file_name,
                                               expected_md5=target_md5,
-                                              expected_size=file['size'],
+                                              expected_size=file['file_size'],
                                               n_retries=1))
 
         self.assertTrue(any(f'Expected MD5 checksum does not match for file "{target_file_name}"' in msg
@@ -177,7 +177,7 @@ class TestDownloadFile(unittest.TestCase):
         target_file_name = f'{self.work_dir}/{file["file_name"]}'
         with self.assertLogs(level='ERROR') as cm:
             self.assertFalse(io.download_file(file['url'], target_file_name,
-                                              expected_md5=file['md5'],
+                                              expected_md5=file['md5sum'],
                                               expected_size=target_size,
                                               n_retries=1))
 
@@ -191,8 +191,8 @@ class TestDownloadFile(unittest.TestCase):
         target_file_name = f'{self.work_dir}/{file["file_name"]}'
         with self.assertLogs(level='ERROR') as cm:
             self.assertFalse(io.download_file(url, target_file_name,
-                                              expected_md5=file['md5'],
-                                              expected_size=file['size'],
+                                              expected_md5=file['md5sum'],
+                                              expected_size=file['file_size'],
                                               n_retries=1))
 
         self.assertTrue(any(f'Failed to download file "{target_file_name}" after 1 attempt(s)' in msg
@@ -204,7 +204,7 @@ class TestDownloadFile(unittest.TestCase):
         target_file_name = f'{self.work_dir}/{file["file_name"]}'
         with self.assertLogs(level='WARNING') as cm:
             self.assertTrue(io.download_file(file['url'], target_file_name,
-                                             expected_size=file['size'],
+                                             expected_size=file['file_size'],
                                              n_retries=1))
 
         self.assertTrue(any(f'Skipping md5 check for file "{target_file_name}"' in msg
@@ -216,7 +216,7 @@ class TestDownloadFile(unittest.TestCase):
         target_file_name = f'{self.work_dir}/{file["file_name"]}'
         with self.assertLogs(level='WARNING') as cm:
             self.assertTrue(io.download_file(file['url'], target_file_name,
-                                             expected_md5=file['md5'],
+                                             expected_md5=file['md5sum'],
                                              n_retries=1))
 
         self.assertTrue(any(f'Skipping size check for file "{target_file_name}"' in msg

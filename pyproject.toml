@@ -13,6 +13,14 @@ dependencies = [
 ]
 requires-python = '>=3.11'
 
+[project.optional-dependencies]
+test = [
+    'Flask>=3.1.0',
+    'graphene>=3.4.3',
+    'graphql-core==3.2.5',
+    'graphql-server==3.0.0b7'
+]
+
 [tool.setuptools]
 packages = ['PDC_client', 'PDC_client.submodules']
 package-dir = {'PDC_client' = 'src'}
