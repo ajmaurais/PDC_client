@@ -8,7 +8,7 @@ import random
 from resources.setup_functions import make_work_dir, run_command
 from resources import TEST_DIR
 from resources.data import FILE_METADATA, ALIQUOT_METADATA, CASE_METADATA, STUDY_METADATA
-from resources.data import PDC_TEST_URLS, PDC_TEST_FILE_IDS, TEST_URLS
+from resources.data import PDC_TEST_URLS, TEST_URLS
 
 from PDC_client.submodules import io
 
@@ -24,7 +24,7 @@ class TestMd5(unittest.TestCase):
         args = ['md5sum', __file__]
         md5_result = run_command(args, self.work_dir, prefix='md5sum')
         self.assertEqual(md5_result.returncode, 0)
-        target = re.split('\s+', md5_result.stdout.strip())[0]
+        target = re.split(r'\s+', md5_result.stdout.strip())[0]
 
         io_md5 = io.md5_sum(__file__)
         self.assertEqual(io_md5, target)
@@ -115,6 +115,14 @@ class TestMetadataFunctions(unittest.TestCase):
                 io.flatten_metadata(**data)
 
             self.assertIn(f'No aliquot data found for file_id: {file_id}', str(e.exception))
+
+
+    def test_read_metadata_tsv(self):
+        test_study = 'PDC000504'
+        test_file = f'{TEST_DIR}/resources/data/output/PDC000504_flat.tsv'
+        with open(test_file, 'r', encoding='utf-8') as inF:
+            data = io.read_file_metadata(inF, format='tsv')
+        self.assertEqual(len(data), len(self.files[test_study]))
 
 
     def test_missing_case(self):

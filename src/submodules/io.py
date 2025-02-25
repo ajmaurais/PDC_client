@@ -1,13 +1,15 @@
-import sys
+
 import os
 import json
 from csv import DictReader
 from hashlib import md5
 import re
-import httpx
 import warnings
+from typing import TextIO
 
-from .api import FILE_DATA_KEYS
+import httpx
+
+from .api import FILE_DATA_KEYS, DATA_ID_KEYS
 from .logger import LOGGER
 
 RAW_BASENAME_RE = re.compile(r'/([^/]+\.raw)')
@@ -33,7 +35,8 @@ def _write_row(itterable, ostream, sep='\t', quote=None):
     for i, it in enumerate(itterable):
         if i > 0:
             ostream.write(sep)
-        ostream.write(it if quote is None else f'{quote}{it}{quote}')
+        value_s = str(it) if it is not None else ''
+        ostream.write(value_s if quote is None else f'{quote}{value_s}{quote}')
     ostream.write('\n')
 
 
@@ -132,7 +135,20 @@ def write_metadata_file(data: dict|list, ofname: str, format: str='json'):
         raise ValueError(f'{format} is an unknown output format!')
 
 
-def readFileMetadata(fp, format):
+def read_file_metadata(fp: TextIO, format: str) -> list:
+    '''
+    Read study file metadata.
+
+    Parameters:
+        fp (file): File pointer.
+        format (str): The metadata format. One of ["tsv", "json"].
+
+    Returns:
+        data (list): List of file metadata dictionaries.
+
+    Raises:
+        RuntimeError: If unknown metadata format.
+    '''
     if format == 'tsv':
         return list(DictReader(fp, delimiter='\t'))
     if format == 'json':
@@ -140,9 +156,17 @@ def readFileMetadata(fp, format):
     raise RuntimeError(f"Unknown metadata format!: '{format}'")
 
 
-def writeSkylineAnnotations(data, ofname):
+def write_skyline_annotations(data: list, ofname: str):
+    '''
+    Write Skyline annotations file.
 
-    file_annotations = [key for key in data[0].keys() if key not in FILE_DATA_KEYS]
+    Parameters:
+        data (list): List of file metadata dictionaries for each file.
+        ofname (str): Output file name.
+    '''
+
+    exclude_keys = set(DATA_ID_KEYS + FILE_DATA_KEYS)
+    file_annotations = [key for key in data[0].keys() if key not in exclude_keys]
 
     # make csv headers
     headers = ['ElementLocator']
@@ -156,7 +180,7 @@ def writeSkylineAnnotations(data, ofname):
             _write_row(annotation_values, outF, sep=',', quote='"')
 
 
-def md5_sum(fname):
+def md5_sum(fname: str) -> str:
     ''' Get the md5 digest of a file. '''
     file_hash = md5()
     with open(fname, 'rb') as inF:

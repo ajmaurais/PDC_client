@@ -133,6 +133,7 @@ Available commands:
                             help="The output file format. Default is 'json'. "
                                  "'tsv' is only compatable with DIA data.")
         f_args.add_argument('-a', '--skylineAnnotations', default=False, action='store_true',
+                            dest='skyline_annotations',
                             help='Also save Skyline annotations csv file. Only compatable with DIA data.')
         f_args.add_argument('--flatten', default=False, action='store_true',
                             help='Combine metadata into a single flat file. '
@@ -149,7 +150,7 @@ Available commands:
                 sys.exit(1)
             experiment_type = study_metadata['experiment_type']
             if not io.is_dia(study_metadata) and \
-                (args.flatten or args.skylineAnnotations or args.format == 'tsv'):
+                (args.flatten or args.skyline_annotations or args.format == 'tsv'):
                 LOGGER.error('Output format not supported for %s experiments', experiment_type)
                 sys.exit(1)
 
@@ -171,22 +172,24 @@ Available commands:
             sys.exit(1)
 
         prefix = f'{study_metadata["pdc_study_id"]}_' if args.prefix is None else args.prefix
-        if args.flatten:
+        flat_data = None
+        if args.flatten or args.skyline_annotations:
             if any(len(a['file_ids']) != 1 for a in aliquots):
                 LOGGER.error('Cannot flatten aliquots with more than 1 file_id.')
                 sys.exit(1)
-
             flat_data = io.flatten_metadata(**metadata_files)
+
+        if args.skyline_annotations:
+            io.write_skyline_annotations(flat_data, f'{prefix}skyline_annotations.csv')
+
+        if args.flatten:
             io.write_metadata_file(flat_data, f'{prefix}flat.{args.format}',
                                    format=args.format)
+            sys.exit(0)
 
-            if args.skylineAnnotations:
-                io.writeSkylineAnnotations(flat_data, 'skyline_annotations.csv')
-
-        else:
-            for name, data in metadata_files.items():
-                io.write_metadata_file(data, f'{prefix}{name}.{args.format}',
-                                       format=args.format)
+        for name, data in metadata_files.items():
+            io.write_metadata_file(data, f'{prefix}{name}.{args.format}',
+                                    format=args.format)
 
 
     def metadataToSky(self, start=2):
@@ -203,10 +206,10 @@ Available commands:
         else:
             input_format = os.path.splitext(args.metadata_file)[1][1:]
 
-        with open(args.metadata_file, 'r') as outF:
-            data = io.readFileMetadata(outF, input_format)
+        with open(args.metadata_file, 'r', encoding='utf-8') as outF:
+            data = io.read_file_metadata(outF, input_format)
 
-        io.writeSkylineAnnotations(data, 'skyline_annotations.csv')
+        io.write_skyline_annotations(data, 'skyline_annotations.csv')
 
 
     def file(self, start=2):

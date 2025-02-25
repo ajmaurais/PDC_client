@@ -3,6 +3,7 @@ data/*
 id_rsa_*
 .vscode/*
 tests/work/*
+.DS_Store
 
 __pycache__/
 *.py[cod]

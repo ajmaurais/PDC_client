@@ -2,19 +2,20 @@
 import os
 import unittest
 import random
+from csv import DictReader
+from abc import ABC, abstractmethod
 
 from resources import TEST_DIR, setup_functions
 from resources.mock_graphql_server.data import api_data
 from resources.data import PDC_TEST_FILE_IDS, TEST_URLS
 
-from PDC_client import main
 from PDC_client.submodules.io import is_dia, md5_sum
 from PDC_client.submodules.api import Client
 
 
 TEST_PDC_STUDY_ID = 'PDC000504'
-TEST_URL = 'https://pdc.cancer.gov/graphql'
-# TEST_URL = 'http://127.0.0.1:5000/graphql'
+# TEST_URL = 'https://pdc.cancer.gov/graphql'
+TEST_URL = 'http://127.0.0.1:5000/graphql'
 
 
 class TestStudySubcommands(unittest.TestCase):
@@ -56,7 +57,48 @@ class TestStudySubcommands(unittest.TestCase):
         self.assertEqual(result.stdout.strip(), target)
 
 
-class TestMetadataSubcommand(unittest.TestCase):
+class SkylineAnnotationsTestBase(ABC):
+    SKYLINE_ANNOTATIONS_PDC_STUDY_ID = 'PDC000504'
+    TARGET_SKYLINE_ANNOTATIONS = f'{TEST_DIR}/resources/data/output/{SKYLINE_ANNOTATIONS_PDC_STUDY_ID}_skyline_annotations.csv'
+
+    @abstractmethod
+    def assertEqual(self, lhs, rhs):
+        pass
+
+    @abstractmethod
+    def assertIn(self, lhs, rhs):
+        pass
+
+    def _format_dict(self, data):
+        ret = {}
+        for row in data:
+            if 'ElementLocator' not in row:
+                raise AssertionError("'ElementLocator' not found in: %s" % row)
+            ret[row['ElementLocator']] = {k: v for k, v in row.items() if k != 'ElementLocator'}
+
+        return ret
+
+
+    def assertSkylineAnnotationsEqual(self, rhs_fname, lhs_fname):
+        ''' Compare two Skyline annotations files '''
+
+        with open(rhs_fname, 'r') as inF:
+            rhs_data = list(DictReader(inF, delimiter=','))
+        with open(lhs_fname, 'r') as inF:
+            lhs_data = list(DictReader(inF, delimiter=','))
+
+        self.assertEqual(len(rhs_data), len(lhs_data))
+        rhs_data = self._format_dict(rhs_data)
+        lhs_data = self._format_dict(lhs_data)
+
+        for replicate, data in lhs_data.items():
+            self.assertIn(replicate, rhs_data)
+            self.assertEqual(set(rhs_data[replicate].keys()), set(data.keys()))
+            for key in data:
+                self.assertEqual(rhs_data[replicate][key], data[key])
+
+
+class TestMetadataSubcommand(unittest.TestCase, SkylineAnnotationsTestBase):
     @classmethod
     def setUpClass(cls):
         cls.work_dir = f'{TEST_DIR}/work/metadata_subcommand'
@@ -76,7 +118,7 @@ class TestMetadataSubcommand(unittest.TestCase):
         study_id = api_data.get_study_id(TEST_PDC_STUDY_ID)
 
         args = ['PDC_client', 'metadata', '-u', TEST_URL, study_id]
-        result = setup_functions.run_command(args, self.work_dir, prefix='default')
+        result = setup_functions.run_command(args, self.work_dir, prefix='test_default')
 
         target_files = [f'{TEST_PDC_STUDY_ID}_{file}.json'
                         for file in ('study_metadata', 'files', 'aliquots', 'cases')]
@@ -102,13 +144,89 @@ class TestMetadataSubcommand(unittest.TestCase):
         self.assertTrue(os.path.getsize(f'{self.work_dir}/{target_file}'))
 
 
+    def test_flatten_tsv(self):
+        pdc_study_id = self.get_test_study(dda=False, seed=40)
+        study_id = api_data.get_study_id(pdc_study_id)
+
+        prefix = f'{pdc_study_id}_flatten_tsv_test_'
+        args = ['PDC_client', 'metadata', f'--prefix={prefix}',
+                '--flatten', '--format=tsv',
+                '-u', TEST_URL, study_id]
+        result = setup_functions.run_command(args, self.work_dir, prefix='default')
+
+        self.assertEqual(result.returncode, 0, result.stderr)
+        target_file = f'{prefix}flat.tsv'
+        self.assertTrue(os.path.exists(f'{self.work_dir}/{target_file}'),
+                        f"target_file '{target_file}' not found in {self.work_dir}")
+        self.assertTrue(os.path.getsize(f'{self.work_dir}/{target_file}'))
+
+
     def test_invalid_study_id(self):
         study_id = 'INVALID_STUDY_ID'
         args = ['PDC_client', 'metadata', '-u', TEST_URL, study_id]
-        result = setup_functions.run_command(command=args,
-                                             wd=self.work_dir, prefix='invalid_study_id')
+        result = setup_functions.run_command(command=args, wd=self.work_dir,
+                                             prefix='invalid_study_id')
         self.assertEqual(result.returncode, 1)
         self.assertIn(f'Could not retrieve metadata for study: {study_id}', result.stderr)
+
+
+    def test_skyline_annotations(self):
+        test_pdc_study_id = self.SKYLINE_ANNOTATIONS_PDC_STUDY_ID
+        study_id = api_data.get_study_id(test_pdc_study_id)
+        args = ['PDC_client', 'metadata', '-u', TEST_URL,
+                '--flatten', '--skylineAnnotations', study_id]
+        result = setup_functions.run_command(command=args, wd=self.work_dir,
+                                             prefix='test_skyline_annotations')
+
+        self.assertEqual(result.returncode, 0, result.stderr)
+        target_file = f'{test_pdc_study_id}_flat.json'
+        self.assertTrue(os.path.exists(f'{self.work_dir}/{target_file}'),
+                        f"target_file '{target_file}' not found in {self.work_dir}")
+        self.assertTrue(os.path.getsize(f'{self.work_dir}/{target_file}'))
+
+        test_annotations_file = f'{self.work_dir}/{test_pdc_study_id}_skyline_annotations.csv'
+        self.assertTrue(os.path.exists(test_annotations_file),
+                        f"target_file '{test_annotations_file}' not found in {self.work_dir}")
+        self.assertEqual(os.path.getsize(test_annotations_file),
+                         os.path.getsize(self.TARGET_SKYLINE_ANNOTATIONS))
+        self.assertSkylineAnnotationsEqual(test_annotations_file, self.TARGET_SKYLINE_ANNOTATIONS)
+
+
+class TestMetadataToSky(unittest.TestCase, SkylineAnnotationsTestBase):
+    @classmethod
+    def setUpClass(cls):
+        cls.work_dir = f'{TEST_DIR}/work/metadataToSky_subcommand'
+        cls.test_metadata_json = f'{TEST_DIR}/resources/data/output/{cls.SKYLINE_ANNOTATIONS_PDC_STUDY_ID}_flat.json'
+        cls.test_metadata_tsv = f'{TEST_DIR}/resources/data/output/{cls.SKYLINE_ANNOTATIONS_PDC_STUDY_ID}_flat.tsv'
+        setup_functions.make_work_dir(cls.work_dir, clear_dir=True)
+
+
+    def test_metadataToSky(self):
+        args = ['PDC_client', 'metadataToSky', self.test_metadata_json]
+        result = setup_functions.run_command(command=args, wd=self.work_dir,
+                                             prefix='test_metadataToSky')
+
+        self.assertEqual(result.returncode, 0, result.stderr)
+        test_annotations_file = f'{self.work_dir}/skyline_annotations.csv'
+        self.assertTrue(os.path.exists(test_annotations_file),
+                        f"target_file '{test_annotations_file}' not found in {self.work_dir}")
+        self.assertEqual(os.path.getsize(test_annotations_file),
+                         os.path.getsize(self.TARGET_SKYLINE_ANNOTATIONS))
+        self.assertSkylineAnnotationsEqual(test_annotations_file, self.TARGET_SKYLINE_ANNOTATIONS)
+
+
+    def test_tsv_metadataToSky(self):
+        args = ['PDC_client', 'metadataToSky', self.test_metadata_tsv]
+        result = setup_functions.run_command(command=args, wd=self.work_dir,
+                                             prefix='test_metadataToSky')
+
+        self.assertEqual(result.returncode, 0, result.stderr)
+        test_annotations_file = f'{self.work_dir}/skyline_annotations.csv'
+        self.assertTrue(os.path.exists(test_annotations_file),
+                        f"target_file '{test_annotations_file}' not found in {self.work_dir}")
+        self.assertEqual(os.path.getsize(test_annotations_file),
+                         os.path.getsize(self.TARGET_SKYLINE_ANNOTATIONS))
+        self.assertSkylineAnnotationsEqual(test_annotations_file, self.TARGET_SKYLINE_ANNOTATIONS)
 
 
 class TestFileSubcommands(unittest.TestCase):
@@ -124,6 +242,13 @@ class TestFileSubcommands(unittest.TestCase):
         if not cls.mock_server_active:
             with Client() as client:
                 cls.pdc_file_url = client.get_file_url(PDC_TEST_FILE_IDS[cls.test_file_id_index]['file_id'])
+
+
+    def test_mutually_exclusive_args(self):
+        args = ['PDC_client', 'file', '--fileID', 'file_id', '--url', 'url']
+        result = setup_functions.run_command(args, self.work_dir, prefix='test_invalid_args')
+        self.assertEqual(result.returncode, 2, result.stderr)
+        self.assertIn('argument --url: not allowed with argument --fileID', result.stderr)
 
 
     def test_file_id(self):

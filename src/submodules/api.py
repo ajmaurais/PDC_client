@@ -12,6 +12,7 @@ CLIENT_TIMEOUT = 10
 BASE_URL ='https://proteomic.datacommons.cancer.gov/graphql'
 
 FILE_DATA_KEYS = ['file_id', 'file_name', 'file_submitter_id', 'md5sum', 'file_size',
+                  'experiment_type', 'analytical_fraction', 'analyte_type',
                   'data_category', 'file_type', 'file_format', 'url']
 
 DATA_ID_KEYS = ["file_id", "file_submitter_id", "aliquot_id",
