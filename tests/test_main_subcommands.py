@@ -14,8 +14,8 @@ from PDC_client.submodules.api import Client
 
 
 TEST_PDC_STUDY_ID = 'PDC000504'
-# TEST_URL = 'https://pdc.cancer.gov/graphql'
-TEST_URL = 'http://127.0.0.1:5000/graphql'
+TEST_URL = 'https://pdc.cancer.gov/graphql'
+# TEST_URL = 'http://127.0.0.1:5000/graphql'
 
 
 class TestStudySubcommands(unittest.TestCase):

@@ -15,7 +15,7 @@ FILE_DATA_KEYS = ['file_id', 'file_name', 'file_submitter_id', 'md5sum', 'file_s
                   'experiment_type', 'analytical_fraction', 'analyte_type',
                   'data_category', 'file_type', 'file_format', 'url']
 
-DATA_ID_KEYS = ["file_id", "file_submitter_id", "aliquot_id",
+DATA_ID_KEYS = ["file_id", "file_submitter_id",
                 "sample_id", "case_id", "demographic_id"]
 
 class Client():
