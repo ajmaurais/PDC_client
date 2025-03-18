@@ -15,7 +15,7 @@ from resources.data import FILE_METADATA, ALIQUOT_METADATA, CASE_METADATA
 from PDC_client.submodules.api import Client, BASE_URL
 
 DUPLICATE_FILE_TEST_STUDIES = ['PDC000251']
-STUDIES = ['PDC000504', 'PDC000451'] + DUPLICATE_FILE_TEST_STUDIES
+STUDIES = ['PDC000504', 'PDC000451', 'PDC000592'] + DUPLICATE_FILE_TEST_STUDIES
 
 ENDPOINTS = {'study': 'Study metadata',
              'studyCatalog': 'Study catalog',

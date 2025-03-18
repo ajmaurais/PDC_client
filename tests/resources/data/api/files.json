@@ -1394,5 +1394,1147 @@
       "file_type": "Proprietary",
       "md5sum": "ee90a312e39c3a7de45925462810b6ef"
     }
+  ],
+  "PDC000592": [
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "011cffd0-8924-4fec-89df-b7656b6622ec",
+      "file_name": "20220706_GJ_954_100ng_DIA_60min_test_Slot2-26_1_10361.d.zip",
+      "file_size": "3395660011",
+      "file_submitter_id": "20220706_GJ_954_100ng_DIA_60min_test_Slot2-26_1_10361.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "096eb172094db150ec3d7ba60428ccbd"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "06321e1b-c53d-4f98-bc91-cc43900bed6f",
+      "file_name": "20220705_GJ_298_100ng_DIA_60min_test_Slot2-20_1_10305.d.zip",
+      "file_size": "3241178097",
+      "file_submitter_id": "20220705_GJ_298_100ng_DIA_60min_test_Slot2-20_1_10305.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "b306302e237ebf9f3c85f771901a128f"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "06c70da6-c72a-49e4-82ba-aa597b3253af",
+      "file_name": "20220703_GJ_251_100ng_DIA_60min_test_Slot2-21_1_10265.d.zip",
+      "file_size": "2145391400",
+      "file_submitter_id": "20220703_GJ_251_100ng_DIA_60min_test_Slot2-21_1_10265.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "2f293a3231193313b41e7ab5e1e9afd4"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "0c243cc8-3c1e-45ae-86a3-3042641ebe4d",
+      "file_name": "20220706_GJ_397_100ng_DIA_60min_test_Slot2-5_1_10333.d.zip",
+      "file_size": "2251667438",
+      "file_submitter_id": "20220706_GJ_397_100ng_DIA_60min_test_Slot2-5_1_10333.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "c83fcc9de941e2b46bc18e237a77de27"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "0f83bc48-3ba6-4ed7-9be8-d801c9e0bc9b",
+      "file_name": "20220626_GJ_134_100ng_DIA_60min_test_Slot2-24_1_10100.d.zip",
+      "file_size": "3072555860",
+      "file_submitter_id": "20220626_GJ_134_100ng_DIA_60min_test_Slot2-24_1_10100.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "57a62ad858858a2b3be4a09976d95d3a"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "0fea9f22-4d9f-4bdf-97be-8da561831def",
+      "file_name": "20220701_GJ_494_100ng_DIA_60min_test_Slot2-4_1_10203.d.zip",
+      "file_size": "3042027480",
+      "file_submitter_id": "20220701_GJ_494_100ng_DIA_60min_test_Slot2-4_1_10203.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "0b196d12b4bd3ce902debb1778e9e26f"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "105963eb-4bf5-4415-ab6f-6b2a46ea4f93",
+      "file_name": "20220706_GJ_475_100ng_DIA_60min_test_Slot2-19_1_10347.d.zip",
+      "file_size": "3305374720",
+      "file_submitter_id": "20220706_GJ_475_100ng_DIA_60min_test_Slot2-19_1_10347.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "287af19415e03561d1249c29c54be898"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "117acdd4-1056-481c-80b5-03c976f2c9a7",
+      "file_name": "20220708_GJ_595_100ng_DIA_60min_test_Slot2-5_1_10376.d.zip",
+      "file_size": "3120825140",
+      "file_submitter_id": "20220708_GJ_595_100ng_DIA_60min_test_Slot2-5_1_10376.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "b23ec10ee612d6562a4adc3747100cd6"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "1763e9d0-f86d-43b1-97ac-855cffbd9f18",
+      "file_name": "20220702_GJ_125_100ng_DIA_60min_test_Slot2-1_1_10239.d.zip",
+      "file_size": "3081232473",
+      "file_submitter_id": "20220702_GJ_125_100ng_DIA_60min_test_Slot2-1_1_10239.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "9e74ada7df4498c4db87de578d950e52"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "17b03780-3e4e-4fdf-a678-f739e5c16168",
+      "file_name": "20220706_GJ_476_100ng_DIA_60min_test_Slot2-20_1_10349.d.zip",
+      "file_size": "2914574405",
+      "file_submitter_id": "20220706_GJ_476_100ng_DIA_60min_test_Slot2-20_1_10349.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "15a0364ddab2b81fbd91dcd7071192f9"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "18601b9b-03c4-4fbc-b791-70caefaccb11",
+      "file_name": "20220626_GJ_586_100ng_DIA_60min_test_Slot2-20_1_10092.d.zip",
+      "file_size": "3146766922",
+      "file_submitter_id": "20220626_GJ_586_100ng_DIA_60min_test_Slot2-20_1_10092.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "78f509c5c298445b1f03ce98e40c096d"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "19c3dbf8-7da2-41d2-a5d4-d78071ee809b",
+      "file_name": "20220706_GJ_953_100ng_DIA_60min_test_Slot2-25_1_10359.d.zip",
+      "file_size": "3475960776",
+      "file_submitter_id": "20220706_GJ_953_100ng_DIA_60min_test_Slot2-25_1_10359.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "ea15c0703e0d29e40ae79e4165314118"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "1a81c4ef-d9f9-4248-b413-9581943c5991",
+      "file_name": "20220703_GJ_295_100ng_DIA_60min_test_Slot2-27_1_10277.d.zip",
+      "file_size": "3229901824",
+      "file_submitter_id": "20220703_GJ_295_100ng_DIA_60min_test_Slot2-27_1_10277.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "12b0b0ac33aeb1d17f77fbd91311101c"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "2004b0dd-075e-4871-99ff-7f6d90c945f3",
+      "file_name": "20220702_GJ_965_100ng_DIA_60min_test_Slot2-27_1_10235.d.zip",
+      "file_size": "3297837281",
+      "file_submitter_id": "20220702_GJ_965_100ng_DIA_60min_test_Slot2-27_1_10235.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "8d2b2df1e55c4f0c7e28e82d7e12f048"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "21a3fd8f-8a05-470a-8d9c-dcedd61cfd92",
+      "file_name": "20220702_GJ_536_100ng_DIA_60min_test_Slot2-24_1_10229.d.zip",
+      "file_size": "3306718862",
+      "file_submitter_id": "20220702_GJ_536_100ng_DIA_60min_test_Slot2-24_1_10229.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "29d2368442468fd5ef75ffc047c1d3c5"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "222521b4-e0f6-4943-b7bd-40c5af2d3063",
+      "file_name": "20220626_GJ_133_100ng_DIA_60min_test_Slot2-23_1_10098.d.zip",
+      "file_size": "3000814753",
+      "file_submitter_id": "20220626_GJ_133_100ng_DIA_60min_test_Slot2-23_1_10098.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "cf4cafe0b3d0d82eb05c772e98b6e8d8"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "223f0577-36db-4a3c-914b-442117ab64d6",
+      "file_name": "20220627_GJ_981_100ng_DIA_60min_test_Slot2-3_1_10116.d.zip",
+      "file_size": "3330571544",
+      "file_submitter_id": "20220627_GJ_981_100ng_DIA_60min_test_Slot2-3_1_10116.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "6eaf069db98ef871579cb6cd5e6272b0"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "229dc2a7-22e8-42cc-9f31-730a0bce1f68",
+      "file_name": "20220628_GJ_871_100ng_DIA_60min_test_Slot2-21_1_10136.d.zip",
+      "file_size": "3422829684",
+      "file_submitter_id": "20220628_GJ_871_100ng_DIA_60min_test_Slot2-21_1_10136.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "4de5b4b86eb8362a982b875283a93032"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "26c188f3-3897-4b17-aa50-d9713566fea7",
+      "file_name": "20220708_GJ_344_100ng_DIA_60min_test_Slot2-7_1_10380.d.zip",
+      "file_size": "2455141746",
+      "file_submitter_id": "20220708_GJ_344_100ng_DIA_60min_test_Slot2-7_1_10380.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "e0b9eca70466fc01131e4b5e4f64607e"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "291c0aeb-caf7-4f70-94d3-07836147d1ae",
+      "file_name": "20220626_GJ_232_100ng_DIA_60min_test_Slot2-28_1_10108.d.zip",
+      "file_size": "3125804908",
+      "file_submitter_id": "20220626_GJ_232_100ng_DIA_60min_test_Slot2-28_1_10108.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "816628ffb0bbe2afc8d1249880224ac5"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "29d67df5-2e68-40d7-adb6-6dd04fc49f0e",
+      "file_name": "20220703_GJ_197_100ng_DIA_60min_test_Slot2-25_1_10273.d.zip",
+      "file_size": "2508070237",
+      "file_submitter_id": "20220703_GJ_197_100ng_DIA_60min_test_Slot2-25_1_10273.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "d46d65e8e54f6b8038650652939d7335"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "2c907c7a-b2e7-4e2a-84c5-c4604b23bd64",
+      "file_name": "20220624_GJ_984_100ng_DIA_60min_test_Slot2-27_1_10064.d.zip",
+      "file_size": "3316517649",
+      "file_submitter_id": "20220624_GJ_984_100ng_DIA_60min_test_Slot2-27_1_10064.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "72f9004f0cc88b4129bef0dfafdd6a21"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "3177ebd7-e12c-46a8-b5a8-b57b42901fcb",
+      "file_name": "20220626_GJ_567_100ng_DIA_60min_test_Slot2-21_1_10094.d.zip",
+      "file_size": "3280403840",
+      "file_submitter_id": "20220626_GJ_567_100ng_DIA_60min_test_Slot2-21_1_10094.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "465adda8c86bbe5594005334fd55f233"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "3b67da5a-9779-420e-a846-94b17d1222fb",
+      "file_name": "20220624_GJ_175_100ng_DIA_60min_test_Slot2-5_1_10034.d.zip",
+      "file_size": "3080330802",
+      "file_submitter_id": "20220624_GJ_175_100ng_DIA_60min_test_Slot2-5_1_10034.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "8e00fc2fc6b84ca2a403d016108f05f9"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "3dad3b5d-6e38-4810-942a-5e3d721b6f43",
+      "file_name": "20220706_GJ_863_100ng_DIA_60min_test_Slot2-9_1_10341.d.zip",
+      "file_size": "3238418069",
+      "file_submitter_id": "20220706_GJ_863_100ng_DIA_60min_test_Slot2-9_1_10341.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "c87514a551a8441a6b467e669597a454"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "3fa978a8-e3fe-4b31-92a8-80bd5f3604a3",
+      "file_name": "20220625_GJ_323_100ng_DIA_60min_test_Slot2-9_1_10084.d.zip",
+      "file_size": "2789851068",
+      "file_submitter_id": "20220625_GJ_323_100ng_DIA_60min_test_Slot2-9_1_10084.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "4485ab24ff16aa4a7a5f51b79c3d3325"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "40a9fc0a-2be0-439b-9edf-8a0eaf324e08",
+      "file_name": "20220624_GJ_848_100ng_DIA_60min_test_Slot2-23_1_10056.d.zip",
+      "file_size": "3352207622",
+      "file_submitter_id": "20220624_GJ_848_100ng_DIA_60min_test_Slot2-23_1_10056.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "0288a921a2f7450bd7973c05e6987b68"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "4313c05c-0576-4438-a658-f1fc6769b1c7",
+      "file_name": "20220706_GJ_735_100ng_DIA_60min_test_Slot2-1_1_10325.d.zip",
+      "file_size": "3112436324",
+      "file_submitter_id": "20220706_GJ_735_100ng_DIA_60min_test_Slot2-1_1_10325.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "8dc5fcf24df677aba3a3574abfbe5e97"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "45a65dbd-10cf-4b6a-91ca-63a9c77f89d2",
+      "file_name": "20220627_GJ_861_100ng_DIA_60min_test_Slot2-1_1_10112.d.zip",
+      "file_size": "3431208551",
+      "file_submitter_id": "20220627_GJ_861_100ng_DIA_60min_test_Slot2-1_1_10112.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "f59c9596972c589ff758e47b86b7869e"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "46b435a4-5b56-4696-8ce0-0d7615a8d436",
+      "file_name": "20220627_GJ_595_100ng_DIA_60min_test_Slot2-8_1_10126.d.zip",
+      "file_size": "2809098457",
+      "file_submitter_id": "20220627_GJ_595_100ng_DIA_60min_test_Slot2-8_1_10126.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "12e03cfb7987622e5a0986c828e894b9"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "507586e0-8f38-445f-ade5-dd33e46a329e",
+      "file_name": "20220703_GJ_956_100ng_DIA_60min_test_Slot2-20_1_10263.d.zip",
+      "file_size": "3223501173",
+      "file_submitter_id": "20220703_GJ_956_100ng_DIA_60min_test_Slot2-20_1_10263.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "f08a2ac4b49726851493598bde3e2593"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "5254d60d-21eb-4aa9-a76e-1664882033ee",
+      "file_name": "20220702_GJ_154_100ng_DIA_60min_test_Slot2-20_1_10221.d.zip",
+      "file_size": "2489617853",
+      "file_submitter_id": "20220702_GJ_154_100ng_DIA_60min_test_Slot2-20_1_10221.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "c6706f71925e3213ec04670ee55705c3"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "5265b965-5049-4725-8ffe-3cece7fea96e",
+      "file_name": "20220708_GJ_611_100ng_DIA_60min_test_Slot2-3_1_10372.d.zip",
+      "file_size": "2941928807",
+      "file_submitter_id": "20220708_GJ_611_100ng_DIA_60min_test_Slot2-3_1_10372.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "6102385d6d8cc1338f2e79af8d2957e8"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "52754737-bfe4-4354-b184-0f3648ac76b9",
+      "file_name": "20220706_GJ_398_100ng_DIA_60min_test_Slot2-6_1_10335.d.zip",
+      "file_size": "2332758389",
+      "file_submitter_id": "20220706_GJ_398_100ng_DIA_60min_test_Slot2-6_1_10335.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "dcf89a9f7370df1f6fb8a8665c621684"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "529894e6-b39d-497a-965e-61311733d721",
+      "file_name": "20220628_GJ_962_100ng_DIA_60min_test_Slot2-26_1_10146.d.zip",
+      "file_size": "3081457562",
+      "file_submitter_id": "20220628_GJ_962_100ng_DIA_60min_test_Slot2-26_1_10146.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "cb309fb011f46c248c789628ba76a422"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "5afc6d7f-54f1-4098-b8dd-2a87372ed0d0",
+      "file_name": "20220624_GJ_128_100ng_DIA_60min_test_Slot2-4_1_10032.d.zip",
+      "file_size": "3377540427",
+      "file_submitter_id": "20220624_GJ_128_100ng_DIA_60min_test_Slot2-4_1_10032.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "c8544e7d32b5eaee952a8bfd4a43772f"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "5c4ed870-f417-487d-be44-7688ac16d154",
+      "file_name": "20220706_GJ_222_100ng_DIA_60min_test_Slot2-8_1_10339.d.zip",
+      "file_size": "3100281396",
+      "file_submitter_id": "20220706_GJ_222_100ng_DIA_60min_test_Slot2-8_1_10339.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "3993bbb8743ed10b49418f3bda9fde39"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "5d664311-90ab-4be2-80b0-3ad948b97ff1",
+      "file_name": "20220706_GJ_864_100ng_DIA_60min_test_Slot2-10_1_10343.d.zip",
+      "file_size": "2342235567",
+      "file_submitter_id": "20220706_GJ_864_100ng_DIA_60min_test_Slot2-10_1_10343.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "605d33f6b3053c4aa8fe2267b0eecaa9"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "612f9bfe-f667-4e0a-bc5e-86c569b17f76",
+      "file_name": "20220704_GJ_138_100ng_DIA_60min_test_Slot2-6_1_10293.d.zip",
+      "file_size": "3090408723",
+      "file_submitter_id": "20220704_GJ_138_100ng_DIA_60min_test_Slot2-6_1_10293.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "be23f66fe21b37843d2a9ab94249aad3"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "65702cfe-6226-4d81-a92d-0fde466ae7bd",
+      "file_name": "20220704_GJ_214_100ng_DIA_60min_test_Slot2-8_1_10297.d.zip",
+      "file_size": "3010001759",
+      "file_submitter_id": "20220704_GJ_214_100ng_DIA_60min_test_Slot2-8_1_10297.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "4ec9623eb8456b56e4456329aa0c6af7"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "6a0ee558-49a4-4767-9137-8eab7a694fdd",
+      "file_name": "20220630_GJ_333_100ng_DIA_60min_test_Slot2-19_1_10175.d.zip",
+      "file_size": "3187953651",
+      "file_submitter_id": "20220630_GJ_333_100ng_DIA_60min_test_Slot2-19_1_10175.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "5c7d8ddf9361d1c079c8e938007b4d65"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "6dfab4ec-6f60-49cc-8bc8-42417cbb75c9",
+      "file_name": "20220629_GJ_351_100ng_DIA_60min_test_Slot2-8_1_10168.d.zip",
+      "file_size": "3286589687",
+      "file_submitter_id": "20220629_GJ_351_100ng_DIA_60min_test_Slot2-8_1_10168.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "c447707f9d5b9a9d798e4d3c7f9a87c6"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "6eea0202-1f61-460b-8617-3a0c5afc7db3",
+      "file_name": "20220702_GJ_172_100ng_DIA_60min_test_Slot2-8_1_10253.d.zip",
+      "file_size": "3284874900",
+      "file_submitter_id": "20220702_GJ_172_100ng_DIA_60min_test_Slot2-8_1_10253.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "425acec821543372d504f1b8b547cd22"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "709d5261-7ec4-43c2-bd57-459283659d8b",
+      "file_name": "20220703_GJ_198_100ng_DIA_60min_test_Slot2-26_1_10275.d.zip",
+      "file_size": "2863014380",
+      "file_submitter_id": "20220703_GJ_198_100ng_DIA_60min_test_Slot2-26_1_10275.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "42da28b9eb6299ee0476d2164618a566"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "73e9f299-519a-45bb-b4b9-25f65bf75742",
+      "file_name": "20220627_GJ_458_100ng_DIA_60min_test_Slot2-5_1_10120.d.zip",
+      "file_size": "3344386941",
+      "file_submitter_id": "20220627_GJ_458_100ng_DIA_60min_test_Slot2-5_1_10120.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "e3bbc03c2f387c9ee362627cb3c66ae2"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "7bb84767-0d8f-4778-a6c5-9caa4bb0a6ac",
+      "file_name": "20220708_GJ_596_100ng_DIA_60min_test_Slot2-6_1_10378.d.zip",
+      "file_size": "2394643799",
+      "file_submitter_id": "20220708_GJ_596_100ng_DIA_60min_test_Slot2-6_1_10378.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "3acf6d587926405f0ea667bd3cd3cbbb"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "7bbdb6db-45ad-4b56-b41c-9ab36f161ec1",
+      "file_name": "20220703_GJ_252_100ng_DIA_60min_test_Slot2-22_1_10267.d.zip",
+      "file_size": "4695193673",
+      "file_submitter_id": "20220703_GJ_252_100ng_DIA_60min_test_Slot2-22_1_10267.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "82683f9d42ab522e78a0a191d14daf99"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "7c76177a-d0f6-4f65-a93a-20a230dd9ce2",
+      "file_name": "20220624_GJ_127_100ng_DIA_60min_test_Slot2-3_1_10030.d.zip",
+      "file_size": "3708859800",
+      "file_submitter_id": "20220624_GJ_127_100ng_DIA_60min_test_Slot2-3_1_10030.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "1165082398e82c7bf23d760b55ed9f72"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "80c0d0ea-ebb4-47e4-b934-01c25cd269e2",
+      "file_name": "20220702_GJ_876_100ng_DIA_60min_test_Slot2-26_1_10233.d.zip",
+      "file_size": "3050029018",
+      "file_submitter_id": "20220702_GJ_876_100ng_DIA_60min_test_Slot2-26_1_10233.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "5160ef3c4523916fea8374171dce2425"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "80e1cb93-44a4-4422-a93f-dc8033228687",
+      "file_name": "20220704_GJ_137_100ng_DIA_60min_test_Slot2-5_1_10291.d.zip",
+      "file_size": "3280208653",
+      "file_submitter_id": "20220704_GJ_137_100ng_DIA_60min_test_Slot2-5_1_10291.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "a4463825bb3267e2cc1a267726a0fd32"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "83ccedec-2aae-40c3-bc4a-60d234ae5b74",
+      "file_name": "20220702_GJ_175_100ng_DIA_60min_test_Slot2-5_1_10247.d.zip",
+      "file_size": "3234970516",
+      "file_submitter_id": "20220702_GJ_175_100ng_DIA_60min_test_Slot2-5_1_10247.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "904929366552b3c23a5fc2c62467587e"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "84ad2f85-6090-4db4-a5a7-0261893b148b",
+      "file_name": "20220703_GJ_955_100ng_DIA_60min_test_Slot2-19_1_10261.d.zip",
+      "file_size": "3313783438",
+      "file_submitter_id": "20220703_GJ_955_100ng_DIA_60min_test_Slot2-19_1_10261.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "d98853b5fbb5c2ee598135b430e31ce0"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "860acf66-4a14-4183-bb06-ffeb9d2edd86",
+      "file_name": "20220706_GJ_523_100ng_DIA_60min_test_Slot2-21_1_10351.d.zip",
+      "file_size": "3271819411",
+      "file_submitter_id": "20220706_GJ_523_100ng_DIA_60min_test_Slot2-21_1_10351.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "669bd56fc4f63591b2fe3088be82e38b"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "865be81e-ebaf-4daf-a91a-fe1fdf9cf699",
+      "file_name": "20220630_GJ_851_100ng_DIA_60min_test_Slot2-23_1_10183.d.zip",
+      "file_size": "2790026292",
+      "file_submitter_id": "20220630_GJ_851_100ng_DIA_60min_test_Slot2-23_1_10183.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "1e82322928e7387fe25820c178dac570"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "87adb11a-db6e-43d8-af0e-3dce6a41a18b",
+      "file_name": "20220629_GJ_477_100ng_DIA_60min_test_Slot2-6_1_10164.d.zip",
+      "file_size": "3439615339",
+      "file_submitter_id": "20220629_GJ_477_100ng_DIA_60min_test_Slot2-6_1_10164.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "f15cc43b1f4a66e9efdac97a84c49dea"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "8aae99e8-2cc5-431b-b12d-b88f17317ff3",
+      "file_name": "20220630_GJ_334_100ng_DIA_60min_test_Slot2-20_1_10177.d.zip",
+      "file_size": "2874839616",
+      "file_submitter_id": "20220630_GJ_334_100ng_DIA_60min_test_Slot2-20_1_10177.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "d71697662486f44b5b43b274847ac070"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "8c46e37b-00ee-475b-8720-121a16dbfab3",
+      "file_name": "20220630_GJ_976_100ng_DIA_60min_test_Slot2-22_1_10181.d.zip",
+      "file_size": "3018767046",
+      "file_submitter_id": "20220630_GJ_976_100ng_DIA_60min_test_Slot2-22_1_10181.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "f78662f991171f6afe6547df547392a4"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "90d152f4-ecaa-40d1-9ce1-93bcfd757c63",
+      "file_name": "20220702_GJ_126_100ng_DIA_60min_test_Slot2-2_1_10241.d.zip",
+      "file_size": "3207867731",
+      "file_submitter_id": "20220702_GJ_126_100ng_DIA_60min_test_Slot2-2_1_10241.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "9fd61837076f5ec7f074d66c5ad04c86"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "932f7ddf-13bd-41dc-9d56-8e9138415b4b",
+      "file_name": "20220702_GJ_127_100ng_DIA_60min_test_Slot2-3_1_10243.d.zip",
+      "file_size": "3422814580",
+      "file_submitter_id": "20220702_GJ_127_100ng_DIA_60min_test_Slot2-3_1_10243.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "3658bbc6206c36f502702840d930c8aa"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "93bd16a3-4946-491d-85bb-c663d843100f",
+      "file_name": "20220628_GJ_227_100ng_DIA_60min_test_Slot2-27_1_10148.d.zip",
+      "file_size": "3473146234",
+      "file_submitter_id": "20220628_GJ_227_100ng_DIA_60min_test_Slot2-27_1_10148.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "9dadaaf2b5a0a1b41fa3206217b0c368"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "952612fe-439a-4b67-add7-7c6372accf3f",
+      "file_name": "20220630_GJ_867_100ng_DIA_60min_test_Slot2-27_1_10191.d.zip",
+      "file_size": "2782320722",
+      "file_submitter_id": "20220630_GJ_867_100ng_DIA_60min_test_Slot2-27_1_10191.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "f05ff780e10d080d55c8e09cab1b76fa"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "99e026c8-47b8-499c-84f9-ea24de0142f2",
+      "file_name": "20220702_GJ_875_100ng_DIA_60min_test_Slot2-25_1_10231.d.zip",
+      "file_size": "3380871280",
+      "file_submitter_id": "20220702_GJ_875_100ng_DIA_60min_test_Slot2-25_1_10231.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "01516bbf2005370b868828d44379bb34"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "9b8a7ff9-7800-47a9-a1c0-a4e63bdccbbe",
+      "file_name": "20220625_GJ_583_100ng_DIA_60min_test_Slot2-1_1_10068.d.zip",
+      "file_size": "3800302278",
+      "file_submitter_id": "20220625_GJ_583_100ng_DIA_60min_test_Slot2-1_1_10068.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "d51418b016a697f6f45300759779ba9f"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "9fe427c3-0839-462f-a8ca-18e7d4cc098f",
+      "file_name": "20220626_GJ_123_100ng_DIA_60min_test_Slot2-25_1_10102.d.zip",
+      "file_size": "3368931485",
+      "file_submitter_id": "20220626_GJ_123_100ng_DIA_60min_test_Slot2-25_1_10102.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "cccf44a8bfe09fb821c7a851b59663a7"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "a07f59ed-48f1-4f5c-a7bb-294bfbeeef03",
+      "file_name": "20220630_GJ_975_100ng_DIA_60min_test_Slot2-21_1_10179.d.zip",
+      "file_size": "3056628935",
+      "file_submitter_id": "20220630_GJ_975_100ng_DIA_60min_test_Slot2-21_1_10179.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "0ba55be71ca861dedbc9a811571b509f"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "a1aa4a1c-661b-4713-ae62-49dec476465f",
+      "file_name": "20220701_GJ_493_100ng_DIA_60min_test_Slot2-3_1_10201.d.zip",
+      "file_size": "3146960238",
+      "file_submitter_id": "20220701_GJ_493_100ng_DIA_60min_test_Slot2-3_1_10201.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "18606aa19c3555041e7a4840c90d0cb8"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "a1c5a3fc-7bd5-457a-b07e-72e3b0afdba2",
+      "file_name": "20220705_GJ_297_100ng_DIA_60min_test_Slot2-19_1_10303.d.zip",
+      "file_size": "3171159373",
+      "file_submitter_id": "20220705_GJ_297_100ng_DIA_60min_test_Slot2-19_1_10303.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "d659640e1ce33f48c60f8ef5dd18f3db"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "a3732ced-6866-40d2-8869-b03e641a7277",
+      "file_name": "20220626_GJ_231_100ng_DIA_60min_test_Slot2-27_1_10106.d.zip",
+      "file_size": "2957801672",
+      "file_submitter_id": "20220626_GJ_231_100ng_DIA_60min_test_Slot2-27_1_10106.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "cc0eca3324c0a5d1a0392eafa2d9bf8d"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "a406b895-6bf2-43a7-b88e-02e30c10c1df",
+      "file_name": "20220629_GJ_612_100ng_DIA_60min_test_Slot2-4_1_10160.d.zip",
+      "file_size": "3038523995",
+      "file_submitter_id": "20220629_GJ_612_100ng_DIA_60min_test_Slot2-4_1_10160.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "4ac9c936b83d4642a2b257d83061f2ee"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "a44239d9-88b3-47f6-85ab-d92079c54265",
+      "file_name": "20220628_GJ_961_100ng_DIA_60min_test_Slot2-25_1_10144.d.zip",
+      "file_size": "3481538957",
+      "file_submitter_id": "20220628_GJ_961_100ng_DIA_60min_test_Slot2-25_1_10144.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "309260f5ca313d64deffd174d4f1979a"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "a6086ada-f7d7-4c6d-a742-905c11a3df1b",
+      "file_name": "20220702_GJ_128_100ng_DIA_60min_test_Slot2-4_1_10245.d.zip",
+      "file_size": "3379986651",
+      "file_submitter_id": "20220702_GJ_128_100ng_DIA_60min_test_Slot2-4_1_10245.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "86ec1c16b183bf9b513ca43bea5a9109"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "a6ce74a7-42a9-473c-922e-97d2a90f7f3d",
+      "file_name": "20220626_GJ_124_100ng_DIA_60min_test_Slot2-26_1_10104.d.zip",
+      "file_size": "2941076691",
+      "file_submitter_id": "20220626_GJ_124_100ng_DIA_60min_test_Slot2-26_1_10104.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "07987c50ba6d0b2c536e3bc01e3369fb"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "a9969838-1210-42b5-a11a-700f9a1209ea",
+      "file_name": "20220624_GJ_972_100ng_DIA_60min_test_Slot2-10_1_10044.d.zip",
+      "file_size": "2782763346",
+      "file_submitter_id": "20220624_GJ_972_100ng_DIA_60min_test_Slot2-10_1_10044.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "8eedb7399c0ce4b38f7421cb7fcfe912"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "ab005670-976b-41e7-8f39-2c857d1d0a3b",
+      "file_name": "20220630_GJ_852_100ng_DIA_60min_test_Slot2-24_1_10185.d.zip",
+      "file_size": "3133632762",
+      "file_submitter_id": "20220630_GJ_852_100ng_DIA_60min_test_Slot2-24_1_10185.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "0f7350bb462b27aec7834a94fc01f60f"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "ab45b9c3-b76e-4bac-9418-37e8e7d9698f",
+      "file_name": "20220702_GJ_972_100ng_DIA_60min_test_Slot2-10_1_10257.d.zip",
+      "file_size": "2902475094",
+      "file_submitter_id": "20220702_GJ_972_100ng_DIA_60min_test_Slot2-10_1_10257.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "d607d8dd1c150b5f00f6df2e14a31bb5"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "ad7a3fae-c3f4-4868-8d3e-d8c946b39f25",
+      "file_name": "20220629_GJ_611_100ng_DIA_60min_test_Slot2-3_1_10158.d.zip",
+      "file_size": "3139876647",
+      "file_submitter_id": "20220629_GJ_611_100ng_DIA_60min_test_Slot2-3_1_10158.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "e9d370c5b45a3efb912084f78d240201"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "aefd84e0-ca80-4264-9808-f4eab8177b27",
+      "file_name": "20220706_GJ_524_100ng_DIA_60min_test_Slot2-22_1_10353.d.zip",
+      "file_size": "3320245123",
+      "file_submitter_id": "20220706_GJ_524_100ng_DIA_60min_test_Slot2-22_1_10353.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "adbdfbd3b08a716751e0a14b738f9124"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "b38347a9-b374-4d92-bc3e-63277eb1528b",
+      "file_name": "20220708_GJ_585_100ng_DIA_60min_test_Slot2-8_1_10382.d.zip",
+      "file_size": "3016721752",
+      "file_submitter_id": "20220708_GJ_585_100ng_DIA_60min_test_Slot2-8_1_10382.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "de5ba71dd1eca1abdd6bc4baae5a4d2b"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "b6160320-ed05-4e12-97bf-41583c83dc44",
+      "file_name": "20220624_GJ_171_100ng_DIA_60min_test_Slot2-7_1_10038.d.zip",
+      "file_size": "5192810573",
+      "file_submitter_id": "20220624_GJ_171_100ng_DIA_60min_test_Slot2-7_1_10038.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "4bea9b35a749337e38d3c971c3612e8d"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "bd4c37d5-557d-4422-b2aa-b7ce498626dd",
+      "file_name": "20220627_GJ_457_100ng_DIA_60min_test_Slot2-4_1_10118.d.zip",
+      "file_size": "3254843740",
+      "file_submitter_id": "20220627_GJ_457_100ng_DIA_60min_test_Slot2-4_1_10118.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "b1ee90f42c701226d9111c0465651f31"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "be1c0c03-6239-4577-9adf-9272a246418c",
+      "file_name": "20220702_GJ_853_100ng_DIA_60min_test_Slot2-21_1_10223.d.zip",
+      "file_size": "3372482800",
+      "file_submitter_id": "20220702_GJ_853_100ng_DIA_60min_test_Slot2-21_1_10223.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "49fa0ebf61034cb50cd00a8f5697c1b5"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "c073f330-148f-4fda-988c-b33ce0c20b43",
+      "file_name": "20220630_GJ_211_100ng_DIA_60min_test_Slot2-25_1_10187.d.zip",
+      "file_size": "2796868728",
+      "file_submitter_id": "20220630_GJ_211_100ng_DIA_60min_test_Slot2-25_1_10187.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "11fa127dad1f79d265aeef404f63bb80"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "c6c7c53f-364c-4ab6-8758-52abbd1e2d5e",
+      "file_name": "20220702_GJ_854_100ng_DIA_60min_test_Slot2-22_1_10225.d.zip",
+      "file_size": "3413062198",
+      "file_submitter_id": "20220702_GJ_854_100ng_DIA_60min_test_Slot2-22_1_10225.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "bc4494165d5d9abc09568d49f0145fa5"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "c95fe98a-99ba-4b92-aca4-a869e235ed4d",
+      "file_name": "20220624_GJ_125_100ng_DIA_60min_test_Slot2-1_1_10026.d.zip",
+      "file_size": "3180589209",
+      "file_submitter_id": "20220624_GJ_125_100ng_DIA_60min_test_Slot2-1_1_10026.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "e899cf6e28ab770b7267f9cbdbdb502c"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "caec4f3f-0e7c-42e5-ac91-f0f0b1ff95be",
+      "file_name": "20220702_GJ_171_100ng_DIA_60min_test_Slot2-7_1_10251.d.zip",
+      "file_size": "3506701285",
+      "file_submitter_id": "20220702_GJ_171_100ng_DIA_60min_test_Slot2-7_1_10251.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "5914849638045abce1ef276e5b936db2"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "cc6303c7-479a-4219-b0b1-2cfffe1dcf1d",
+      "file_name": "20220624_GJ_176_100ng_DIA_60min_test_Slot2-6_1_10036.d.zip",
+      "file_size": "2761478489",
+      "file_submitter_id": "20220624_GJ_176_100ng_DIA_60min_test_Slot2-6_1_10036.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "4065308ebd2d58cc43f48ba86ea15c5a"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "cdc43aa6-d08d-49a8-a393-74d997f502b9",
+      "file_name": "20220628_GJ_873_100ng_DIA_60min_test_Slot2-23_1_10140.d.zip",
+      "file_size": "2462948302",
+      "file_submitter_id": "20220628_GJ_873_100ng_DIA_60min_test_Slot2-23_1_10140.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "3d2be7018e36f939d40434d390c55364"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "d198658f-6f57-4d52-857c-4465bbe4ec93",
+      "file_name": "20220703_GJ_296_100ng_DIA_60min_test_Slot2-28_1_10279.d.zip",
+      "file_size": "2949694127",
+      "file_submitter_id": "20220703_GJ_296_100ng_DIA_60min_test_Slot2-28_1_10279.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "24282b39fea8da659b16e95b9ab331f3"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "d3e84473-44e7-4bbb-89fa-e12645906967",
+      "file_name": "20220628_GJ_874_100ng_DIA_60min_test_Slot2-24_1_10142.d.zip",
+      "file_size": "3251873227",
+      "file_submitter_id": "20220628_GJ_874_100ng_DIA_60min_test_Slot2-24_1_10142.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "55996e7410d21f98aeb29b0d8910d098"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "d47997a2-b17f-40f0-805b-5f4c41e612da",
+      "file_name": "20220708_GJ_568_100ng_DIA_60min_test_Slot2-9_1_10384.d.zip",
+      "file_size": "2544469354",
+      "file_submitter_id": "20220708_GJ_568_100ng_DIA_60min_test_Slot2-9_1_10384.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "6b1275ca89f9cd6c5b19f5d25267b6c3"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "d535f421-b12a-47b0-9584-9c9ce3a447a9",
+      "file_name": "20220624_GJ_971_100ng_DIA_60min_test_Slot2-9_1_10042.d.zip",
+      "file_size": "4471390986",
+      "file_submitter_id": "20220624_GJ_971_100ng_DIA_60min_test_Slot2-9_1_10042.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "713210948737d4711756821651dea242"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "d537cc7b-8e99-462c-bc7a-e352f7585866",
+      "file_name": "20220704_GJ_213_100ng_DIA_60min_test_Slot2-7_1_10295.d.zip",
+      "file_size": "3213099997",
+      "file_submitter_id": "20220704_GJ_213_100ng_DIA_60min_test_Slot2-7_1_10295.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "dba4588154ff094ec40e345a3752b0b9"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "d7bb5dac-604f-4773-8073-105e3e907e73",
+      "file_name": "20220628_GJ_228_100ng_DIA_60min_test_Slot2-28_1_10150.d.zip",
+      "file_size": "3071204323",
+      "file_submitter_id": "20220628_GJ_228_100ng_DIA_60min_test_Slot2-28_1_10150.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "260fd8f85718326f4d92e770b178c677"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "dc63d84b-7157-4afe-9159-ae980128edc6",
+      "file_name": "20220624_GJ_983_100ng_DIA_60min_test_Slot2-26_1_10062.d.zip",
+      "file_size": "3334983148",
+      "file_submitter_id": "20220624_GJ_983_100ng_DIA_60min_test_Slot2-26_1_10062.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "12ff1564d16fc7b749c36839953e1b01"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "dee6d496-6b96-4a72-b7ab-9908ac49eea1",
+      "file_name": "20220625_GJ_584_100ng_DIA_60min_test_Slot2-2_1_10070.d.zip",
+      "file_size": "3041410218",
+      "file_submitter_id": "20220625_GJ_584_100ng_DIA_60min_test_Slot2-2_1_10070.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "c008a322ed10db25375d591d6ae4ae5e"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "df7cbad8-aeef-4bf7-b1ea-0777659dc9f6",
+      "file_name": "20220702_GJ_535_100ng_DIA_60min_test_Slot2-23_1_10227.d.zip",
+      "file_size": "3280208287",
+      "file_submitter_id": "20220702_GJ_535_100ng_DIA_60min_test_Slot2-23_1_10227.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "f0d6a5ad541dd28b9a4a31890fde7a1e"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "e6c4c2ba-9f89-4fed-a25d-dadd85243876",
+      "file_name": "20220626_GJ_585_100ng_DIA_60min_test_Slot2-19_1_10090.d.zip",
+      "file_size": "2631071106",
+      "file_submitter_id": "20220626_GJ_585_100ng_DIA_60min_test_Slot2-19_1_10090.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "69ef2b50706be16024c86a2a456082e4"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "e948fbfe-6510-4e7c-926e-7823c575617c",
+      "file_name": "20220708_GJ_494_100ng_DIA_60min_test_Slot2-2_1_10370.d.zip",
+      "file_size": "3215606176",
+      "file_submitter_id": "20220708_GJ_494_100ng_DIA_60min_test_Slot2-2_1_10370.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "9423de7adcf1760a60958bf31959eec2"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "e96cd1aa-6f40-4b1c-9eac-0a29b0611ea3",
+      "file_name": "20220628_GJ_872_100ng_DIA_60min_test_Slot2-22_1_10138.d.zip",
+      "file_size": "2954859066",
+      "file_submitter_id": "20220628_GJ_872_100ng_DIA_60min_test_Slot2-22_1_10138.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "5a4116953e785288f82ef03b3b9248e1"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "eb2475f9-33b9-4973-8af0-a28a7e11a5f1",
+      "file_name": "20220706_GJ_221_100ng_DIA_60min_test_Slot2-7_1_10337.d.zip",
+      "file_size": "3213099835",
+      "file_submitter_id": "20220706_GJ_221_100ng_DIA_60min_test_Slot2-7_1_10337.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "70410a7528847d6a15725a07ab36549c"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "eed2613a-8373-4cea-8c55-53d3f5121b36",
+      "file_name": "20220627_GJ_596_100ng_DIA_60min_test_Slot2-9_1_10128.d.zip",
+      "file_size": "2209338790",
+      "file_submitter_id": "20220627_GJ_596_100ng_DIA_60min_test_Slot2-9_1_10128.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "95f5dfbbbfb4976156679005a9bd020a"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "ef194ef8-99bb-4992-adf1-c6cc32b1b2ac",
+      "file_name": "20220629_GJ_352_100ng_DIA_60min_test_Slot2-9_1_10170.d.zip",
+      "file_size": "3243206189",
+      "file_submitter_id": "20220629_GJ_352_100ng_DIA_60min_test_Slot2-9_1_10170.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "23a002461a0113aedfb4d5413ea51d5c"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "eff08e53-9a61-4f4a-bca1-8d348ccd769d",
+      "file_name": "20220627_GJ_344_100ng_DIA_60min_test_Slot2-7_1_10124.d.zip",
+      "file_size": "2133812467",
+      "file_submitter_id": "20220627_GJ_344_100ng_DIA_60min_test_Slot2-7_1_10124.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "5fbedf25edcf9d9bd790e077473fa25f"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "f2e3476f-42d0-449c-b613-57cfaba29152",
+      "file_name": "20220624_GJ_847_100ng_DIA_60min_test_Slot2-22_1_10054.d.zip",
+      "file_size": "3337861924",
+      "file_submitter_id": "20220624_GJ_847_100ng_DIA_60min_test_Slot2-22_1_10054.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "782a85d8006a24cde9401196dd7dcd38"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "f5ddb924-d51f-44b6-88c3-3c0655a0b3cd",
+      "file_name": "20220706_GJ_736_100ng_DIA_60min_test_Slot2-2_1_10327.d.zip",
+      "file_size": "3115855882",
+      "file_submitter_id": "20220706_GJ_736_100ng_DIA_60min_test_Slot2-2_1_10327.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "d9f664612249dadb6cdfe8eb4729f75f"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "f604ee66-248c-4781-99a3-6131af325416",
+      "file_name": "20220702_GJ_176_100ng_DIA_60min_test_Slot2-6_1_10249.d.zip",
+      "file_size": "2607903104",
+      "file_submitter_id": "20220702_GJ_176_100ng_DIA_60min_test_Slot2-6_1_10249.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "a43f53c641c02180e2c0becc8340cd43"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "f94a9dd2-4d6e-425f-acf0-f3553c8d12e9",
+      "file_name": "20220627_GJ_343_100ng_DIA_60min_test_Slot2-6_1_10122.d.zip",
+      "file_size": "3330539951",
+      "file_submitter_id": "20220627_GJ_343_100ng_DIA_60min_test_Slot2-6_1_10122.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "60bc1672d92dcdfa1404cafb5cc2b66f"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "f94eb383-9d80-47db-8d18-34dca0f24e5d",
+      "file_name": "20220627_GJ_862_100ng_DIA_60min_test_Slot2-2_1_10114.d.zip",
+      "file_size": "3263051325",
+      "file_submitter_id": "20220627_GJ_862_100ng_DIA_60min_test_Slot2-2_1_10114.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "be845a3c6855d8317d6bc862ca9f59d9"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "fa8b4632-09a6-41f0-8289-111c853e1f1d",
+      "file_name": "20220630_GJ_212_100ng_DIA_60min_test_Slot2-26_1_10189.d.zip",
+      "file_size": "3116096527",
+      "file_submitter_id": "20220630_GJ_212_100ng_DIA_60min_test_Slot2-26_1_10189.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "20a791ea838b58b93726a5025e8983b2"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "fb6b6167-1bf9-4ffa-b09e-6e3f76890a6b",
+      "file_name": "20220702_GJ_971_100ng_DIA_60min_test_Slot2-9_1_10255.d.zip",
+      "file_size": "3274031907",
+      "file_submitter_id": "20220702_GJ_971_100ng_DIA_60min_test_Slot2-9_1_10255.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "d51171210dd7a7799bd525d4346b9aac"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "fbd5de1d-8d18-412c-99a4-ae76237fe013",
+      "file_name": "20220702_GJ_153_100ng_DIA_60min_test_Slot2-19_1_10219.d.zip",
+      "file_size": "3338928461",
+      "file_submitter_id": "20220702_GJ_153_100ng_DIA_60min_test_Slot2-19_1_10219.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "f00c4432390e9db6ae70e2c17595328b"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "fc60c798-159c-43d5-8c61-b1bed9febf8a",
+      "file_name": "20220624_GJ_172_100ng_DIA_60min_test_Slot2-8_1_10040.d.zip",
+      "file_size": "3101385553",
+      "file_submitter_id": "20220624_GJ_172_100ng_DIA_60min_test_Slot2-8_1_10040.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "bd74033e4e814c95fdb764dd74c36864"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "ff1922ec-22f7-43df-a619-3ffa3078c757",
+      "file_name": "20220630_GJ_868_100ng_DIA_60min_test_Slot2-28_1_10193.d.zip",
+      "file_size": "3046380912",
+      "file_submitter_id": "20220630_GJ_868_100ng_DIA_60min_test_Slot2-28_1_10193.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "77089758ab03e6eeb70cba302a86d6cb"
+    },
+    {
+      "data_category": "Raw Mass Spectra",
+      "file_format": "vendor-specific",
+      "file_id": "ff6f57be-14a0-4790-a3b9-adca0495105e",
+      "file_name": "20220624_GJ_126_100ng_DIA_60min_test_Slot2-2_1_10028.d.zip",
+      "file_size": "2963534203",
+      "file_submitter_id": "20220624_GJ_126_100ng_DIA_60min_test_Slot2-2_1_10028.d.zip",
+      "file_type": "Proprietary",
+      "md5sum": "910cdd6b1bac9582bdd04f5b8808d135"
+    }
   ]
 }
