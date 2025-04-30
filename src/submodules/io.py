@@ -19,7 +19,7 @@ FILE_EXT_RE = re.compile(r'^([\w\-%& \\\/=\+]+)\.(.*)$')
 def normalize_fname(s: str) -> str:
     ''' Convert non-alphanumeric characters to underscores.'''
     ret = s
-    ret = re.sub('[^a-zA-Z_]+', ' ', ret)
+    ret = re.sub(r'[^a-zA-Z_]+', ' ', ret)
     ret = re.sub(r'\s+', '_', ret)
     return ret
 

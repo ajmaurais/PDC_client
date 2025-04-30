@@ -68,7 +68,6 @@ Available commands:
 
         with Client(url=args.baseUrl, verify=not args.skipVerify) as client:
             study_id = client.get_study_id(args.pdc_study_id)
-
         if study_id is None:
             LOGGER.error('No study found matching pdc_study_id!\n')
             sys.exit(1)
