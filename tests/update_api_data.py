@@ -15,7 +15,7 @@ from resources.data import FILE_METADATA, ALIQUOT_METADATA, CASE_METADATA
 from PDC_client.submodules.api import Client, BASE_URL
 
 DUPLICATE_FILE_TEST_STUDIES = ['PDC000251']
-STUDIES = ['PDC000504', 'PDC000451'] + DUPLICATE_FILE_TEST_STUDIES
+STUDIES = ['PDC000504', 'PDC000451', 'PDC000592'] + DUPLICATE_FILE_TEST_STUDIES
 
 ENDPOINTS = {'study': 'Study metadata',
              'studyCatalog': 'Study catalog',
@@ -23,10 +23,9 @@ ENDPOINTS = {'study': 'Study metadata',
              'aliquot': 'Aliquot metadata',
              'case': 'Case metadata'}
 
-ENDPOINT_SORT_KEYS = {'study': 'study_id',
+ENDPOINT_SORT_KEYS = {'study': 'study_name',
                      'studyCatalog': 'study_id',
                      'file': 'file_id',
-                     'aliquot': 'aliquot_id',
                      'case': 'case_id'}
 
 TEST_DATA = {'study': STUDY_METADATA,
@@ -140,10 +139,18 @@ def sort_endpoint_data(data: dict|list, name: str) -> dict:
     ValueError: If the endpoint is not in ENDPOINT_SORT_KEYS.
     '''
     if name == 'study':
-        data = sorted(data, key=lambda x: x[ENDPOINT_SORT_KEYS[name]])
-    elif name in ('file', 'aliquot', 'case'):
-        data = {k: sorted(v, key=lambda x: x[ENDPOINT_SORT_KEYS[name]])
-                for k, v in data.items()}
+        new_data = sorted(data, key=lambda x: x[ENDPOINT_SORT_KEYS[name]])
+    elif name in ('file', 'case'):
+        new_data = {k: sorted(v, key=lambda x: x[ENDPOINT_SORT_KEYS[name]])
+                    for k, v in data.items()}
+    elif name == 'aliquot':
+        new_data = dict()
+        for study in data:
+            new_data[study] = []
+            for aliquot in data[study]:
+                aliquot['file_ids'] = sorted(aliquot['file_ids'])
+                new_data[study].append(aliquot)
+            new_data[study] = sorted(new_data[study], key=lambda x: x['file_ids'][0])
     elif name == 'studyCatalog':
         new_data = dict()
         for k in sorted(data.keys()):
@@ -151,7 +158,7 @@ def sort_endpoint_data(data: dict|list, name: str) -> dict:
     else:
         raise ValueError(f'Unknown endpoint {name}.')
 
-    return data
+    return new_data
 
 
 def load_json_to_dict(name):

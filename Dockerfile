@@ -8,7 +8,7 @@ RUN apt-get update && \
     mkdir -p /code/PDC_client/PDC_client /data
 
 COPY src code/PDC_client/src
-COPY setup.py pyproject.toml requirements.txt README.md /code/PDC_client
+COPY setup.py pyproject.toml requirements.txt README.md /code/PDC_client/
 
 RUN cd /code/PDC_client && \
     pip install .
@@ -35,7 +35,7 @@ ENV GIT_UNCOMMITTED_CHANGES=${GIT_UNCOMMITTED_CHANGES}
 ENV GIT_LAST_COMMIT=${GIT_LAST_COMMIT}
 ENV DOCKER_IMAGE=${DOCKER_IMAGE}
 ENV DOCKER_TAG=${DOCKER_TAG}
-ARG PDC_CLIENT_VERSION=${PDC_CLIENT_VERSION}
+ENV PDC_CLIENT_VERSION=${PDC_CLIENT_VERSION}
 
 WORKDIR /data
 ENTRYPOINT ["/usr/local/bin/entrypoint"]

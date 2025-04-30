@@ -233,10 +233,13 @@ def download_file(url: str, ofname: str,
                 with open(ofname, 'wb') as outF:
                     for chunk in response.iter_bytes(chunk_size=8192):
                         outF.write(chunk)
-        except (httpx.TimeoutException, httpx.RequestError):
+        except (httpx.TimeoutException, httpx.RequestError) as e:
+            LOGGER.warning('Failed to download file "%s" because "%s"', ofname, e)
+            LOGGER.warning('Retry %i of %i', tries + 1, n_retries)
             continue
-        except (httpx.HTTPStatusError) as error:
-            LOGGER.error('Failed to download file "%s" because "%s"', ofname, error)
+        except (httpx.HTTPStatusError) as e:
+            LOGGER.warning('Failed to download file "%s" because "%s"', ofname, e)
+            LOGGER.warning('Retry %i of %i', tries + 1, n_retries)
             continue
 
         if expected_md5 is None:

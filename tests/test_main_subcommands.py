@@ -108,7 +108,7 @@ class TestMetadataSubcommand(unittest.TestCase, SkylineAnnotationsTestBase):
     def get_test_study(self, dda=False, seed=1):
         ''' Chose random study to test '''
         dia_studies = [study['pdc_study_id'] for study in api_data.studies.values()
-                       if (not dda) and is_dia(study)]
+                       if ((not dda) and is_dia(study)) or (dda and not is_dia(study))]
         self.assertGreaterEqual(len(dia_studies), 1, 'No DIA studies found in mock data')
         random.seed(seed)
         return random.choice(dia_studies)
@@ -159,6 +159,19 @@ class TestMetadataSubcommand(unittest.TestCase, SkylineAnnotationsTestBase):
         self.assertTrue(os.path.exists(f'{self.work_dir}/{target_file}'),
                         f"target_file '{target_file}' not found in {self.work_dir}")
         self.assertTrue(os.path.getsize(f'{self.work_dir}/{target_file}'))
+
+
+    def test_flatten_dda_fails(self):
+        pdc_study_id = self.get_test_study(dda=True, seed=3)
+        study_id = api_data.get_study_id(pdc_study_id)
+
+        prefix = f'{pdc_study_id}_flatten_tsv_test_'
+        args = ['PDC_client', 'metadata', f'--prefix={prefix}',
+                '--flatten', '--format=tsv',
+                '-u', TEST_URL, study_id]
+        result = setup_functions.run_command(args, self.work_dir, prefix='default')
+        self.assertEqual(result.returncode, 1)
+        self.assertIn('Output format not supported for', result.stderr)
 
 
     def test_invalid_study_id(self):

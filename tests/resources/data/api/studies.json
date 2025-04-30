@@ -1,5 +1,23 @@
 [
   {
+    "aliquots_count": 2,
+    "analytical_fraction": "Acetylome",
+    "cases_count": 2,
+    "experiment_type": "TMT11",
+    "pdc_study_id": "PDC000451",
+    "study_id": "46a0b9b0-9b50-44ec-8a0b-4db245fc4857",
+    "study_name": "CPTAC GBM Confirmatory Study - CompRef Acetylome"
+  },
+  {
+    "aliquots_count": 98,
+    "analytical_fraction": "Proteome",
+    "cases_count": 51,
+    "experiment_type": "Label Free",
+    "pdc_study_id": "PDC000592",
+    "study_id": "7a7edea2-0bd4-41ab-bbee-0474bce8a237",
+    "study_name": "NF-PNET Validation Study - DIA"
+  },
+  {
     "aliquots_count": 84,
     "analytical_fraction": "Proteome",
     "cases_count": 15,
@@ -16,14 +34,5 @@
     "pdc_study_id": "PDC000251",
     "study_id": "f115c648-5027-41ac-91ac-92b24d44f44e",
     "study_name": "Prospective Ovarian JHU N-linked Glycosite-containing peptide"
-  },
-  {
-    "aliquots_count": 2,
-    "analytical_fraction": "Acetylome",
-    "cases_count": 2,
-    "experiment_type": "TMT11",
-    "pdc_study_id": "PDC000451",
-    "study_id": "46a0b9b0-9b50-44ec-8a0b-4db245fc4857",
-    "study_name": "CPTAC GBM Confirmatory Study - CompRef Acetylome"
   }
 ]

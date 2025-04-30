@@ -26,5 +26,13 @@
         "study_id": "eb6aae30-9b42-4fe1-b3ed-22b55d730dfa"
       }
     ]
+  },
+  "PDC000592": {
+    "versions": [
+      {
+        "is_latest_version": true,
+        "study_id": "7a7edea2-0bd4-41ab-bbee-0474bce8a237"
+      }
+    ]
   }
 }
