@@ -696,7 +696,7 @@ class Client():
         return '''query {
             filesPerStudy (study_id: "%s" %s acceptDUA: true) {
                 file_id file_name file_submitter_id md5sum file_size
-                data_category file_type file_format signedUrl {url}}
+                data_category file_type file_format file_location signedUrl {url}}
             }''' % (study_id, data_category_str)
 
 
@@ -731,7 +731,7 @@ class Client():
             return None
 
         keys = ('file_id', 'file_name', 'file_submitter_id', 'md5sum', 'file_size',
-                'data_category', 'file_type', 'file_format')
+                'data_category', 'file_type', 'file_format', 'file_location')
         data = list()
         for file in payload['data']['filesPerStudy']:
             if file['data_category'] == 'Raw Mass Spectra':

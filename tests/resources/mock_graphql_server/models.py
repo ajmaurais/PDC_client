@@ -36,6 +36,7 @@ class FilesPerStudy(graphene.ObjectType):
     data_category = graphene.String(name='data_category')
     file_type = graphene.String(name='file_type')
     file_format = graphene.String(name='file_format')
+    file_location = graphene.String(name='file_location')
     signedUrl = graphene.Field(Url, name='signedUrl')
 
 
