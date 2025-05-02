@@ -701,6 +701,7 @@ class Client():
 
 
     async def async_get_study_raw_files(self, study_id: str,
+                                        use_s3_path: bool=False,
                                         n_files: Optional[int]=None) -> list|None:
         '''
         Async versio of get_study_raw_files
@@ -709,6 +710,8 @@ class Client():
         ----------
         study_id: str
             The study id.
+        use_s3_path: bool
+            If True, use the S3 path for the file URL. If False, use the signed URL.
         n_files: int
             Limit metadata to n files. If None metadata is returned for all files.
 
@@ -736,7 +739,12 @@ class Client():
         for file in payload['data']['filesPerStudy']:
             if file['data_category'] == 'Raw Mass Spectra':
                 new_file = {k: file[k] for k in keys}
-                new_file['url'] = file['signedUrl']['url']
+
+                if use_s3_path:
+                    new_file['url'] = f"s3://pdcdatastore{file['file_location']}"
+                else:
+                    new_file['url'] = file['signedUrl']['url']
+
                 data.append(new_file)
 
         if n_files is not None:

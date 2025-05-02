@@ -156,7 +156,7 @@ Available commands:
                 sys.exit(1)
 
             # download remaining metadata
-            files = client.get_study_raw_files(args.study_id, n_files=args.n_files)
+            files = client.get_study_raw_files(args.study_id, n_files=args.n_files, s3_path=args.s3Path)
             aliquots = client.get_study_aliquots(args.study_id,
                                                  file_ids=[f['file_id'] for f in files])
             cases = client.get_study_cases(args.study_id)
