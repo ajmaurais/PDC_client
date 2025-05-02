@@ -741,7 +741,7 @@ class Client():
                 new_file = {k: file[k] for k in keys}
 
                 if use_s3_path:
-                    new_file['url'] = f"s3://pdcdatastore{file['file_location']}"
+                    new_file['url'] = f"s3://pdcdatastore/{file['file_location']}"
                 else:
                     new_file['url'] = file['signedUrl']['url']
 
