@@ -6,6 +6,7 @@ from hashlib import md5
 import re
 import warnings
 from typing import TextIO
+import subprocess
 
 import httpx
 
@@ -204,6 +205,63 @@ def file_basename(url):
     return None if not match else match.group(1)
 
 
+def http_get(url: str, ofname: str, n_retries: int=2) -> bool:
+    tries = 0
+    while tries < n_retries:
+        tries += 1
+        try:
+            with httpx.stream("GET", url) as response:
+                response.raise_for_status()
+                with open(ofname, 'wb') as outF:
+                    for chunk in response.iter_bytes(chunk_size=8192):
+                        outF.write(chunk)
+        except (httpx.TimeoutException, httpx.RequestError) as e:
+            LOGGER.warning('Failed to download file "%s" because "%s"', ofname, e)
+            LOGGER.warning('Retry %i of %i', tries + 1, n_retries)
+            continue
+        except (httpx.HTTPStatusError) as e:
+            LOGGER.warning('Failed to download file "%s" because "%s"', ofname, e)
+            LOGGER.warning('Retry %i of %i', tries + 1, n_retries)
+            continue
+
+        return True
+
+    LOGGER.error('Failed to download file "%s" after %d attempt(s)', ofname, n_retries)
+    return False
+
+
+def s3_get(path: str, ofname: str, aws_profile: str|None = None) -> bool:
+    '''
+    Download a file from S3.
+
+    Parameters:
+        path (str): The s3 path
+        ofname (str): The name of the file to write.
+        aws_profile (str): The AWS profile to use. None to use the default profile.
+
+    Returns:
+        sucess (bool): True if sucessfull, False if not.
+    '''
+
+    cmd = ["aws", "s3"]
+    if aws_profile:
+        cmd += ["--profile", aws_profile]
+    cmd += ["cp", path, ofname]
+
+    try:
+        status = subprocess.run(
+            cmd, text=True, check=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE
+        )
+    except subprocess.CalledProcessError as e:
+        msg = e.stderr.strip() or e.stdout.strip()
+        LOGGER.error('Failed to download %s: %s', path, msg)
+        return False
+
+    return True
+
+
 def download_file(url: str, ofname: str,
                   expected_md5: str=None, expected_size: int=None,
                   n_retries:int=2) -> bool:
@@ -223,37 +281,27 @@ def download_file(url: str, ofname: str,
     Returns:
         sucess (bool): True if sucessfull, False if not.
     '''
+    protocol = url.split(':')[0]
 
-    tries = 0
-    while tries < n_retries:
-        tries += 1
-        try:
-            with httpx.stream("GET", url) as response:
-                response.raise_for_status()
-                with open(ofname, 'wb') as outF:
-                    for chunk in response.iter_bytes(chunk_size=8192):
-                        outF.write(chunk)
-        except (httpx.TimeoutException, httpx.RequestError) as e:
-            LOGGER.warning('Failed to download file "%s" because "%s"', ofname, e)
-            LOGGER.warning('Retry %i of %i', tries + 1, n_retries)
-            continue
-        except (httpx.HTTPStatusError) as e:
-            LOGGER.warning('Failed to download file "%s" because "%s"', ofname, e)
-            LOGGER.warning('Retry %i of %i', tries + 1, n_retries)
-            continue
-
-        if expected_md5 is None:
-            LOGGER.warning('Skipping md5 check for file "%s"', ofname)
-        elif md5_sum(ofname) != expected_md5:
-            LOGGER.error('Expected MD5 checksum does not match for file "%s"', ofname)
+    if protocol in ('http', 'https'):
+        if not http_get(url, ofname, n_retries):
             return False
-
-        if expected_size is None:
-            LOGGER.warning('Skipping size check for file "%s"', ofname)
-        elif os.path.getsize(ofname) != expected_size:
-            LOGGER.error('Expected file size does not match for file "%s"', ofname)
+    elif protocol == 's3':
+        if not s3_get(url, ofname):
             return False
-        return True
+    else:
+        LOGGER.error('Unknown protocol "%s" for file "%s"', protocol, ofname)
+        return False
 
-    LOGGER.error('Failed to download file "%s" after %d attempt(s)', ofname, n_retries)
-    return False
+    if expected_md5 is None:
+        LOGGER.warning('Skipping md5 check for file "%s"', ofname)
+    elif md5_sum(ofname) != expected_md5:
+        LOGGER.error('Expected MD5 checksum does not match for file "%s"', ofname)
+        return False
+
+    if expected_size is None:
+        LOGGER.warning('Skipping size check for file "%s"', ofname)
+    elif os.path.getsize(ofname) != expected_size:
+        LOGGER.error('Expected file size does not match for file "%s"', ofname)
+        return False
+    return True

@@ -137,6 +137,8 @@ Available commands:
         f_args.add_argument('--flatten', default=False, action='store_true',
                             help='Combine metadata into a single flat file. '
                                  'Only compatable with DIA data.')
+        f_args.add_argument('--s3Path', default=False, action='store_true',
+                            help='Use S3 path instaed of URL for file download.')
 
         parser.add_argument('study_id', help='The study id.')
         args = parser.parse_args(self.argv[start:])
