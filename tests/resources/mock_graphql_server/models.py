@@ -15,6 +15,7 @@ class Study(graphene.ObjectType):
     study_id = graphene.ID(name='study_id')
     pdc_study_id = graphene.String(name='pdc_study_id')
     study_name = graphene.String(name='study_name')
+    study_submitter_id = graphene.String(name='study_submitter_id')
     analytical_fraction = graphene.String(name='analytical_fraction')
     experiment_type = graphene.String(name='experiment_type')
     cases_count = graphene.Int(name='cases_count')

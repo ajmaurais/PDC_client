@@ -6,16 +6,8 @@
     "experiment_type": "TMT11",
     "pdc_study_id": "PDC000451",
     "study_id": "46a0b9b0-9b50-44ec-8a0b-4db245fc4857",
-    "study_name": "CPTAC GBM Confirmatory Study - CompRef Acetylome"
-  },
-  {
-    "aliquots_count": 98,
-    "analytical_fraction": "Proteome",
-    "cases_count": 51,
-    "experiment_type": "Label Free",
-    "pdc_study_id": "PDC000592",
-    "study_id": "7a7edea2-0bd4-41ab-bbee-0474bce8a237",
-    "study_name": "NF-PNET Validation Study - DIA"
+    "study_name": "CPTAC GBM Confirmatory Study - CompRef Acetylome",
+    "study_submitter_id": "CPTAC GBM Confirmatory Study - CompRef Acetylome"
   },
   {
     "aliquots_count": 84,
@@ -24,7 +16,18 @@
     "experiment_type": "Label Free",
     "pdc_study_id": "PDC000504",
     "study_id": "eb6aae30-9b42-4fe1-b3ed-22b55d730dfa",
-    "study_name": "CPTAC PDAC BioTExt - Proteome"
+    "study_name": "CPTAC PDAC BioTExt - Proteome",
+    "study_submitter_id": "CPTAC PDAC BioTExt - Proteome"
+  },
+  {
+    "aliquots_count": 98,
+    "analytical_fraction": "Proteome",
+    "cases_count": 51,
+    "experiment_type": "Label Free",
+    "pdc_study_id": "PDC000592",
+    "study_id": "7a7edea2-0bd4-41ab-bbee-0474bce8a237",
+    "study_name": "NF-PNET Validation Study - DIA",
+    "study_submitter_id": "NF-PNET Validation Study - DIA"
   },
   {
     "aliquots_count": 118,
@@ -33,6 +36,7 @@
     "experiment_type": "TMT10",
     "pdc_study_id": "PDC000251",
     "study_id": "f115c648-5027-41ac-91ac-92b24d44f44e",
-    "study_name": "Prospective Ovarian JHU N-linked Glycosite-containing peptide"
+    "study_name": "Prospective Ovarian JHU N-linked Glycosite-containing peptide",
+    "study_submitter_id": "Prospective Ovarian JHU N-linked Glycosite-containing peptide v2"
   }
 ]

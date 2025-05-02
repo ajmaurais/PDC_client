@@ -7,7 +7,7 @@ import random
 
 from resources.setup_functions import make_work_dir, run_command
 from resources import TEST_DIR
-from resources.data import FILE_METADATA, ALIQUOT_METADATA, CASE_METADATA, STUDY_METADATA
+from resources.data import FILE_METADATA, SAMPLE_METADATA, CASE_METADATA, STUDY_METADATA
 from resources.data import PDC_TEST_URLS, TEST_URLS
 
 from PDC_client.submodules import io

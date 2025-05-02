@@ -45,10 +45,10 @@ class Client():
         Gets the PDC study ID for a given study ID.
     get_study_name(study_id: str) -> str:
         Gets the study name for a given study ID.
-    async async_get_study_aliquots(study_id: str, file_ids: Optional[list]=None, page_limit: int=100) -> list:
-        Asynchronously gets the aliquots for a study.
-    get_study_aliquots(study_id: str, **kwargs) -> list|None:
-        Gets the aliquots for a study.
+    async async_get_study_samples(study_id: str, file_ids: Optional[list]=None, page_limit: int=100) -> list:
+        Asynchronously gets the samples and aliquots for a study.
+    get_study_samples(study_id: str, **kwargs) -> list|None:
+        Gets the samples and aliquots for a study.
     async async_get_study_cases(study_id: str, page_limit: int=100) -> list|None:
         Asynchronously gets the cases for a study.
     get_study_cases(study_id: str, **kwargs) -> list|None:
@@ -296,7 +296,7 @@ class Client():
     def _study_metadata_query(id_name, query_id):
         return '''query={
             study (%s: "%s" acceptDUA: true) {
-                study_id pdc_study_id study_name
+                study_id pdc_study_id study_name study_submitter_id
                 analytical_fraction experiment_type
                 cases_count aliquots_count
             }
@@ -510,11 +510,11 @@ class Client():
             } ''' % study_id
 
 
-    async def async_get_study_aliquots(self, study_id: str,
-                                       file_ids: Optional[list]=None,
-                                       page_limit: int=100) -> list:
+    async def async_get_study_samples(self, study_id: str,
+                                      file_ids: Optional[list]=None,
+                                      page_limit: int=100) -> list:
         '''
-        Async version of get_study_aliquots.
+        Async version of get_study_samples.
 
         Parameters
         ----------
@@ -599,16 +599,16 @@ class Client():
         return aliquots
 
 
-    def get_study_aliquots(self, study_id: str, **kwargs) -> list|None:
+    def get_study_samples(self, study_id: str, **kwargs) -> list|None:
         '''
-        Get metadata for all aliquots in a study.
+        Get metadata for all samples and aliquots in a study.
 
         Parameters
         ----------
         study_id: str
             The study ID.
         kwargs: dict
-            Additional kwargs passed to async_get_study_aliquots
+            Additional kwargs passed to async_get_study_samples
 
         Returns
         -------
@@ -616,7 +616,7 @@ class Client():
             A list of aliquots in the study where each list element is metadata for each aliquot
             or None if no cases could be found for study_id.
         '''
-        return self._loop.run_until_complete(self.async_get_study_aliquots(study_id, **kwargs))
+        return self._loop.run_until_complete(self.async_get_study_samples(study_id, **kwargs))
 
 
     @staticmethod

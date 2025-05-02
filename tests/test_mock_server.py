@@ -513,9 +513,9 @@ class TestClient(TestGraphQLServerBase):
             self.assertDictEqual(test_data[study_id], version)
 
 
-    def test_get_study_aliquots(self):
+    def test_get_study_samples(self):
         study_id = api_data.get_study_id(self.TEST_PDC_STUDY_ID)
-        pdc_data, test_data = self.get_data_pair('get_study_aliquots', study_id, page_limit=50)
+        pdc_data, test_data = self.get_data_pair('get_study_samples', study_id, page_limit=50)
 
         self.assertEqual(len(pdc_data), len(test_data))
         pdc_data = data_list_to_dict(pdc_data, 'aliquot_id')
@@ -528,11 +528,11 @@ class TestClient(TestGraphQLServerBase):
 
     def test_get_study_cases(self):
         study_id = api_data.get_study_id(self.TEST_PDC_STUDY_ID)
-        pdc_data, test_data = self.get_data_pair('get_study_aliquots', study_id, page_limit=50)
+        pdc_data, test_data = self.get_data_pair('get_study_cases', study_id, page_limit=50)
 
         self.assertEqual(len(pdc_data), len(test_data))
-        pdc_data = data_list_to_dict(pdc_data, 'aliquot_id')
-        test_data = data_list_to_dict(test_data, 'aliquot_id')
+        pdc_data = data_list_to_dict(pdc_data, 'case_id')
+        test_data = data_list_to_dict(test_data, 'case_id')
 
         for case_id, case in pdc_data.items():
             self.assertIn(case_id, test_data)

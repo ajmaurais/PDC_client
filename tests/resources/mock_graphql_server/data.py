@@ -3,7 +3,7 @@ import json
 from typing import Generator
 
 from ..data import STUDY_METADATA, STUDY_CATALOG, FILE_METADATA
-from ..data import ALIQUOT_METADATA, CASE_METADATA
+from ..data import SAMPLE_METADATA, CASE_METADATA
 
 class Data:
     def __init__(self):
@@ -43,7 +43,7 @@ class Data:
                 self.index_study_file_ids[study_id].append(file['file_id'])
 
         # read aliquot data
-        with open(ALIQUOT_METADATA, 'r', encoding='utf-8') as inF:
+        with open(SAMPLE_METADATA, 'r', encoding='utf-8') as inF:
             aliquot_data = json.load(inF)
 
         self.index_study_cases = dict()

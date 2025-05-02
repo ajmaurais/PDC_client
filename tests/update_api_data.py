@@ -10,7 +10,7 @@ import random
 from uuid import UUID
 
 from resources.data import STUDY_METADATA, STUDY_CATALOG
-from resources.data import FILE_METADATA, ALIQUOT_METADATA, CASE_METADATA
+from resources.data import FILE_METADATA, SAMPLE_METADATA, CASE_METADATA
 
 from PDC_client.submodules.api import Client, BASE_URL
 
@@ -20,7 +20,7 @@ STUDIES = ['PDC000504', 'PDC000451', 'PDC000592'] + DUPLICATE_FILE_TEST_STUDIES
 ENDPOINTS = {'study': 'Study metadata',
              'studyCatalog': 'Study catalog',
              'file': 'File metadata',
-             'aliquot': 'Aliquot metadata',
+             'samples': 'Sample metadata',
              'case': 'Case metadata'}
 
 ENDPOINT_SORT_KEYS = {'study': 'study_name',
@@ -31,7 +31,7 @@ ENDPOINT_SORT_KEYS = {'study': 'study_name',
 TEST_DATA = {'study': STUDY_METADATA,
              'studyCatalog': STUDY_CATALOG,
              'file': FILE_METADATA,
-             'aliquot': ALIQUOT_METADATA,
+             'sample': SAMPLE_METADATA,
              'case': CASE_METADATA}
 
 # ANSI color codes
@@ -143,13 +143,13 @@ def sort_endpoint_data(data: dict|list, name: str) -> dict:
     elif name in ('file', 'case'):
         new_data = {k: sorted(v, key=lambda x: x[ENDPOINT_SORT_KEYS[name]])
                     for k, v in data.items()}
-    elif name == 'aliquot':
+    elif name == 'sample':
         new_data = dict()
         for study in data:
             new_data[study] = []
-            for aliquot in data[study]:
-                aliquot['file_ids'] = sorted(aliquot['file_ids'])
-                new_data[study].append(aliquot)
+            for sample in data[study]:
+                sample['file_ids'] = sorted(sample['file_ids'])
+                new_data[study].append(sample)
             new_data[study] = sorted(new_data[study], key=lambda x: x['file_ids'][0])
     elif name == 'studyCatalog':
         new_data = dict()
@@ -293,7 +293,7 @@ async def download_metadata(pdc_study_ids, endpoints, url=BASE_URL):
         study_metadata_tasks = list()
         study_catalog_tasks = list()
         file_tasks = list()
-        aliquot_tasks = list()
+        sample_tasks = list()
         case_tasks = list()
         async with asyncio.TaskGroup() as tg:
             for study in study_ids:
@@ -309,9 +309,9 @@ async def download_metadata(pdc_study_ids, endpoints, url=BASE_URL):
                     file_tasks.append(
                         tg.create_task(client.async_get_study_raw_files(study))
                     )
-                if 'aliquot' in endpoints:
-                    aliquot_tasks.append(
-                        tg.create_task(client.async_get_study_aliquots(study))
+                if 'sample' in endpoints:
+                    sample_tasks.append(
+                        tg.create_task(client.async_get_study_samples(study))
                     )
                 if 'case' in endpoints:
                     case_tasks.append(
@@ -339,11 +339,11 @@ async def download_metadata(pdc_study_ids, endpoints, url=BASE_URL):
                 raw_files[study][i].pop('url')
         raw_files = sort_endpoint_data(raw_files, 'file')
 
-    aliquots = None
-    if 'aliquot' in endpoints:
-        aliquots = sort_endpoint_data({study_ids[study]: task.result()
-                                      for study, task in zip(study_ids.keys(), aliquot_tasks)},
-                                      'aliquot')
+    samples = None
+    if 'sample' in endpoints:
+        samples = sort_endpoint_data({study_ids[study]: task.result()
+                                      for study, task in zip(study_ids.keys(), sample_tasks)},
+                                      'sample')
 
     cases = None
     if 'case' in endpoints:
@@ -354,7 +354,7 @@ async def download_metadata(pdc_study_ids, endpoints, url=BASE_URL):
     return {'study': study_metadata,
             'studyCatalog': study_catalog,
             'file': raw_files,
-            'aliquot': aliquots,
+            'sample': samples,
             'case': cases}
 
 
@@ -368,7 +368,7 @@ def filter_old_data(test_data):
         data['study'][1] = [study for study in data['study'][1] if study['study_id'] in study_ids]
 
     # filter File metadata
-    for endpoint in ['file', 'aliquot', 'case']:
+    for endpoint in ['file', 'sample', 'case']:
         if endpoint in data and isinstance(data[endpoint][1], dict):
             data[endpoint][1] = {k: v for k, v in data[endpoint][1].items()
                                  if k in data[endpoint][0]}
