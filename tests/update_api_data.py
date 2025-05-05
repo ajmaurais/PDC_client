@@ -72,7 +72,7 @@ def get_diff(lhs, rhs, name):
     diff: list
         A line with each line of the diff text between lhs and rhs.
     '''
-    lhs_s, rhs_s = [json.dumps(x, indent=2, sort_keys=True).splitlines() for x in [lhs, rhs]]
+    lhs_s, rhs_s = [json.dumps(x, indent=2, sort_keys=False).splitlines() for x in [lhs, rhs]]
 
     diff = difflib.unified_diff(lhs_s, rhs_s,
                                 fromfile='' if name is None else f'Old {name}',
@@ -108,7 +108,7 @@ def print_diff(diff, color=True):
 
 
 def n_diff(lhs, rhs):
-    lhs_s, rhs_s = [json.dumps(x, indent=2, sort_keys=True).splitlines() for x in [lhs, rhs]]
+    lhs_s, rhs_s = [json.dumps(x, indent=2, sort_keys=False).splitlines() for x in [lhs, rhs]]
 
     added = 0
     removed = 0
@@ -228,7 +228,7 @@ def update_test_data(files, color=True):
             removed_s = '-' * round(removed / plot_divisor)
 
             with open(TEST_DATA[files[name][1]], 'w', encoding='utf-8') as outF:
-                json.dump(files[name][0], outF, indent=2, sort_keys=True)
+                json.dump(files[name][0], outF, indent=2, sort_keys=False)
 
             if color and sys.stdout.isatty():
                 plot_line = f'{GREEN}{added_s}{RESET}{RED}{removed_s}{RESET}'
@@ -277,7 +277,7 @@ def add_duplicate_files(files, studies):
             'md5sum': '26ab0db90d72e28ad0ba1e22ee510510'
         })
 
-    return files
+    return sort_nested_dicts(files)
 
 
 async def download_metadata(pdc_study_ids, endpoints, url=BASE_URL):
@@ -292,7 +292,6 @@ async def download_metadata(pdc_study_ids, endpoints, url=BASE_URL):
                 )
         study_metadata = {pdc_id: task.result() for pdc_id, task in zip(pdc_study_ids, study_metadata_tasks)}
         study_ids = {study['study_id']: study['pdc_study_id'] for study in study_metadata.values()}
-        # study_ids = {task.result(): pdc_id for pdc_id, task in zip(pdc_study_ids, study_id_tasks)}
 
         study_metadata_tasks = list()
         study_catalog_tasks = list()
@@ -421,7 +420,7 @@ def main():
     # add duplicate files to test data
     if 'file' in args.endpoints:
         api_data['file'] = add_duplicate_files(api_data['file'],
-                                            [study for study in DUPLICATE_FILE_TEST_STUDIES
+                                               [study for study in DUPLICATE_FILE_TEST_STUDIES
                                                 if study in pdc_study_ids])
 
     test_data = {key: [api_data[key], key] for key, data in api_data.items()
