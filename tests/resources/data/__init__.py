@@ -8,7 +8,7 @@ STUDY_METADATA = f'{TEST_DIR}/resources/data/api/studies.json'
 STUDY_CATALOG = f'{TEST_DIR}/resources/data/api/study_catalog.json'
 EXPERIMENT_METADATA = f'{TEST_DIR}/resources/data/api/experiments.json'
 FILE_METADATA = f'{TEST_DIR}/resources/data/api/files.json'
-SAMPLE_METADATA = f'{TEST_DIR}/resources/data/api/aliquots.json'
+SAMPLE_METADATA = f'{TEST_DIR}/resources/data/api/samples.json'
 CASE_METADATA = f'{TEST_DIR}/resources/data/api/cases.json'
 
 PDC_TEST_URLS = f'{TEST_DIR}/resources/data/test_urls.json'

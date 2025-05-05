@@ -25,16 +25,11 @@ ENDPOINTS = {'study': 'Study metadata',
              'samples': 'Sample metadata',
              'case': 'Case metadata'}
 
-ENDPOINT_SORT_KEYS = {'study': 'study_name',
-                     'studyCatalog': 'study_id',
-                     'file': 'file_id',
-                     'case': 'case_id'}
-
 TEST_DATA = {'study': STUDY_METADATA,
              'studyCatalog': STUDY_CATALOG,
              'experiment': EXPERIMENT_METADATA,
              'file': FILE_METADATA,
-             'sample': SAMPLE_METADATA,
+             'samples': SAMPLE_METADATA,
              'case': CASE_METADATA}
 
 # ANSI color codes
@@ -318,7 +313,7 @@ async def download_metadata(pdc_study_ids, endpoints, url=BASE_URL):
                     experiment_tasks.append(
                         tg.create_task(client.async_get_experimental_metadata(study_submitter_id))
                     )
-                if 'sample' in endpoints:
+                if 'samples' in endpoints:
                     sample_tasks.append(
                         tg.create_task(client.async_get_study_samples(study))
                     )
@@ -353,7 +348,7 @@ async def download_metadata(pdc_study_ids, endpoints, url=BASE_URL):
         raw_files = sort_nested_dicts(raw_files)
 
     samples = None
-    if 'sample' in endpoints:
+    if 'samples' in endpoints:
         samples = sort_nested_dicts({study_ids[study]: task.result()
                                      for study, task in zip(study_ids.keys(), sample_tasks)})
 
@@ -366,7 +361,7 @@ async def download_metadata(pdc_study_ids, endpoints, url=BASE_URL):
             'studyCatalog': study_catalog,
             'experiment': experiment_metadata,
             'file': raw_files,
-            'sample': samples,
+            'samples': samples,
             'case': cases}
 
 
