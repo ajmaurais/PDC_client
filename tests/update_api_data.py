@@ -7,9 +7,10 @@ import difflib
 import subprocess
 import asyncio
 import random
+from typing import Any
 from uuid import UUID
 
-from resources.data import STUDY_METADATA, STUDY_CATALOG
+from resources.data import STUDY_METADATA, STUDY_CATALOG, EXPERIMENT_METADATA
 from resources.data import FILE_METADATA, SAMPLE_METADATA, CASE_METADATA
 
 from PDC_client.submodules.api import Client, BASE_URL
@@ -19,6 +20,7 @@ STUDIES = ['PDC000504', 'PDC000451', 'PDC000592'] + DUPLICATE_FILE_TEST_STUDIES
 
 ENDPOINTS = {'study': 'Study metadata',
              'studyCatalog': 'Study catalog',
+             'experiment': 'Experiment metadata',
              'file': 'File metadata',
              'samples': 'Sample metadata',
              'case': 'Case metadata'}
@@ -30,6 +32,7 @@ ENDPOINT_SORT_KEYS = {'study': 'study_name',
 
 TEST_DATA = {'study': STUDY_METADATA,
              'studyCatalog': STUDY_CATALOG,
+             'experiment': EXPERIMENT_METADATA,
              'file': FILE_METADATA,
              'sample': SAMPLE_METADATA,
              'case': CASE_METADATA}
@@ -118,47 +121,46 @@ def n_diff(lhs, rhs):
     return added, removed
 
 
-def sort_endpoint_data(data: dict|list, name: str) -> dict:
+def _element_key(elem: Any) -> Any:
     '''
-    Sort the data for a given endpoint based off ENDPOINT_SORT_KEYS.
-
-    Parameters
-    ----------
-    data: dict|list
-        The data to be sorted.
-    name: str
-        The name of the endpoint that is being sorted.
-
-    Returns
-    -------
-    data: dict
-        The sorted data.
-
-    Raises
-    ------
-    ValueError: If the endpoint is not in ENDPOINT_SORT_KEYS.
+    Turn elem into something Python can compare across types:
+      - dict -> tuple of (key, value_key) pairs in key order
+      - list -> tuple of element_keys
+      - string -> itself
     '''
-    if name == 'study':
-        new_data = sorted(data, key=lambda x: x[ENDPOINT_SORT_KEYS[name]])
-    elif name in ('file', 'case'):
-        new_data = {k: sorted(v, key=lambda x: x[ENDPOINT_SORT_KEYS[name]])
-                    for k, v in data.items()}
-    elif name == 'sample':
-        new_data = dict()
-        for study in data:
-            new_data[study] = []
-            for sample in data[study]:
-                sample['file_ids'] = sorted(sample['file_ids'])
-                new_data[study].append(sample)
-            new_data[study] = sorted(new_data[study], key=lambda x: x['file_ids'][0])
-    elif name == 'studyCatalog':
-        new_data = dict()
-        for k in sorted(data.keys()):
-            new_data[k] = {'versions': sorted(data[k]['versions'], key=lambda x: x['study_id'])}
+    if isinstance(elem, dict):
+        return tuple((k, _element_key(elem[k])) for k in sorted(elem))
+    if isinstance(elem, list):
+        return tuple(_element_key(item) for item in elem)
+    return elem
+
+
+def sort_nested_dicts(obj: Any) -> Any:
+    '''
+    Recursively sort nested dictionaries by their keys.
+
+    This function processes dictionaries, lists, and other data types recursively:
+    - If the input is a dictionary, it returns a new dictionary with keys sorted
+        in ascending order and values processed recursively.
+    - If the input is a list, it returns a new list with each element processed
+        recursively.
+    - For all other data types, the input is returned unchanged.
+
+    Args:
+        obj (Any): The input object to be processed. Can be a dictionary, list,
+                   or any other data type.
+
+    Returns:
+        Any: A new object with dictionaries sorted by keys and nested structures
+             processed recursively.
+    '''
+    if isinstance(obj, dict):
+        return {k: sort_nested_dicts(obj[k]) for k in sorted(obj)}
+    elif isinstance(obj, list):
+        canon = [sort_nested_dicts(elem) for elem in obj]
+        return sorted(canon, key=_element_key)
     else:
-        raise ValueError(f'Unknown endpoint {name}.')
-
-    return new_data
+        return obj
 
 
 def load_json_to_dict(name):
@@ -178,7 +180,7 @@ def load_json_to_dict(name):
         return ''
 
     data = json.loads(text)
-    return sort_endpoint_data(data, name)
+    return sort_nested_dicts(data)
 
 
 def update_test_data(files, color=True):
@@ -282,16 +284,19 @@ async def download_metadata(pdc_study_ids, endpoints, url=BASE_URL):
     ''' download all study_ids for pdc_study_ids '''
 
     async with Client(timeout=30, url=url) as client:
-        study_id_tasks = list()
+        study_metadata_tasks = list()
         async with asyncio.TaskGroup() as tg:
             for study in pdc_study_ids:
-                study_id_tasks.append(
-                    tg.create_task(client.async_get_study_id(pdc_study_id=study))
+                study_metadata_tasks.append(
+                    tg.create_task(client.async_get_study_metadata(pdc_study_id=study))
                 )
-        study_ids = {task.result(): pdc_id for pdc_id, task in zip(pdc_study_ids, study_id_tasks)}
+        study_metadata = {pdc_id: task.result() for pdc_id, task in zip(pdc_study_ids, study_metadata_tasks)}
+        study_ids = {study['study_id']: study['pdc_study_id'] for study in study_metadata.values()}
+        # study_ids = {task.result(): pdc_id for pdc_id, task in zip(pdc_study_ids, study_id_tasks)}
 
         study_metadata_tasks = list()
         study_catalog_tasks = list()
+        experiment_tasks = list()
         file_tasks = list()
         sample_tasks = list()
         case_tasks = list()
@@ -309,6 +314,11 @@ async def download_metadata(pdc_study_ids, endpoints, url=BASE_URL):
                     file_tasks.append(
                         tg.create_task(client.async_get_study_raw_files(study))
                     )
+                if 'experiment' in endpoints:
+                    study_submitter_id = study_metadata[study_ids[study]]['study_submitter_id']
+                    experiment_tasks.append(
+                        tg.create_task(client.async_get_experimental_metadata(study_submitter_id))
+                    )
                 if 'sample' in endpoints:
                     sample_tasks.append(
                         tg.create_task(client.async_get_study_samples(study))
@@ -320,13 +330,17 @@ async def download_metadata(pdc_study_ids, endpoints, url=BASE_URL):
 
     study_metadata = None
     if 'study' in endpoints:
-        study_metadata = sort_endpoint_data([task.result() for task in study_metadata_tasks], 'study')
+        study_metadata = sort_nested_dicts([task.result() for task in study_metadata_tasks])
 
     study_catalog = None
     if 'studyCatalog' in endpoints:
-        study_catalog = sort_endpoint_data({study_ids[study]: task.result()
-                                            for study, task in zip(study_ids.keys(), study_catalog_tasks)},
-                                            'studyCatalog')
+        study_catalog = sort_nested_dicts({study_ids[study]: task.result()
+                                           for study, task in zip(study_ids.keys(), study_catalog_tasks)})
+
+    experiment_metadata = None
+    if 'experiment' in endpoints:
+        experiment_metadata = sort_nested_dicts({study_ids[study]: task.result()
+                                                 for study, task in zip(study_ids.keys(), experiment_tasks)})
 
     raw_files = None
     if 'file' in endpoints:
@@ -337,22 +351,21 @@ async def download_metadata(pdc_study_ids, endpoints, url=BASE_URL):
         for study in raw_files:
             for i in range(len(raw_files[study])):
                 raw_files[study][i].pop('url')
-        raw_files = sort_endpoint_data(raw_files, 'file')
+        raw_files = sort_nested_dicts(raw_files)
 
     samples = None
     if 'sample' in endpoints:
-        samples = sort_endpoint_data({study_ids[study]: task.result()
-                                      for study, task in zip(study_ids.keys(), sample_tasks)},
-                                      'sample')
+        samples = sort_nested_dicts({study_ids[study]: task.result()
+                                     for study, task in zip(study_ids.keys(), sample_tasks)})
 
     cases = None
     if 'case' in endpoints:
-        cases = sort_endpoint_data({study_ids[study]: task.result()
-                                    for study, task in zip(study_ids.keys(), case_tasks)},
-                                    'case')
+        cases = sort_nested_dicts({study_ids[study]: task.result()
+                                   for study, task in zip(study_ids.keys(), case_tasks)})
 
     return {'study': study_metadata,
             'studyCatalog': study_catalog,
+            'experiment': experiment_metadata,
             'file': raw_files,
             'sample': samples,
             'case': cases}
