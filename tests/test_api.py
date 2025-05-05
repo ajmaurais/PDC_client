@@ -267,11 +267,11 @@ class TestExperimentLevel(unittest.TestCase):
         self.assertTrue("No experimental metadata found for study_submitter_id: 'DUMMY'" in cm.output[0])
 
 
-class TestAliquotLevel(unittest.TestCase):
+class TestSampleLevel(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        with open(data.ALIQUOT_METADATA, 'r', encoding='utf-8') as inF:
-            cls.aliquots = json.load(inF)
+        with open(data.SAMPLE_METADATA, 'r', encoding='utf-8') as inF:
+            cls.samples = json.load(inF)
 
         with open(data.STUDY_METADATA, 'r', encoding='utf-8') as inF:
             study_list = json.load(inF)
@@ -279,18 +279,18 @@ class TestAliquotLevel(unittest.TestCase):
 
 
     @staticmethod
-    def aliquot_list_to_dict(aliquot_list):
-        aliquot_dict = dict()
-        for aliquot in aliquot_list.copy():
-            aliquot_dict[aliquot.pop('aliquot_id')] = aliquot
+    def sample_list_to_dict(sample_list):
+        sample_dict = dict()
+        for sample in sample_list.copy():
+            sample_dict[sample.pop('aliquot_id')] = sample
 
-        return aliquot_dict
+        return sample_dict
 
 
     def test_invalid_study(self):
         with api.Client(url=TEST_URL) as client:
             with self.assertLogs(level='ERROR') as cm:
-                ret = client.get_study_aliquots('DUMMY')
+                ret = client.get_study_samples('DUMMY')
 
         self.assertIsNone(ret)
         self.assertTrue(any('API query failed with response' in o for o in cm.output) or
@@ -299,31 +299,31 @@ class TestAliquotLevel(unittest.TestCase):
 
     def test_data(self):
         page_len = 50
-        # for study, study_aliquots in self.aliquots.items():
+        # for study, study_samples in self.samples.items():
         study = 'PDC000504'
-        study_aliquots = self.aliquots[study]
+        study_samples = self.samples[study]
 
-        study_aliquots = self.aliquot_list_to_dict(study_aliquots)
+        study_samples = self.sample_list_to_dict(study_samples)
 
         with api.Client(url=TEST_URL) as client:
-            test_study_aliquots = client.get_study_aliquots(self.studies[study]['study_id'],
-                                                            page_limit=page_len)
+            test_study_samples = client.get_study_samples(self.studies[study]['study_id'],
+                                                          page_limit=page_len)
 
-        self.assertEqual(len(test_study_aliquots), self.studies[study]['aliquots_count'])
+        self.assertEqual(len(test_study_samples), self.studies[study]['aliquots_count'])
 
-        test_study_aliquots = self.aliquot_list_to_dict(test_study_aliquots)
+        test_study_samples = self.sample_list_to_dict(test_study_samples)
 
-        self.assertDictEqual(test_study_aliquots, study_aliquots)
+        self.assertDictEqual(test_study_samples, study_samples)
 
-        file_ids = list(set(file_id for f in test_study_aliquots.values() for file_id in f['file_ids']))
+        file_ids = list(set(file_id for f in test_study_samples.values() for file_id in f['file_ids']))
         with api.Client(url=TEST_URL) as client:
-            file_ids_aliquots = client.get_study_aliquots(self.studies[study]['study_id'],
-                                                          page_limit=page_len,
-                                                          file_ids=file_ids)
+            file_ids_aliquots = client.get_study_samples(self.studies[study]['study_id'],
+                                                         page_limit=page_len,
+                                                         file_ids=file_ids)
 
-        file_ids_aliquots = self.aliquot_list_to_dict(file_ids_aliquots)
-        self.assertEqual(len(file_ids_aliquots), len(test_study_aliquots))
-        self.assertDictEqual(file_ids_aliquots, test_study_aliquots)
+        file_ids_aliquots = self.sample_list_to_dict(file_ids_aliquots)
+        self.assertEqual(len(file_ids_aliquots), len(test_study_samples))
+        self.assertDictEqual(file_ids_aliquots, test_study_samples)
 
 
 class TestCaseLevel(unittest.TestCase):
