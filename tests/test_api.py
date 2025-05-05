@@ -2,6 +2,7 @@
 import unittest
 import json
 import random
+from copy import deepcopy
 
 from resources import data
 from update_api_data import DUPLICATE_FILE_TEST_STUDIES
@@ -287,6 +288,17 @@ class TestSampleLevel(unittest.TestCase):
         return sample_dict
 
 
+    @staticmethod
+    def subset_file_ids(data, file_ids):
+        ret = list()
+        for sample in data:
+            if any(file_id in sample['file_ids'] for file_id in file_ids):
+                sample['file_ids'] = [file_id for file_id in sample['file_ids'] if file_id in file_ids]
+                ret.append(sample)
+
+        return ret
+
+
     def test_invalid_study(self):
         with api.Client(url=TEST_URL) as client:
             with self.assertLogs(level='ERROR') as cm:
@@ -297,10 +309,30 @@ class TestSampleLevel(unittest.TestCase):
                         any('Invalid query for study_id:' in o for o in cm.output))
 
 
+    def assertSampleListEqual(self, lhs, rhs):
+        lhs = deepcopy(lhs)
+        rhs = deepcopy(rhs)
+
+        self.assertIsInstance(lhs, dict)
+        self.assertIsInstance(rhs, dict)
+        self.assertEqual(len(lhs), len(rhs))
+
+        for aliqot_id, lhs_sample in lhs.items():
+            self.assertIn(aliqot_id, rhs)
+            rhs_sample = rhs[aliqot_id]
+
+            self.assertEqual(len(lhs_sample['file_ids']), len(rhs_sample['file_ids']))
+            self.assertListEqual(sorted(lhs_sample.pop('file_ids')),
+                                 sorted(rhs_sample.pop('file_ids')))
+
+            self.assertDictEqual(lhs_sample, rhs_sample)
+
+
     def test_data(self):
         page_len = 50
         # for study, study_samples in self.samples.items():
-        study = 'PDC000504'
+        # study = 'PDC000504'
+        study = 'PDC000451'
         study_samples = self.samples[study]
 
         study_samples = self.sample_list_to_dict(study_samples)
@@ -313,7 +345,7 @@ class TestSampleLevel(unittest.TestCase):
 
         test_study_samples = self.sample_list_to_dict(test_study_samples)
 
-        self.assertDictEqual(test_study_samples, study_samples)
+        self.assertSampleListEqual(test_study_samples, study_samples)
 
         file_ids = list(set(file_id for f in test_study_samples.values() for file_id in f['file_ids']))
         with api.Client(url=TEST_URL) as client:
@@ -322,8 +354,29 @@ class TestSampleLevel(unittest.TestCase):
                                                          file_ids=file_ids)
 
         file_ids_aliquots = self.sample_list_to_dict(file_ids_aliquots)
-        self.assertEqual(len(file_ids_aliquots), len(test_study_samples))
-        self.assertDictEqual(file_ids_aliquots, test_study_samples)
+        self.assertSampleListEqual(file_ids_aliquots, test_study_samples)
+
+
+    def test_file_ids_arg(self):
+        page_len = 50
+        # test_study = 'PDC000504'
+        test_study = 'PDC000451'
+        all_file_ids = list(set(file_id for f in self.samples[test_study] for file_id in f['file_ids']))
+
+        # Randomly select 5 file_ids
+        random.seed(7)
+        file_ids = random.sample(all_file_ids, min(len(all_file_ids), 5))
+
+        # Get the ground truth aliquots that contain the selected file_ids
+        gt_samples = self.sample_list_to_dict(self.subset_file_ids(self.samples[test_study], file_ids))
+
+        with api.Client(url=TEST_URL) as client:
+            file_ids_aliquots = client.get_study_samples(self.studies[test_study]['study_id'],
+                                                         page_limit=page_len,
+                                                         file_ids=file_ids)
+
+        file_ids_aliquots = self.sample_list_to_dict(file_ids_aliquots)
+        self.assertSampleListEqual(file_ids_aliquots, gt_samples)
 
 
 class TestCaseLevel(unittest.TestCase):
