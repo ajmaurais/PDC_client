@@ -226,6 +226,47 @@ class TestFileLevel(unittest.TestCase):
                 self.assertDictEqual(api_data, gt_files[file_id])
 
 
+class TestExperimentLevel(unittest.TestCase):
+    def setUp(self):
+        with open(data.STUDY_METADATA, 'r', encoding='utf-8') as inF:
+            study_metadata = json.load(inF)
+        self.study_metadata = {study.pop('pdc_study_id'): study for study in study_metadata}
+
+        with open(data.EXPERIMENT_METADATA, 'r', encoding='utf-8') as inF:
+            self.experiments = json.load(inF)
+
+
+    @staticmethod
+    def aliquot_list_to_dict(aliquot_list):
+        aliquot_dict = dict()
+        for aliquot in aliquot_list:
+            aliquot_dict[aliquot['aliquot_id']] = aliquot['aliquot_run_metadata_id']
+
+        return aliquot_dict
+
+
+    def test_data(self):
+        with api.Client(url=TEST_URL) as client:
+            for study, study_runs in self.experiments.items():
+                test_study_runs = client.get_experimental_metadata(self.study_metadata[study]['study_submitter_id'])
+
+                self.assertEqual(len(test_study_runs), len(study_runs))
+                for run_id, run in study_runs.items():
+                    self.assertIn(run_id, test_study_runs)
+                    gt_run = self.aliquot_list_to_dict(run)
+                    test_run = self.aliquot_list_to_dict(test_study_runs[run_id])
+                    self.assertDictEqual(test_run, gt_run)
+
+
+    def test_invalid_study(self):
+        with api.Client(url=TEST_URL) as client:
+            with self.assertLogs(level='ERROR') as cm:
+                ret = client.get_experimental_metadata('DUMMY')
+
+        self.assertIsNone(ret)
+        self.assertTrue("No experimental metadata found for study_submitter_id: 'DUMMY'" in cm.output[0])
+
+
 class TestAliquotLevel(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
