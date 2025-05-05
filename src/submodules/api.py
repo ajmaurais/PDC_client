@@ -430,6 +430,70 @@ class Client():
         return None
 
 
+    @staticmethod
+    def _experimental_metadata_query(study_submitter_id: str):
+        return '''query={
+            experimentalMetadata (study_submitter_id: "%s") {
+                study_run_metadata { study_run_metadata_id study_run_metadata_submitter_id
+                    aliquot_run_metadata {
+                        aliquot_id
+                        aliquot_run_metadata_id
+                    }
+                }
+            } }''' % study_submitter_id
+
+
+    async def async_get_experimental_metadata(self, study_submitter_id: str) -> dict|None:
+        '''
+        Async version of get_experimental_metadata
+
+        Parameters
+        ----------
+        study_submitter_id: str
+            The study submitter ID.
+
+        Returns
+        -------
+        metadata: dict
+            A dictionary with the experimental metadata or None if no metadata could be found.
+        '''
+
+        query = self._experimental_metadata_query(study_submitter_id)
+        data = await self._get(query)
+
+        if data['data']['experimentalMetadata'] is None or len(data['data']['experimentalMetadata']) == 0:
+            LOGGER.error("No experimental metadata found for study_submitter_id: '%s'", study_submitter_id)
+            return None
+
+        if len(data['data']['experimentalMetadata']) > 1:
+            LOGGER.error("More than 1 experiment found for study_submitter_id: '%s'",
+                         study_submitter_id)
+            return None
+
+        runs = data['data']['experimentalMetadata'][0]
+        for run in runs:
+            pass
+
+        return None
+
+
+    def get_experimental_metadata(self, study_submitter_id: str) -> dict|None:
+        '''
+        Get experimental metadata for a study_submitter_id.
+
+        Parameters
+        ----------
+        study_submitter_id: str
+            The study submitter ID.
+
+        Returns
+        -------
+        metadata: dict
+            A dictionary with the experimental metadata or None if no metadata could be found.
+        '''
+        return self._loop.run_until_complete(self.async_get_experimental_metadata(study_submitter_id))
+
+
     async def _get_paginated_data(self,
                                   query_f: Callable[[str, str, int], str],
                                   data_name: str,
