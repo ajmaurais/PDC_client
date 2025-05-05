@@ -130,9 +130,9 @@ def _element_key(elem: Any) -> Any:
     return elem
 
 
-def sort_nested_dicts(obj: Any) -> Any:
+def sort_nested_objs(obj: Any) -> Any:
     '''
-    Recursively sort nested dictionaries by their keys.
+    Recursively sort nested objects by their keys and values.
 
     This function processes dictionaries, lists, and other data types recursively:
     - If the input is a dictionary, it returns a new dictionary with keys sorted
@@ -150,9 +150,9 @@ def sort_nested_dicts(obj: Any) -> Any:
              processed recursively.
     '''
     if isinstance(obj, dict):
-        return {k: sort_nested_dicts(obj[k]) for k in sorted(obj)}
+        return {k: sort_nested_objs(obj[k]) for k in sorted(obj)}
     elif isinstance(obj, list):
-        canon = [sort_nested_dicts(elem) for elem in obj]
+        canon = [sort_nested_objs(elem) for elem in obj]
         return sorted(canon, key=_element_key)
     else:
         return obj
@@ -175,7 +175,7 @@ def load_json_to_dict(name):
         return ''
 
     data = json.loads(text)
-    return sort_nested_dicts(data)
+    return sort_nested_objs(data)
 
 
 def update_test_data(files, color=True):
@@ -272,7 +272,7 @@ def add_duplicate_files(files, studies):
             'md5sum': '26ab0db90d72e28ad0ba1e22ee510510'
         })
 
-    return sort_nested_dicts(files)
+    return sort_nested_objs(files)
 
 
 async def download_metadata(pdc_study_ids, endpoints, url=BASE_URL):
@@ -324,17 +324,17 @@ async def download_metadata(pdc_study_ids, endpoints, url=BASE_URL):
 
     study_metadata = None
     if 'study' in endpoints:
-        study_metadata = sort_nested_dicts([task.result() for task in study_metadata_tasks])
+        study_metadata = sort_nested_objs([task.result() for task in study_metadata_tasks])
 
     study_catalog = None
     if 'studyCatalog' in endpoints:
-        study_catalog = sort_nested_dicts({study_ids[study]: task.result()
-                                           for study, task in zip(study_ids.keys(), study_catalog_tasks)})
+        study_catalog = sort_nested_objs({study_ids[study]: task.result()
+                                          for study, task in zip(study_ids.keys(), study_catalog_tasks)})
 
     experiment_metadata = None
     if 'experiment' in endpoints:
-        experiment_metadata = sort_nested_dicts({study_ids[study]: task.result()
-                                                 for study, task in zip(study_ids.keys(), experiment_tasks)})
+        experiment_metadata = sort_nested_objs({study_ids[study]: task.result()
+                                                for study, task in zip(study_ids.keys(), experiment_tasks)})
 
     raw_files = None
     if 'file' in endpoints:
@@ -345,17 +345,17 @@ async def download_metadata(pdc_study_ids, endpoints, url=BASE_URL):
         for study in raw_files:
             for i in range(len(raw_files[study])):
                 raw_files[study][i].pop('url')
-        raw_files = sort_nested_dicts(raw_files)
+        raw_files = sort_nested_objs(raw_files)
 
     samples = None
     if 'samples' in endpoints:
-        samples = sort_nested_dicts({study_ids[study]: task.result()
-                                     for study, task in zip(study_ids.keys(), sample_tasks)})
+        samples = sort_nested_objs({study_ids[study]: task.result()
+                                    for study, task in zip(study_ids.keys(), sample_tasks)})
 
     cases = None
     if 'case' in endpoints:
-        cases = sort_nested_dicts({study_ids[study]: task.result()
-                                   for study, task in zip(study_ids.keys(), case_tasks)})
+        cases = sort_nested_objs({study_ids[study]: task.result()
+                                  for study, task in zip(study_ids.keys(), case_tasks)})
 
     return {'study': study_metadata,
             'studyCatalog': study_catalog,
