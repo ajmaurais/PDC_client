@@ -562,7 +562,7 @@ class Client():
         ''' query to get aliquot IDs associated with each file. '''
         return '''query={
             fileMetadata (file_id: "%s" acceptDUA: true) {
-                file_id aliquots { aliquot_id } }
+                file_id study_run_metadata_id aliquots { aliquot_id } }
                 }''' % file_id
 
 
@@ -633,15 +633,17 @@ class Client():
                 LOGGER.error("Error getting aliquot_ids for file: '%s'", file_id)
                 continue
             query_file_id = data['data']['fileMetadata'][0]['file_id']
+            srm_id = data['data']['fileMetadata'][0]['study_run_metadata_id']
             assert(file_id == query_file_id)
             for aliquot in data['data']['fileMetadata'][0]['aliquots']:
                 if aliquot['aliquot_id'] not in file_aliquot_ids:
                     file_aliquot_ids[aliquot['aliquot_id']] = set()
-                file_aliquot_ids[aliquot['aliquot_id']].add(file_id)
+                file_aliquot_ids[aliquot['aliquot_id']].add((file_id, srm_id))
 
-        # convert sets to lists
+        # convert sets of tuples to dicts
         for aliquot_id in file_aliquot_ids:
-            file_aliquot_ids[aliquot_id] = list(file_aliquot_ids[aliquot_id])
+            file_aliquot_ids[aliquot_id] = {file_id: srm_id
+                                            for file_id, srm_id in file_aliquot_ids[aliquot_id]}
 
         aliquot_data = await aliquot_task
         if aliquot_data is None:
@@ -658,7 +660,7 @@ class Client():
                     new_a['case_id'] = case['case_id']
 
                     if aliquot['aliquot_id'] in file_aliquot_ids:
-                        new_a['file_ids'] = file_aliquot_ids[new_a['aliquot_id']]
+                        new_a['file_id_to_run_metadata_id'] = file_aliquot_ids[new_a['aliquot_id']]
                         aliquots.append(new_a)
 
         return aliquots
