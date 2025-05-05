@@ -470,11 +470,12 @@ class Client():
                          study_submitter_id)
             return None
 
-        runs = data['data']['experimentalMetadata'][0]
-        for run in runs:
-            pass
+        data = data['data']['experimentalMetadata'][0]['study_run_metadata']
+        runs = dict()
+        for run in data:
+            runs[run['study_run_metadata_id']] = run['aliquot_run_metadata']
 
-        return None
+        return runs
 
 
     def get_experimental_metadata(self, study_submitter_id: str) -> dict|None:
