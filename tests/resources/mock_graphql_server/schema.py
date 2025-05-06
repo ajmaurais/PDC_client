@@ -59,7 +59,7 @@ class Query(graphene.ObjectType):
             raise RuntimeError('You must provide either a study_submitter_id or an id!')
 
         if study_submitter_id is not None and id is None:
-            id = api_data.get_study_id(study_submitter_id=study_submitter_id)
+            id = api_data.get_study_id_by_submitter_id(study_submitter_id)
 
         study_data = api_data.studies.get(id)
         if study_data is None:

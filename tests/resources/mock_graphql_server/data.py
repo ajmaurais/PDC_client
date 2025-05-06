@@ -118,7 +118,7 @@ class Data:
                 self.cases[case_id]['demographics'] = case
 
 
-    def get_study_id(self, pdc_study_id=None, study_submitter_id=None):
+    def get_study_id(self, pdc_study_id):
         '''
         Retrieve the study_id based on the provided pdc_study_id.
 
@@ -127,18 +127,17 @@ class Data:
         Returns:
             str: The study ID if found, otherwise None.
         '''
-        if pdc_study_id is not None:
-            for study in self.studies.values():
-                if study['pdc_study_id'] == pdc_study_id:
-                    return study['study_id']
-            return None
-        elif study_submitter_id is not None:
-            for study in self.studies.values():
-                if study['study_submitter_id'] == study_submitter_id:
-                    return study['study_id']
-            return None
-        else:
-            raise ValueError('Either pdc_study_id or study_submitter_id must be provided.')
+        for study in self.studies.values():
+            if study['pdc_study_id'] == pdc_study_id:
+                return study['study_id']
+        return None
+
+
+    def get_study_id_by_submitter_id(self, study_submitter_id):
+        for study in self.studies.values():
+            if study['study_submitter_id'] == study_submitter_id:
+                return study['study_id']
+        return None
 
 
     def get_studies(self, study_id=None, pdc_study_id=None) -> Generator[dict, None, None]:

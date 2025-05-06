@@ -440,6 +440,9 @@ class TestRawRequests(TestGraphQLServerBase):
             test_response = self.post(TEST_URL, query)
             self.assertEqual(pdc_response.status_code, 200)
             self.assertEqual(test_response.status_code, 200)
+
+            self.assertNotIn('errors', test_response.json(), msg=test_response.json().get('errors'))
+
             pdc_data = pdc_response.json()['data']['filesPerStudy']
             test_data = test_response.json()['data']['filesPerStudy']
             self.assertIsNotNone(pdc_data)
@@ -597,7 +600,7 @@ class TestClient(TestGraphQLServerBase):
         test_files = {i: api_data.file_metadata[i] for i in
                       random.sample(list(api_data.file_metadata.keys()), 3)}
 
-        for file_id, file_data in test_files.items():
+        for file_id in test_files:
             pdc_data, test_data = self.get_data_pair('get_file_url', file_id)
             self.assertIn('url', pdc_data)
             self.assertIn('url', test_data)
