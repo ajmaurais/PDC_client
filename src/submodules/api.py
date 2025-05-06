@@ -471,11 +471,10 @@ class Client():
             return None
 
         data = data['data']['experimentalMetadata'][0]['study_run_metadata']
-        runs = dict()
         for run in data:
-            runs[run['study_run_metadata_id']] = run['aliquot_run_metadata']
+            run['study_run_metadata_submitter_id'] = run['study_run_metadata_submitter_id'].lstrip()
 
-        return runs
+        return data
 
 
     def get_experimental_metadata(self, study_submitter_id: str) -> dict|None:
