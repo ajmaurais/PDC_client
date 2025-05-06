@@ -246,16 +246,31 @@ class TestExperimentLevel(unittest.TestCase):
         return aliquot_dict
 
 
+    @staticmethod
+    def srm_id_list_to_dict(runs):
+        ret = dict()
+        for run in runs:
+            ret[run['study_run_metadata_id']] = run
+
+        return ret
+
+
     def test_data(self):
         with api.Client(url=TEST_URL) as client:
             for study, study_runs in self.experiments.items():
                 test_study_runs = client.get_experimental_metadata(self.study_metadata[study]['study_submitter_id'])
 
                 self.assertEqual(len(test_study_runs), len(study_runs))
+
+                study_runs = self.srm_id_list_to_dict(study_runs)
+                test_study_runs = self.srm_id_list_to_dict(test_study_runs)
+
                 for run_id, run in study_runs.items():
                     self.assertIn(run_id, test_study_runs)
-                    gt_run = self.aliquot_list_to_dict(run)
-                    test_run = self.aliquot_list_to_dict(test_study_runs[run_id])
+                    self.assertEqual(run['study_run_metadata_submitter_id'],
+                                     test_study_runs[run_id]['study_run_metadata_submitter_id'])
+                    gt_run = self.aliquot_list_to_dict(run['aliquot_run_metadata'])
+                    test_run = self.aliquot_list_to_dict(test_study_runs[run_id]['aliquot_run_metadata'])
                     self.assertDictEqual(test_run, gt_run)
 
 
