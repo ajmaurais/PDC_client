@@ -535,6 +535,27 @@ class TestClient(TestGraphQLServerBase):
         self.do_invalid_test('get_study_metadata', 'INVALID_STUDY_ID')
 
 
+    def test_get_experimental_metadata(self):
+        study_submmitter_id = api_data.studies[api_data.get_study_id(self.TEST_PDC_STUDY_ID)]['study_submitter_id']
+        pdc_data, test_data = self.get_data_pair('get_experimental_metadata', study_submmitter_id)
+
+        self.assertEqual(len(pdc_data), len(test_data))
+
+        pdc_data = data_list_to_dict(pdc_data, 'study_run_metadata_id')
+        test_data = data_list_to_dict(test_data, 'study_run_metadata_id')
+        for srm_id, run in pdc_data.items():
+            self.assertIn(srm_id, test_data)
+            test_run = test_data[srm_id]
+
+            self.assertEqual(run['study_run_metadata_submitter_id'],
+                             test_run['study_run_metadata_submitter_id'])
+            self.assertEqual(len(run['aliquot_run_metadata']),
+                             len(test_run['aliquot_run_metadata']))
+            pdc_aliquots = {a['aliquot_run_metadata_id']: a['aliquot_id'] for a in run['aliquot_run_metadata']}
+            test_aliquots = {a['aliquot_run_metadata_id']: a['aliquot_id'] for a in test_run['aliquot_run_metadata']}
+            self.assertDictEqual(pdc_aliquots, test_aliquots)
+
+
     def test_get_study_raw_files(self):
         pdc_data, test_data = self.get_data_pair('get_study_raw_files',
                                                  study_id=api_data.get_study_id(self.TEST_PDC_STUDY_ID))
