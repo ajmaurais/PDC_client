@@ -7,6 +7,7 @@ from signal import SIGTERM
 import re
 import time
 import httpx
+from copy import deepcopy
 
 from resources import TEST_DIR
 from resources.setup_functions import make_work_dir
@@ -332,6 +333,58 @@ class TestRawRequests(TestGraphQLServerBase):
         self.assertIn('errors', pdc_data)
         self.assertIn('errors', test_data)
         self.assertDictEqual(pdc_data['data'], test_data['data'])
+
+
+    def test_experimental_metadata_query(self):
+        def parse_data(data):
+            _data = deepcopy(data)
+            self.assertIn('data', _data)
+            self.assertIn('experimentalMetadata', _data['data'])
+            self.assertEqual(len(_data['data']['experimentalMetadata']), 1)
+            _data = _data['data']['experimentalMetadata'][0]['study_run_metadata']
+            ret = dict()
+            for run in _data:
+                if 'aliquot_run_metadata' not in run:
+                    print(run)
+                study_run_metadata_id = run.pop('study_run_metadata_id')
+                ret[study_run_metadata_id] = run
+
+            return ret
+
+        study_id = api_data.get_study_id(self.TEST_PDC_STUDY_ID)
+        study_submitter_id = api_data.studies[study_id]['study_submitter_id']
+        query = api.Client._experimental_metadata_query(study_submitter_id)
+
+        pdc_data, test_data = self.get_paired_data(query)
+        self.assertNotIn('errors', test_data, msg=test_data.get('errors'))
+
+        pdc_data = parse_data(pdc_data)
+        test_data = parse_data(test_data)
+
+        self.assertEqual(len(pdc_data), len(test_data))
+
+        for srm_id, run in pdc_data.items():
+            self.assertIn(srm_id, test_data)
+            test_run = test_data[srm_id]
+
+            self.assertEqual(run.get('study_run_metadata_submitter_id'),
+                             test_run.get('study_run_metadata_submitter_id'))
+            self.assertEqual(len(run['aliquot_run_metadata']),
+                             len(test_run['aliquot_run_metadata']))
+            pdc_aliquots = {a['aliquot_run_metadata_id']: a['aliquot_id'] for a in run['aliquot_run_metadata']}
+            test_aliquots = {a['aliquot_run_metadata_id']: a['aliquot_id'] for a in test_run['aliquot_run_metadata']}
+            self.assertDictEqual(pdc_aliquots, test_aliquots)
+
+
+    def test_invalid_experimental_metadata_query(self):
+        query = api.Client._experimental_metadata_query('INVALID_STUDY_ID')
+
+        pdc_response = self.get(PDC_URL, query)
+        test_response = self.get(TEST_URL, query)
+        self.assertEqual(pdc_response.status_code, 200)
+        self.assertEqual(test_response.status_code, 200)
+        self.assertEqual(len(pdc_response.json()['data']['experimentalMetadata']), 0)
+        self.assertEqual(len(test_response.json()['data']['experimentalMetadata']), 0)
 
 
     def test_file_metadata_query(self):

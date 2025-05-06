@@ -1,9 +1,21 @@
 
 import json
+import re
 from typing import Generator
 
 from ..data import STUDY_METADATA, STUDY_CATALOG, FILE_METADATA
-from ..data import SAMPLE_METADATA, CASE_METADATA
+from ..data import EXPERIMENT_METADATA, SAMPLE_METADATA, CASE_METADATA
+
+
+def split_ms_file_extension(file_path):
+    match = re.search(r'^(.+?)(\.(?:raw|d\.zip|mzML))?$', file_path)
+    if match:
+        file_name = match.group(1)
+        file_extension = match.group(2) if match.group(2) else ''
+        return file_name, file_extension
+    else:
+        raise ValueError(f"Invalid file path format: {file_path}")
+
 
 class Data:
     def __init__(self):
@@ -32,6 +44,14 @@ class Data:
                 file['pdc_study_id'] = pdc_study_id
                 self.files_per_study[study_id].append(file)
 
+        # read experimental metadata
+        with open(EXPERIMENT_METADATA, 'r', encoding='utf-8') as inF:
+            experiment_data = json.load(inF)
+        self.experiments = dict()
+        for pdc_study_id, experiments in experiment_data.items():
+            study_id = self.get_study_id(pdc_study_id)
+            self.experiments[study_id] = experiments
+
         self.file_metadata = dict()
         self.index_study_file_ids = dict()
         file_metadata_keys = ['file_name', 'file_type', 'file_format', 'data_category', 'md5sum', 'file_size']
@@ -40,6 +60,7 @@ class Data:
             for file in files:
                 self.file_metadata[file['file_id']] = {key: file[key] for key in file_metadata_keys}
                 self.file_metadata[file['file_id']]['aliquots'] = list()
+                self.file_metadata[file['file_id']]['study_run_metadata_id'] = self.get_study_run_metadata_submitter_id(file['file_name'])
                 self.index_study_file_ids[study_id].append(file['file_id'])
 
         # read aliquot data
@@ -55,10 +76,11 @@ class Data:
             for aliquot in aliquots:
                 self.index_study_cases[study_id].add(aliquot['case_id'])
 
-                for file_id in aliquot['file_ids']:
+                for file_id, srm_id in aliquot['file_id_to_run_metadata_id'].items():
                     if file_id not in self.file_metadata:
-                        raise RuntimeError(f"Missing file metadata for file_id: '{aliquot['file_id']}'")
+                        raise RuntimeError(f"Missing file metadata for file_id: '{file_id}'")
                     self.file_metadata[file_id]['aliquots'].append({'aliquot_id': aliquot['aliquot_id']})
+                    self.file_metadata[file_id]['study_run_metadata_id'] = srm_id
 
                 case_id = aliquot['case_id']
                 if case_id not in self.cases:
@@ -96,7 +118,7 @@ class Data:
                 self.cases[case_id]['demographics'] = case
 
 
-    def get_study_id(self, pdc_study_id):
+    def get_study_id(self, pdc_study_id=None, study_submitter_id=None):
         '''
         Retrieve the study_id based on the provided pdc_study_id.
 
@@ -105,10 +127,18 @@ class Data:
         Returns:
             str: The study ID if found, otherwise None.
         '''
-        for study in self.studies.values():
-            if study['pdc_study_id'] == pdc_study_id:
-                return study['study_id']
-        return None
+        if pdc_study_id is not None:
+            for study in self.studies.values():
+                if study['pdc_study_id'] == pdc_study_id:
+                    return study['study_id']
+            return None
+        elif study_submitter_id is not None:
+            for study in self.studies.values():
+                if study['study_submitter_id'] == study_submitter_id:
+                    return study['study_id']
+            return None
+        else:
+            raise ValueError('Either pdc_study_id or study_submitter_id must be provided.')
 
 
     def get_studies(self, study_id=None, pdc_study_id=None) -> Generator[dict, None, None]:
@@ -176,8 +206,61 @@ class Data:
             i += 1
 
 
-    def get_file_metadata(self, file_id):
-        return self.file_metadata.get(file_id, None)
+    def get_file_id(self, file_name):
+        '''
+        Get the file ID based on the file name.
+        Args:
+            file_name (str): The name of the file to retrieve the ID for.
+        Returns:
+            str: The file ID if found, otherwise None.
+        '''
+        file_base = split_ms_file_extension(file_name)[0]
+        for file_id, file in self.file_metadata.items():
+            it_file_base = split_ms_file_extension(file['file_name'])[0]
+            if it_file_base == file_base:
+                return file_id
+
+        return None
+
+
+    def get_study_run_metadata_submitter_id(self, file_name):
+        '''
+        Retrieve the study run metadata submitter ID based on the file ID.
+
+        Args:
+            file_name (str): The name of the file to retrieve the submitter ID for.
+
+        Returns:
+            str: The study run metadata submitter ID if found, otherwise None.
+        '''
+        file_base = split_ms_file_extension(file_name)[0]
+        for study in self.experiments.values():
+            for run in study:
+                it_file_base = split_ms_file_extension(run['study_run_metadata_submitter_id'])[0]
+                if file_base == it_file_base:
+                    return run['study_run_metadata_id']
+
+        return None
+
+
+    def get_file_metadata(self, file_id=None, study_run_metadata_id=None):
+        '''
+        Retrieve file metadata based on file_id or study_run_metadata_id.
+        Args:
+            file_id (str, optional): The ID of the file to retrieve. Defaults to None.
+            study_run_metadata_id (str, optional): The study run metadata ID to retrieve. Defaults to None.
+        Returns:
+            dict: A dictionary containing the file metadata if found, otherwise None.
+        '''
+        if file_id is not None:
+            return self.file_metadata.get(file_id, None)
+        elif study_run_metadata_id is not None:
+            for file in self.file_metadata.values():
+                if file['study_run_metadata_id'] == study_run_metadata_id:
+                    return file
+            return None
+        else:
+            raise ValueError('Both file_id or study_run_metadata_id cannot be None!')
 
 
 api_data = Data()

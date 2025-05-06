@@ -26,6 +26,21 @@ class Url(graphene.ObjectType):
     url = graphene.String(name='url')
 
 
+class AliquotRunMetadata(graphene.ObjectType):
+    aliquot_id = graphene.String(name='aliquot_id')
+    aliquot_run_metadata_id = graphene.String(name='aliquot_run_metadata_id')
+
+
+class StudyRunMetadata(graphene.ObjectType):
+    study_run_metadata_id = graphene.ID(name='study_run_metadata_id')
+    study_run_metadata_submitter_id = graphene.String(name='study_run_metadata_submitter_id')
+    aliquot_run_metadata = graphene.List(AliquotRunMetadata, name='aliquot_run_metadata')
+
+
+class ExperimentalMetadata(graphene.ObjectType):
+    study_run_metadata = graphene.List(StudyRunMetadata, name='study_run_metadata')
+
+
 class FilesPerStudy(graphene.ObjectType):
     study_id = graphene.ID(name='study_id')
     pdc_study_id = graphene.String(name='pdc_study_id')
@@ -48,6 +63,7 @@ class Aliquot(graphene.ObjectType):
 
 class FileMetadata(graphene.ObjectType):
     file_id = graphene.ID(name='file_id')
+    study_run_metadata_id = graphene.String(name='study_run_metadata_id')
     aliquots = graphene.List(Aliquot, name='aliquots')
     file_name = graphene.String(name='file_name')
     file_type = graphene.String(name='file_type')

@@ -1,7 +1,11 @@
+
+from os.path import splitext
+
 import graphene
 
 from .data import api_data
 from .models import Study, Url, StudyVersion, StudyCatalog, FilesPerStudy
+from .models import ExperimentalMetadata, StudyRunMetadata, AliquotRunMetadata
 from .models import FileMetadata, Aliquot
 from .models import PaginatedCasesSamplesAliquots, CasesSamplesAliquots, Pagination
 from .models import SAMPLE_STRING_KEYS, Sample
@@ -30,6 +34,10 @@ class Query(graphene.ObjectType):
     fileMetadata = graphene.List(FileMetadata, id=graphene.ID(name='file_id'),
                                  acceptDUA=graphene.Boolean())
 
+    experimentalMetadata = graphene.List(ExperimentalMetadata,
+                                         id=graphene.ID(name='study_id'),
+                                         study_submitter_id=graphene.String(name='study_submitter_id'))
+
     paginatedCasesSamplesAliquots = graphene.Field(PaginatedCasesSamplesAliquots,
                                                    id=graphene.ID(name='study_id'),
                                                    offset=graphene.Int(), limit=graphene.Int(),
@@ -44,6 +52,33 @@ class Query(graphene.ObjectType):
         if not acceptDUA:
             raise RuntimeError('You must accept the DUA to access this data!')
         return [Study(**study) for study in api_data.get_studies(study_id=id, pdc_study_id=pdc_study_id)]
+
+
+    def resolve_experimentalMetadata(self, info, id=None, study_submitter_id=None):
+        if id is None and study_submitter_id is None:
+            raise RuntimeError('You must provide either a study_submitter_id or an id!')
+
+        if study_submitter_id is not None and id is None:
+            id = api_data.get_study_id(study_submitter_id=study_submitter_id)
+
+        study_data = api_data.studies.get(id)
+        if study_data is None:
+            return []
+
+        experiment_data = api_data.experiments.get(id)
+
+        exp_metadata = ExperimentalMetadata(study_run_metadata=[])
+        for run in experiment_data:
+            srm_id = run['study_run_metadata_id']
+            ar_metadata = run['aliquot_run_metadata']
+            ss_id = run['study_run_metadata_submitter_id']
+
+            sr_metadata = StudyRunMetadata(study_run_metadata_id=srm_id,
+                                           study_run_metadata_submitter_id=ss_id,
+                                           aliquot_run_metadata=[AliquotRunMetadata(**a) for a in ar_metadata])
+            exp_metadata.study_run_metadata.append(sr_metadata)
+
+        return [exp_metadata]
 
 
     def resolve_studyCatalog(self, info, id, acceptDUA=False):
@@ -124,6 +159,7 @@ class Query(graphene.ObjectType):
                              file_format=file['file_format'],
                              file_size=file['file_size'],
                              md5sum=file['md5sum'],
+                             study_run_metadata_id=file['study_run_metadata_id'],
                              aliquots=[Aliquot(**aliquot) for aliquot in file['aliquots']])]
 
 
