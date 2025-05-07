@@ -274,6 +274,3 @@ class Data:
             return None
         else:
             raise ValueError('Both file_id or study_run_metadata_id cannot be None!')
-
-
-api_data = Data()

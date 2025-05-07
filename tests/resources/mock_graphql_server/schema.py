@@ -3,7 +3,7 @@ from os.path import splitext
 
 import graphene
 
-from .data import api_data
+from .data import Data
 from .models import Study, Url, StudyVersion, StudyCatalog, FilesPerStudy
 from .models import ExperimentalMetadata, StudyRunMetadata, AliquotRunMetadata
 from .models import FileMetadata, Aliquot
@@ -16,6 +16,8 @@ class QueryError(Exception):
 
 # Query Type
 class Query(graphene.ObjectType):
+    api_data = Data()
+
     study = graphene.List(Study, id=graphene.ID(name='study_id'),
                           pdc_study_id=graphene.String(name='pdc_study_id'),
                           acceptDUA=graphene.Boolean())
@@ -51,7 +53,7 @@ class Query(graphene.ObjectType):
     def resolve_study(self, info, id=None, pdc_study_id=None, acceptDUA=False):
         if not acceptDUA:
             raise RuntimeError('You must accept the DUA to access this data!')
-        return [Study(**study) for study in api_data.get_studies(study_id=id, pdc_study_id=pdc_study_id)]
+        return [Study(**study) for study in Query.api_data.get_studies(study_id=id, pdc_study_id=pdc_study_id)]
 
 
     def resolve_experimentalMetadata(self, info, id=None, study_submitter_id=None):
@@ -59,13 +61,13 @@ class Query(graphene.ObjectType):
             raise RuntimeError('You must provide either a study_submitter_id or an id!')
 
         if study_submitter_id is not None and id is None:
-            id = api_data.get_study_id_by_submitter_id(study_submitter_id)
+            id = Query.api_data.get_study_id_by_submitter_id(study_submitter_id)
 
-        study_data = api_data.studies.get(id)
+        study_data = Query.api_data.studies.get(id)
         if study_data is None:
             return []
 
-        experiment_data = api_data.experiments.get(id)
+        experiment_data = Query.api_data.experiments.get(id)
 
         exp_metadata = ExperimentalMetadata(study_run_metadata=[])
         for run in experiment_data:
@@ -85,7 +87,7 @@ class Query(graphene.ObjectType):
         if not acceptDUA:
             raise RuntimeError('You must accept the DUA to access this data!')
 
-        if (study := api_data.study_catalog.get(id)) is None:
+        if (study := Query.api_data.study_catalog.get(id)) is None:
             return []
 
         return [StudyCatalog(pdc_study_id=id,
@@ -102,11 +104,13 @@ class Query(graphene.ObjectType):
             raise RuntimeError('You must accept the DUA to access this data!')
 
         ret = []
-        for file in api_data.get_files_per_study(study_id=id,
-                                                 data_category=data_category,
-                                                 file_name=file_name,
-                                                 file_type=file_type,
-                                                 file_format=file_format):
+        for file in Query.api_data.get_files_per_study(
+                study_id=id,
+                data_category=data_category,
+                file_name=file_name,
+                file_type=file_type,
+                file_format=file_format
+            ):
             ret.append(FilesPerStudy(**file, signedUrl=Url('file_does_not_exist')))
 
         if len(ret) == 0:
@@ -119,13 +123,13 @@ class Query(graphene.ObjectType):
         if not acceptDUA:
             raise RuntimeError('You must accept the DUA to access this data!')
 
-        total = api_data.get_total_cases_per_study(id)
+        total = Query.api_data.get_total_cases_per_study(id)
         ret = PaginatedCasesSamplesAliquots(total=total)
 
         casesSamplesAliquots = list()
         aliquots = dict()
         i = 0
-        for case in api_data.get_cases_per_study(id, offset):
+        for case in Query.api_data.get_cases_per_study(id, offset):
             if i >= limit:
                 break
 
@@ -149,7 +153,7 @@ class Query(graphene.ObjectType):
         if not acceptDUA:
             raise RuntimeError('You must accept the DUA to access this data!')
 
-        if (file := api_data.get_file_metadata(id)) is None:
+        if (file := Query.api_data.get_file_metadata(id)) is None:
             return None
 
         return [FileMetadata(file_id=id,
@@ -160,7 +164,7 @@ class Query(graphene.ObjectType):
                              file_size=file['file_size'],
                              md5sum=file['md5sum'],
                              study_run_metadata_id=file['study_run_metadata_id'],
-                             aliquots=[Aliquot(**aliquot) for aliquot in file['aliquots']])]
+                             aliquots=[ Aliquot(**aliquot) for aliquot in file['aliquots'] ])]
 
 
     def resolve_paginatedCaseDemographicsPerStudy(self, info, id, offset=0, limit=100,
@@ -168,12 +172,12 @@ class Query(graphene.ObjectType):
         if not acceptDUA:
             raise RuntimeError('You must accept the DUA to access this data!')
 
-        total = api_data.get_total_cases_per_study(id)
+        total = Query.api_data.get_total_cases_per_study(id)
         ret = PaginatedCaseDemographicsPerStudy(total=total)
 
         caseDemographicsPerStudy = list()
         i = 0
-        for case in api_data.get_cases_per_study(id, offset):
+        for case in Query.api_data.get_cases_per_study(id, offset):
             if i >= limit:
                 break
             caseDemographicsPerStudy.append(

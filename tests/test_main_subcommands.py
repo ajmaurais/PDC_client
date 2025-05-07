@@ -6,7 +6,7 @@ from csv import DictReader
 from abc import ABC, abstractmethod
 
 from resources import TEST_DIR, setup_functions
-from resources.mock_graphql_server.data import api_data
+from resources.mock_graphql_server.data import Data
 from resources.data import PDC_TEST_FILE_IDS, TEST_URLS
 
 from PDC_client.submodules.io import is_dia, md5_sum
@@ -23,10 +23,11 @@ class TestStudySubcommands(unittest.TestCase):
     def setUpClass(cls):
         cls.work_dir = f'{TEST_DIR}/work/study_subcommands'
         setup_functions.make_work_dir(cls.work_dir, clear_dir=True)
+        cls.api_data = Data()
 
 
     def test_study_id(self):
-        target = api_data.get_study_id(TEST_PDC_STUDY_ID)
+        target = self.api_data.get_study_id(TEST_PDC_STUDY_ID)
 
         args = ['PDC_client', 'studyID', '-u', TEST_URL, TEST_PDC_STUDY_ID]
         result = setup_functions.run_command(args, self.work_dir, prefix='study_id')
@@ -36,8 +37,8 @@ class TestStudySubcommands(unittest.TestCase):
 
 
     def test_study_name(self):
-        study_id = api_data.get_study_id(TEST_PDC_STUDY_ID)
-        target = api_data.studies[study_id]['study_name']
+        study_id = self.api_data.get_study_id(TEST_PDC_STUDY_ID)
+        target = self.api_data.studies[study_id]['study_name']
 
         args = ['PDC_client', 'studyName', '-u', TEST_URL, study_id]
         result = setup_functions.run_command(args, self.work_dir, prefix='study_name')
@@ -47,7 +48,7 @@ class TestStudySubcommands(unittest.TestCase):
 
 
     def test_pdc_study_id(self):
-        study_id = api_data.get_study_id(TEST_PDC_STUDY_ID)
+        study_id = self.api_data.get_study_id(TEST_PDC_STUDY_ID)
         target = TEST_PDC_STUDY_ID
 
         args = ['PDC_client', 'PDCStudyID', '-u', TEST_URL, study_id]
@@ -103,11 +104,12 @@ class TestMetadataSubcommand(unittest.TestCase, SkylineAnnotationsTestBase):
     def setUpClass(cls):
         cls.work_dir = f'{TEST_DIR}/work/metadata_subcommand'
         setup_functions.make_work_dir(cls.work_dir, clear_dir=True)
+        cls.api_data = Data()
 
 
     def get_test_study(self, dda=False, seed=1):
         ''' Chose random study to test '''
-        dia_studies = [study['pdc_study_id'] for study in api_data.studies.values()
+        dia_studies = [study['pdc_study_id'] for study in self.api_data.studies.values()
                        if ((not dda) and is_dia(study)) or (dda and not is_dia(study))]
         self.assertGreaterEqual(len(dia_studies), 1, 'No DIA studies found in mock data')
         random.seed(seed)
@@ -115,7 +117,7 @@ class TestMetadataSubcommand(unittest.TestCase, SkylineAnnotationsTestBase):
 
 
     def test_default(self):
-        study_id = api_data.get_study_id(TEST_PDC_STUDY_ID)
+        study_id = self.api_data.get_study_id(TEST_PDC_STUDY_ID)
 
         args = ['PDC_client', 'metadata', '-u', TEST_URL, study_id]
         result = setup_functions.run_command(args, self.work_dir, prefix='test_default')
@@ -130,7 +132,7 @@ class TestMetadataSubcommand(unittest.TestCase, SkylineAnnotationsTestBase):
 
     def test_flatten(self):
         pdc_study_id = self.get_test_study(dda=False, seed=40)
-        study_id = api_data.get_study_id(pdc_study_id)
+        study_id = self.api_data.get_study_id(pdc_study_id)
 
         prefix = f'{pdc_study_id}_flatten_test_'
         args = ['PDC_client', 'metadata', f'--prefix={prefix}', '--flatten',
@@ -146,7 +148,7 @@ class TestMetadataSubcommand(unittest.TestCase, SkylineAnnotationsTestBase):
 
     def test_flatten_tsv(self):
         pdc_study_id = self.get_test_study(dda=False, seed=40)
-        study_id = api_data.get_study_id(pdc_study_id)
+        study_id = self.api_data.get_study_id(pdc_study_id)
 
         prefix = f'{pdc_study_id}_flatten_tsv_test_'
         args = ['PDC_client', 'metadata', f'--prefix={prefix}',
@@ -163,7 +165,7 @@ class TestMetadataSubcommand(unittest.TestCase, SkylineAnnotationsTestBase):
 
     def test_flatten_dda_fails(self):
         pdc_study_id = self.get_test_study(dda=True, seed=3)
-        study_id = api_data.get_study_id(pdc_study_id)
+        study_id = self.api_data.get_study_id(pdc_study_id)
 
         prefix = f'{pdc_study_id}_flatten_tsv_test_'
         args = ['PDC_client', 'metadata', f'--prefix={prefix}',
@@ -185,7 +187,7 @@ class TestMetadataSubcommand(unittest.TestCase, SkylineAnnotationsTestBase):
 
     def test_skyline_annotations(self):
         test_pdc_study_id = self.SKYLINE_ANNOTATIONS_PDC_STUDY_ID
-        study_id = api_data.get_study_id(test_pdc_study_id)
+        study_id = self.api_data.get_study_id(test_pdc_study_id)
         args = ['PDC_client', 'metadata', '-u', TEST_URL,
                 '--flatten', '--skylineAnnotations', study_id]
         result = setup_functions.run_command(command=args, wd=self.work_dir,

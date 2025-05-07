@@ -11,7 +11,7 @@ from copy import deepcopy
 
 from resources import TEST_DIR
 from resources.setup_functions import make_work_dir
-from resources.mock_graphql_server.data import api_data
+from resources.mock_graphql_server.data import Data
 from resources.mock_graphql_server.server import server_is_running
 
 from PDC_client.submodules import api
@@ -36,6 +36,7 @@ class TestGraphQLServerBase(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         '''Set up the test server before running tests.'''
+        cls.api_data = Data()
 
         # return if server is already running
         if server_is_running(url=TEST_URL):
@@ -155,7 +156,7 @@ class TestRawRequests(TestGraphQLServerBase):
 
 
     def test_case_aliquot_query(self):
-        study_id = api_data.get_study_id(self.TEST_PDC_STUDY_ID)
+        study_id = self.api_data.get_study_id(self.TEST_PDC_STUDY_ID)
         limit = 10
         offset = 0
 
@@ -184,9 +185,9 @@ class TestRawRequests(TestGraphQLServerBase):
 
 
     def test_file_aliquot_query(self):
-        study_id = api_data.get_study_id(self.TEST_PDC_STUDY_ID)
+        study_id = self.api_data.get_study_id(self.TEST_PDC_STUDY_ID)
         random.seed(-1)
-        for file_id in random.sample(list(api_data.index_study_file_ids[study_id]), 1):
+        for file_id in random.sample(list(self.api_data.index_study_file_ids[study_id]), 1):
             query = api.Client._file_aliquot_query(file_id)
 
             pdc_data, test_data = self.get_paired_data(query)
@@ -211,7 +212,7 @@ class TestRawRequests(TestGraphQLServerBase):
 
 
     def test_study_case_query(self):
-        study_id = api_data.get_study_id(self.TEST_PDC_STUDY_ID)
+        study_id = self.api_data.get_study_id(self.TEST_PDC_STUDY_ID)
         limit = 10
         offset = 0
 
@@ -240,7 +241,7 @@ class TestRawRequests(TestGraphQLServerBase):
 
 
     def test_study_file_id_query(self):
-        query = api.Client._study_file_id_query(api_data.get_study_id(self.TEST_PDC_STUDY_ID))
+        query = api.Client._study_file_id_query(self.api_data.get_study_id(self.TEST_PDC_STUDY_ID))
         pdc_response = self.post(PDC_URL, query)
         test_response = self.post(TEST_URL, query)
 
@@ -281,7 +282,7 @@ class TestRawRequests(TestGraphQLServerBase):
 
 
     def test_study_raw_file_query(self):
-        query = api.Client._study_raw_file_query(api_data.get_study_id(self.TEST_PDC_STUDY_ID))
+        query = api.Client._study_raw_file_query(self.api_data.get_study_id(self.TEST_PDC_STUDY_ID))
         pdc_response = self.post(PDC_URL, query)
         test_response = self.post(TEST_URL, query)
 
@@ -351,8 +352,8 @@ class TestRawRequests(TestGraphQLServerBase):
 
             return ret
 
-        study_id = api_data.get_study_id(self.TEST_PDC_STUDY_ID)
-        study_submitter_id = api_data.studies[study_id]['study_submitter_id']
+        study_id = self.api_data.get_study_id(self.TEST_PDC_STUDY_ID)
+        study_submitter_id = self.api_data.studies[study_id]['study_submitter_id']
         query = api.Client._experimental_metadata_query(study_submitter_id)
 
         pdc_data, test_data = self.get_paired_data(query)
@@ -389,8 +390,8 @@ class TestRawRequests(TestGraphQLServerBase):
 
     def test_file_metadata_query(self):
         random.seed(12)
-        test_files = {i: api_data.file_metadata[i] for i in
-                      random.sample(list(api_data.file_metadata.keys()), 3)}
+        test_files = {i: self.api_data.file_metadata[i] for i in
+                      random.sample(list(self.api_data.file_metadata.keys()), 3)}
 
         query_keys = ['file_name', 'file_type', 'data_category',
                       'file_format', 'md5sum', 'file_size']
@@ -429,8 +430,8 @@ class TestRawRequests(TestGraphQLServerBase):
 
     def test_file_url_query(self):
         random.seed(12)
-        test_files = {i: api_data.file_metadata[i] for i in
-                      random.sample(list(api_data.file_metadata.keys()), 3)}
+        test_files = {i: self.api_data.file_metadata[i] for i in
+                      random.sample(list(self.api_data.file_metadata.keys()), 3)}
 
         query_keys = ['file_name', 'file_type', 'data_category', 'file_format']
 
@@ -518,25 +519,25 @@ class TestClient(TestGraphQLServerBase):
         self.do_invalid_test('get_study_id', 'INVALID_STUDY_ID')
 
     def test_get_study_name(self):
-        self.do_single_comparison_test('get_study_name', api_data.get_study_id(self.TEST_PDC_STUDY_ID),
+        self.do_single_comparison_test('get_study_name', self.api_data.get_study_id(self.TEST_PDC_STUDY_ID),
                                        comparison_f=self.assertEqual)
         self.do_invalid_test('get_study_name', 'INVALID_STUDY_ID')
 
 
     def test_get_pdc_study_id(self):
-        self.do_single_comparison_test('get_pdc_study_id', study_id=api_data.get_study_id(self.TEST_PDC_STUDY_ID),
+        self.do_single_comparison_test('get_pdc_study_id', study_id=self.api_data.get_study_id(self.TEST_PDC_STUDY_ID),
                                        comparison_f=self.assertEqual)
         self.do_invalid_test('get_pdc_study_id', 'INVALID_STUDY_ID')
 
 
     def test_get_study_metadata(self):
-        self.do_single_comparison_test('get_study_metadata', study_id=api_data.get_study_id(self.TEST_PDC_STUDY_ID),
+        self.do_single_comparison_test('get_study_metadata', study_id=self.api_data.get_study_id(self.TEST_PDC_STUDY_ID),
                                        comparison_f=self.assertDictEqual)
         self.do_invalid_test('get_study_metadata', 'INVALID_STUDY_ID')
 
 
     def test_get_experimental_metadata(self):
-        study_submmitter_id = api_data.studies[api_data.get_study_id(self.TEST_PDC_STUDY_ID)]['study_submitter_id']
+        study_submmitter_id = self.api_data.studies[self.api_data.get_study_id(self.TEST_PDC_STUDY_ID)]['study_submitter_id']
         pdc_data, test_data = self.get_data_pair('get_experimental_metadata', study_submmitter_id)
 
         self.assertEqual(len(pdc_data), len(test_data))
@@ -558,7 +559,7 @@ class TestClient(TestGraphQLServerBase):
 
     def test_get_study_raw_files(self):
         pdc_data, test_data = self.get_data_pair('get_study_raw_files',
-                                                 study_id=api_data.get_study_id(self.TEST_PDC_STUDY_ID))
+                                                 study_id=self.api_data.get_study_id(self.TEST_PDC_STUDY_ID))
 
         self.assertEqual(len(pdc_data), len(test_data))
         pdc_data = data_list_to_dict(pdc_data, 'file_id')
@@ -591,7 +592,7 @@ class TestClient(TestGraphQLServerBase):
 
 
     def test_get_study_samples(self):
-        study_id = api_data.get_study_id(self.TEST_PDC_STUDY_ID)
+        study_id = self.api_data.get_study_id(self.TEST_PDC_STUDY_ID)
         pdc_data, test_data = self.get_data_pair('get_study_samples', study_id, page_limit=50)
 
         self.assertEqual(len(pdc_data), len(test_data))
@@ -604,7 +605,7 @@ class TestClient(TestGraphQLServerBase):
 
 
     def test_get_study_cases(self):
-        study_id = api_data.get_study_id(self.TEST_PDC_STUDY_ID)
+        study_id = self.api_data.get_study_id(self.TEST_PDC_STUDY_ID)
         pdc_data, test_data = self.get_data_pair('get_study_cases', study_id, page_limit=50)
 
         self.assertEqual(len(pdc_data), len(test_data))
@@ -618,8 +619,8 @@ class TestClient(TestGraphQLServerBase):
 
     def test_get_file_url(self):
         random.seed(7)
-        test_files = {i: api_data.file_metadata[i] for i in
-                      random.sample(list(api_data.file_metadata.keys()), 3)}
+        test_files = {i: self.api_data.file_metadata[i] for i in
+                      random.sample(list(self.api_data.file_metadata.keys()), 3)}
 
         for file_id in test_files:
             pdc_data, test_data = self.get_data_pair('get_file_url', file_id)
