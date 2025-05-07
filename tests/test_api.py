@@ -325,7 +325,8 @@ class TestSampleLevel(unittest.TestCase):
 
         self.assertIsNone(ret)
         self.assertTrue(any('API query failed with response' in o for o in cm.output) or
-                        any('Invalid query for study_id:' in o for o in cm.output))
+                        any('Invalid query for study_id:' in o for o in cm.output) or
+                        any('Invalid study_id' in o for o in cm.output))
 
 
     def assertSampleListEqual(self, lhs, rhs):
