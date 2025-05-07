@@ -68,5 +68,4 @@ def get_server():
 
 
 if __name__ == "__main__":
-    app = get_server()
-    app.run(debug=True, port=5000)
+    get_server().run(debug=True, port=5000)

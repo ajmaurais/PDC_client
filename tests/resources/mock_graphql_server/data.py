@@ -3,8 +3,11 @@ import json
 import re
 from typing import Generator
 
+from .logger import LOGGER
+
 from ..data import STUDY_METADATA, STUDY_CATALOG, FILE_METADATA
 from ..data import EXPERIMENT_METADATA, SAMPLE_METADATA, CASE_METADATA
+from ..data import MISSING_SRM_IDS
 
 
 def split_ms_file_extension(file_path):
@@ -60,7 +63,7 @@ class Data:
             for file in files:
                 self.file_metadata[file['file_id']] = {key: file[key] for key in file_metadata_keys}
                 self.file_metadata[file['file_id']]['aliquots'] = list()
-                self.file_metadata[file['file_id']]['study_run_metadata_id'] = self.get_study_run_metadata_submitter_id(file['file_name'])
+                self.file_metadata[file['file_id']]['study_run_metadata_id'] = self.get_study_run_metadata_id(file['file_name'])
                 self.index_study_file_ids[study_id].append(file['file_id'])
 
         # read aliquot data
@@ -76,11 +79,10 @@ class Data:
             for aliquot in aliquots:
                 self.index_study_cases[study_id].add(aliquot['case_id'])
 
-                for file_id, srm_id in aliquot['file_id_to_run_metadata_id'].items():
+                for file_id in aliquot['file_id_to_aliquot_run_metadata_id']:
                     if file_id not in self.file_metadata:
                         raise RuntimeError(f"Missing file metadata for file_id: '{file_id}'")
                     self.file_metadata[file_id]['aliquots'].append({'aliquot_id': aliquot['aliquot_id']})
-                    self.file_metadata[file_id]['study_run_metadata_id'] = srm_id
 
                 case_id = aliquot['case_id']
                 if case_id not in self.cases:
@@ -219,10 +221,17 @@ class Data:
             if it_file_base == file_base:
                 return file_id
 
+        LOGGER.warning(f"File ID not found for file name: {file_name}")
         return None
 
 
-    def get_study_run_metadata_submitter_id(self, file_name):
+    def _resolve_missing_srm_ids(self, file_name):
+        if file_name in MISSING_SRM_IDS:
+            return True, MISSING_SRM_IDS[file_name]['study_run_metadata_id']
+        return False, None
+
+
+    def get_study_run_metadata_id(self, file_name):
         '''
         Retrieve the study run metadata submitter ID based on the file ID.
 
@@ -232,13 +241,18 @@ class Data:
         Returns:
             str: The study run metadata submitter ID if found, otherwise None.
         '''
-        file_base = split_ms_file_extension(file_name)[0]
+        query_file_base = split_ms_file_extension(file_name)[0]
         for study in self.experiments.values():
             for run in study:
                 it_file_base = split_ms_file_extension(run['study_run_metadata_submitter_id'])[0]
-                if file_base == it_file_base:
+                if it_file_base == query_file_base:
                     return run['study_run_metadata_id']
 
+        found, srm_id = self._resolve_missing_srm_ids(file_name)
+        if found:
+            return srm_id
+
+        LOGGER.warning(f"study_run_metadata_submitter_id not found for file name: {file_name}")
         return None
 
 
