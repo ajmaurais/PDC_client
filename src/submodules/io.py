@@ -55,7 +55,14 @@ def flatten_metadata(study_metadata, files, aliquots, cases):
         data (list): List of dictionaries with the flattened metadata for each file.
     '''
 
-    if any(len(a['file_ids']) != 1 for a in aliquots):
+    file_ids_to_arm_ids = {}
+    for aliquot in aliquots:
+        for file_id, arm_id in aliquot['file_id_to_aliquot_run_metadata_id'].items():
+            if file_id not in file_ids_to_arm_ids:
+                file_ids_to_arm_ids[file_id] = []
+            file_ids_to_arm_ids[file_id].append(arm_id)
+
+    if any(len(v) > 1 for v in file_ids_to_arm_ids.values()):
         raise ValueError('Cannot flatten aliquots with more than 1 file_id.')
 
     ret = []
@@ -66,11 +73,17 @@ def flatten_metadata(study_metadata, files, aliquots, cases):
 
         # add aliquot metadata
         file_id = file['file_id']
-        aliquot_data = next((a for a in aliquots if a['file_ids'][0] == file_id), None)
+        aliquot_data = next((a for a in aliquots if file_id in a['file_id_to_aliquot_run_metadata_id']), None)
         if aliquot_data is None:
             raise ValueError(f'No aliquot data found for file_id: {file_id}')
+
+        arm_id = aliquot_data['file_id_to_aliquot_run_metadata_id'].get(file_id)
+        if arm_id is None:
+            raise ValueError(f'No aliquot_run_metadata_id found for file_id: {file_id}')
+        ret[-1]['aliquot_run_metadata_id'] = arm_id
+
         for k, v in aliquot_data.items():
-            if k != 'file_ids':
+            if k != 'file_id_to_aliquot_run_metadata_id':
                 ret[-1][k] = v
 
         # add case metadata

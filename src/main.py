@@ -157,8 +157,8 @@ Available commands:
 
             # download remaining metadata
             files = client.get_study_raw_files(args.study_id, n_files=args.n_files, use_s3_path=args.s3Path)
-            aliquots = client.get_study_aliquots(args.study_id,
-                                                 file_ids=[f['file_id'] for f in files])
+            aliquots = client.get_study_samples(args.study_id,
+                                                file_ids=[f['file_id'] for f in files])
             cases = client.get_study_cases(args.study_id)
 
         # check that no metadata is missing
@@ -175,9 +175,6 @@ Available commands:
         prefix = f'{study_metadata["pdc_study_id"]}_' if args.prefix is None else args.prefix
         flat_data = None
         if args.flatten or args.skyline_annotations:
-            if any(len(a['file_ids']) != 1 for a in aliquots):
-                LOGGER.error('Cannot flatten aliquots with more than 1 file_id.')
-                sys.exit(1)
             flat_data = io.flatten_metadata(**metadata_files)
 
         if args.skyline_annotations:

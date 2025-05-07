@@ -15,7 +15,7 @@ FILE_DATA_KEYS = ['file_id', 'file_name', 'file_submitter_id', 'md5sum', 'file_s
                   'experiment_type', 'analytical_fraction', 'analyte_type',
                   'data_category', 'file_type', 'file_format', 'url']
 
-DATA_ID_KEYS = ["file_id", "file_submitter_id",
+DATA_ID_KEYS = ["file_id", "file_submitter_id", "aliquot_id",
                 "sample_id", "case_id", "demographic_id"]
 
 class Client():
@@ -601,6 +601,15 @@ class Client():
                                          page_limit=page_limit)
             )
 
+        study_metadata = await self.async_get_study_metadata(study_id=study_id)
+        if study_metadata is None:
+            LOGGER.error("Invalid study_id: '%s'", study_id)
+            return None
+
+        experiment_metadata_task = asyncio.create_task(
+                self.async_get_experimental_metadata(study_metadata['study_submitter_id'])
+            )
+
         if file_ids is None:
             file_id_query = self._study_file_id_query(study_id)
             file_id_data = await self._post(file_id_query)
@@ -624,8 +633,22 @@ class Client():
                     tg.create_task(self._get(self._file_aliquot_query(file_id)))
                 )
 
-        # construct dictionary of aliquot_ids maped to file_ids
-        file_aliquot_ids = dict()
+        # construct dictionary of study_run_metadata_ids mapped to aliquot_run_metadata_ids
+        experiment_metadata = await experiment_metadata_task
+        if experiment_metadata is None:
+            LOGGER.error("Could not find experiment metadat for study_id: '%s'", study_id)
+            return None
+
+        aliquot_id_to_srm_arm_id_pairs = dict()
+        for run in experiment_metadata:
+            srm_id = run['study_run_metadata_id']
+            for id_pair in run['aliquot_run_metadata']:
+                if id_pair['aliquot_id'] not in aliquot_id_to_srm_arm_id_pairs:
+                    aliquot_id_to_srm_arm_id_pairs[id_pair['aliquot_id']] = {}
+                aliquot_id_to_srm_arm_id_pairs[id_pair['aliquot_id']][srm_id] = id_pair['aliquot_run_metadata_id']
+
+        # construct dictionary of file_ids mapped to aliquot_run_metadata_ids
+        aliquot_id_to_file_arm_id_pairs = dict()
         for file_id, task in zip(file_ids, aliquot_id_tasks):
             data = task.result()
             if data is None or data['data']['fileMetadata'] is None:
@@ -634,15 +657,25 @@ class Client():
             query_file_id = data['data']['fileMetadata'][0]['file_id']
             srm_id = data['data']['fileMetadata'][0]['study_run_metadata_id']
             assert(file_id == query_file_id)
+
             for aliquot in data['data']['fileMetadata'][0]['aliquots']:
-                if aliquot['aliquot_id'] not in file_aliquot_ids:
-                    file_aliquot_ids[aliquot['aliquot_id']] = set()
-                file_aliquot_ids[aliquot['aliquot_id']].add((file_id, srm_id))
+                if aliquot['aliquot_id'] not in aliquot_id_to_file_arm_id_pairs:
+                    aliquot_id_to_file_arm_id_pairs[aliquot['aliquot_id']] = set()
+
+                # this should never happen
+                if aliquot['aliquot_id'] not in aliquot_id_to_srm_arm_id_pairs:
+                    LOGGER.error("Aliquot ID '%s' not found in experimental metadata for file: '%s'",
+                                 aliquot['aliquot_id'], file_id)
+                    continue
+
+                arm_id = aliquot_id_to_srm_arm_id_pairs[aliquot['aliquot_id']].get(srm_id, None)
+                aliquot_id_to_file_arm_id_pairs[aliquot['aliquot_id']].add((file_id, arm_id))
 
         # convert sets of tuples to dicts
-        for aliquot_id in file_aliquot_ids:
-            file_aliquot_ids[aliquot_id] = {file_id: srm_id
-                                            for file_id, srm_id in file_aliquot_ids[aliquot_id]}
+        for aliquot_id in aliquot_id_to_file_arm_id_pairs:
+            aliquot_id_to_file_arm_id_pairs[aliquot_id] = {
+                file_id: arm_id for file_id, arm_id in aliquot_id_to_file_arm_id_pairs[aliquot_id]
+                }
 
         aliquot_data = await aliquot_task
         if aliquot_data is None:
@@ -658,8 +691,8 @@ class Client():
                                                          'sample_type', 'tissue_type')})
                     new_a['case_id'] = case['case_id']
 
-                    if aliquot['aliquot_id'] in file_aliquot_ids:
-                        new_a['file_id_to_run_metadata_id'] = file_aliquot_ids[new_a['aliquot_id']]
+                    if aliquot['aliquot_id'] in aliquot_id_to_file_arm_id_pairs:
+                        new_a['file_id_to_aliquot_run_metadata_id'] = aliquot_id_to_file_arm_id_pairs[new_a['aliquot_id']]
                         aliquots.append(new_a)
 
         return aliquots

@@ -48,7 +48,7 @@ class TestMetadataFunctions(unittest.TestCase):
             self.studies = {study['pdc_study_id']: study for study in self.studies}
         with open(FILE_METADATA, 'r', encoding='utf-8') as inF:
             self.files = json.load(inF)
-        with open(ALIQUOT_METADATA, 'r', encoding='utf-8') as inF:
+        with open(SAMPLE_METADATA, 'r', encoding='utf-8') as inF:
             self.aliquots = json.load(inF)
         with open(CASE_METADATA, 'r', encoding='utf-8') as inF:
             self.cases = json.load(inF)
@@ -58,22 +58,22 @@ class TestMetadataFunctions(unittest.TestCase):
 
 
     def test_flatten_dia_study(self):
-        allowed_null_keys = {'year_of_death', 'year_of_birth', 'cause_of_death', 'vital_status'}
+        allowed_null_keys = {'analyte_type', 'year_of_death', 'year_of_birth', 'cause_of_death', 'vital_status'}
         for pdc_study_id in self.study_types['dia']:
             data = {'study_metadata': self.studies[pdc_study_id],
                     'files': self.files[pdc_study_id],
                     'aliquots': self.aliquots[pdc_study_id],
                     'cases': self.cases[pdc_study_id]}
 
-            target_keys = ['experiment_type', 'analytical_fraction']
+            target_keys = ['experiment_type', 'analytical_fraction', 'aliquot_run_metadata_id']
             target_keys += data['files'][0].keys()
-            target_keys += [k for k in data['aliquots'][0] if k != 'file_ids']
+            target_keys += [k for k in data['aliquots'][0] if k != 'file_id_to_aliquot_run_metadata_id']
             target_keys += data['cases'][0].keys()
             target_keys = set(target_keys)
 
             flat_data = io.flatten_metadata(**data)
             for file in flat_data:
-                self.assertEqual(len(file), len(target_keys))
+                self.assertEqual(set(file.keys()), target_keys)
                 for key, value in file.items():
                     self.assertIn(key, target_keys)
                     if key in allowed_null_keys and value is None:
@@ -107,7 +107,7 @@ class TestMetadataFunctions(unittest.TestCase):
             random.seed(42)
             file_id = random.choice(data['files'])['file_id']
             for i, aliquot in enumerate(data['aliquots']):
-                if file_id in aliquot['file_ids']:
+                if file_id in aliquot['file_id_to_aliquot_run_metadata_id']:
                     data['aliquots'].pop(i)
                     break
 
@@ -136,7 +136,9 @@ class TestMetadataFunctions(unittest.TestCase):
             random.seed(3)
             aliquot_id_i = random.randint(0, len(data['aliquots']))
             case_id = data['aliquots'][aliquot_id_i]['case_id']
-            file_ids = [a['file_ids'][0] for a in data['aliquots'] if a['case_id'] == case_id]
+            file_ids = [file_id
+                        for a in data['aliquots'] if a['case_id'] == case_id
+                        for file_id in a['file_id_to_aliquot_run_metadata_id']]
             for i, case in enumerate(data['cases']):
                 if case['case_id'] == case_id:
                     data['cases'].pop(i)

@@ -101,7 +101,7 @@ class TestFileLevel(unittest.TestCase):
     @staticmethod
     def file_list_to_dict(file_list):
         file_dict = dict()
-        for file in file_list.copy():
+        for file in file_list:
             file_dict[file.pop('file_id')] = file
 
         return file_dict
@@ -297,8 +297,8 @@ class TestSampleLevel(unittest.TestCase):
     @staticmethod
     def sample_list_to_dict(sample_list):
         sample_dict = dict()
-        for sample in sample_list.copy():
-            sample_dict[sample.pop('aliquot_id')] = sample
+        for sample in sample_list:
+            sample_dict[sample['aliquot_id']] = sample
 
         return sample_dict
 
@@ -307,10 +307,12 @@ class TestSampleLevel(unittest.TestCase):
     def subset_file_ids(data, file_ids):
         ret = list()
         for sample in data:
-            if any(file_id in sample['file_id_to_run_metadata_id'] for file_id in file_ids):
-                sample['file_id_to_run_metadata_id'] = {file_id: srm_id
-                                                        for file_id, srm_id in sample['file_id_to_run_metadata_id'].items()
-                                                        if file_id in file_ids}
+            if any(file_id in sample['file_id_to_aliquot_run_metadata_id'] for file_id in file_ids):
+                sample['file_id_to_aliquot_run_metadata_id'] = {
+                    file_id: arm_id
+                    for file_id, arm_id in sample['file_id_to_aliquot_run_metadata_id'].items()
+                    if file_id in file_ids
+                    }
                 ret.append(sample)
 
         return ret
@@ -338,10 +340,10 @@ class TestSampleLevel(unittest.TestCase):
             self.assertIn(aliqot_id, rhs)
             rhs_sample = rhs[aliqot_id]
 
-            self.assertEqual(len(lhs_sample['file_id_to_run_metadata_id']),
-                             len(rhs_sample['file_id_to_run_metadata_id']))
-            self.assertDictEqual(lhs_sample.pop('file_id_to_run_metadata_id'),
-                                 rhs_sample.pop('file_id_to_run_metadata_id'))
+            self.assertEqual(len(lhs_sample['file_id_to_aliquot_run_metadata_id']),
+                             len(rhs_sample['file_id_to_aliquot_run_metadata_id']))
+            self.assertDictEqual(lhs_sample.pop('file_id_to_aliquot_run_metadata_id'),
+                                 rhs_sample.pop('file_id_to_aliquot_run_metadata_id'))
 
             self.assertDictEqual(lhs_sample, rhs_sample)
 
@@ -366,7 +368,7 @@ class TestSampleLevel(unittest.TestCase):
         self.assertSampleListEqual(test_study_samples, study_samples)
 
         file_ids = list(set(file_id for f in test_study_samples.values()
-                            for file_id in f['file_id_to_run_metadata_id']))
+                            for file_id in f['file_id_to_aliquot_run_metadata_id']))
         with api.Client(url=TEST_URL) as client:
             file_ids_aliquots = client.get_study_samples(self.studies[study]['study_id'],
                                                          page_limit=page_len,
@@ -380,7 +382,7 @@ class TestSampleLevel(unittest.TestCase):
         page_len = 50
         # test_study = 'PDC000504'
         test_study = 'PDC000451'
-        all_file_ids = list(set(file_id for f in self.samples[test_study] for file_id in f['file_id_to_run_metadata_id']))
+        all_file_ids = list(set(file_id for f in self.samples[test_study] for file_id in f['file_id_to_aliquot_run_metadata_id']))
 
         # Randomly select 5 file_ids
         random.seed(7)
