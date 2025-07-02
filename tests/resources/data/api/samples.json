@@ -2,6 +2,7 @@
   "PDC000251": [
     {
       "aliquot_id": "526b6147-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "1abbcb28-f221-4cd4-8c01-37b9bb_D1_D2",
       "analyte_type": "Protein",
       "case_id": "526a3222-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -16,6 +17,7 @@
     },
     {
       "aliquot_id": "526b623a-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "9b90eb78-2f50-4aeb-b010-d642f9_D2",
       "analyte_type": "Protein",
       "case_id": "526a3222-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -30,6 +32,7 @@
     },
     {
       "aliquot_id": "526b630e-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "b22659b9-e12c-4725-a7db-a833de_D1_D2",
       "analyte_type": "Protein",
       "case_id": "526a3812-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -44,6 +47,7 @@
     },
     {
       "aliquot_id": "526b64c8-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "0745488e-0bfb-4d1f-8228-dedf76_D1_D2",
       "analyte_type": "Protein",
       "case_id": "526a3949-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -58,6 +62,7 @@
     },
     {
       "aliquot_id": "526b65a3-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "8ed739dd-ae0f-4881-971a-db3cf4_D1_D2",
       "analyte_type": "Protein",
       "case_id": "526a3b90-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -72,6 +77,7 @@
     },
     {
       "aliquot_id": "526b6674-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "1556af7e-c2ae-4fce-9aae-87c459_D1_D2",
       "analyte_type": "Protein",
       "case_id": "526a3c86-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -86,6 +92,7 @@
     },
     {
       "aliquot_id": "526b6836-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "1a10c200-3895-4648-b951-94f99f_D2",
       "analyte_type": "Protein",
       "case_id": "526a3c86-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -100,6 +107,7 @@
     },
     {
       "aliquot_id": "526b6916-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "eb0a53df-7620-4024-8d2d-051142_D2",
       "analyte_type": "Protein",
       "case_id": "526a3d60-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -114,6 +122,7 @@
     },
     {
       "aliquot_id": "526b69fc-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "2f901c90-617e-46da-9fac-d68369_D2",
       "analyte_type": "Protein",
       "case_id": "526a3f3c-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -128,6 +137,7 @@
     },
     {
       "aliquot_id": "526b6b1d-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "d38f40fb-dd78-43b2-8b7b-4b6977_D2",
       "analyte_type": "Protein",
       "case_id": "526a4022-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -142,6 +152,7 @@
     },
     {
       "aliquot_id": "526b6bf0-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "2b73e01c-347a-4dae-a71d-752aeb_D2",
       "analyte_type": "Protein",
       "case_id": "526a4022-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -156,6 +167,7 @@
     },
     {
       "aliquot_id": "526b6d95-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "685ec3c2-e67a-40d3-9eb3-aa01c9_D1_D2",
       "analyte_type": "Protein",
       "case_id": "526a41f5-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -170,6 +182,7 @@
     },
     {
       "aliquot_id": "526b6e6f-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "347e379b-77c0-4dd3-aa25-18c9d1_D2",
       "analyte_type": "Protein",
       "case_id": "526a42f3-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -184,6 +197,7 @@
     },
     {
       "aliquot_id": "526b6f41-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "a3a26070-fb84-406a-8280-d555e6_D2",
       "analyte_type": "Protein",
       "case_id": "526a42f3-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -198,6 +212,7 @@
     },
     {
       "aliquot_id": "526b711b-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "340a3769-3031-41ae-bb08-a2f696_D2",
       "analyte_type": "Protein",
       "case_id": "526a44db-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -212,6 +227,7 @@
     },
     {
       "aliquot_id": "526b7203-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "51a4ce2f-4166-4c6b-a7e0-942d0a_D2",
       "analyte_type": "Protein",
       "case_id": "526a44db-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -226,6 +242,7 @@
     },
     {
       "aliquot_id": "526b72d9-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "a583d3ff-8165-43e9-b764-23b7ef_D1_D2",
       "analyte_type": "Protein",
       "case_id": "526a45be-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -240,6 +257,7 @@
     },
     {
       "aliquot_id": "526b7491-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "5ea22f5e-307b-491d-801f-8b7fa6_D2",
       "analyte_type": "Protein",
       "case_id": "526a45be-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -254,6 +272,7 @@
     },
     {
       "aliquot_id": "526b756b-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "8e17b45e-6a06-4e4e-913d-7b1edb_D2",
       "analyte_type": "Protein",
       "case_id": "526a47af-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -268,6 +287,7 @@
     },
     {
       "aliquot_id": "526b7751-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "3490835c-c004-45ed-91f3-7c206f_D2",
       "analyte_type": "Protein",
       "case_id": "526a488e-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -282,6 +302,7 @@
     },
     {
       "aliquot_id": "526b7826-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "6e209757-a7f4-45af-b5f3-2ebc02_D2",
       "analyte_type": "Protein",
       "case_id": "526a488e-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -296,6 +317,7 @@
     },
     {
       "aliquot_id": "526b79ec-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "092af714-b97a-457c-b0e9-8c20e8_D2",
       "analyte_type": "Protein",
       "case_id": "526a4a82-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -310,6 +332,7 @@
     },
     {
       "aliquot_id": "526b7abf-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "62f5840e-6cd7-4200-b651-645e53_D2",
       "analyte_type": "Protein",
       "case_id": "526a4a82-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -324,6 +347,7 @@
     },
     {
       "aliquot_id": "526b7c96-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "558333b0-ea23-4303-9e3c-4932b1_D2",
       "analyte_type": "Protein",
       "case_id": "526a4b64-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -338,6 +362,7 @@
     },
     {
       "aliquot_id": "526b7d6d-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "256ac9f5-1e19-44b4-92fb-fef3fc_D2",
       "analyte_type": "Protein",
       "case_id": "526a4d66-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -352,6 +377,7 @@
     },
     {
       "aliquot_id": "526b7f4d-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "9a7a86d3-bbf2-4d36-941d-c75c03_D1_D2",
       "analyte_type": "Protein",
       "case_id": "526a4e47-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -366,6 +392,7 @@
     },
     {
       "aliquot_id": "526b8047-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "1772e913-f62e-446a-8cf3-720348_D2",
       "analyte_type": "Protein",
       "case_id": "526a5065-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -380,6 +407,7 @@
     },
     {
       "aliquot_id": "526b8231-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "fbb41c94-aabd-49cc-90b2-882c3e_D2",
       "analyte_type": "Protein",
       "case_id": "526a514c-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -394,6 +422,7 @@
     },
     {
       "aliquot_id": "526b8307-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "9e0d47e0-f633-468b-b82b-4d752d_D2",
       "analyte_type": "Protein",
       "case_id": "526a53ac-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -408,6 +437,7 @@
     },
     {
       "aliquot_id": "526b8502-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "27f3ca2d-a86f-479d-8e7e-5307c7_D2",
       "analyte_type": "Protein",
       "case_id": "526a548e-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -422,6 +452,7 @@
     },
     {
       "aliquot_id": "526b85e4-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "2ed8beb2-bc63-4bad-b5fe-1916a0_D2",
       "analyte_type": "Protein",
       "case_id": "526a5774-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -436,6 +467,7 @@
     },
     {
       "aliquot_id": "526b87ee-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "0c87932d-b6fd-4eb5-b86a-a34d07_D2",
       "analyte_type": "Protein",
       "case_id": "526a587e-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -450,6 +482,7 @@
     },
     {
       "aliquot_id": "526b88c5-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "2dc28da8-7ff1-4b9b-b5bd-17cc25_D2",
       "analyte_type": "Protein",
       "case_id": "526a5ae9-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -464,6 +497,7 @@
     },
     {
       "aliquot_id": "526b8ada-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "927f0958-db5a-4bc5-92b7-2a3695_D2",
       "analyte_type": "Protein",
       "case_id": "526a5c31-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -478,6 +512,7 @@
     },
     {
       "aliquot_id": "526b8bb0-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "8d78194e-fbef-4819-a7b5-b73ae9_D2",
       "analyte_type": "Protein",
       "case_id": "526a5d16-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -492,6 +527,7 @@
     },
     {
       "aliquot_id": "526b8dd4-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "5c3971ee-87c7-4dff-b66e-f18892_D2",
       "analyte_type": "Protein",
       "case_id": "526a5f28-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -506,6 +542,7 @@
     },
     {
       "aliquot_id": "526b8ecb-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "42d860a3-8a0c-4c44-a09a-9ad8cf_D2",
       "analyte_type": "Protein",
       "case_id": "526a6002-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -520,6 +557,7 @@
     },
     {
       "aliquot_id": "526b90a3-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "e3ebe010-cd31-4b5d-8fcb-b7103b_D2",
       "analyte_type": "Protein",
       "case_id": "526a60d3-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -534,6 +572,7 @@
     },
     {
       "aliquot_id": "526b9188-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "3d3e1888-d67e-4c69-ba83-112d0f_D2",
       "analyte_type": "Protein",
       "case_id": "526a62a5-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -548,6 +587,7 @@
     },
     {
       "aliquot_id": "526b932d-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "efc971f8-54c5-4531-a792-705ecf_D2",
       "analyte_type": "Protein",
       "case_id": "526a6387-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -562,6 +602,7 @@
     },
     {
       "aliquot_id": "526b9408-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "a8853382-b726-4ce8-98d5-ca89df_D2",
       "analyte_type": "Protein",
       "case_id": "526a6457-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -576,6 +617,7 @@
     },
     {
       "aliquot_id": "526b94d2-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "08296da7-70ea-44df-8646-09f2cc_D2",
       "analyte_type": "Protein",
       "case_id": "526a662f-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -590,6 +632,7 @@
     },
     {
       "aliquot_id": "526b9676-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "4ccb249a-6722-491e-97e9-e3b4e7_D2",
       "analyte_type": "Protein",
       "case_id": "526a6716-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -604,6 +647,7 @@
     },
     {
       "aliquot_id": "526b979c-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "eb3f3494-7057-4afe-b212-e6e9a3_D2",
       "analyte_type": "Protein",
       "case_id": "526a67e6-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -618,6 +662,7 @@
     },
     {
       "aliquot_id": "526b9892-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "f6c215ea-5381-4521-bb61-be8e97_D2",
       "analyte_type": "Protein",
       "case_id": "526a69a7-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -632,6 +677,7 @@
     },
     {
       "aliquot_id": "526b9a48-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "fe83e13f-9754-403b-8f74-d6caf8_D2",
       "analyte_type": "Protein",
       "case_id": "526a6a80-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -646,6 +692,7 @@
     },
     {
       "aliquot_id": "526b9b1d-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "d4791079-c826-4fc7-9d9b-ee20ba_D2",
       "analyte_type": "Protein",
       "case_id": "526a6b52-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -660,6 +707,7 @@
     },
     {
       "aliquot_id": "526b9cd6-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "af95e2c6-25c4-4ab8-bf06-3e15ff_D2",
       "analyte_type": "Protein",
       "case_id": "526a6d21-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -674,6 +722,7 @@
     },
     {
       "aliquot_id": "526b9da9-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "2224c03f-b7b1-4368-887e-2b4cdf_D2",
       "analyte_type": "Protein",
       "case_id": "526a6df9-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -688,6 +737,7 @@
     },
     {
       "aliquot_id": "526b9f6a-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "41d0619e-b299-42e2-ac32-29e784_D2",
       "analyte_type": "Protein",
       "case_id": "526a6ec8-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -702,6 +752,7 @@
     },
     {
       "aliquot_id": "526ba03d-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "318d53c3-216b-4de1-a098-77d6dd_D2",
       "analyte_type": "Protein",
       "case_id": "526a70a6-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -716,6 +767,7 @@
     },
     {
       "aliquot_id": "526ba234-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "285fed94-1495-448e-879b-b55de9_D2",
       "analyte_type": "Protein",
       "case_id": "526a717c-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -730,6 +782,7 @@
     },
     {
       "aliquot_id": "526ba31b-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "10c2d629-0287-4511-ac25-f29031_D2",
       "analyte_type": "Protein",
       "case_id": "526a724a-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -744,6 +797,7 @@
     },
     {
       "aliquot_id": "526ba4fb-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "e9d416e7-f661-400a-896e-388545_D2",
       "analyte_type": "Protein",
       "case_id": "526a743e-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -758,6 +812,7 @@
     },
     {
       "aliquot_id": "526ba5f0-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "7d953d1d-84b6-4ecd-b1d7-1ed865_D2",
       "analyte_type": "Protein",
       "case_id": "526a751a-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -772,6 +827,7 @@
     },
     {
       "aliquot_id": "526ba7e7-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "50997c44-1c8b-4d34-b535-4a6cc2_D2",
       "analyte_type": "Protein",
       "case_id": "526a75e7-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -786,6 +842,7 @@
     },
     {
       "aliquot_id": "526ba8be-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "1b2ab076-c72f-4bbe-b9f9-657d24_D2",
       "analyte_type": "Protein",
       "case_id": "526a77f1-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -800,6 +857,7 @@
     },
     {
       "aliquot_id": "526baab1-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "3dcf8b3c-c0c5-4dfa-9543-5d30fb_D2",
       "analyte_type": "Protein",
       "case_id": "526a78cd-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -814,6 +872,7 @@
     },
     {
       "aliquot_id": "526bab8a-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "69d552be-7cb2-4bb4-b602-a27b3e_D2",
       "analyte_type": "Protein",
       "case_id": "526a79a5-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -828,6 +887,7 @@
     },
     {
       "aliquot_id": "526bad8b-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "161317f3-1a39-438e-af45-cd2502_D2",
       "analyte_type": "Protein",
       "case_id": "526a7bd7-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -842,6 +902,7 @@
     },
     {
       "aliquot_id": "526bae65-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "15524912-685a-47ce-a824-567848_D2",
       "analyte_type": "Protein",
       "case_id": "526a7cfe-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -856,6 +917,7 @@
     },
     {
       "aliquot_id": "526bb07d-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "0cc794c3-5bf5-4621-b238-58a0f6_D2",
       "analyte_type": "Protein",
       "case_id": "526a7dd0-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -870,6 +932,7 @@
     },
     {
       "aliquot_id": "526bb15d-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "76e77c6b-c80e-4391-bdbb-e1dcea_D2",
       "analyte_type": "Protein",
       "case_id": "526a7f76-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -884,6 +947,7 @@
     },
     {
       "aliquot_id": "526bb380-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "79b60f32-6cca-4cb6-9a1e-22a3ac_D2",
       "analyte_type": "Protein",
       "case_id": "526a8051-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -898,6 +962,7 @@
     },
     {
       "aliquot_id": "526bb46c-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "9c8e78bf-b03e-4ba0-9909-5ff070_D2",
       "analyte_type": "Protein",
       "case_id": "526a8125-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -912,6 +977,7 @@
     },
     {
       "aliquot_id": "526bb587-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "d109a3c0-350e-47f5-bda0-61899c_D2",
       "analyte_type": "Protein",
       "case_id": "526a82cb-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -926,6 +992,7 @@
     },
     {
       "aliquot_id": "526bb705-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "7069e990-4a4e-4984-a66d-4d835a_D2",
       "analyte_type": "Protein",
       "case_id": "526a83a7-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -940,6 +1007,7 @@
     },
     {
       "aliquot_id": "526bb8c9-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "91b287fd-eadb-442d-abcd-20b741_D2",
       "analyte_type": "Protein",
       "case_id": "526a847d-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -954,6 +1022,7 @@
     },
     {
       "aliquot_id": "526bb9a4-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "bd266bdd-12e4-42cb-9c49-911bfc_D2",
       "analyte_type": "Protein",
       "case_id": "526a8634-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -968,6 +1037,7 @@
     },
     {
       "aliquot_id": "526bba73-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "a65d8e76-640f-4341-a561-afbb57_D2",
       "analyte_type": "Protein",
       "case_id": "526a8712-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -982,6 +1052,7 @@
     },
     {
       "aliquot_id": "526bbc17-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "51c1c79e-5a8e-4b0a-bf92-1c0cab_D2",
       "analyte_type": "Protein",
       "case_id": "526a88d1-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -996,6 +1067,7 @@
     },
     {
       "aliquot_id": "526bbcef-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "61f76fe6-a1c6-41b8-bdc2-2f9209_D2",
       "analyte_type": "Protein",
       "case_id": "526a89a7-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -1010,6 +1082,7 @@
     },
     {
       "aliquot_id": "526bbdba-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "1de8d3d8-fc0e-4be0-8aa7-127c7b_D2",
       "analyte_type": "Protein",
       "case_id": "526a8b79-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -1024,6 +1097,7 @@
     },
     {
       "aliquot_id": "526bbf6b-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "2115808b-6a0d-49bc-a8d7-b83bde_D2",
       "analyte_type": "Protein",
       "case_id": "526a8c5a-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -1038,6 +1112,7 @@
     },
     {
       "aliquot_id": "526bc03f-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "1db5574d-aca7-403c-8100-6e705f_D2",
       "analyte_type": "Protein",
       "case_id": "526a8c5a-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -1052,6 +1127,7 @@
     },
     {
       "aliquot_id": "526bc1f8-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "994f9b8e-46cb-413f-8ec8-2c2fed_D2",
       "analyte_type": "Protein",
       "case_id": "526a8e33-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -1066,6 +1142,7 @@
     },
     {
       "aliquot_id": "526bc2cd-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "7edfd606-4bee-4529-9fec-1ca7f0_D2",
       "analyte_type": "Protein",
       "case_id": "526a8f0c-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -1080,6 +1157,7 @@
     },
     {
       "aliquot_id": "526bc48d-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "7c7ce2d7-6c8a-424e-8e6c-d14ad1_D2",
       "analyte_type": "Protein",
       "case_id": "526a8f0c-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -1094,6 +1172,7 @@
     },
     {
       "aliquot_id": "526bc567-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "1c9145ad-1981-4871-aa7e-8b11de_D2",
       "analyte_type": "Protein",
       "case_id": "526a90f2-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -1108,6 +1187,7 @@
     },
     {
       "aliquot_id": "526bc744-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "e23eb014-69c1-460a-b9d4-9786c8_D2",
       "analyte_type": "Protein",
       "case_id": "526a90f2-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -1122,6 +1202,7 @@
     },
     {
       "aliquot_id": "526bc822-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "31c15e30-21d4-4843-bd4a-9cd0d8_D2",
       "analyte_type": "Protein",
       "case_id": "526a91cb-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -1136,6 +1217,7 @@
     },
     {
       "aliquot_id": "526bca01-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "627e6e36-3dca-4ee5-9755-6f3510_D2",
       "analyte_type": "Protein",
       "case_id": "526a91cb-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -1150,6 +1232,7 @@
     },
     {
       "aliquot_id": "526bcad6-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "b9c1f22e-61f7-45ed-b3b4-5094c7_D2",
       "analyte_type": "Protein",
       "case_id": "526a93bc-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -1164,6 +1247,7 @@
     },
     {
       "aliquot_id": "526bccba-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "3fbf076a-824b-4eac-b6dc-bf5e59_D2",
       "analyte_type": "Protein",
       "case_id": "526a9497-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -1178,6 +1262,7 @@
     },
     {
       "aliquot_id": "526bcd8c-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "3e746bea-ed68-40e6-b348-6ddf08_D2",
       "analyte_type": "Protein",
       "case_id": "526a9697-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -1192,6 +1277,7 @@
     },
     {
       "aliquot_id": "526bcf80-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "cfd76f9a-ce60-4ec7-8e6b-a8fc31_D3",
       "analyte_type": "Protein",
       "case_id": "526a9779-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -1206,6 +1292,7 @@
     },
     {
       "aliquot_id": "526bd053-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "e6850782-fd2a-4c53-b682-1852fe_D2",
       "analyte_type": "Protein",
       "case_id": "526a99c0-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -1220,6 +1307,7 @@
     },
     {
       "aliquot_id": "526bd258-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "05387aad-2a1f-42c2-8d6f-950598_D3",
       "analyte_type": "Protein",
       "case_id": "526a9aa9-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -1234,6 +1322,7 @@
     },
     {
       "aliquot_id": "526bd328-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "46c73531-f531-4ec3-97fe-b39d9d_D2",
       "analyte_type": "Protein",
       "case_id": "526a9cc6-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -1248,6 +1337,7 @@
     },
     {
       "aliquot_id": "526bd536-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "6530147a-efe9-4df6-ac2f-03ece3_D2",
       "analyte_type": "Protein",
       "case_id": "526a9d9d-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -1262,6 +1352,7 @@
     },
     {
       "aliquot_id": "526bd60e-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "49bd51fe-48a1-4828-b66e-b30c38_D2",
       "analyte_type": "Protein",
       "case_id": "526a9fbc-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -1276,6 +1367,7 @@
     },
     {
       "aliquot_id": "526bd832-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "28d0abdb-f682-4bd3-9425-a9c508_D2",
       "analyte_type": "Protein",
       "case_id": "526aa0b0-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -1290,6 +1382,7 @@
     },
     {
       "aliquot_id": "526bd921-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "3946a96c-e0ae-442f-83b4-a9350e_D2",
       "analyte_type": "Protein",
       "case_id": "526aa1ce-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -1304,6 +1397,7 @@
     },
     {
       "aliquot_id": "526bda36-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "e7b656bf-3c34-4ba1-bdf3-c7eefe_D2",
       "analyte_type": "Protein",
       "case_id": "526aa2aa-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -1318,6 +1412,7 @@
     },
     {
       "aliquot_id": "526bdb0e-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "52c064a7-78d9-4a1a-85b4-27c6d1_D2",
       "analyte_type": "Protein",
       "case_id": "526aa37f-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -1332,6 +1427,7 @@
     },
     {
       "aliquot_id": "526bdc01-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "74a45e5a-a35a-4c60-a4b4-f3f5ea_D2",
       "analyte_type": "Protein",
       "case_id": "526aa526-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -1346,6 +1442,7 @@
     },
     {
       "aliquot_id": "526bdce5-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "8234f8ea-bdbd-45b0-bd0b-16f1e7_D2",
       "analyte_type": "Protein",
       "case_id": "526aa60a-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -1360,6 +1457,7 @@
     },
     {
       "aliquot_id": "526bddb6-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "2563cb02-d58a-4286-8634-7502cd_D2",
       "analyte_type": "Protein",
       "case_id": "526aa6dd-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -1374,6 +1472,7 @@
     },
     {
       "aliquot_id": "526bdf68-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "80873a0c-1f40-4d51-bab1-3f2071_D2",
       "analyte_type": "Protein",
       "case_id": "526aa7b2-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -1388,6 +1487,7 @@
     },
     {
       "aliquot_id": "526be03f-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "ce1e5dfc-2ef1-4633-af93-5ea4d9_D2",
       "analyte_type": "Protein",
       "case_id": "526aa956-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -1402,6 +1502,7 @@
     },
     {
       "aliquot_id": "526be10c-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "a03d1103-b809-42c4-ad5c-5aff58_D2",
       "analyte_type": "Protein",
       "case_id": "526aaa31-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -1416,6 +1517,7 @@
     },
     {
       "aliquot_id": "526be1d7-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "3a380577-c134-47ba-a1ce-988d7c_D2",
       "analyte_type": "Protein",
       "case_id": "526aab00-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -1430,6 +1532,7 @@
     },
     {
       "aliquot_id": "526be2ab-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "2b4ce90c-8036-4207-ac3e-54a76f_D2",
       "analyte_type": "Protein",
       "case_id": "526aabd0-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -1444,6 +1547,7 @@
     },
     {
       "aliquot_id": "526be379-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "21efd60f-6a31-4b98-9477-16a905_D2",
       "analyte_type": "Protein",
       "case_id": "526aabd0-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -1458,6 +1562,7 @@
     },
     {
       "aliquot_id": "526be540-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "6319b36b-533c-4e86-8e12-80552e_D3",
       "analyte_type": "Protein",
       "case_id": "526aad86-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -1472,6 +1577,7 @@
     },
     {
       "aliquot_id": "526be61f-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "2433b136-fc7b-4cea-b958-bc6efb_D2",
       "analyte_type": "Protein",
       "case_id": "526aae61-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -1486,6 +1592,7 @@
     },
     {
       "aliquot_id": "526be6ef-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "35a345a4-e954-4c81-ae3f-7797cd_D2",
       "analyte_type": "Protein",
       "case_id": "526aaf30-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -1500,6 +1607,7 @@
     },
     {
       "aliquot_id": "526be7be-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "c17b0ff9-9057-4848-a0cc-abb25f_D2",
       "analyte_type": "Protein",
       "case_id": "526aafff-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -1514,6 +1622,7 @@
     },
     {
       "aliquot_id": "526be887-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "QC1",
       "analyte_type": "Protein",
       "case_id": "526ab1ce-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -1528,6 +1637,7 @@
     },
     {
       "aliquot_id": "526be963-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "QC2",
       "analyte_type": "Protein",
       "case_id": "526ab1ce-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -1542,6 +1652,7 @@
     },
     {
       "aliquot_id": "526beb55-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "QC3",
       "analyte_type": "Protein",
       "case_id": "526ab1ce-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -1556,6 +1667,7 @@
     },
     {
       "aliquot_id": "526bec2a-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "QC4",
       "analyte_type": "Protein",
       "case_id": "526ab1ce-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -1570,6 +1682,7 @@
     },
     {
       "aliquot_id": "526becf7-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "QC5",
       "analyte_type": "Protein",
       "case_id": "526ab1ce-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -1584,6 +1697,7 @@
     },
     {
       "aliquot_id": "526bedc1-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "QC6",
       "analyte_type": "Protein",
       "case_id": "526ab1ce-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -1598,6 +1712,7 @@
     },
     {
       "aliquot_id": "526bee8e-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "QC7",
       "analyte_type": "Protein",
       "case_id": "526ab1ce-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -1612,6 +1727,7 @@
     },
     {
       "aliquot_id": "526bef60-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "QC8",
       "analyte_type": "Protein",
       "case_id": "526ab1ce-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -1626,6 +1742,7 @@
     },
     {
       "aliquot_id": "526bf02b-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "QC9",
       "analyte_type": "Protein",
       "case_id": "526ab1ce-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -1640,6 +1757,7 @@
     },
     {
       "aliquot_id": "526bf23c-0881-11eb-bc0e-0aad30af8a83",
+      "aliquot_submitter_id": "pooled sample",
       "analyte_type": "Protein",
       "case_id": "526ab2b2-0881-11eb-bc0e-0aad30af8a83",
       "file_id_to_aliquot_run_metadata_id": {
@@ -1692,6 +1810,7 @@
   "PDC000451": [
     {
       "aliquot_id": "6e8c6366-d0b0-11e9-9a07-0a80fada099c",
+      "aliquot_submitter_id": "WHIM-P93",
       "analyte_type": "Protein",
       "case_id": "f1ee4ead-cf1e-11e9-9a07-0a80fada099c",
       "file_id_to_aliquot_run_metadata_id": {
@@ -1715,6 +1834,7 @@
     },
     {
       "aliquot_id": "6ec07a96-d0b0-11e9-9a07-0a80fada099c",
+      "aliquot_submitter_id": "WHIM-P94",
       "analyte_type": "Protein",
       "case_id": "f1ee500a-cf1e-11e9-9a07-0a80fada099c",
       "file_id_to_aliquot_run_metadata_id": {
@@ -1740,6 +1860,7 @@
   "PDC000504": [
     {
       "aliquot_id": "0154372b-d56a-4e05-866b-279e26a2c0f0",
+      "aliquot_submitter_id": "CPT0170350030",
       "analyte_type": "Protein",
       "case_id": "d176f43a-527a-4e4f-bcba-8097209f8a61",
       "file_id_to_aliquot_run_metadata_id": {
@@ -1752,6 +1873,7 @@
     },
     {
       "aliquot_id": "0919a8f4-dad5-407c-b7f6-b8060baff3a5",
+      "aliquot_submitter_id": "CPT0162450012",
       "analyte_type": "Protein",
       "case_id": "760cd860-16e3-47a5-9210-aad75d5b8c8c",
       "file_id_to_aliquot_run_metadata_id": {
@@ -1764,6 +1886,7 @@
     },
     {
       "aliquot_id": "098afb30-766b-4411-9be6-cbbd5c8d9cff",
+      "aliquot_submitter_id": "CPT0184810030",
       "analyte_type": "Protein",
       "case_id": "6fd23aa1-ca9f-4299-9eeb-81683ee4acc3",
       "file_id_to_aliquot_run_metadata_id": {
@@ -1776,6 +1899,7 @@
     },
     {
       "aliquot_id": "09cdc0a4-b435-44e7-8a8c-84f0d8218341",
+      "aliquot_submitter_id": "CPT0187730112",
       "analyte_type": "Protein",
       "case_id": "7b1fa6fd-6c33-4e14-b20a-048a7f5a836c",
       "file_id_to_aliquot_run_metadata_id": {
@@ -1788,6 +1912,7 @@
     },
     {
       "aliquot_id": "0cc526e2-e0a0-4f1f-bfed-41c21610c212",
+      "aliquot_submitter_id": "CPT0187830118",
       "analyte_type": "Protein",
       "case_id": "0eddd8e2-c532-4f08-9b4e-3a6d86befcb2",
       "file_id_to_aliquot_run_metadata_id": {
@@ -1800,6 +1925,7 @@
     },
     {
       "aliquot_id": "139203ac-6898-4260-a2eb-00d081bce214",
+      "aliquot_submitter_id": "CPT0162230031",
       "analyte_type": "Protein",
       "case_id": "9ac78a5e-393f-48ba-9385-cad0175801e5",
       "file_id_to_aliquot_run_metadata_id": {
@@ -1812,6 +1938,7 @@
     },
     {
       "aliquot_id": "174798a9-dfac-4249-b3ec-bf2db95c32bb",
+      "aliquot_submitter_id": "CPT0187830027",
       "analyte_type": "Protein",
       "case_id": "0eddd8e2-c532-4f08-9b4e-3a6d86befcb2",
       "file_id_to_aliquot_run_metadata_id": {
@@ -1824,6 +1951,7 @@
     },
     {
       "aliquot_id": "187fe18b-f2fb-4220-8f39-a8ea83b88834",
+      "aliquot_submitter_id": "CPT0170350012",
       "analyte_type": "Protein",
       "case_id": "d176f43a-527a-4e4f-bcba-8097209f8a61",
       "file_id_to_aliquot_run_metadata_id": {
@@ -1836,6 +1964,7 @@
     },
     {
       "aliquot_id": "1a09eae4-8a7c-4c4e-ab63-5bcd0cce19a8",
+      "aliquot_submitter_id": "CPT0162380112",
       "analyte_type": "Protein",
       "case_id": "1862470d-0aca-47f8-9ddd-371db1a98c70",
       "file_id_to_aliquot_run_metadata_id": {
@@ -1848,6 +1977,7 @@
     },
     {
       "aliquot_id": "1d842e6d-9a81-492f-bbad-a5e654f999a7",
+      "aliquot_submitter_id": "CPT0184830012",
       "analyte_type": "Protein",
       "case_id": "6fd23aa1-ca9f-4299-9eeb-81683ee4acc3",
       "file_id_to_aliquot_run_metadata_id": {
@@ -1860,6 +1990,7 @@
     },
     {
       "aliquot_id": "2c37bde6-8be9-4cc3-8dca-89b5a505d0aa",
+      "aliquot_submitter_id": "CPT0162230112",
       "analyte_type": "Protein",
       "case_id": "9ac78a5e-393f-48ba-9385-cad0175801e5",
       "file_id_to_aliquot_run_metadata_id": {
@@ -1872,6 +2003,7 @@
     },
     {
       "aliquot_id": "33ce13b2-cb75-41b2-ae33-4eae8f494c0a",
+      "aliquot_submitter_id": "CPT0167050012",
       "analyte_type": "Protein",
       "case_id": "a0ddc659-d393-4469-b1d1-d61dcdbc5b06",
       "file_id_to_aliquot_run_metadata_id": {
@@ -1884,6 +2016,7 @@
     },
     {
       "aliquot_id": "358f2037-3ae2-48ea-8d9a-7482dfd53a4e",
+      "aliquot_submitter_id": "CPT0198830009",
       "analyte_type": "Protein",
       "case_id": "8e6654ba-0c12-4244-83f1-a6420f2163e8",
       "file_id_to_aliquot_run_metadata_id": {
@@ -1896,6 +2029,7 @@
     },
     {
       "aliquot_id": "36fa7d3c-a060-4b71-b813-eff622746bf8",
+      "aliquot_submitter_id": "CPT0198530009",
       "analyte_type": "Protein",
       "case_id": "18fa5b39-8d49-47f4-adb1-c8295bf67032",
       "file_id_to_aliquot_run_metadata_id": {
@@ -1908,6 +2042,7 @@
     },
     {
       "aliquot_id": "399905bc-127b-4b49-abd0-548de3769319",
+      "aliquot_submitter_id": "CPT0161660112",
       "analyte_type": "Protein",
       "case_id": "ef1ba9c5-91da-48b7-ac49-0a8f00bfba64",
       "file_id_to_aliquot_run_metadata_id": {
@@ -1920,6 +2055,7 @@
     },
     {
       "aliquot_id": "3a9bd7a5-ddc9-4fab-89af-36eaa59840ac",
+      "aliquot_submitter_id": "CPT0198530012",
       "analyte_type": "Protein",
       "case_id": "18fa5b39-8d49-47f4-adb1-c8295bf67032",
       "file_id_to_aliquot_run_metadata_id": {
@@ -1932,6 +2068,7 @@
     },
     {
       "aliquot_id": "3ae7f4e7-b6c0-4cac-a780-a3a3aa7b05c8",
+      "aliquot_submitter_id": "CPT0170340112",
       "analyte_type": "Protein",
       "case_id": "d176f43a-527a-4e4f-bcba-8097209f8a61",
       "file_id_to_aliquot_run_metadata_id": {
@@ -1944,6 +2081,7 @@
     },
     {
       "aliquot_id": "425ee0f9-7fe4-438c-beb2-f1b227adb72b",
+      "aliquot_submitter_id": "CPT0167050027",
       "analyte_type": "Protein",
       "case_id": "a0ddc659-d393-4469-b1d1-d61dcdbc5b06",
       "file_id_to_aliquot_run_metadata_id": {
@@ -1956,6 +2094,7 @@
     },
     {
       "aliquot_id": "4b1e729a-a6f6-40db-87a2-d31a25b4aa24",
+      "aliquot_submitter_id": "CPT0161630112",
       "analyte_type": "Protein",
       "case_id": "ef1ba9c5-91da-48b7-ac49-0a8f00bfba64",
       "file_id_to_aliquot_run_metadata_id": {
@@ -1968,6 +2107,7 @@
     },
     {
       "aliquot_id": "4c49e964-c677-4ffc-beb4-b92de2b9e9da",
+      "aliquot_submitter_id": "CPT0161630012",
       "analyte_type": "Protein",
       "case_id": "ef1ba9c5-91da-48b7-ac49-0a8f00bfba64",
       "file_id_to_aliquot_run_metadata_id": {
@@ -1980,6 +2120,7 @@
     },
     {
       "aliquot_id": "4cea5a46-6538-4739-9097-2d0aa0571fa9",
+      "aliquot_submitter_id": "CPT0162390012",
       "analyte_type": "Protein",
       "case_id": "1862470d-0aca-47f8-9ddd-371db1a98c70",
       "file_id_to_aliquot_run_metadata_id": {
@@ -1992,6 +2133,7 @@
     },
     {
       "aliquot_id": "4e66860e-749b-4e75-a264-3cd8ae95dcac",
+      "aliquot_submitter_id": "CPT0198830012",
       "analyte_type": "Protein",
       "case_id": "8e6654ba-0c12-4244-83f1-a6420f2163e8",
       "file_id_to_aliquot_run_metadata_id": {
@@ -2004,6 +2146,7 @@
     },
     {
       "aliquot_id": "4eaab718-1732-471b-aac6-162259715ba0",
+      "aliquot_submitter_id": "CPT0187720112",
       "analyte_type": "Protein",
       "case_id": "7b1fa6fd-6c33-4e14-b20a-048a7f5a836c",
       "file_id_to_aliquot_run_metadata_id": {
@@ -2016,6 +2159,7 @@
     },
     {
       "aliquot_id": "4ed2e5b0-4b3b-4d87-af18-8012389eda15",
+      "aliquot_submitter_id": "CPT0187820112",
       "analyte_type": "Protein",
       "case_id": "0eddd8e2-c532-4f08-9b4e-3a6d86befcb2",
       "file_id_to_aliquot_run_metadata_id": {
@@ -2028,6 +2172,7 @@
     },
     {
       "aliquot_id": "4f1fb2ff-1291-492a-b480-03e7fc9229e6",
+      "aliquot_submitter_id": "CPT0187720026",
       "analyte_type": "Protein",
       "case_id": "7b1fa6fd-6c33-4e14-b20a-048a7f5a836c",
       "file_id_to_aliquot_run_metadata_id": {
@@ -2040,6 +2185,7 @@
     },
     {
       "aliquot_id": "4ff71256-cf97-4439-9978-d74fe7c4d5ab",
+      "aliquot_submitter_id": "CPT0170350112",
       "analyte_type": "Protein",
       "case_id": "d176f43a-527a-4e4f-bcba-8097209f8a61",
       "file_id_to_aliquot_run_metadata_id": {
@@ -2052,6 +2198,7 @@
     },
     {
       "aliquot_id": "55e30653-fa4c-4907-a034-cc01c339ec02",
+      "aliquot_submitter_id": "CPT0170340028",
       "analyte_type": "Protein",
       "case_id": "d176f43a-527a-4e4f-bcba-8097209f8a61",
       "file_id_to_aliquot_run_metadata_id": {
@@ -2064,6 +2211,7 @@
     },
     {
       "aliquot_id": "56a7f4ea-b181-4282-ac5d-192e96c36393",
+      "aliquot_submitter_id": "CPT0183850012",
       "analyte_type": "Protein",
       "case_id": "7bfcbba7-db38-48ef-8c0e-d60ce4e756ab",
       "file_id_to_aliquot_run_metadata_id": {
@@ -2076,6 +2224,7 @@
     },
     {
       "aliquot_id": "57b09803-6c35-4de8-a8c4-5b812f8ce33e",
+      "aliquot_submitter_id": "CPT0184830028",
       "analyte_type": "Protein",
       "case_id": "6fd23aa1-ca9f-4299-9eeb-81683ee4acc3",
       "file_id_to_aliquot_run_metadata_id": {
@@ -2088,6 +2237,7 @@
     },
     {
       "aliquot_id": "580b8e18-bd2b-4ec7-9e19-b5cfdb3a0da4",
+      "aliquot_submitter_id": "CPT0187830012",
       "analyte_type": "Protein",
       "case_id": "0eddd8e2-c532-4f08-9b4e-3a6d86befcb2",
       "file_id_to_aliquot_run_metadata_id": {
@@ -2100,6 +2250,7 @@
     },
     {
       "aliquot_id": "61d4f39e-1936-461c-a422-98e60220ba6f",
+      "aliquot_submitter_id": "CPT0198520009",
       "analyte_type": "Protein",
       "case_id": "18fa5b39-8d49-47f4-adb1-c8295bf67032",
       "file_id_to_aliquot_run_metadata_id": {
@@ -2112,6 +2263,7 @@
     },
     {
       "aliquot_id": "62e5785c-2665-4423-a86c-1bb92e67efa9",
+      "aliquot_submitter_id": "CPT0162390112",
       "analyte_type": "Protein",
       "case_id": "1862470d-0aca-47f8-9ddd-371db1a98c70",
       "file_id_to_aliquot_run_metadata_id": {
@@ -2124,6 +2276,7 @@
     },
     {
       "aliquot_id": "64b18f4b-fd4c-4fd5-add6-5631ed495ecd",
+      "aliquot_submitter_id": "CPT0162250012",
       "analyte_type": "Protein",
       "case_id": "9ac78a5e-393f-48ba-9385-cad0175801e5",
       "file_id_to_aliquot_run_metadata_id": {
@@ -2136,6 +2289,7 @@
     },
     {
       "aliquot_id": "6543ccf8-b6b5-4883-ba20-1082b09bcd25",
+      "aliquot_submitter_id": "CPT0187820026",
       "analyte_type": "Protein",
       "case_id": "0eddd8e2-c532-4f08-9b4e-3a6d86befcb2",
       "file_id_to_aliquot_run_metadata_id": {
@@ -2148,6 +2302,7 @@
     },
     {
       "aliquot_id": "7018ee06-c0b4-4904-aec7-53b10aead2c4",
+      "aliquot_submitter_id": "CPT0166540012",
       "analyte_type": "Protein",
       "case_id": "421c43ec-df99-4e7b-830a-bad7835a4a78",
       "file_id_to_aliquot_run_metadata_id": {
@@ -2160,6 +2315,7 @@
     },
     {
       "aliquot_id": "709d24d5-21be-4faf-8682-74c7c6523272",
+      "aliquot_submitter_id": "CPT0183850030",
       "analyte_type": "Protein",
       "case_id": "7bfcbba7-db38-48ef-8c0e-d60ce4e756ab",
       "file_id_to_aliquot_run_metadata_id": {
@@ -2172,6 +2328,7 @@
     },
     {
       "aliquot_id": "7a1294d5-6d91-4f11-a139-23e9a0a9e44f",
+      "aliquot_submitter_id": "CPT0162460112",
       "analyte_type": "Protein",
       "case_id": "760cd860-16e3-47a5-9210-aad75d5b8c8c",
       "file_id_to_aliquot_run_metadata_id": {
@@ -2184,6 +2341,7 @@
     },
     {
       "aliquot_id": "7a4e9207-bacd-41dd-9589-b2d95e21e813",
+      "aliquot_submitter_id": "CPT0184810112",
       "analyte_type": "Protein",
       "case_id": "6fd23aa1-ca9f-4299-9eeb-81683ee4acc3",
       "file_id_to_aliquot_run_metadata_id": {
@@ -2196,6 +2354,7 @@
     },
     {
       "aliquot_id": "842ed394-aac6-4219-b158-df81253844c0",
+      "aliquot_submitter_id": "CPT0198810112",
       "analyte_type": "Protein",
       "case_id": "8e6654ba-0c12-4244-83f1-a6420f2163e8",
       "file_id_to_aliquot_run_metadata_id": {
@@ -2208,6 +2367,7 @@
     },
     {
       "aliquot_id": "863081b8-98d3-4669-a9d3-50b15a62b7ca",
+      "aliquot_submitter_id": "CPT0162230012",
       "analyte_type": "Protein",
       "case_id": "9ac78a5e-393f-48ba-9385-cad0175801e5",
       "file_id_to_aliquot_run_metadata_id": {
@@ -2220,6 +2380,7 @@
     },
     {
       "aliquot_id": "87a24acb-9874-4593-b2df-97b851f7367a",
+      "aliquot_submitter_id": "CPT0162460031",
       "analyte_type": "Protein",
       "case_id": "760cd860-16e3-47a5-9210-aad75d5b8c8c",
       "file_id_to_aliquot_run_metadata_id": {
@@ -2232,6 +2393,7 @@
     },
     {
       "aliquot_id": "8fa569bd-fd59-433d-bbfe-5d1887ea4200",
+      "aliquot_submitter_id": "CPT0187660012",
       "analyte_type": "Protein",
       "case_id": "63b89ae5-e930-4840-b062-1f1ff1365d95",
       "file_id_to_aliquot_run_metadata_id": {
@@ -2244,6 +2406,7 @@
     },
     {
       "aliquot_id": "9142c94a-5c71-4bba-b15a-f64093efc537",
+      "aliquot_submitter_id": "CPT0184830112",
       "analyte_type": "Protein",
       "case_id": "6fd23aa1-ca9f-4299-9eeb-81683ee4acc3",
       "file_id_to_aliquot_run_metadata_id": {
@@ -2256,6 +2419,7 @@
     },
     {
       "aliquot_id": "9148d27d-06d0-420a-823b-2c534a1be20c",
+      "aliquot_submitter_id": "CPT0183870027",
       "analyte_type": "Protein",
       "case_id": "7bfcbba7-db38-48ef-8c0e-d60ce4e756ab",
       "file_id_to_aliquot_run_metadata_id": {
@@ -2268,6 +2432,7 @@
     },
     {
       "aliquot_id": "961d7545-4542-4541-b4fc-b799cec4873f",
+      "aliquot_submitter_id": "CPT0161630027",
       "analyte_type": "Protein",
       "case_id": "ef1ba9c5-91da-48b7-ac49-0a8f00bfba64",
       "file_id_to_aliquot_run_metadata_id": {
@@ -2280,6 +2445,7 @@
     },
     {
       "aliquot_id": "9b4b6390-d501-4174-a9fc-b0f3ce5a6cc9",
+      "aliquot_submitter_id": "CPT0187660112",
       "analyte_type": "Protein",
       "case_id": "63b89ae5-e930-4840-b062-1f1ff1365d95",
       "file_id_to_aliquot_run_metadata_id": {
@@ -2292,6 +2458,7 @@
     },
     {
       "aliquot_id": "9c0d7911-7fb9-4ebd-b554-aa67f7d1de33",
+      "aliquot_submitter_id": "CPT0187720012",
       "analyte_type": "Protein",
       "case_id": "7b1fa6fd-6c33-4e14-b20a-048a7f5a836c",
       "file_id_to_aliquot_run_metadata_id": {
@@ -2304,6 +2471,7 @@
     },
     {
       "aliquot_id": "9c295bff-21df-4d26-957c-aeb80ed6ca91",
+      "aliquot_submitter_id": "CPT0184450112",
       "analyte_type": "Protein",
       "case_id": "9a3d9daa-c653-46d1-8ba2-c066e3eb5ea8",
       "file_id_to_aliquot_run_metadata_id": {
@@ -2316,6 +2484,7 @@
     },
     {
       "aliquot_id": "9eadbb20-68eb-4254-8d50-48e4b625aeaa",
+      "aliquot_submitter_id": "CPT0167050112",
       "analyte_type": "Protein",
       "case_id": "a0ddc659-d393-4469-b1d1-d61dcdbc5b06",
       "file_id_to_aliquot_run_metadata_id": {
@@ -2328,6 +2497,7 @@
     },
     {
       "aliquot_id": "9ffd1fd8-3f0a-4334-8556-16491c639077",
+      "aliquot_submitter_id": "CPT0187640009",
       "analyte_type": "Protein",
       "case_id": "63b89ae5-e930-4840-b062-1f1ff1365d95",
       "file_id_to_aliquot_run_metadata_id": {
@@ -2340,6 +2510,7 @@
     },
     {
       "aliquot_id": "a0598317-6435-48af-9e36-b2fcf30ddf9f",
+      "aliquot_submitter_id": "CPT0183870012",
       "analyte_type": "Protein",
       "case_id": "7bfcbba7-db38-48ef-8c0e-d60ce4e756ab",
       "file_id_to_aliquot_run_metadata_id": {
@@ -2352,6 +2523,7 @@
     },
     {
       "aliquot_id": "a217485d-8c90-4895-b491-f22f7871f814",
+      "aliquot_submitter_id": "CPT0184450041",
       "analyte_type": "Protein",
       "case_id": "9a3d9daa-c653-46d1-8ba2-c066e3eb5ea8",
       "file_id_to_aliquot_run_metadata_id": {
@@ -2364,6 +2536,7 @@
     },
     {
       "aliquot_id": "a33914a8-5c1c-4c6f-8b19-004c07fc0b3c",
+      "aliquot_submitter_id": "CPT0198810012",
       "analyte_type": "Protein",
       "case_id": "8e6654ba-0c12-4244-83f1-a6420f2163e8",
       "file_id_to_aliquot_run_metadata_id": {
@@ -2376,6 +2549,7 @@
     },
     {
       "aliquot_id": "ac70cdc7-c606-4b41-8a17-88646b599a1c",
+      "aliquot_submitter_id": "CPT0183850112",
       "analyte_type": "Protein",
       "case_id": "7bfcbba7-db38-48ef-8c0e-d60ce4e756ab",
       "file_id_to_aliquot_run_metadata_id": {
@@ -2388,6 +2562,7 @@
     },
     {
       "aliquot_id": "afc344db-371e-4681-840c-17d7ef81985f",
+      "aliquot_submitter_id": "CPT0166560112",
       "analyte_type": "Protein",
       "case_id": "421c43ec-df99-4e7b-830a-bad7835a4a78",
       "file_id_to_aliquot_run_metadata_id": {
@@ -2400,6 +2575,7 @@
     },
     {
       "aliquot_id": "b1bdb690-ed01-4427-8c48-50bdc967cb0d",
+      "aliquot_submitter_id": "CPT0162390030",
       "analyte_type": "Protein",
       "case_id": "1862470d-0aca-47f8-9ddd-371db1a98c70",
       "file_id_to_aliquot_run_metadata_id": {
@@ -2412,6 +2588,7 @@
     },
     {
       "aliquot_id": "b1f6406b-b1b1-4e6c-84f0-d4dec6b13d87",
+      "aliquot_submitter_id": "CPT0161660012",
       "analyte_type": "Protein",
       "case_id": "ef1ba9c5-91da-48b7-ac49-0a8f00bfba64",
       "file_id_to_aliquot_run_metadata_id": {
@@ -2424,6 +2601,7 @@
     },
     {
       "aliquot_id": "b503609c-6895-4b26-90fa-92fdc1a39bf3",
+      "aliquot_submitter_id": "CPT0198520012",
       "analyte_type": "Protein",
       "case_id": "18fa5b39-8d49-47f4-adb1-c8295bf67032",
       "file_id_to_aliquot_run_metadata_id": {
@@ -2436,6 +2614,7 @@
     },
     {
       "aliquot_id": "b74a213b-c64d-4ff1-ad7d-205f9e207d37",
+      "aliquot_submitter_id": "CPT0187820012",
       "analyte_type": "Protein",
       "case_id": "0eddd8e2-c532-4f08-9b4e-3a6d86befcb2",
       "file_id_to_aliquot_run_metadata_id": {
@@ -2448,6 +2627,7 @@
     },
     {
       "aliquot_id": "b74a74eb-8b81-4a0d-90c0-1e9b4680e168",
+      "aliquot_submitter_id": "CPT0198810028",
       "analyte_type": "Protein",
       "case_id": "8e6654ba-0c12-4244-83f1-a6420f2163e8",
       "file_id_to_aliquot_run_metadata_id": {
@@ -2460,6 +2640,7 @@
     },
     {
       "aliquot_id": "be6b9f72-e603-402a-884f-8238093c092e",
+      "aliquot_submitter_id": "CPT0162380012",
       "analyte_type": "Protein",
       "case_id": "1862470d-0aca-47f8-9ddd-371db1a98c70",
       "file_id_to_aliquot_run_metadata_id": {
@@ -2472,6 +2653,7 @@
     },
     {
       "aliquot_id": "bf0d06dd-d8d9-4932-9bd9-1ec22fb8fcb9",
+      "aliquot_submitter_id": "CPT0167060009",
       "analyte_type": "Protein",
       "case_id": "a0ddc659-d393-4469-b1d1-d61dcdbc5b06",
       "file_id_to_aliquot_run_metadata_id": {
@@ -2484,6 +2666,7 @@
     },
     {
       "aliquot_id": "c07a6f26-c51b-47b1-bf68-4d15187b1712",
+      "aliquot_submitter_id": "CPT0187640012",
       "analyte_type": "Protein",
       "case_id": "63b89ae5-e930-4840-b062-1f1ff1365d95",
       "file_id_to_aliquot_run_metadata_id": {
@@ -2496,6 +2679,7 @@
     },
     {
       "aliquot_id": "c489b915-0a1f-432a-9803-4322d06af89e",
+      "aliquot_submitter_id": "CPT0187660031",
       "analyte_type": "Protein",
       "case_id": "63b89ae5-e930-4840-b062-1f1ff1365d95",
       "file_id_to_aliquot_run_metadata_id": {
@@ -2508,6 +2692,7 @@
     },
     {
       "aliquot_id": "c56b5847-a07e-4e25-96c8-835dacb6ae23",
+      "aliquot_submitter_id": "CPT0161660030",
       "analyte_type": "Protein",
       "case_id": "ef1ba9c5-91da-48b7-ac49-0a8f00bfba64",
       "file_id_to_aliquot_run_metadata_id": {
@@ -2520,6 +2705,7 @@
     },
     {
       "aliquot_id": "c7687cd6-9999-4ef4-903e-52a151355c70",
+      "aliquot_submitter_id": "CPT0187730012",
       "analyte_type": "Protein",
       "case_id": "7b1fa6fd-6c33-4e14-b20a-048a7f5a836c",
       "file_id_to_aliquot_run_metadata_id": {
@@ -2532,6 +2718,7 @@
     },
     {
       "aliquot_id": "c79f8af2-47af-4503-98a5-a79695a146e4",
+      "aliquot_submitter_id": "CPT0184450030",
       "analyte_type": "Protein",
       "case_id": "9a3d9daa-c653-46d1-8ba2-c066e3eb5ea8",
       "file_id_to_aliquot_run_metadata_id": {
@@ -2544,6 +2731,7 @@
     },
     {
       "aliquot_id": "caa7119e-130f-4701-8b78-e6e8d7fc6170",
+      "aliquot_submitter_id": "CPT0166560012",
       "analyte_type": "Protein",
       "case_id": "421c43ec-df99-4e7b-830a-bad7835a4a78",
       "file_id_to_aliquot_run_metadata_id": {
@@ -2556,6 +2744,7 @@
     },
     {
       "aliquot_id": "cef94ef8-e446-422b-9d1f-b0c65b8b10a5",
+      "aliquot_submitter_id": "CPT0162460012",
       "analyte_type": "Protein",
       "case_id": "760cd860-16e3-47a5-9210-aad75d5b8c8c",
       "file_id_to_aliquot_run_metadata_id": {
@@ -2568,6 +2757,7 @@
     },
     {
       "aliquot_id": "d205644c-64c9-4a9f-936c-49ce9d222f94",
+      "aliquot_submitter_id": "CPT0166560029",
       "analyte_type": "Protein",
       "case_id": "421c43ec-df99-4e7b-830a-bad7835a4a78",
       "file_id_to_aliquot_run_metadata_id": {
@@ -2580,6 +2770,7 @@
     },
     {
       "aliquot_id": "d961b56e-c819-45e5-92f6-22bab25335c7",
+      "aliquot_submitter_id": "CPT0184460009",
       "analyte_type": "Protein",
       "case_id": "9a3d9daa-c653-46d1-8ba2-c066e3eb5ea8",
       "file_id_to_aliquot_run_metadata_id": {
@@ -2592,6 +2783,7 @@
     },
     {
       "aliquot_id": "da54b458-26b3-44a4-8d6a-f30eb1f182f6",
+      "aliquot_submitter_id": "CPT0170340012",
       "analyte_type": "Protein",
       "case_id": "d176f43a-527a-4e4f-bcba-8097209f8a61",
       "file_id_to_aliquot_run_metadata_id": {
@@ -2604,6 +2796,7 @@
     },
     {
       "aliquot_id": "defc5b3b-c4e1-4c8e-b605-f4647ef418ed",
+      "aliquot_submitter_id": "CPT0166540112",
       "analyte_type": "Protein",
       "case_id": "421c43ec-df99-4e7b-830a-bad7835a4a78",
       "file_id_to_aliquot_run_metadata_id": {
@@ -2616,6 +2809,7 @@
     },
     {
       "aliquot_id": "e16cc55f-92a0-482f-91f6-5af495b66825",
+      "aliquot_submitter_id": "CPT0184450012",
       "analyte_type": "Protein",
       "case_id": "9a3d9daa-c653-46d1-8ba2-c066e3eb5ea8",
       "file_id_to_aliquot_run_metadata_id": {
@@ -2628,6 +2822,7 @@
     },
     {
       "aliquot_id": "e72ddf81-6d30-4351-be24-d1dd72fe28cf",
+      "aliquot_submitter_id": "CPT0167060012",
       "analyte_type": "Protein",
       "case_id": "a0ddc659-d393-4469-b1d1-d61dcdbc5b06",
       "file_id_to_aliquot_run_metadata_id": {
@@ -2640,6 +2835,7 @@
     },
     {
       "aliquot_id": "ec187d67-b77c-4fe7-9cba-cb549e4491fc",
+      "aliquot_submitter_id": "CPT0162450031",
       "analyte_type": "Protein",
       "case_id": "760cd860-16e3-47a5-9210-aad75d5b8c8c",
       "file_id_to_aliquot_run_metadata_id": {
@@ -2652,6 +2848,7 @@
     },
     {
       "aliquot_id": "eef2eb97-614c-4f4b-9ee3-9d6ab1c19b01",
+      "aliquot_submitter_id": "CPT0183870118",
       "analyte_type": "Protein",
       "case_id": "7bfcbba7-db38-48ef-8c0e-d60ce4e756ab",
       "file_id_to_aliquot_run_metadata_id": {
@@ -2664,6 +2861,7 @@
     },
     {
       "aliquot_id": "f0e36cdd-954c-4973-be8e-de31d1465205",
+      "aliquot_submitter_id": "CPT0162450112",
       "analyte_type": "Protein",
       "case_id": "760cd860-16e3-47a5-9210-aad75d5b8c8c",
       "file_id_to_aliquot_run_metadata_id": {
@@ -2676,6 +2874,7 @@
     },
     {
       "aliquot_id": "f144868c-4554-4f35-816e-ae23666452c3",
+      "aliquot_submitter_id": "CPT0184810012",
       "analyte_type": "Protein",
       "case_id": "6fd23aa1-ca9f-4299-9eeb-81683ee4acc3",
       "file_id_to_aliquot_run_metadata_id": {
@@ -2688,6 +2887,7 @@
     },
     {
       "aliquot_id": "f2d79c98-ce1c-4fe7-87ba-be4da0ca967d",
+      "aliquot_submitter_id": "CPT0162380031",
       "analyte_type": "Protein",
       "case_id": "1862470d-0aca-47f8-9ddd-371db1a98c70",
       "file_id_to_aliquot_run_metadata_id": {
@@ -2700,6 +2900,7 @@
     },
     {
       "aliquot_id": "f5c14832-aebc-4be4-8428-dd7ce725aee3",
+      "aliquot_submitter_id": "CPT0162250031",
       "analyte_type": "Protein",
       "case_id": "9ac78a5e-393f-48ba-9385-cad0175801e5",
       "file_id_to_aliquot_run_metadata_id": {
@@ -2712,6 +2913,7 @@
     },
     {
       "aliquot_id": "fa899faa-c8f7-4214-964f-3db1b0a33970",
+      "aliquot_submitter_id": "CPT0187730030",
       "analyte_type": "Protein",
       "case_id": "7b1fa6fd-6c33-4e14-b20a-048a7f5a836c",
       "file_id_to_aliquot_run_metadata_id": {
@@ -2724,6 +2926,7 @@
     },
     {
       "aliquot_id": "fe3e1176-1cce-4384-8839-51478ef45e6d",
+      "aliquot_submitter_id": "CPT0166540029",
       "analyte_type": "Protein",
       "case_id": "421c43ec-df99-4e7b-830a-bad7835a4a78",
       "file_id_to_aliquot_run_metadata_id": {
@@ -2736,6 +2939,7 @@
     },
     {
       "aliquot_id": "ffa286bc-4074-4e6f-b668-83e47f9d6423",
+      "aliquot_submitter_id": "CPT0162250112",
       "analyte_type": "Protein",
       "case_id": "9ac78a5e-393f-48ba-9385-cad0175801e5",
       "file_id_to_aliquot_run_metadata_id": {
@@ -2750,6 +2954,7 @@
   "PDC000592": [
     {
       "aliquot_id": "0240e092-bd4a-4e08-9b9c-13ce51684616",
+      "aliquot_submitter_id": "S867",
       "analyte_type": null,
       "case_id": "88830a55-d0da-4dfc-81a1-e1c79a79385e",
       "file_id_to_aliquot_run_metadata_id": {
@@ -2762,6 +2967,7 @@
     },
     {
       "aliquot_id": "047fb13d-c3be-4ea5-9b7c-ac18fc08721e",
+      "aliquot_submitter_id": "S153",
       "analyte_type": null,
       "case_id": "d691d968-9a1e-4a9a-ab08-f0f79f4b7588",
       "file_id_to_aliquot_run_metadata_id": {
@@ -2774,6 +2980,7 @@
     },
     {
       "aliquot_id": "0acd0a44-56b5-4678-b686-001dfb94270a",
+      "aliquot_submitter_id": "S872",
       "analyte_type": null,
       "case_id": "2f2c2daf-d6af-4d12-b904-9ff9c5ced87a",
       "file_id_to_aliquot_run_metadata_id": {
@@ -2786,6 +2993,7 @@
     },
     {
       "aliquot_id": "0d362f1a-288f-40ce-8f79-e7b9c8661dc5",
+      "aliquot_submitter_id": "S211",
       "analyte_type": null,
       "case_id": "afc41eb8-d821-4905-ac8b-9608a97668cd",
       "file_id_to_aliquot_run_metadata_id": {
@@ -2798,6 +3006,7 @@
     },
     {
       "aliquot_id": "11440e5a-6b15-4d6b-a4c1-ad4832a0a6f3",
+      "aliquot_submitter_id": "S231",
       "analyte_type": null,
       "case_id": "a95b9068-7edb-4d8a-85a8-036e6085c4c9",
       "file_id_to_aliquot_run_metadata_id": {
@@ -2810,6 +3019,7 @@
     },
     {
       "aliquot_id": "1376a211-8f60-403b-bdc6-20b5951dc579",
+      "aliquot_submitter_id": "S735",
       "analyte_type": null,
       "case_id": "994b500d-7ffe-4263-ad09-4b34bc9ae429",
       "file_id_to_aliquot_run_metadata_id": {
@@ -2822,6 +3032,7 @@
     },
     {
       "aliquot_id": "15c18d27-a097-4e49-8c42-b78cb2394766",
+      "aliquot_submitter_id": "S956",
       "analyte_type": null,
       "case_id": "44ad4b98-82ad-40b0-bb46-b5823465d650",
       "file_id_to_aliquot_run_metadata_id": {
@@ -2834,6 +3045,7 @@
     },
     {
       "aliquot_id": "1708d346-06b3-4be5-9594-bdc34bca8231",
+      "aliquot_submitter_id": "S475",
       "analyte_type": null,
       "case_id": "8e835a0b-3969-4cd5-a1be-bcf913209b9b",
       "file_id_to_aliquot_run_metadata_id": {
@@ -2846,6 +3058,7 @@
     },
     {
       "aliquot_id": "1aca5397-4491-4681-917e-d4056ae828da",
+      "aliquot_submitter_id": "S138",
       "analyte_type": null,
       "case_id": "55b93947-a7a2-48e9-adba-038d2a84a877",
       "file_id_to_aliquot_run_metadata_id": {
@@ -2858,6 +3071,7 @@
     },
     {
       "aliquot_id": "2056f60e-af92-4441-be0f-2ef46d1ee7c4",
+      "aliquot_submitter_id": "S127",
       "analyte_type": null,
       "case_id": "26dcf7a6-93d3-4068-9962-5166263d8739",
       "file_id_to_aliquot_run_metadata_id": {
@@ -2871,6 +3085,7 @@
     },
     {
       "aliquot_id": "225e2e4c-decd-4de1-bbc4-bc924c949d14",
+      "aliquot_submitter_id": "S477",
       "analyte_type": null,
       "case_id": "ed2d4373-b98d-46e2-8d2e-af4cb0711c8f",
       "file_id_to_aliquot_run_metadata_id": {
@@ -2883,6 +3098,7 @@
     },
     {
       "aliquot_id": "25376d22-42f0-4ee6-8260-982fac49426f",
+      "aliquot_submitter_id": "S493",
       "analyte_type": null,
       "case_id": "cca1338a-66b5-409b-950c-91bf54564c1e",
       "file_id_to_aliquot_run_metadata_id": {
@@ -2895,6 +3111,7 @@
     },
     {
       "aliquot_id": "277a85ba-28b1-4ee9-a19b-98dce4e3a18a",
+      "aliquot_submitter_id": "S851",
       "analyte_type": null,
       "case_id": "bd59b331-41ea-4a8c-bca0-70e41ced11cf",
       "file_id_to_aliquot_run_metadata_id": {
@@ -2907,6 +3124,7 @@
     },
     {
       "aliquot_id": "2a45b8c8-2787-420d-9ce4-dd05ebe8f29a",
+      "aliquot_submitter_id": "S333",
       "analyte_type": null,
       "case_id": "e1ee5afa-32ee-45af-bd9e-823d3e58a3c1",
       "file_id_to_aliquot_run_metadata_id": {
@@ -2919,6 +3137,7 @@
     },
     {
       "aliquot_id": "2b0feabc-646e-4c80-8567-8d250cdd721c",
+      "aliquot_submitter_id": "S352",
       "analyte_type": null,
       "case_id": "6ec0e1bd-261e-4d4a-aa21-167958a39ae3",
       "file_id_to_aliquot_run_metadata_id": {
@@ -2931,6 +3150,7 @@
     },
     {
       "aliquot_id": "33d2b006-c128-4bd4-8da4-3f63b2a7127f",
+      "aliquot_submitter_id": "S736",
       "analyte_type": null,
       "case_id": "994b500d-7ffe-4263-ad09-4b34bc9ae429",
       "file_id_to_aliquot_run_metadata_id": {
@@ -2943,6 +3163,7 @@
     },
     {
       "aliquot_id": "37097025-79b1-4032-a069-bc81406d9609",
+      "aliquot_submitter_id": "S351",
       "analyte_type": null,
       "case_id": "6ec0e1bd-261e-4d4a-aa21-167958a39ae3",
       "file_id_to_aliquot_run_metadata_id": {
@@ -2955,6 +3176,7 @@
     },
     {
       "aliquot_id": "3860f9d0-ed45-449c-bfdb-94587e3f028e",
+      "aliquot_submitter_id": "S863",
       "analyte_type": null,
       "case_id": "76fb0b33-543a-4f10-917d-e301eda7770a",
       "file_id_to_aliquot_run_metadata_id": {
@@ -2967,6 +3189,7 @@
     },
     {
       "aliquot_id": "3d6020dd-ae9a-4060-bbc8-1b1badf6a9fe",
+      "aliquot_submitter_id": "S868",
       "analyte_type": null,
       "case_id": "88830a55-d0da-4dfc-81a1-e1c79a79385e",
       "file_id_to_aliquot_run_metadata_id": {
@@ -2979,6 +3202,7 @@
     },
     {
       "aliquot_id": "410ef5af-d15b-4d52-a8cc-a09676ab8949",
+      "aliquot_submitter_id": "S133",
       "analyte_type": null,
       "case_id": "fe55de9e-ec2a-4858-8691-374b4076dcb2",
       "file_id_to_aliquot_run_metadata_id": {
@@ -2991,6 +3215,7 @@
     },
     {
       "aliquot_id": "435e5f00-03a3-4f53-9ec1-e47de8bc5286",
+      "aliquot_submitter_id": "S852",
       "analyte_type": null,
       "case_id": "bd59b331-41ea-4a8c-bca0-70e41ced11cf",
       "file_id_to_aliquot_run_metadata_id": {
@@ -3003,6 +3228,7 @@
     },
     {
       "aliquot_id": "47843a36-0c0b-4d7e-8266-f9d61efc680c",
+      "aliquot_submitter_id": "S252",
       "analyte_type": null,
       "case_id": "5116fa19-a80c-4c68-bfd9-4a2d7ee8097b",
       "file_id_to_aliquot_run_metadata_id": {
@@ -3015,6 +3241,7 @@
     },
     {
       "aliquot_id": "4a4772c6-2383-46fd-836c-dee2b7a215c8",
+      "aliquot_submitter_id": "S568",
       "analyte_type": null,
       "case_id": "e053328e-8549-4d8d-9add-bdbecaf6f7c8",
       "file_id_to_aliquot_run_metadata_id": {
@@ -3027,6 +3254,7 @@
     },
     {
       "aliquot_id": "4b0029a1-0d28-414c-8829-79d9500c956d",
+      "aliquot_submitter_id": "S853",
       "analyte_type": null,
       "case_id": "3d6692fe-a516-43e2-96f1-6692491895ed",
       "file_id_to_aliquot_run_metadata_id": {
@@ -3039,6 +3267,7 @@
     },
     {
       "aliquot_id": "4d715a6c-90d6-4b0c-88ac-00d2b35a220e",
+      "aliquot_submitter_id": "S981",
       "analyte_type": null,
       "case_id": "15257f0a-4fbc-4b9a-8004-b141b84ca8c9",
       "file_id_to_aliquot_run_metadata_id": {
@@ -3051,6 +3280,7 @@
     },
     {
       "aliquot_id": "5028cb9a-ec15-4e99-843f-7af6e888279f",
+      "aliquot_submitter_id": "S611",
       "analyte_type": null,
       "case_id": "72a05e18-c236-4a16-a4a3-b7f0e7862da1",
       "file_id_to_aliquot_run_metadata_id": {
@@ -3064,6 +3294,7 @@
     },
     {
       "aliquot_id": "50d2c1c2-28ea-4075-b8c8-61a54326896b",
+      "aliquot_submitter_id": "S344",
       "analyte_type": null,
       "case_id": "d7afc90b-0d4e-4b7d-a66e-2332c057016d",
       "file_id_to_aliquot_run_metadata_id": {
@@ -3077,6 +3308,7 @@
     },
     {
       "aliquot_id": "524a312a-dc56-4f37-8613-85abf190a028",
+      "aliquot_submitter_id": "S861",
       "analyte_type": null,
       "case_id": "91ea11a0-f805-45e8-939f-06a7bc34a4cf",
       "file_id_to_aliquot_run_metadata_id": {
@@ -3089,6 +3321,7 @@
     },
     {
       "aliquot_id": "597fcea1-930a-46e4-942c-8d15051ab7f5",
+      "aliquot_submitter_id": "S123",
       "analyte_type": null,
       "case_id": "bdea9645-57ce-447c-bbdd-15e04a61487b",
       "file_id_to_aliquot_run_metadata_id": {
@@ -3101,6 +3334,7 @@
     },
     {
       "aliquot_id": "5a60fde1-33c8-47ea-a966-f3dfd1906b72",
+      "aliquot_submitter_id": "S873",
       "analyte_type": null,
       "case_id": "fb978a52-9cfa-49c2-a777-fa3c1cc63c55",
       "file_id_to_aliquot_run_metadata_id": {
@@ -3113,6 +3347,7 @@
     },
     {
       "aliquot_id": "5bbc336d-2058-4fb2-bd5f-f954ea6b5913",
+      "aliquot_submitter_id": "S251",
       "analyte_type": null,
       "case_id": "5116fa19-a80c-4c68-bfd9-4a2d7ee8097b",
       "file_id_to_aliquot_run_metadata_id": {
@@ -3125,6 +3360,7 @@
     },
     {
       "aliquot_id": "5c89b925-1afd-4e9d-a39f-87acceaee438",
+      "aliquot_submitter_id": "S585",
       "analyte_type": null,
       "case_id": "585bbd14-a0c4-4e1c-900e-3e29b3616a09",
       "file_id_to_aliquot_run_metadata_id": {
@@ -3138,6 +3374,7 @@
     },
     {
       "aliquot_id": "5e72d720-82ac-414d-8ee8-bf2a44ecfb61",
+      "aliquot_submitter_id": "S984",
       "analyte_type": null,
       "case_id": "3a1ae888-7175-491b-92cd-481f25b1d578",
       "file_id_to_aliquot_run_metadata_id": {
@@ -3150,6 +3387,7 @@
     },
     {
       "aliquot_id": "62e3e740-2506-4d1f-aa7f-dae70b071690",
+      "aliquot_submitter_id": "S862",
       "analyte_type": null,
       "case_id": "91ea11a0-f805-45e8-939f-06a7bc34a4cf",
       "file_id_to_aliquot_run_metadata_id": {
@@ -3162,6 +3400,7 @@
     },
     {
       "aliquot_id": "6439a20d-5135-4ac0-93e4-13b800362ef5",
+      "aliquot_submitter_id": "S596",
       "analyte_type": null,
       "case_id": "d07ffb03-854c-4982-8a0c-e84cfae11322",
       "file_id_to_aliquot_run_metadata_id": {
@@ -3175,6 +3414,7 @@
     },
     {
       "aliquot_id": "645b59ac-52e8-4730-91b5-e3c924473ea3",
+      "aliquot_submitter_id": "S476",
       "analyte_type": null,
       "case_id": "8e835a0b-3969-4cd5-a1be-bcf913209b9b",
       "file_id_to_aliquot_run_metadata_id": {
@@ -3187,6 +3427,7 @@
     },
     {
       "aliquot_id": "646ba48f-ddcb-430b-8b3e-ea5801d30591",
+      "aliquot_submitter_id": "S954",
       "analyte_type": null,
       "case_id": "8a9aea56-efcb-48cf-aea3-96ca05ed4965",
       "file_id_to_aliquot_run_metadata_id": {
@@ -3199,6 +3440,7 @@
     },
     {
       "aliquot_id": "6515f5f9-56e8-4798-a56f-a80ce22938d6",
+      "aliquot_submitter_id": "S125",
       "analyte_type": null,
       "case_id": "e54a5de8-20b4-40c1-8d31-2b4eae248b31",
       "file_id_to_aliquot_run_metadata_id": {
@@ -3212,6 +3454,7 @@
     },
     {
       "aliquot_id": "6cef3e05-1d67-4271-bfc8-34e435554fd0",
+      "aliquot_submitter_id": "S128",
       "analyte_type": null,
       "case_id": "26dcf7a6-93d3-4068-9962-5166263d8739",
       "file_id_to_aliquot_run_metadata_id": {
@@ -3225,6 +3468,7 @@
     },
     {
       "aliquot_id": "6e80f1f1-fd99-4372-9734-5f658248dd95",
+      "aliquot_submitter_id": "S874",
       "analyte_type": null,
       "case_id": "fb978a52-9cfa-49c2-a777-fa3c1cc63c55",
       "file_id_to_aliquot_run_metadata_id": {
@@ -3237,6 +3481,7 @@
     },
     {
       "aliquot_id": "71ce24be-49b6-4475-870e-5f79d0df65f7",
+      "aliquot_submitter_id": "S175",
       "analyte_type": null,
       "case_id": "eb09b4d4-6681-4c44-a735-d4d3431bf9d9",
       "file_id_to_aliquot_run_metadata_id": {
@@ -3250,6 +3495,7 @@
     },
     {
       "aliquot_id": "71f3a26c-fb66-4e73-8070-604a2d2adb9f",
+      "aliquot_submitter_id": "S567",
       "analyte_type": null,
       "case_id": "e053328e-8549-4d8d-9add-bdbecaf6f7c8",
       "file_id_to_aliquot_run_metadata_id": {
@@ -3262,6 +3508,7 @@
     },
     {
       "aliquot_id": "73293581-3c5e-44c9-9315-04a8c999732f",
+      "aliquot_submitter_id": "S295",
       "analyte_type": null,
       "case_id": "f0591206-6fab-4c07-8999-08703e4db259",
       "file_id_to_aliquot_run_metadata_id": {
@@ -3274,6 +3521,7 @@
     },
     {
       "aliquot_id": "74ee2eae-83ec-4e56-b13e-0b84b0b171f3",
+      "aliquot_submitter_id": "S334",
       "analyte_type": null,
       "case_id": "e1ee5afa-32ee-45af-bd9e-823d3e58a3c1",
       "file_id_to_aliquot_run_metadata_id": {
@@ -3286,6 +3534,7 @@
     },
     {
       "aliquot_id": "7915dc79-80d4-46b9-9565-5690c7ccbac9",
+      "aliquot_submitter_id": "S962",
       "analyte_type": null,
       "case_id": "cc6007f8-484a-46c2-8c04-4656749b5446",
       "file_id_to_aliquot_run_metadata_id": {
@@ -3298,6 +3547,7 @@
     },
     {
       "aliquot_id": "7982369a-10ee-42cb-a261-10c020a03ae0",
+      "aliquot_submitter_id": "S972",
       "analyte_type": null,
       "case_id": "d1224265-4ca6-4f62-ac08-f1f104e8962e",
       "file_id_to_aliquot_run_metadata_id": {
@@ -3311,6 +3561,7 @@
     },
     {
       "aliquot_id": "7c5448fd-ac34-4dfa-8d9a-04b5af43ee2e",
+      "aliquot_submitter_id": "S971",
       "analyte_type": null,
       "case_id": "d1224265-4ca6-4f62-ac08-f1f104e8962e",
       "file_id_to_aliquot_run_metadata_id": {
@@ -3324,6 +3575,7 @@
     },
     {
       "aliquot_id": "7cdfcd57-39b3-40ee-bfb9-2a5a4a64d4b5",
+      "aliquot_submitter_id": "S296",
       "analyte_type": null,
       "case_id": "f0591206-6fab-4c07-8999-08703e4db259",
       "file_id_to_aliquot_run_metadata_id": {
@@ -3336,6 +3588,7 @@
     },
     {
       "aliquot_id": "7d6435c8-4a4f-4375-8057-45619509bf9c",
+      "aliquot_submitter_id": "S583",
       "analyte_type": null,
       "case_id": "62ae7012-3c05-477c-af34-a38c1e996c80",
       "file_id_to_aliquot_run_metadata_id": {
@@ -3348,6 +3601,7 @@
     },
     {
       "aliquot_id": "92492a84-b477-4aae-bce1-67aa4aec5b07",
+      "aliquot_submitter_id": "S397",
       "analyte_type": null,
       "case_id": "1cf9deb7-5289-44c0-a9de-a60d0820fe85",
       "file_id_to_aliquot_run_metadata_id": {
@@ -3360,6 +3614,7 @@
     },
     {
       "aliquot_id": "936cf30a-f02e-422c-9ec0-9f151b2a8cc1",
+      "aliquot_submitter_id": "S524",
       "analyte_type": null,
       "case_id": "648a285d-1048-46e1-9c2d-9a373a56aef5",
       "file_id_to_aliquot_run_metadata_id": {
@@ -3372,6 +3627,7 @@
     },
     {
       "aliquot_id": "95546593-bc73-4657-a4cf-6b4c86e19cb6",
+      "aliquot_submitter_id": "S875",
       "analyte_type": null,
       "case_id": "47b3a39c-4a18-4206-981f-b13d514500de",
       "file_id_to_aliquot_run_metadata_id": {
@@ -3384,6 +3640,7 @@
     },
     {
       "aliquot_id": "99404cd1-dbda-4828-814b-332932d39340",
+      "aliquot_submitter_id": "S228",
       "analyte_type": null,
       "case_id": "795e6214-9b92-436e-b06b-f4d2982e50ec",
       "file_id_to_aliquot_run_metadata_id": {
@@ -3396,6 +3653,7 @@
     },
     {
       "aliquot_id": "9980d85e-2424-4eb6-b208-9ffdc48c31d4",
+      "aliquot_submitter_id": "S343",
       "analyte_type": null,
       "case_id": "d7afc90b-0d4e-4b7d-a66e-2332c057016d",
       "file_id_to_aliquot_run_metadata_id": {
@@ -3408,6 +3666,7 @@
     },
     {
       "aliquot_id": "99c39559-a2ee-40e2-9173-64dd58a11e3c",
+      "aliquot_submitter_id": "S221",
       "analyte_type": null,
       "case_id": "54b8c076-b687-4acb-b508-94ba723f276b",
       "file_id_to_aliquot_run_metadata_id": {
@@ -3420,6 +3679,7 @@
     },
     {
       "aliquot_id": "99c6aac7-7bc9-4f88-9820-25e99f6a3572",
+      "aliquot_submitter_id": "S955",
       "analyte_type": null,
       "case_id": "44ad4b98-82ad-40b0-bb46-b5823465d650",
       "file_id_to_aliquot_run_metadata_id": {
@@ -3432,6 +3692,7 @@
     },
     {
       "aliquot_id": "9a935415-20d9-4397-a9cd-03c5f3537c8e",
+      "aliquot_submitter_id": "S227",
       "analyte_type": null,
       "case_id": "795e6214-9b92-436e-b06b-f4d2982e50ec",
       "file_id_to_aliquot_run_metadata_id": {
@@ -3444,6 +3705,7 @@
     },
     {
       "aliquot_id": "9ce3ec2e-d2b6-4825-b1e7-1d1a4a64af53",
+      "aliquot_submitter_id": "S458",
       "analyte_type": null,
       "case_id": "621e1ccd-877f-4473-8854-eab41a51efe1",
       "file_id_to_aliquot_run_metadata_id": {
@@ -3456,6 +3718,7 @@
     },
     {
       "aliquot_id": "9e5ea971-6338-4765-a650-70aa9866a1a9",
+      "aliquot_submitter_id": "S535",
       "analyte_type": null,
       "case_id": "f9997384-3ddb-40ce-9491-57d990011dc0",
       "file_id_to_aliquot_run_metadata_id": {
@@ -3468,6 +3731,7 @@
     },
     {
       "aliquot_id": "a1745af9-bf5c-4b6a-a58e-6019a7d9ab30",
+      "aliquot_submitter_id": "S126",
       "analyte_type": null,
       "case_id": "e54a5de8-20b4-40c1-8d31-2b4eae248b31",
       "file_id_to_aliquot_run_metadata_id": {
@@ -3481,6 +3745,7 @@
     },
     {
       "aliquot_id": "a47fbecc-dcad-4932-aa5d-a0ef4f23b496",
+      "aliquot_submitter_id": "S297",
       "analyte_type": null,
       "case_id": "4951047d-24ff-4662-95e0-8f35a23415a1",
       "file_id_to_aliquot_run_metadata_id": {
@@ -3493,6 +3758,7 @@
     },
     {
       "aliquot_id": "a4bffbba-225e-43a3-ac22-8b332ab93cd7",
+      "aliquot_submitter_id": "S134",
       "analyte_type": null,
       "case_id": "fe55de9e-ec2a-4858-8691-374b4076dcb2",
       "file_id_to_aliquot_run_metadata_id": {
@@ -3505,6 +3771,7 @@
     },
     {
       "aliquot_id": "a5029f6d-4881-420c-97bb-2e974c285049",
+      "aliquot_submitter_id": "S494",
       "analyte_type": null,
       "case_id": "cca1338a-66b5-409b-950c-91bf54564c1e",
       "file_id_to_aliquot_run_metadata_id": {
@@ -3518,6 +3785,7 @@
     },
     {
       "aliquot_id": "a515982a-03cf-4baa-bf2d-547b97062c6d",
+      "aliquot_submitter_id": "S298",
       "analyte_type": null,
       "case_id": "4951047d-24ff-4662-95e0-8f35a23415a1",
       "file_id_to_aliquot_run_metadata_id": {
@@ -3530,6 +3798,7 @@
     },
     {
       "aliquot_id": "a9229230-e26c-45c9-ab88-d5baea856d21",
+      "aliquot_submitter_id": "S523",
       "analyte_type": null,
       "case_id": "648a285d-1048-46e1-9c2d-9a373a56aef5",
       "file_id_to_aliquot_run_metadata_id": {
@@ -3542,6 +3811,7 @@
     },
     {
       "aliquot_id": "a963f02a-65fa-4e88-b0d5-2e4d48e0cceb",
+      "aliquot_submitter_id": "S214",
       "analyte_type": null,
       "case_id": "42c08ced-5583-490e-848f-012eccd9e55e",
       "file_id_to_aliquot_run_metadata_id": {
@@ -3554,6 +3824,7 @@
     },
     {
       "aliquot_id": "aaf44a06-27b0-47e5-af23-381edeb7dad7",
+      "aliquot_submitter_id": "S953",
       "analyte_type": null,
       "case_id": "8a9aea56-efcb-48cf-aea3-96ca05ed4965",
       "file_id_to_aliquot_run_metadata_id": {
@@ -3566,6 +3837,7 @@
     },
     {
       "aliquot_id": "ab9c237e-e383-43f7-b901-a9dd125c1d3a",
+      "aliquot_submitter_id": "S198",
       "analyte_type": null,
       "case_id": "27d267ec-5629-495a-a30d-7945280e13e0",
       "file_id_to_aliquot_run_metadata_id": {
@@ -3578,6 +3850,7 @@
     },
     {
       "aliquot_id": "adcb46b7-e1a8-4fc7-9350-ef51535faa02",
+      "aliquot_submitter_id": "S154",
       "analyte_type": null,
       "case_id": "d691d968-9a1e-4a9a-ab08-f0f79f4b7588",
       "file_id_to_aliquot_run_metadata_id": {
@@ -3590,6 +3863,7 @@
     },
     {
       "aliquot_id": "b7204ce0-8e8e-4648-b275-fd08de913718",
+      "aliquot_submitter_id": "S197",
       "analyte_type": null,
       "case_id": "27d267ec-5629-495a-a30d-7945280e13e0",
       "file_id_to_aliquot_run_metadata_id": {
@@ -3602,6 +3876,7 @@
     },
     {
       "aliquot_id": "b737fa13-6eac-420e-a424-413d955fa363",
+      "aliquot_submitter_id": "S232",
       "analyte_type": null,
       "case_id": "a95b9068-7edb-4d8a-85a8-036e6085c4c9",
       "file_id_to_aliquot_run_metadata_id": {
@@ -3614,6 +3889,7 @@
     },
     {
       "aliquot_id": "b8638111-3089-4722-8d3f-dec99fe58a06",
+      "aliquot_submitter_id": "S212",
       "analyte_type": null,
       "case_id": "afc41eb8-d821-4905-ac8b-9608a97668cd",
       "file_id_to_aliquot_run_metadata_id": {
@@ -3626,6 +3902,7 @@
     },
     {
       "aliquot_id": "b92efe54-b0f1-4810-a934-8285a2cb84c1",
+      "aliquot_submitter_id": "S854",
       "analyte_type": null,
       "case_id": "3d6692fe-a516-43e2-96f1-6692491895ed",
       "file_id_to_aliquot_run_metadata_id": {
@@ -3638,6 +3915,7 @@
     },
     {
       "aliquot_id": "c45416d8-8448-43c1-a6b0-210e4d8befb6",
+      "aliquot_submitter_id": "S176",
       "analyte_type": null,
       "case_id": "eb09b4d4-6681-4c44-a735-d4d3431bf9d9",
       "file_id_to_aliquot_run_metadata_id": {
@@ -3651,6 +3929,7 @@
     },
     {
       "aliquot_id": "c5a9e751-5e3e-4323-a978-1ba9726e867b",
+      "aliquot_submitter_id": "S965",
       "analyte_type": null,
       "case_id": "2e8e8176-2aa8-429f-a1e1-ba32d937ac96",
       "file_id_to_aliquot_run_metadata_id": {
@@ -3663,6 +3942,7 @@
     },
     {
       "aliquot_id": "c839e91c-436e-4fca-905f-1a3324a1e69b",
+      "aliquot_submitter_id": "S536",
       "analyte_type": null,
       "case_id": "f9997384-3ddb-40ce-9491-57d990011dc0",
       "file_id_to_aliquot_run_metadata_id": {
@@ -3675,6 +3955,7 @@
     },
     {
       "aliquot_id": "cabf53d4-dba9-4a28-b669-4b95d43d10c7",
+      "aliquot_submitter_id": "S871",
       "analyte_type": null,
       "case_id": "2f2c2daf-d6af-4d12-b904-9ff9c5ced87a",
       "file_id_to_aliquot_run_metadata_id": {
@@ -3687,6 +3968,7 @@
     },
     {
       "aliquot_id": "cb2d3732-3733-4222-ba35-5dd1bd3615e4",
+      "aliquot_submitter_id": "S876",
       "analyte_type": null,
       "case_id": "47b3a39c-4a18-4206-981f-b13d514500de",
       "file_id_to_aliquot_run_metadata_id": {
@@ -3699,6 +3981,7 @@
     },
     {
       "aliquot_id": "d0560e0d-ccb0-48fe-8122-a3f0d8191444",
+      "aliquot_submitter_id": "S398",
       "analyte_type": null,
       "case_id": "1cf9deb7-5289-44c0-a9de-a60d0820fe85",
       "file_id_to_aliquot_run_metadata_id": {
@@ -3711,6 +3994,7 @@
     },
     {
       "aliquot_id": "d0c321de-eb1f-48aa-9409-a9b9a7762658",
+      "aliquot_submitter_id": "S847",
       "analyte_type": null,
       "case_id": "4e31e795-3cf8-4732-a490-89eaeed33c67",
       "file_id_to_aliquot_run_metadata_id": {
@@ -3723,6 +4007,7 @@
     },
     {
       "aliquot_id": "d78473f4-b077-4629-937f-7b9ab7b794e6",
+      "aliquot_submitter_id": "S457",
       "analyte_type": null,
       "case_id": "621e1ccd-877f-4473-8854-eab41a51efe1",
       "file_id_to_aliquot_run_metadata_id": {
@@ -3735,6 +4020,7 @@
     },
     {
       "aliquot_id": "d82698bf-e54d-45b0-bc57-8fe225d5fd86",
+      "aliquot_submitter_id": "S595",
       "analyte_type": null,
       "case_id": "d07ffb03-854c-4982-8a0c-e84cfae11322",
       "file_id_to_aliquot_run_metadata_id": {
@@ -3748,6 +4034,7 @@
     },
     {
       "aliquot_id": "dd76d88e-88c6-4358-b9c7-c4de61f1b454",
+      "aliquot_submitter_id": "S976",
       "analyte_type": null,
       "case_id": "a077fdce-6b90-48f1-bec1-128106c7512d",
       "file_id_to_aliquot_run_metadata_id": {
@@ -3760,6 +4047,7 @@
     },
     {
       "aliquot_id": "dd87d237-38a2-4238-864b-0011a8ecd22f",
+      "aliquot_submitter_id": "S584",
       "analyte_type": null,
       "case_id": "62ae7012-3c05-477c-af34-a38c1e996c80",
       "file_id_to_aliquot_run_metadata_id": {
@@ -3772,6 +4060,7 @@
     },
     {
       "aliquot_id": "de6632dc-3d76-4e88-934f-b7014458e1e3",
+      "aliquot_submitter_id": "S961",
       "analyte_type": null,
       "case_id": "cc6007f8-484a-46c2-8c04-4656749b5446",
       "file_id_to_aliquot_run_metadata_id": {
@@ -3784,6 +4073,7 @@
     },
     {
       "aliquot_id": "e0cffda7-c9dc-419d-9eb3-2ba411b5e610",
+      "aliquot_submitter_id": "S124",
       "analyte_type": null,
       "case_id": "bdea9645-57ce-447c-bbdd-15e04a61487b",
       "file_id_to_aliquot_run_metadata_id": {
@@ -3796,6 +4086,7 @@
     },
     {
       "aliquot_id": "e5aef431-07c5-483e-917b-c14f8e5caf81",
+      "aliquot_submitter_id": "S864",
       "analyte_type": null,
       "case_id": "76fb0b33-543a-4f10-917d-e301eda7770a",
       "file_id_to_aliquot_run_metadata_id": {
@@ -3808,6 +4099,7 @@
     },
     {
       "aliquot_id": "e8173848-a620-4d38-8216-6c1dfb49c98d",
+      "aliquot_submitter_id": "S983",
       "analyte_type": null,
       "case_id": "3a1ae888-7175-491b-92cd-481f25b1d578",
       "file_id_to_aliquot_run_metadata_id": {
@@ -3820,6 +4112,7 @@
     },
     {
       "aliquot_id": "eb79feda-ae20-4149-8a0d-61520d5a140f",
+      "aliquot_submitter_id": "S586",
       "analyte_type": null,
       "case_id": "585bbd14-a0c4-4e1c-900e-3e29b3616a09",
       "file_id_to_aliquot_run_metadata_id": {
@@ -3832,6 +4125,7 @@
     },
     {
       "aliquot_id": "ed4dfada-92dc-4f75-ae9f-1b20fd1d4c4a",
+      "aliquot_submitter_id": "S975",
       "analyte_type": null,
       "case_id": "a077fdce-6b90-48f1-bec1-128106c7512d",
       "file_id_to_aliquot_run_metadata_id": {
@@ -3844,6 +4138,7 @@
     },
     {
       "aliquot_id": "eefea89b-2697-485b-bab6-475dd7f8eefd",
+      "aliquot_submitter_id": "S213",
       "analyte_type": null,
       "case_id": "42c08ced-5583-490e-848f-012eccd9e55e",
       "file_id_to_aliquot_run_metadata_id": {
@@ -3856,6 +4151,7 @@
     },
     {
       "aliquot_id": "f12efb3f-ce93-41a6-acb5-8e97c16ad264",
+      "aliquot_submitter_id": "S172",
       "analyte_type": null,
       "case_id": "c98abf75-5a2b-470e-b387-fe7ea5a2f2a5",
       "file_id_to_aliquot_run_metadata_id": {
@@ -3869,6 +4165,7 @@
     },
     {
       "aliquot_id": "f15061b4-d5f6-413e-95d2-90412e06d1a2",
+      "aliquot_submitter_id": "S171",
       "analyte_type": null,
       "case_id": "c98abf75-5a2b-470e-b387-fe7ea5a2f2a5",
       "file_id_to_aliquot_run_metadata_id": {
@@ -3882,6 +4179,7 @@
     },
     {
       "aliquot_id": "f15a0272-1619-4cdd-aeb6-b44aa6d464dd",
+      "aliquot_submitter_id": "S848",
       "analyte_type": null,
       "case_id": "4e31e795-3cf8-4732-a490-89eaeed33c67",
       "file_id_to_aliquot_run_metadata_id": {
@@ -3894,6 +4192,7 @@
     },
     {
       "aliquot_id": "f2d6f5e5-fa24-4ef6-b8db-d3d05f87d806",
+      "aliquot_submitter_id": "S137",
       "analyte_type": null,
       "case_id": "55b93947-a7a2-48e9-adba-038d2a84a877",
       "file_id_to_aliquot_run_metadata_id": {
@@ -3906,6 +4205,7 @@
     },
     {
       "aliquot_id": "fb47d19a-f234-4904-89b7-650b7987dac4",
+      "aliquot_submitter_id": "S222",
       "analyte_type": null,
       "case_id": "54b8c076-b687-4acb-b508-94ba723f276b",
       "file_id_to_aliquot_run_metadata_id": {
@@ -3918,6 +4218,7 @@
     },
     {
       "aliquot_id": "fd33cdf7-1263-4c77-9bff-7af4833d9ff8",
+      "aliquot_submitter_id": "S612",
       "analyte_type": null,
       "case_id": "72a05e18-c236-4a16-a4a3-b7f0e7862da1",
       "file_id_to_aliquot_run_metadata_id": {
@@ -3930,6 +4231,7 @@
     },
     {
       "aliquot_id": "fe18cdc8-002a-4585-873d-e59b1e7b769d",
+      "aliquot_submitter_id": "S323",
       "analyte_type": null,
       "case_id": "aa1367a5-221d-4bc2-a0d0-70ad52a76a9a",
       "file_id_to_aliquot_run_metadata_id": {

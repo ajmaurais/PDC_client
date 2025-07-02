@@ -99,8 +99,13 @@ class Data:
                     self.cases[case_id]['samples'][sample_id]['sample_type'] = aliquot['sample_type']
                     self.cases[case_id]['samples'][sample_id]['tissue_type'] = aliquot['tissue_type']
 
-                self.cases[case_id]['samples'][sample_id]['aliquots'].append({'aliquot_id': aliquot['aliquot_id'],
-                                                                              'analyte_type': aliquot['analyte_type']})
+                self.cases[case_id]['samples'][sample_id]['aliquots'].append(
+                    {
+                        'aliquot_id': aliquot['aliquot_id'],
+                        'aliquot_submitter_id': aliquot['aliquot_submitter_id'],
+                        'analyte_type': aliquot['analyte_type']
+                    }
+                )
 
         # convert index sets to lists
         self.index_study_cases = {k: list(v) for k, v in self.index_study_cases.items()}

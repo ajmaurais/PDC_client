@@ -58,6 +58,7 @@ class FilesPerStudy(graphene.ObjectType):
 
 class Aliquot(graphene.ObjectType):
     aliquot_id = graphene.ID(name='aliquot_id')
+    aliquot_submitter_id = graphene.String(name='aliquot_submitter_id')
     analyte_type = graphene.String(name='analyte_type')
 
 

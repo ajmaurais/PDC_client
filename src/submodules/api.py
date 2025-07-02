@@ -549,7 +549,7 @@ class Client():
                 casesSamplesAliquots {
                     case_id
                     samples { sample_id sample_submitter_id sample_type tissue_type
-                        aliquots { aliquot_id analyte_type }
+                        aliquots { aliquot_id aliquot_submitter_id analyte_type }
                     }
                 }
                 pagination { count from total }
@@ -687,7 +687,7 @@ class Client():
         for case in aliquot_data:
             for sample in case['samples']:
                 for aliquot in sample['aliquots']:
-                    new_a = {k: aliquot[k] for k in ('aliquot_id', 'analyte_type')}
+                    new_a = {k: aliquot[k] for k in ('aliquot_id', 'aliquot_submitter_id', 'analyte_type')}
                     new_a.update({k: sample[k] for k in ('sample_id', 'sample_submitter_id',
                                                          'sample_type', 'tissue_type')})
                     new_a['case_id'] = case['case_id']
