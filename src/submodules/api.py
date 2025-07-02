@@ -143,7 +143,7 @@ class Client():
         return closure().__await__()
 
 
-    async def _post(self, query: str) -> dict:
+    async def _post(self, query: str) -> dict | None:
         query = re.sub(r'\s+', ' ', query.strip())
         for _ in range(self.request_retries):
             try:
@@ -154,14 +154,14 @@ class Client():
             #     break
             except ConnectError:
                 LOGGER.error('Invalid URL: %s', self.url, stacklevel=2)
-                return
+                return None
         LOGGER.error('Error in query:\n\t%s\n\tstatus_code: %s\n\ttext: %s',
                      query, response.status_code, response.text,
                      stacklevel=2)
         return None
 
 
-    async def _get(self, query) -> dict:
+    async def _get(self, query) -> dict | None:
         query = re.sub(r'\s+', ' ', query.strip())
         for _ in range(self.request_retries):
             try:
@@ -172,7 +172,7 @@ class Client():
             #     break
             except ConnectError:
                 LOGGER.error('Invalid URL: %s', self.url, stacklevel=2)
-                return
+                return None
         LOGGER.error('Error in query:\n\t%s\n\tstatus_code: %s\n\ttext: %s',
                      query, response.status_code, response.text,
                      stacklevel=2)
@@ -370,7 +370,7 @@ class Client():
 
     def get_study_metadata(self, pdc_study_id: str|None=None,
                            study_id: Optional[str]=None,
-                           **kwargs) -> Optional[dict]:
+                           **kwargs) -> dict | None:
         '''
         Parameters
         ----------
@@ -392,7 +392,7 @@ class Client():
             )
 
 
-    def get_pdc_study_id(self, study_id: str) -> str:
+    def get_pdc_study_id(self, study_id: str) -> str | None:
         '''
         Get pdc_study_id for a study_id.
 
@@ -411,7 +411,7 @@ class Client():
         return None
 
 
-    def get_study_name(self, study_id: str) -> str:
+    def get_study_name(self, study_id: str) -> str | None:
         '''
         Get study_name for a study_id.
 
@@ -461,7 +461,7 @@ class Client():
         query = self._experimental_metadata_query(study_submitter_id)
         data = await self._get(query)
 
-        if data['data']['experimentalMetadata'] is None or len(data['data']['experimentalMetadata']) == 0:
+        if data is None or data['data']['experimentalMetadata'] is None or len(data['data']['experimentalMetadata']) == 0:
             LOGGER.error("No experimental metadata found for study_submitter_id: '%s'", study_submitter_id)
             return None
 
@@ -495,10 +495,10 @@ class Client():
 
 
     async def _get_paginated_data(self,
-                                  query_f: Callable[[str, str, int], str],
+                                  query_f: Callable[[str, int, int], str],
                                   data_name: str,
                                   study_id: str,
-                                  page_limit: int=100) -> list:
+                                  page_limit: int=100) -> list | None:
 
         endpoint_name = f'paginated{data_name[0].upper()}{data_name[1:]}'
 
@@ -576,7 +576,7 @@ class Client():
 
     async def async_get_study_samples(self, study_id: str,
                                       file_ids: Optional[list]=None,
-                                      page_limit: int=100) -> list:
+                                      page_limit: int=100) -> list | None:
         '''
         Async version of get_study_samples.
 
@@ -607,7 +607,7 @@ class Client():
             return None
 
         experiment_metadata_task = asyncio.create_task(
-                self.async_get_experimental_metadata(study_metadata['study_submitter_id'])
+                self.async_get_experimental_metadata(study_metadata.get('study_submitter_id'))
             )
 
         if file_ids is None:
@@ -680,6 +680,7 @@ class Client():
         aliquot_data = await aliquot_task
         if aliquot_data is None:
             LOGGER.error("Invalid query for study_id: '%s'", study_id)
+            return None
 
         # flatten aliquots into 1 list
         aliquots = list()
