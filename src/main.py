@@ -66,7 +66,7 @@ Available commands:
         parser.add_argument('pdc_study_id')
         args = parser.parse_args(self.argv[start:])
 
-        with Client(url=args.baseUrl, verify=not args.skipVerify) as client:
+        with Client(url=args.baseUrl, verify=not args.skipVerify, timeout=60) as client:
             study_id = client.get_study_id(args.pdc_study_id)
         if study_id is None:
             LOGGER.error('No study found matching pdc_study_id!\n')
@@ -83,7 +83,7 @@ Available commands:
         parser.add_argument('study_id')
         args = parser.parse_args(self.argv[start:])
 
-        with Client(url=args.baseUrl, verify=not args.skipVerify) as client:
+        with Client(url=args.baseUrl, verify=not args.skipVerify, timeout=60) as client:
             pdc_study_id = client.get_pdc_study_id(args.study_id)
 
         if pdc_study_id is None:
@@ -103,7 +103,7 @@ Available commands:
         parser.add_argument('study_id')
         args = parser.parse_args(self.argv[start:])
 
-        with Client(url=args.baseUrl, verify=not args.skipVerify) as client:
+        with Client(url=args.baseUrl, verify=not args.skipVerify, timeout=60) as client:
             study_name = client.get_study_name(args.study_id)
 
         if study_name is None:
@@ -143,7 +143,7 @@ Available commands:
         parser.add_argument('study_id', help='The study id.')
         args = parser.parse_args(self.argv[start:])
 
-        with Client(url=args.baseUrl, verify=not args.skipVerify) as client:
+        with Client(url=args.baseUrl, verify=not args.skipVerify, timeout=60) as client:
             # get study metadata and check that output options are compatable with experiment type
             study_metadata = client.get_study_metadata(study_id=args.study_id)
             if study_metadata is None:
@@ -239,7 +239,7 @@ Available commands:
         md5sum = args.md5sum
         size = args.size
         if args.file_id is not None:
-            with Client(url=args.baseUrl) as client:
+            with Client(url=args.baseUrl, timeout=60) as client:
                 file_data = client.get_file_url(args.file_id)
 
             if file_data is None:

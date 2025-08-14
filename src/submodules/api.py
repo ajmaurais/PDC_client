@@ -4,7 +4,7 @@ import asyncio
 from typing import Callable, Optional
 
 from httpx import Limits, AsyncClient
-from httpx import ConnectError
+from httpx import ConnectError, ConnectTimeout
 
 from .logger import LOGGER
 
@@ -163,15 +163,19 @@ class Client():
 
     async def _get(self, query) -> dict | None:
         query = re.sub(r'\s+', ' ', query.strip())
+        query_url = f'{self.url}?{query}'
         for _ in range(self.request_retries):
             try:
-                response = await self.client.get(f'{self.url}?{query}')
+                response = await self.client.get(query_url)
                 if response.status_code == 200:
                     return response.json()
             # if response.status_code >= 400 and response.status_code < 500:
             #     break
             except ConnectError:
                 LOGGER.error('Invalid URL: %s', self.url, stacklevel=2)
+                return None
+            except ConnectTimeout:
+                LOGGER.error('Connection timed out: %s', query_url, stacklevel=2)
                 return None
         LOGGER.error('Error in query:\n\t%s\n\tstatus_code: %s\n\ttext: %s',
                      query, response.status_code, response.text,
