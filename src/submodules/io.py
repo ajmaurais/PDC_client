@@ -7,6 +7,7 @@ import re
 import warnings
 from typing import TextIO
 import subprocess
+from shutil import which
 
 import httpx
 
@@ -243,7 +244,10 @@ def http_get(url: str, ofname: str, n_retries: int=2) -> bool:
     return False
 
 
-def s3_get(path: str, ofname: str, aws_profile: str|None = None) -> bool:
+def s3_get(
+    path: str, ofname: str,
+    aws_profile: str|None = None, aws_cli: str = None
+) -> bool:
     '''
     Download a file from S3.
 
@@ -251,18 +255,23 @@ def s3_get(path: str, ofname: str, aws_profile: str|None = None) -> bool:
         path (str): The s3 path
         ofname (str): The name of the file to write.
         aws_profile (str): The AWS profile to use. None to use the default profile.
+        aws_cli (str): The path to the AWS CLI executable. None to use the default.
 
     Returns:
         sucess (bool): True if sucessfull, False if not.
     '''
+    cli_path = which(aws_cli if aws_cli else 'aws')
+    if cli_path is None:
+        LOGGER.error('AWS CLI not found! Please install it to download files from S3.')
+        return False
 
-    cmd = ["aws", "s3"]
+    cmd = [cli_path, "s3"]
     if aws_profile:
         cmd += ["--profile", aws_profile]
     cmd += ["cp", path, ofname]
 
     try:
-        status = subprocess.run(
+        subprocess.run(
             cmd, text=True, check=True,
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE
@@ -277,7 +286,7 @@ def s3_get(path: str, ofname: str, aws_profile: str|None = None) -> bool:
 
 def download_file(url: str, ofname: str,
                   expected_md5: str=None, expected_size: int=None,
-                  n_retries:int=2) -> bool:
+                  n_retries:int=2, aws_cli: str = None) -> bool:
     '''
     Download a single file.
 
@@ -300,7 +309,7 @@ def download_file(url: str, ofname: str,
         if not http_get(url, ofname, n_retries):
             return False
     elif protocol == 's3':
-        if not s3_get(url, ofname):
+        if not s3_get(url, ofname, aws_cli=aws_cli):
             return False
     else:
         LOGGER.error('Unknown protocol "%s" for file "%s"', protocol, ofname)

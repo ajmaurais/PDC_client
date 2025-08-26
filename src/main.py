@@ -212,21 +212,37 @@ Available commands:
 
     def file(self, start=2):
         parser = argparse.ArgumentParser(description=Main.FILE_DESCRIPTION)
-        parser.add_argument('-u', '--baseUrl', default=BASE_URL,
-                            help=f'The base URL for the PDC API. {BASE_URL} is the default. '
-                                  'Only used with --fileID option.')
-        parser.add_argument('-o', '--ofname', default=None,
-                            help='Output file name.')
-        parser.add_argument('-m', '--md5sum', default=None,
-                            help='The expected file md5 sum. If blank, the check sum step is skipped.')
-        parser.add_argument('-s', '--size', default=None, type=int,
-                            help='The expected file size. If blank, the file size check is skipped.')
-        parser.add_argument('--noBackup', action='store_true', default=False,
-                            help='Don\'t backup duplicate files. '
-                                 'By default, if the file already exists the new file is written to a tempory file as it is '
-                                 'being downloaded and overwritten once the download is completed.')
-        parser.add_argument('-f', '--force', action='store_true', default=False,
-                            help='Re-download even if the target file already exists.')
+        parser.add_argument(
+            '-u', '--baseUrl', default=BASE_URL,
+            help=f'The base URL for the PDC API. {BASE_URL} is the default. '
+                  'Only used with --fileID option.'
+        )
+        parser.add_argument(
+            '-o', '--ofname', default=None, help='Output file name.'
+        )
+        parser.add_argument(
+            '-m', '--md5sum', default=None,
+            help='The expected file md5 sum. If blank, the check sum step is skipped.'
+        )
+        parser.add_argument(
+            '-s', '--size', default=None, type=int,
+            help='The expected file size. If blank, the file size check is skipped.'
+        )
+        parser.add_argument(
+            '--noBackup', action='store_true', default=False,
+            help='Don\'t backup duplicate files. '
+                 'By default, if the file already exists the new file is written to a tempory file as it is '
+                 'being downloaded and overwritten once the download is completed.'
+        )
+        parser.add_argument(
+            '-f', '--force', action='store_true', default=False,
+            help='Re-download even if the target file already exists.'
+        )
+        parser.add_argument(
+            '--aws-cli', default=None, dest='aws_cli',
+            help='The path to the AWS CLI executable. '
+                 'By default, the program will look for it in the system PATH.'
+        )
 
         source_args = parser.add_mutually_exclusive_group(required=True)
         source_args.add_argument('--url', help='The file url.')
@@ -272,7 +288,8 @@ Available commands:
                 old_ofname = ofname
                 ofname += f'_{datetime.now().strftime("%y%m%d_%H%M%S")}.tmp'
 
-        if not io.download_file(url, ofname, expected_md5=md5sum, expected_size=size):
+        if not io.download_file(url, ofname, expected_md5=md5sum, expected_size=size,
+                                aws_cli=args.aws_cli):
             LOGGER.error("Failed to download file: '%s'", ofname)
             sys.exit(1)
 

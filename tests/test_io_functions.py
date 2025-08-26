@@ -4,6 +4,8 @@ import unittest
 import json
 import re
 import random
+from unittest import mock
+import subprocess
 
 from resources.setup_functions import make_work_dir, run_command
 from resources import TEST_DIR
@@ -231,3 +233,67 @@ class TestDownloadFile(unittest.TestCase):
 
         self.assertTrue(any(f'Skipping size check for file "{target_file_name}"' in msg
                             for msg in cm.output), cm.output)
+
+
+class TestS3Download(unittest.TestCase):
+    def _mock_process_run(self, rc):
+        mock_run = mock.Mock()
+        mock_run.return_value = mock.Mock()
+        mock_run.return_value.returncode = rc
+        return mock_run
+
+
+    def test_download(self):
+        test_url = 's3://bucket/key'
+        ofname = 'ofname'
+        aws_cli_path = '/usr/bin/aws'
+        with mock.patch('PDC_client.submodules.io.subprocess.run',
+                        return_value=self._mock_process_run(0)) as mock_run, \
+             mock.patch('PDC_client.submodules.io.which', return_value=aws_cli_path) as mock_which:
+                 with self.assertLogs(level='WARNING') as cm:
+                    self.assertTrue(io.download_file(
+                        test_url, ofname, aws_cli=aws_cli_path
+                    ))
+
+        mock_which.assert_called_once_with(aws_cli_path)
+        mock_run.assert_called_once_with(
+            [aws_cli_path, 's3', 'cp', test_url, ofname],
+            text=True, check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE
+        )
+
+
+    def test_missing_aws_cli(self):
+        aws_cli_path = '/usr/bin/aws'
+        test_url = 's3://bucket/key'
+        ofname = 'ofname'
+        with mock.patch('PDC_client.submodules.io.which', return_value=None) as mock_which:
+            with self.assertLogs(level='ERROR') as cm:
+                self.assertFalse(io.download_file(
+                    test_url, ofname, aws_cli=aws_cli_path
+                ))
+
+        mock_which.assert_called_once_with(aws_cli_path)
+
+
+    def test_failed_download(self):
+        aws_cli_path = '/usr/bin/aws'
+        test_url = 's3://bucket/key'
+        ofname = 'ofname'
+        with mock.patch('PDC_client.submodules.io.which', return_value=aws_cli_path) as mock_which, \
+             mock.patch('PDC_client.submodules.io.subprocess.run',
+                        side_effect=subprocess.CalledProcessError(
+                            returncode=1, output='output', stderr='error message'
+                        )) as mock_run:
+            with self.assertLogs(level='ERROR') as cm:
+                self.assertFalse(io.download_file(
+                    test_url, ofname, aws_cli=aws_cli_path
+                ))
+
+        mock_which.assert_called_once_with(aws_cli_path)
+        mock_run.assert_called_once_with(
+            [aws_cli_path, 's3', 'cp', test_url, ofname],
+            text=True, check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE
+        )
+        self.assertTrue(
+            any(f'Failed to download {test_url}: error message' in msg for msg in cm.output), cm.output
+        )
